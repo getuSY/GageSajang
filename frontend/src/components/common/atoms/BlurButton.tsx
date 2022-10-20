@@ -35,7 +35,7 @@ const Wrapper = styled.button`
 
     height: 57px;
     z-index: -1;
-    background: linear-gradient(92.86deg, #0c0aa8 0%, #b10dab 40.62%, #ff0099 100%);
+    background: ${({ theme }) => theme.blurColor};
     filter: blur(18.7089px);
   }
 

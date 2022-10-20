@@ -22,7 +22,8 @@ const BorderWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(90deg, #29187c -10.69%, #d00cf0 40.09%, #e12c61 119.31%);
+  /* background: linear-gradient(90deg, #29187c -10.69%, #d00cf0 40.09%, #e12c61 119.31%); */
+  background: ${({ theme }) => theme.gradColor};
   border-radius: 15px;
 `;
 
@@ -36,7 +37,7 @@ const Wrapper = styled.button`
   border-radius: 13px;
   font-size: 20px;
   color: black;
-  background: linear-gradient(90deg, #29187c -10.69%, #d00cf0 40.09%, #e12c61 119.31%);
+  /* background: linear-gradient(90deg, #29187c -10.69%, #d00cf0 40.09%, #e12c61 119.31%); */
   & span {
     position: absolute;
     left: 0;
