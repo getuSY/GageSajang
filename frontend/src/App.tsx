@@ -8,15 +8,19 @@ import {
   orangeTheme,
 } from './styles/theme';
 import Layout from './layout/Layout';
-import LoadingPage from './pages/LoadingPage';
+import LoadingPage from './components/pages/LoadingPage';
 
-const Home = lazy(() => import('./pages/IndexPage'));
-const StatusPage = lazy(() => import('./pages/status/StatusPage'));
-const AnalysisPage = lazy(() => import('./pages/analysis/AnalysisPage'));
-const ProfessionalPage = lazy(
-  () => import('./pages/professional/ProfessionalPage')
+const Home = lazy(() => import('./components/pages/IndexPage'));
+const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
+const AnalysisPage = lazy(
+  () => import('./components/pages/analysis/AnalysisPage')
 );
-const AmatuerPage = lazy(() => import('./pages/amatuer/AmatuerPage'));
+const ProfessionalPage = lazy(
+  () => import('./components/pages/professional/ProfessionalPage')
+);
+const AmatuerPage = lazy(
+  () => import('./components/pages/amatuer/AmatuerPage')
+);
 
 function App() {
   return (

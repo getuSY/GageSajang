@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import Navbar from '../components/layout/organisms/Navbar';
+import Navbar from '../components/organisms/Navbar';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
