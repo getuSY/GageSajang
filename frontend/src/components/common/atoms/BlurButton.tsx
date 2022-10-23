@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type BlurButtonProps = {
+interface BlurButtonProps {
   content: String;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   style?: any;
   status?: boolean;
-};
+}
 
 const BlurButton = ({ content, onClick, style }: BlurButtonProps) => {
   return (

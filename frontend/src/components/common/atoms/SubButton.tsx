@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type SubButtonProps = {
+interface SubButtonProps {
   content: String;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   style?: any;
-};
+}
 
 const SubButton = ({ content, onClick, style }: SubButtonProps) => {
   return (

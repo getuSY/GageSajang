@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type BorderButtonProps = {
+interface BorderButtonProps {
   content: String;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   style?: any;
-};
+}
 
 const BorderButton = ({ content, onClick, style }: BorderButtonProps) => {
   return (

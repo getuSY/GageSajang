@@ -1,17 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import GradButton from '../atoms/GradButton';
 
-const IndexItemDescription = () => {
+interface IndexItemDescriptionProps {
+  right?: boolean;
+  content: any;
+}
+
+const IndexItemDescription = ({
+  right,
+  content,
+}: IndexItemDescriptionProps) => {
   return (
-    <Wrapper>
-      <div className="title">상권 현황</div>
-      <div className="content">서울시 머시기</div>
-      <GradButton content={'보러가기'} status />
+    <Wrapper right={right}>
+      <div className="title">{content.title}</div>
+      <div className="content">{content.description}</div>
+      <GradButton
+        content={content.buttonContent}
+        style={{
+          background: content.buttonColor,
+          width: '250px',
+          height: '73px',
+          fontWeight: 600,
+          fontSize: '1.2rem',
+        }}
+      />
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+interface WrapperProps {
+  right?: boolean;
+}
+
+const Wrapper = styled.div<WrapperProps>`
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-end; */
+  align-items: ${({ right }) => (!right ? 'flex-end' : 'flex-start')};
+  gap: 0.75rem;
+  & .title {
+    font-size: 64px;
+    font-weight: 800;
+  }
+  & .content {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+`;
 
 export default IndexItemDescription;

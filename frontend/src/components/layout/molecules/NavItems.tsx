@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import NavItem from '../atoms/NavItem';
 
-type NavItemsProps = {
+interface NavItemsProps {
   items: any;
-};
+}
 
 const NavItems = ({ items }: NavItemsProps) => {
   return (

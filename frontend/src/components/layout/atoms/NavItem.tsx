@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-type NavItemProps = {
+interface NavItemProps {
   content: String;
   linkTo: any;
-};
+}
 
 const NavItem = ({ content, linkTo }: NavItemProps) => {
   return (

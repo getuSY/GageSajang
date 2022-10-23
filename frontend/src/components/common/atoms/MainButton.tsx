@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type MainButtonProps = {
+interface MainButtonProps {
   content: String;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   style?: any;
-};
+}
 
 const MainButton = ({ content, onClick, style }: MainButtonProps) => {
   return (

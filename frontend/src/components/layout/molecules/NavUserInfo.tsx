@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import BorderButton from '../../common/atoms/BorderButton';
 
-type userType = {
+interface userType {
   username: String;
-};
+}
 
-type NavUserInfoProps = {
+interface NavUserInfoProps {
   userInfo: userType;
-};
+}
 
 const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
   return (

@@ -5,10 +5,10 @@ import GradButton from '../../common/atoms/GradButton';
 
 const navButtonStyle = { width: '120px', height: '44px', fontSize: '1rem' };
 
-type NavButtonProps = {
+interface NavButtonProps {
   toLogin: any;
   toRegister: any;
-};
+}
 
 const NavButton = ({ toLogin, toRegister }: NavButtonProps) => {
   return (

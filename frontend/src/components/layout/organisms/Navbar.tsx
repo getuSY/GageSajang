@@ -5,16 +5,16 @@ import NavLogo from '../atoms/NavLogo';
 import NavButton from '../molecules/NavButton';
 import NavUserInfo from '../molecules/NavUserInfo';
 
-type userType = {
+interface userType {
   username: String;
-};
+}
 
-type NavbarProps = {
+interface NavbarProps {
   navList: Array<Object>;
   toLogin: any;
   toRegister: any;
   userInfo: userType | null;
-};
+}
 
 const Navbar = ({ navList, toLogin, toRegister, userInfo }: NavbarProps) => {
   return (

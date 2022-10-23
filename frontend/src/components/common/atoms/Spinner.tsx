@@ -55,7 +55,7 @@ const Spinner = () => {
   );
 };
 
-type WrapperProps = {
+interface WrapperProps {
   width: number;
   height: number;
   height1: number;
@@ -63,7 +63,7 @@ type WrapperProps = {
   height3: number;
   height4: number;
   spinnerInterval: number;
-};
+}
 
 const Wrapper = styled.div<WrapperProps>`
   display: flex;
