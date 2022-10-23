@@ -1,13 +1,18 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 type MainButtonProps = {
-  text: String;
+  content: String;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  style?: any;
 };
 
-const MainButton = ({ text, onClick }: MainButtonProps) => {
-  return <Wrapper onClick={onClick}>{text}</Wrapper>;
+const MainButton = ({ content, onClick, style }: MainButtonProps) => {
+  return (
+    <Wrapper onClick={onClick} style={style}>
+      {content}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.button`

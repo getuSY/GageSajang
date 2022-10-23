@@ -1,13 +1,18 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 type SubButtonProps = {
-  text: String;
+  content: String;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  style?: any;
 };
 
-const SubButton = ({ text, onClick }: SubButtonProps) => {
-  return <Wrapper onClick={onClick}>{text}</Wrapper>;
+const SubButton = ({ content, onClick, style }: SubButtonProps) => {
+  return (
+    <Wrapper onClick={onClick} style={style}>
+      {content}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.button`

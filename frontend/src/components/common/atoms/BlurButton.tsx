@@ -1,21 +1,27 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 type BlurButtonProps = {
-  text: String;
+  content: String;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  style?: any;
+  status?: boolean;
 };
 
-const BlurButton = ({ text, onClick }: BlurButtonProps) => {
+const BlurButton = ({ content, onClick, style }: BlurButtonProps) => {
   return (
-    <Wrapper onClick={onClick}>
-      <div className='blur-effect' />
-      {text}
+    <Wrapper onClick={onClick} style={style} status>
+      <div className="blur-effect" />
+      {content}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.button`
+interface WrapperProps {
+  status?: boolean;
+}
+
+const Wrapper = styled.button<WrapperProps>`
   width: 250px;
   height: 72px;
   position: relative;
@@ -29,7 +35,6 @@ const Wrapper = styled.button`
     position: absolute;
     left: 0;
     bottom: 0;
-    /* z-index: -1; */
     width: 250px;
     opacity: 0.6;
 

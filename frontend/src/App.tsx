@@ -1,39 +1,57 @@
-import React, { Suspense, lazy } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
-import Header from "./layout/Header";
-import { greenTheme, blueTheme, purpleTheme, orangeTheme } from "./styles/theme";
-import Green from "./pages/theme/Green";
-import Blue from "./pages/theme/Blue";
-import Purple from "./pages/theme/Purple";
-import Orange from "./pages/theme/Orange";
+import React, { lazy } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  greenTheme,
+  blueTheme,
+  purpleTheme,
+  orangeTheme,
+} from './styles/theme';
+import Layout from './layout/Layout';
+import LoadingPage from './pages/LoadingPage';
 
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
+const Home = lazy(() => import('./pages/IndexPage'));
+const StatusPage = lazy(() => import('./pages/status/StatusPage'));
+const AnalysisPage = lazy(() => import('./pages/analysis/AnalysisPage'));
+const ProfessionalPage = lazy(
+  () => import('./pages/professional/ProfessionalPage')
+);
+const AmatuerPage = lazy(() => import('./pages/amatuer/AmatuerPage'));
 
 function App() {
   return (
     <Wrapper>
       <Router>
-        <Header />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path='' element={<Home />} />
-            <Route path='about' element={<About />} />
-            <Route path='green' element={<CustomThemeProvider theme={greenTheme} />}>
-              <Route path='' element={<Green />} />
-            </Route>
-            <Route path='blue' element={<CustomThemeProvider theme={blueTheme} />}>
-              <Route path='' element={<Blue />} />
-            </Route>
-            <Route path='purple' element={<CustomThemeProvider theme={purpleTheme} />}>
-              <Route path='' element={<Purple />} />
-            </Route>
-            <Route path='orange' element={<CustomThemeProvider theme={orangeTheme} />}>
-              <Route path='' element={<Orange />} />
-            </Route>
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="" element={<CustomThemeProvider theme={greenTheme} />}>
+            <Route path="" element={<Home />} />
+            <Route path="loading" element={<LoadingPage />} />
+          </Route>
+          <Route
+            path="status"
+            element={<CustomThemeProvider theme={orangeTheme} />}
+          >
+            <Route path="" element={<StatusPage />} />
+          </Route>
+          <Route
+            path="analysis"
+            element={<CustomThemeProvider theme={blueTheme} />}
+          >
+            <Route path="" element={<AnalysisPage />} />
+          </Route>
+          <Route
+            path="professional"
+            element={<CustomThemeProvider theme={greenTheme} />}
+          >
+            <Route path="" element={<ProfessionalPage />} />
+          </Route>
+          <Route
+            path="amatuer"
+            element={<CustomThemeProvider theme={purpleTheme} />}
+          >
+            <Route path="" element={<AmatuerPage />} />
+          </Route>
+        </Routes>
       </Router>
     </Wrapper>
   );
@@ -42,7 +60,7 @@ function App() {
 const CustomThemeProvider = ({ theme }: any) => {
   return (
     <ThemeProvider theme={theme}>
-      <Outlet />
+      <Layout />
     </ThemeProvider>
   );
 };

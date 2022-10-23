@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Header = () => {
+const SimulationPage = () => {
   return (
     <Wrapper>
-      <h1>가게사장</h1>
+      <h1>SimulationPage</h1>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div``;
 
-export default Header;
+export default SimulationPage;

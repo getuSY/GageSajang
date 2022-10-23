@@ -1,16 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 type BorderButtonProps = {
-  text: String;
+  content: String;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  style?: any;
 };
 
-const BorderButton = ({ text, onClick }: BorderButtonProps) => {
+const BorderButton = ({ content, onClick, style }: BorderButtonProps) => {
   return (
-    <BorderWrapper>
+    <BorderWrapper style={style}>
       <Wrapper onClick={onClick}>
-        <span>{text}</span>
+        <span>{content}</span>
       </Wrapper>
     </BorderWrapper>
   );
@@ -22,22 +23,20 @@ const BorderWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: linear-gradient(90deg, #29187c -10.69%, #d00cf0 40.09%, #e12c61 119.31%); */
   background: ${({ theme }) => theme.gradColor};
   border-radius: 15px;
+  font-size: 20px;
 `;
 
 const Wrapper = styled.button`
   cursor: pointer;
-  width: 141px;
-  height: 50px;
+  width: calc(100% - 5px);
+  height: calc(100% - 5px);
   position: relative;
   overflow: hidden;
-  /* background: white; */
   border-radius: 13px;
-  font-size: 20px;
+  font-size: inherit;
   color: black;
-  /* background: linear-gradient(90deg, #29187c -10.69%, #d00cf0 40.09%, #e12c61 119.31%); */
   & span {
     position: absolute;
     left: 0;
@@ -50,7 +49,7 @@ const Wrapper = styled.button`
     color: black;
   }
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     top: 0;
@@ -58,13 +57,6 @@ const Wrapper = styled.button`
     bottom: 0;
     background-color: #ffffff;
   }
-  /* &:hover {
-    color: white;
-  }
-  &:hover:before {
-    transition: 0.2s ease;
-    width: 0%;
-  } */
 `;
 
 export default BorderButton;
