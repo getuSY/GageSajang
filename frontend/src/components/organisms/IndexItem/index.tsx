@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import IndexItemDescription from '../molecules/IndexItemDescription';
+import IndexItemDescription from '../../molecules/IndexItemDescription';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 interface IndexItemProps {
   right?: boolean;
   content: any;
+  onClick?: any;
 }
 
-const IndexItem = ({ content, right }: IndexItemProps) => {
+const IndexItem = ({ content, right, onClick }: IndexItemProps) => {
   useEffect(() => {
     AOS.init();
   });
@@ -21,11 +22,11 @@ const IndexItem = ({ content, right }: IndexItemProps) => {
       {right ? (
         <>
           <img src={content.imgSrc} alt="" />
-          <IndexItemDescription content={content} right />
+          <IndexItemDescription content={content} onClick={onClick} right />
         </>
       ) : (
         <>
-          <IndexItemDescription content={content} />
+          <IndexItemDescription content={content} onClick={onClick} />
           <img src={content.imgSrc} alt="" />
         </>
       )}

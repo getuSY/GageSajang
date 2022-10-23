@@ -61,7 +61,7 @@ function App() {
   );
 }
 
-const CustomThemeProvider = ({ theme }: any) => {
+export const CustomThemeProvider = ({ theme }: any) => {
   return (
     <ThemeProvider theme={theme}>
       <Layout />

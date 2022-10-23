@@ -1,24 +1,23 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import GradButton from '../atoms/GradButton';
+import Button from '../../atoms/Button';
 
 interface IndexItemDescriptionProps {
   right?: boolean;
   content: any;
+  onClick?: any;
 }
 
 const IndexItemDescription = ({
   right,
   content,
+  onClick,
 }: IndexItemDescriptionProps) => {
-  const navigate = useNavigate();
   return (
     <Wrapper right={right}>
       <div className="title">{content.title}</div>
       <div className="content">{content.description}</div>
-      <GradButton
-        content={content.buttonContent}
+      <Button
         style={{
           background: content.buttonColor,
           width: '250px',
@@ -26,8 +25,11 @@ const IndexItemDescription = ({
           fontWeight: 600,
           fontSize: '1.2rem',
         }}
-        onClick={() => navigate(`/${content.name}`)}
-      />
+        onClick={onClick}
+        type="grad"
+      >
+        {content.buttonContent}
+      </Button>
     </Wrapper>
   );
 };
@@ -39,7 +41,6 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
-  /* align-items: flex-end; */
   align-items: ${({ right }) => (!right ? 'flex-end' : 'flex-start')};
   gap: 0.75rem;
   & .title {

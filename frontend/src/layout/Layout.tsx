@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import Navbar from '../components/organisms/Navbar';
-import { Outlet, useNavigate } from 'react-router-dom';
+import Navbar from '../components/organisms/NavBar';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 const navList = [
@@ -23,26 +23,14 @@ const navList = [
 ];
 
 const Layout = () => {
-  const navigate = useNavigate();
-  const toLogin = () => {
-    navigate('/login');
-  };
-  const toRegister = () => {
-    navigate('/register');
-  };
-
   // dummy userInfo
   const userInfo = {
     username: '짱사장',
   };
+
   return (
     <>
-      <Navbar
-        navList={navList}
-        toLogin={toLogin}
-        toRegister={toRegister}
-        userInfo={userInfo}
-      />
+      <Navbar userInfo={userInfo} navList={navList} />
       <Wrapper>
         <Suspense fallback={<div />}>
           <Outlet />

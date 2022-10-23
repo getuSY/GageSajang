@@ -7,10 +7,10 @@ import {
   blueTheme,
   orangeTheme,
 } from '../../styles/theme';
+import { useNavigate } from 'react-router-dom';
 import IndexSearchBar from '../organisms/IndexSearchBar';
 
 const status = {
-  name: 'status',
   title: '상권 현황',
   description: '서울시의 상권 현황을 한 눈에!',
   imgSrc: 'assets/img/index_status.png',
@@ -18,7 +18,6 @@ const status = {
   buttonColor: orangeTheme.gradColor,
 };
 const analysis = {
-  name: 'analysis',
   title: '상권 분석',
   description: '구체적인 상권 분석 리포트',
   imgSrc: 'assets/img/index_analysis.png',
@@ -27,7 +26,6 @@ const analysis = {
 };
 
 const professional = {
-  name: 'professional',
   title: '이미 사장',
   description: '내 가게 상태를 진단하고 싶다면?',
   imgSrc: 'assets/img/index_professional.png',
@@ -35,7 +33,6 @@ const professional = {
   buttonColor: greenTheme.gradColor,
 };
 const amatuer = {
-  name: 'amatuer',
   title: '아마 사장',
   description: '나는야 예비 창업가!',
   imgSrc: 'assets/img/index_amatuer.png',
@@ -44,13 +41,21 @@ const amatuer = {
 };
 
 const IndexPage = () => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <IndexSearchBar />
-      <IndexItem content={status} />
-      <IndexItem content={analysis} right />
-      <IndexItem content={professional} />
-      <IndexItem content={amatuer} right />
+      <IndexItem content={status} onClick={() => navigate('/status')} />
+      <IndexItem
+        content={analysis}
+        onClick={() => navigate('/analysis')}
+        right
+      />
+      <IndexItem
+        content={professional}
+        onClick={() => navigate('/professional')}
+      />
+      <IndexItem content={amatuer} right onClick={() => navigate('/amatuer')} />
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import BorderButton from '../atoms/BorderButton';
+import Button from '../../atoms/Button';
 
 interface userType {
   username: String;
@@ -19,14 +19,16 @@ const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
         className="profile-img"
       />
       <div className="username">{userInfo.username}</div>
-      <BorderButton
-        content="로그아웃"
+      <Button
         style={{
           fontSize: '16px',
           width: '90px',
           height: '36px',
         }}
-      />
+        type="border"
+      >
+        로그아웃
+      </Button>
     </Wrapper>
   );
 };
