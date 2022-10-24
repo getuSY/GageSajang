@@ -9,6 +9,7 @@ import {
 } from '../../styles/theme';
 import { useNavigate } from 'react-router-dom';
 import IndexSearchBar from '../organisms/IndexSearchBar';
+import Footer from '../organisms/Footer';
 import { IndexContent } from '../../models/common';
 
 const status: IndexContent = {
@@ -57,6 +58,7 @@ const IndexPage = () => {
         onClick={() => navigate('/professional')}
       />
       <IndexItem content={amatuer} right onClick={() => navigate('/amatuer')} />
+      <Footer />
     </Wrapper>
   );
 };
