@@ -13,7 +13,7 @@ const Button = ({ onClick, type, style, children }: ButtonProps) => {
     <>
       {type === 'blur' && (
         <BlurButton onClick={onClick} style={style}>
-          <div className="blur-effect" />
+          <div className="blur-effect" style={style} />
           {children}
         </BlurButton>
       )}
