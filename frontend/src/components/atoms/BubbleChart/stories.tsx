@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import BarChart from '.';
+import BubbleChart from '.';
 import { greenTheme } from '../../../styles/theme';
 
 // greenTheme.mainColor
@@ -10,7 +10,14 @@ const data = {
   datasets: [
     {
       label: '# of Votes',
-      data: [12, 2, 9, 5, 10, 8],
+      data: [
+        { x: 12, y: 1, r: 9 },
+        { x: 2, y: 3, r: 15 },
+        { x: 1, y: 1, r: 9 },
+        { x: 4, y: 2, r: 20 },
+        { x: 6, y: 5, r: 30 },
+        { x: 9, y: 4, r: 25 },
+      ],
       backgroundColor: [
         greenTheme.mainColor,
         greenTheme.subColor,
@@ -33,10 +40,10 @@ const data = {
 };
 
 export default {
-  title: 'atoms/BarChart',
-  component: BarChart,
-} as ComponentMeta<typeof BarChart>;
+  title: 'atoms/BubbleChart',
+  component: BubbleChart,
+} as ComponentMeta<typeof BubbleChart>;
 
-export const defaultTheme: ComponentStory<typeof BarChart> = () => (
-  <BarChart data={data} />
+export const defaultTheme: ComponentStory<typeof BubbleChart> = () => (
+  <BubbleChart data={data} />
 );
