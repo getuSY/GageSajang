@@ -1,4 +1,6 @@
-FROM adoptopenjdk/openjdk11
-CMD ["./mvnw", "clean", "package"]
-COPY --from=builder build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+FROM openjdk:11
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
+
+EXPOSE 8081/tcp
+ENTRYPOINT ["java","-jar","/app.jar"]
