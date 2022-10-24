@@ -2,8 +2,10 @@ import React, { Suspense } from 'react';
 import Navbar from '../components/organisms/NavBar';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { User } from '../models/user';
+import { NavItem } from '../models/common';
 
-const navList = [
+const navList: Array<NavItem> = [
   {
     content: '상권현황',
     linkTo: '/status',
@@ -24,7 +26,7 @@ const navList = [
 
 const Layout = () => {
   // dummy userInfo
-  const userInfo = {
+  const userInfo: User = {
     username: '짱사장',
   };
 

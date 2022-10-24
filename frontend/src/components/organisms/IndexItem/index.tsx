@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import IndexItemDescription from '../../molecules/IndexItemDescription';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { IndexContent } from '../../../models/common';
 
 interface IndexItemProps {
   right?: boolean;
-  content: any;
-  onClick?: any;
+  content: IndexContent;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const IndexItem = ({ content, right, onClick }: IndexItemProps) => {

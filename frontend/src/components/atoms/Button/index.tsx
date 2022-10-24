@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type ButtonProps = {
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+interface ButtonProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type: 'blur' | 'border' | 'grad' | 'main' | 'sub';
-  style?: Object;
+  style?: object;
   children?: React.ReactNode;
-};
+}
 
 const Button = ({ onClick, type, style, children }: ButtonProps) => {
   return (

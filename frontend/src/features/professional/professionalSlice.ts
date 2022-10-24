@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface professionalState {}
+interface ProfessionalState {}
 
-const initialState: professionalState = {};
+const initialState: ProfessionalState = {};
 
 export const professionalSlice = createSlice({
   name: 'professional',

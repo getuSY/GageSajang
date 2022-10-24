@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { User } from '../../models/user';
 
 interface UserState {
-  userInfo: Object | null;
+  userInfo: User | null;
 }
 
 const initialState: UserState = {
   userInfo: {
-    userId: 'Hong',
+    username: 'Hong',
   },
 };
 

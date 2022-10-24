@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button';
-
-interface userType {
-  username: String;
-}
+import { User } from '../../../models/user';
 
 interface NavUserInfoProps {
-  userInfo: userType;
+  userInfo: User;
 }
 
 const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {

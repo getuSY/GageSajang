@@ -9,6 +9,7 @@ import {
 } from './styles/theme';
 import Layout from './layout/Layout';
 import LoadingPage from './components/pages/LoadingPage';
+import { DefaultTheme } from 'styled-components';
 
 const Home = lazy(() => import('./components/pages/IndexPage'));
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
@@ -61,7 +62,11 @@ function App() {
   );
 }
 
-export const CustomThemeProvider = ({ theme }: any) => {
+interface CustomThemeProviderProps {
+  theme: DefaultTheme;
+}
+
+export const CustomThemeProvider = ({ theme }: CustomThemeProviderProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Layout />

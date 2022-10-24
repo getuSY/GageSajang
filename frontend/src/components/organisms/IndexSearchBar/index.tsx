@@ -5,7 +5,7 @@ const IndexSearchBar = () => {
   return (
     <Wrapper>
       <div className="search-bar">
-        나<span>치킨집</span>할 건데 어디에 차리지?
+        나<div>치킨집</div>할 건데 어디에 차리지?
       </div>
     </Wrapper>
   );
@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: calc(100vh - 80px);
+  width: 100%;
 
   & .search-bar {
     // font

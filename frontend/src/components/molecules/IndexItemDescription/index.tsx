@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button';
+import { IndexContent } from '../../../models/common';
 
 interface IndexItemDescriptionProps {
   right?: boolean;
-  content: any;
-  onClick?: any;
+  content: IndexContent;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const IndexItemDescription = ({

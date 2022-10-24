@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { NavItem } from '../../../models/common';
 
 interface NavItemsProps {
-  items: any;
+  items: Array<NavItem>;
 }
 
 const NavItems = ({ items }: NavItemsProps) => {
   return (
     <Wrapper>
-      {items.map((item: any, idx: number) => (
-        <Link to={item.linkTo} className="nav-item">
+      {items.map((item: NavItem, idx: number) => (
+        <Link to={item.linkTo} className="nav-item" key={idx}>
           {item.content}
         </Link>
       ))}

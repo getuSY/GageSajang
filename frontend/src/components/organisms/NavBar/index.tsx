@@ -5,14 +5,12 @@ import NavUserInfo from '../../molecules/NavUserInfo';
 import { Link } from 'react-router-dom';
 import Button from '../../atoms/Button';
 import { useNavigate } from 'react-router-dom';
-
-interface userType {
-  username: String;
-}
+import { User } from '../../../models/user';
+import { NavItem } from '../../../models/common';
 
 interface NavbarProps {
-  userInfo: userType | null;
-  navList: Array<Object>;
+  userInfo: User | null;
+  navList: Array<NavItem>;
 }
 
 const navButtonStyle = { width: '120px', height: '44px', fontSize: '1rem' };

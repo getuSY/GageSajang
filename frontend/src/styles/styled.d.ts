@@ -1,10 +1,10 @@
-import "styled-components";
+import 'styled-components';
 
-declare module "styled-components" {
+declare module 'styled-components' {
   export interface DefaultTheme {
-    mainColor: any;
-    subColor: any;
-    blurColor: any;
-    gradColor: any;
+    mainColor: string;
+    subColor: string;
+    blurColor: string;
+    gradColor: string;
   }
 }
