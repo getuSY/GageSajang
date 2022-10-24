@@ -10,3 +10,8 @@ export interface IndexContent {
   buttonContent: string;
   buttonColor: string;
 }
+
+export interface LabelInputContent {
+  label: string;
+  placeholder: string;
+}
