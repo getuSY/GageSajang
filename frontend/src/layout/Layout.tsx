@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { User } from '../models/user';
 import { NavItem } from '../models/common';
+import { useNavigate } from 'react-router-dom';
 
 const navList: Array<NavItem> = [
   {
@@ -29,11 +30,14 @@ const Layout = () => {
   const userInfo: User = {
     username: '짱사장',
   };
-
+  const navigate = useNavigate();
+  const toLogin = () => {
+    navigate('/login');
+  };
   return (
     <>
       <Navbar userInfo={userInfo} navList={navList} />
-      <Wrapper>
+      <Wrapper onClick={toLogin}>
         <Suspense fallback={<div />}>
           <Outlet />
         </Suspense>
