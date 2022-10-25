@@ -19,9 +19,7 @@ const Button = ({ onClick, type, style, children }: ButtonProps) => {
       )}
       {type === 'border' && (
         <BorderWrapper style={style}>
-          <BorderButton onClick={onClick}>
-            <span>{children}</span>
-          </BorderButton>
+          <BorderButton onClick={onClick}>{children}</BorderButton>
         </BorderWrapper>
       )}
       {type === 'grad' && (
@@ -102,45 +100,24 @@ const SubButton = styled.button`
 `;
 
 const BorderWrapper = styled.div`
+  position: relative;
   width: 145px;
   height: 54px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.gradColor};
+  border: 3px solid transparent;
   border-radius: 15px;
-  font-size: 20px;
+  background-image: linear-gradient(#fff, #fff),
+    ${({ theme }) => theme.gradColor};
+  background-origin: border-box;
+  background-clip: content-box, border-box;
 `;
 
 const BorderButton = styled.button`
-  cursor: pointer;
-  width: calc(100% - 5px);
-  height: calc(100% - 5px);
-  position: relative;
-  overflow: hidden;
-  border-radius: 13px;
-  font-size: inherit;
-  color: black;
-  & span {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-  }
-  &:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ffffff;
-  }
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: transparent;
 `;
 
 export default Button;
