@@ -6,7 +6,7 @@ import json
 
 # url 입력
 
-url = 'http://openapi.seoul.go.kr:8088/464f495a466461383130346555427362/json/TbgisTrdarRelm/1/100/'
+url = 'http://openapi.seoul.go.kr:8088/464f495a466461383130346555427362/json/TbgisTrdarRelm/1671/2000/'
 
 response = requests.get(url)
 
@@ -26,6 +26,7 @@ print(json_ob)
 body = json_ob['TbgisTrdarRelm']
 body = body['row']
 print(body)
+print(len(body))
 
 # pandas import
 import pandas as pd
@@ -33,9 +34,9 @@ import pandas as pd
 # Dataframe으로 만들기
 dataframe = pd.json_normalize(body) #상권분석서비스
 
-df_dongName = pd.read_excel(r'dongName.xlsx')
+df_dongName = pd.read_excel(r'C:\Users\SSAFY\Desktop\E205\S07P31E205\backend\parse_python\dongName.xlsx')
 print(df_dongName.iloc[0])
-print(dataframe.iloc[15])
+print(dataframe.iloc[0])
 df_dongName['행정기관코드'] = df_dongName['행정기관코드']/100
 df_dongName = df_dongName.astype({'행정기관코드':'int64'})
 df_dongName.rename(columns = {'행정기관코드':'ADSTRD_CD'},inplace=True)
