@@ -39,4 +39,4 @@ total_commercialArea = total_commercialArea.dropna()
 
 len(total_commercialArea)
 
-total_commercialArea.to_excel("commercial_area_codd_with_dong.xlsx")
+total_commercialArea.to_excel("commercial_area_code_with_dong.xlsx")
