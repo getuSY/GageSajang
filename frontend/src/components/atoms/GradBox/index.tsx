@@ -1,20 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import CSS from 'csstype';
 
 interface GradBoxProps {
   style?: object;
 }
 
 const GradBox = ({ style }: GradBoxProps) => {
-  return (
-    <Wrapper>
-      <GradDiv style={style}></GradDiv>
-    </Wrapper>
-  );
+  return <GradDiv style={style}></GradDiv>;
 };
 
-const GradDiv = styled.div`
+export const GradDiv = styled.div`
   background: linear-gradient(#ffffff 0 0) padding-box,
     linear-gradient(to right, #01ad7c, #fff80b) border-box;
   color: #313149;
@@ -28,9 +23,9 @@ const GradDiv = styled.div`
   filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
 `;
 
-const Wrapper = styled.div`
-  width: 900px;
-  height: 900px;
-`;
+// const Wrapper = styled.div`
+//   width: 900px;
+//   height: 900px;
+// `;
 
 export default GradBox;
