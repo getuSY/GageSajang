@@ -14,7 +14,7 @@ interface IndexItemProps {
 const IndexItem = ({ content, right, onClick }: IndexItemProps) => {
   useEffect(() => {
     AOS.init();
-  });
+  }, []);
   return (
     <Wrapper
       data-aos={right ? 'fade-right' : 'fade-left'}

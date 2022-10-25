@@ -16,6 +16,9 @@ const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
 const AnalysisPage = lazy(
   () => import('./components/pages/analysis/AnalysisPage')
 );
+const AnalysisResultPage = lazy(
+  () => import('./components/pages/analysis/AnalysisResultPage')
+);
 const ProfessionalPage = lazy(
   () => import('./components/pages/professional/ProfessionalPage')
 );
@@ -43,6 +46,7 @@ function App() {
             element={<CustomThemeProvider theme={blueTheme} />}
           >
             <Route path="" element={<AnalysisPage />} />
+            <Route path="result" element={<AnalysisResultPage />} />
           </Route>
           <Route
             path="professional"
