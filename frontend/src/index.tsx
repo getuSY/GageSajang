@@ -5,16 +5,21 @@ import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './styles/GlobalStyle';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   // <React.StrictMode>
-  <Provider store={store}>
-    <App />
-    <GlobalStyle />
-  </Provider>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <App />
+      <GlobalStyle />
+    </Provider>
+  </QueryClientProvider>
   // </React.StrictMode>
 );
 
