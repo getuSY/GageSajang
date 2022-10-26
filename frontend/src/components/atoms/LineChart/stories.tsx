@@ -38,6 +38,6 @@ export default {
   component: LineChart,
 } as ComponentMeta<typeof LineChart>;
 
-export const defaultTheme: ComponentStory<typeof LineChart> = () => (
+export const lineChart: ComponentStory<typeof LineChart> = () => (
   <LineChart data={data} />
 );

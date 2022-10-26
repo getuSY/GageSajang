@@ -38,6 +38,6 @@ export default {
   component: PieChart,
 } as ComponentMeta<typeof PieChart>;
 
-export const defaultTheme: ComponentStory<typeof PieChart> = () => (
+export const pieChart: ComponentStory<typeof PieChart> = () => (
   <PieChart data={data} />
 );

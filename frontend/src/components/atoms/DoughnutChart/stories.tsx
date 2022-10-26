@@ -38,6 +38,6 @@ export default {
   component: DoughnutChart,
 } as ComponentMeta<typeof DoughnutChart>;
 
-export const defaultTheme: ComponentStory<typeof DoughnutChart> = () => (
+export const doughnutChart: ComponentStory<typeof DoughnutChart> = () => (
   <DoughnutChart data={data} />
 );

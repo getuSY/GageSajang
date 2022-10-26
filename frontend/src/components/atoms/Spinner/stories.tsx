@@ -7,4 +7,4 @@ export default {
   component: Spinner,
 } as ComponentMeta<typeof Spinner>;
 
-export const defaultTheme: ComponentStory<typeof Spinner> = () => <Spinner />;
+export const spinner: ComponentStory<typeof Spinner> = () => <Spinner />;

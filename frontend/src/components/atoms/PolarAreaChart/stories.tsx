@@ -38,6 +38,6 @@ export default {
   component: PolarAreaChart,
 } as ComponentMeta<typeof PolarAreaChart>;
 
-export const defaultTheme: ComponentStory<typeof PolarAreaChart> = () => (
+export const polarAreaChart: ComponentStory<typeof PolarAreaChart> = () => (
   <PolarAreaChart data={data} />
 );

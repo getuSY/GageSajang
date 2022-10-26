@@ -7,6 +7,6 @@ export default {
   component: CheckboxInput,
 } as ComponentMeta<typeof CheckboxInput>;
 
-export const defaultTheme: ComponentStory<typeof CheckboxInput> = () => (
+export const checkboxInput: ComponentStory<typeof CheckboxInput> = () => (
   <CheckboxInput />
 );

@@ -20,6 +20,6 @@ export default {
   component: RadarChart,
 } as ComponentMeta<typeof RadarChart>;
 
-export const defaultTheme: ComponentStory<typeof RadarChart> = () => (
+export const radarChart: ComponentStory<typeof RadarChart> = () => (
   <RadarChart data={data} />
 );

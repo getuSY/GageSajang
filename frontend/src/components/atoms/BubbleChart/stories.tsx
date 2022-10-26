@@ -44,6 +44,6 @@ export default {
   component: BubbleChart,
 } as ComponentMeta<typeof BubbleChart>;
 
-export const defaultTheme: ComponentStory<typeof BubbleChart> = () => (
+export const bubbleChart: ComponentStory<typeof BubbleChart> = () => (
   <BubbleChart data={data} />
 );

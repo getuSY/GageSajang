@@ -37,6 +37,6 @@ export default {
   component: BarChart,
 } as ComponentMeta<typeof BarChart>;
 
-export const defaultTheme: ComponentStory<typeof BarChart> = () => (
+export const barChart: ComponentStory<typeof BarChart> = () => (
   <BarChart data={data} />
 );

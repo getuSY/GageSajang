@@ -7,4 +7,4 @@ export default {
   component: GradBox,
 } as ComponentMeta<typeof GradBox>;
 
-export const defaultTheme: ComponentStory<typeof GradBox> = () => <GradBox />;
+export const gradBox: ComponentStory<typeof GradBox> = () => <GradBox />;

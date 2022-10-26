@@ -17,17 +17,7 @@ export default {
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const Primary = Template.bind({});
-
-export const defaultTheme: ComponentStory<typeof Button> = () => (
-  <Wrapper>
-    <Button type="blur">blur</Button>
-    <Button type="border">border</Button>
-    <Button type="grad">grad</Button>
-    <Button type="main">main</Button>
-    <Button type="sub">sub</Button>
-  </Wrapper>
-);
+export const button = Template.bind({});
 
 export const blue: ComponentStory<typeof Button> = () => (
   <ThemeProvider theme={blueTheme}>
