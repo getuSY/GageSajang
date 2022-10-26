@@ -8,12 +8,6 @@ declare global {
   }
 }
 
-// const trans_coordinates = (arr: Array<any>) => {
-//   arr = arr.map((point, i) => new window.kakao.maps.LatLng(point[0], point[1]));
-//   console.log(arr);
-//   return arr;
-// };
-
 const StatusPage = () => {
   useEffect(() => {
     let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

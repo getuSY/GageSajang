@@ -12,9 +12,8 @@ export const areas = Gu.features.map((area, i) => ({
   SIG_ENG_NM: area.properties.SIG_ENG_NM,
   name: area.properties.SIG_KOR_NM,
   path: area.geometry.coordinates[0].map(
-    (point, i) => new window.kakao.maps.LatLng(point[0], point[1])
+    (point, i) => new window.kakao.maps.LatLng(point[1], point[0])
   ),
-  // path: area.geometry.coordinates[0],
 }));
 
 console.log(areas);
