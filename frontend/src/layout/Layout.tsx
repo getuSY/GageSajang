@@ -29,7 +29,6 @@ const Layout = () => {
   const userInfo: User = {
     username: '짱사장',
   };
-
   return (
     <>
       <Navbar userInfo={userInfo} navList={navList} />
