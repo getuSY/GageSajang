@@ -21,7 +21,7 @@ const loginImg: object = {
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direcrion: row;
+  flex-direction: row;
   margin: auto;
   gap: 3rem;
 `;
