@@ -2,12 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button';
 import { User } from '../../../models/user';
+import { useNavigate } from 'react-router-dom';
 
 interface NavUserInfoProps {
   userInfo: User;
 }
 
 const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
+  const navigate = useNavigate();
+  const toMyPage = () => {
+    navigate('/myPage');
+  };
+  const toMyStore = () => {
+    navigate('/myStore');
+  };
+  const toMyArea = () => {
+    navigate('/myArea');
+  };
+  const toLogin = () => {
+    navigate('/login');
+  };
   return (
     <Wrapper>
       <img
@@ -15,8 +29,17 @@ const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
         alt=""
         className="profile-img"
       />
-      <div className="username">{userInfo.username}</div>
+      <div className="username">
+        {userInfo.username}
+        <ul>
+          <MyPageList onClick={toMyPage}>회원 정보 수정</MyPageList>
+          <MyPageList onClick={toMyStore}>내 가게 정보</MyPageList>
+          <MyPageList onClick={toMyArea}>내 관심 상권</MyPageList>
+        </ul>
+      </div>
+
       <Button
+        onClick={toLogin}
         style={{
           fontSize: '16px',
           width: '90px',
@@ -41,6 +64,39 @@ const Wrapper = styled.div`
   }
   & .username {
     font-size: 22px;
+    padding: 1rem;
+  }
+  & .username ul {
+    display: none;
+    position: absolute;
+    top: 43px;
+    right: 165px;
+  }
+  & .username:hover ul {
+    display: visible;
+    background: #ffffff;
+    display: block;
+    list-style: none;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 0px 0px 15px 15px;
+    font-size: 15px;
+    width: 90px;
+    height: 120px;
+  }
+`;
+
+const MyPageList = styled.li`
+  background: transparent;
+  color: black;
+  font-size: 15px;
+  margin: 0.5rem 0rem 0.5rem -40px;
+  padding: 5px 0px;
+  text-align: center;
+  &:hover {
+    background-color: ${({ theme }) => theme.subColor};
+    display: block;
+    border-radius: 10px;
+    cursor: pointer;
   }
 `;
 
