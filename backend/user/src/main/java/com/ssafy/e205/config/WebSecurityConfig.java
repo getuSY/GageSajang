@@ -27,7 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**","/js/**","/img/**");
+        web.ignoring()
+                .antMatchers("/css/**","/js/**","/img/**")
+                .antMatchers("/v2/api-docs/**", "/v3/api-docs/**", "/configuration/ui",
+                "/swagger-resources", "/configuration/security",
+                "/swagger-ui.html", "/webjars/**","/swagger/**");
     }
 
     @Override
@@ -36,6 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/Auth/**").permitAll()
                 .antMatchers("/user/kakao/**").permitAll()
                 .antMatchers("/user/**").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/").hasRole("user")
                 .antMatchers("/admin").hasRole("admin")
                 .anyRequest().authenticated()
