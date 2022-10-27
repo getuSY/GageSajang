@@ -19,7 +19,7 @@ const buttonStyle = {
 const LoginBox = ({}: LoginBoxProps) => {
   const navigate = useNavigate();
   const toSignUp = () => {
-    navigate('/signUp');
+    navigate('/register');
   };
   return (
     <Wrapper>
