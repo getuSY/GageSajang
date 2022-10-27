@@ -18,10 +18,10 @@ const navButtonStyle = { width: '120px', height: '44px', fontSize: '1rem' };
 const Navbar = ({ userInfo, navList }: NavbarProps) => {
   const navigate = useNavigate();
   const toLogin = () => {
-    navigate('/login');
+    navigate('/user/login');
   };
   const toRegister = () => {
-    navigate('/register');
+    navigate('/user/register');
   };
   return (
     <Wrapper>

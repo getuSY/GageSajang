@@ -10,8 +10,8 @@ import {
 import Layout from './layout/Layout';
 import LoadingPage from './components/pages/LoadingPage';
 import { DefaultTheme } from 'styled-components';
-import LoginPage from '../src/components/pages/login/LoginPage';
-import RegisterPage from './components/pages/register/RegisterPage';
+import LoginPage from './components/pages/user/LoginPage';
+import RegisterPage from './components/pages/user/RegisterPage';
 
 const Home = lazy(() => import('./components/pages/IndexPage'));
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
@@ -33,16 +33,23 @@ function App() {
     <Wrapper>
       <Router>
         <Routes>
+          {/* 기본 테마 */}
           <Route path="" element={<CustomThemeProvider theme={greenTheme} />}>
             <Route path="" element={<Home />} />
             <Route path="loading" element={<LoadingPage />} />
+            <Route path="user">
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
+            </Route>
           </Route>
+          {/* 상권 현황 */}
           <Route
             path="status"
             element={<CustomThemeProvider theme={orangeTheme} />}
           >
             <Route path="" element={<StatusPage />} />
           </Route>
+          {/* 상권 분석 */}
           <Route
             path="analysis"
             element={<CustomThemeProvider theme={blueTheme} />}
@@ -50,29 +57,19 @@ function App() {
             <Route path="" element={<AnalysisPage />} />
             <Route path="result" element={<AnalysisResultPage />} />
           </Route>
+          {/* 이미 사장 */}
           <Route
             path="professional"
             element={<CustomThemeProvider theme={greenTheme} />}
           >
             <Route path="" element={<ProfessionalPage />} />
           </Route>
+          {/* 아마 사장 */}
           <Route
             path="amatuer"
             element={<CustomThemeProvider theme={purpleTheme} />}
           >
             <Route path="" element={<AmatuerPage />} />
-          </Route>
-          <Route
-            path="login"
-            element={<CustomThemeProvider theme={greenTheme} />}
-          >
-            <Route path="" element={<LoginPage />} />
-          </Route>
-          <Route
-            path="register"
-            element={<CustomThemeProvider theme={greenTheme} />}
-          >
-            <Route path="" element={<RegisterPage />} />
           </Route>
         </Routes>
       </Router>
