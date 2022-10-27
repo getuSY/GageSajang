@@ -12,6 +12,7 @@ import LoadingPage from './components/pages/LoadingPage';
 import { DefaultTheme } from 'styled-components';
 import LoginPage from './components/pages/user/LoginPage';
 import RegisterPage from './components/pages/user/RegisterPage';
+import StatusTestPage from './components/pages/status/StatusTestPage';
 
 const Home = lazy(() => import('./components/pages/IndexPage'));
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
@@ -48,6 +49,7 @@ function App() {
             element={<CustomThemeProvider theme={orangeTheme} />}
           >
             <Route path="" element={<StatusPage />} />
+            <Route path="test" element={<StatusTestPage />} />
           </Route>
           {/* 상권 분석 */}
           <Route

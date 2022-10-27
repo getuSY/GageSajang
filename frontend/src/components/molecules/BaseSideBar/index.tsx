@@ -73,13 +73,14 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   background: #ffffff;
   width: 360px;
-  height: 600px;
+  height: calc(100vh - 180px);
+  max-height: 800px;
   position: absolute;
   /* left: -410px;
   left: 0; */
   left: ${({ isOpen }) => (isOpen ? '0px' : '-406px')};
   top: 100px;
-  transition: 0.9s;
+  transition: left 0.9s;
   z-index: 999;
   & .title {
     margin: 12px 0;

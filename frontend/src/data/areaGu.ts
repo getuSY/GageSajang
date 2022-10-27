@@ -17,5 +17,3 @@ export const areas = Gu.features.map((area, i) => ({
   ),
   grade: 0,
 }));
-
-console.log(areas);
