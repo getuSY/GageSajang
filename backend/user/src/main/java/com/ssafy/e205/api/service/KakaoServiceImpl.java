@@ -9,6 +9,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class KakaoServiceImpl implements KakaoService{
@@ -95,7 +96,7 @@ public class KakaoServiceImpl implements KakaoService{
             System.out.println("responseCode : " + responseCode);
 
             //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             String line = "";
             String result = "";
 
@@ -111,15 +112,13 @@ public class KakaoServiceImpl implements KakaoService{
             int id = element.getAsJsonObject().get("id").getAsInt();
             boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("has_email").getAsBoolean();
 //            boolean hasNickName = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("profile_nickname_needs_agreement").getAsBoolean();
-            boolean hasNickName = true;
+
             String email = "";
             String nickname = "";
             if(hasEmail){
                 email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
             }
-            if(hasNickName){
-                nickname = element.getAsJsonObject().get("kakao-account").getAsJsonObject().get("profile").getAsJsonObject().get("nickname").getAsString();
-            }
+            nickname = element.getAsJsonObject().get("properties").getAsJsonObject().get("nickname").getAsString();
 
             System.out.println("id : " + id);
             System.out.println("email : " + email);

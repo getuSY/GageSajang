@@ -27,7 +27,8 @@ public class UserDto {
 
     public List<String> getAuthList(){
         List<String> list = new ArrayList<>();
-        String[] strings = auth.split(",");
+        String[] strings = this.auth.split(",");
+        System.out.println("getAuthList : "+this.auth);
         Collections.addAll(list, strings);
         return list;
     }

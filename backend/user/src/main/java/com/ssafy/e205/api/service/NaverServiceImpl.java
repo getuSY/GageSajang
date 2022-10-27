@@ -2,11 +2,13 @@ package com.ssafy.e205.api.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.ssafy.e205.api.dto.UserDto;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class NaverServiceImpl implements NaverService{
@@ -75,15 +77,15 @@ public class NaverServiceImpl implements NaverService{
             br.close();
             bw.close();
 
-            return getNaverEmail(access_Token);
+//            return getNaverEmail(access_Token);
         }catch (IOException e) {
             e.printStackTrace();
         }
-        return access_Token;
+        return access_Token+","+refresh_Token;
     }
 
     @Override
-    public String getNaverEmail(String token) {
+    public UserDto getNaverUserInfo(String accessToken, String refreshToken) {
         String reqURL = "https://openapi.naver.com/v1/nid/me";
 
         //access_token을 이용하여 사용자 정보 조회
@@ -93,14 +95,14 @@ public class NaverServiceImpl implements NaverService{
 
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
-            conn.setRequestProperty("Authorization", "Bearer " + token); //전송할 header 작성, access_token전송
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken); //전송할 header 작성, access_token전송
 
             //결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
 
             //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             String line = "";
             String result = "";
 
@@ -123,7 +125,12 @@ public class NaverServiceImpl implements NaverService{
 
             br.close();
 
-            return email;
+            UserDto userDto = new UserDto();
+            userDto.setEmail(email);
+            userDto.setNickName(nickname);
+            userDto.setAccessToken(accessToken);
+            userDto.setRefreshToken(refreshToken);
+            return userDto;
 
         } catch (IOException e) {
             e.printStackTrace();
