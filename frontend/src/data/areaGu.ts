@@ -4,6 +4,7 @@ interface dataItem {
   SIG_CD: string;
   SIG_ENG_NM: string;
   SIG_KOR_NM: string;
+  grade: number;
   path: Array<any>;
 }
 
@@ -14,6 +15,7 @@ export const areas = Gu.features.map((area, i) => ({
   path: area.geometry.coordinates[0].map(
     (point, i) => new window.kakao.maps.LatLng(point[1], point[0])
   ),
+  grade: 0,
 }));
 
 console.log(areas);
