@@ -26,18 +26,17 @@ const AnalysisPage = () => {
   return (
     <Wrapper>
       <AnalysisSideBar />
-      <div
-        id="map"
-        style={{
-          width: '100vw',
-          height: 'calc(100vh - 80px)',
-          background: '#595959',
-        }}
-      />
+      <div id="map" />
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  & #map {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    background: #595959;
+  }
+`;
 
 export default AnalysisPage;
