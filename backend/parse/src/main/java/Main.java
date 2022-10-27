@@ -1,7 +1,4 @@
-import anlz.LivingPopulationStore;
-import anlz.ResidentPopulationStore;
-import anlz.StoreLivingPopulation;
-import anlz.StoreResidentPopulation;
+import anlz.*;
 import csv.Api;
 import csv.Csv;
 import object.CodeAndGU;
@@ -26,9 +23,16 @@ public class Main {
 //        storeResidentPopulation.getApi();
 
         // 상권-상주인구(거주인구) CSV -> 최종 정리본 CSV
-        ResidentPopulationStore residentPopulationStore = new ResidentPopulationStore();
-        residentPopulationStore.combine();
+//        ResidentPopulationStore residentPopulationStore = new ResidentPopulationStore();
+//        residentPopulationStore.combine();
 
+        // 상권-점포(점포수, 개업율, 폐업율) CSV 5개년 합병 및 구이름 붙이기
+//        StoreCount storeCount = new StoreCount();
+//        storeCount.combine();
+
+        // 상권-점포(구별)
+        StoreGu storeGu = new StoreGu();
+        storeGu.sum();
 
     }
 }
