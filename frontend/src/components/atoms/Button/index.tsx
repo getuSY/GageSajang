@@ -107,6 +107,7 @@ const BorderWrapper = styled.div`
   border-radius: 15px;
   background-image: linear-gradient(#fff, #fff),
     ${({ theme }) => theme.gradColor};
+  box-sizing: border-box;
   background-origin: border-box;
   background-clip: content-box, border-box;
 `;
