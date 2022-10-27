@@ -31,8 +31,16 @@ public class Main {
 //        storeCount.combine();
 
         // 상권-점포(구별)
-        StoreGu storeGu = new StoreGu();
-        storeGu.sum();
+//        StoreGu storeGu = new StoreGu();
+//        storeGu.sum();
+
+        // 상권-점포(구별+업종코드별)
+//        StoreGuCS storeGuCS = new StoreGuCS();
+//        storeGuCS.sum();
+
+        // 상권-점포(구별+상권 구분코드별)
+        StoreGuDiv storeGuDiv = new StoreGuDiv();
+        storeGuDiv.sum();
 
     }
 }
