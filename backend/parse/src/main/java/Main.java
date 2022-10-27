@@ -47,7 +47,11 @@ public class Main {
 //        storeChange.getApi();
 
         // 상권-변화지표 구별로 다이나믹, 정체, 상권확장, 상권축소
-        StoreChangeGu storeChangeGu = new StoreChangeGu();
-        storeChangeGu.combine();
+//        StoreChangeGu storeChangeGu = new StoreChangeGu();
+//        storeChangeGu.combine();
+
+        // 상권 매출 (구별 + 분기별 + 업종별) 월 매출
+        StoreSalesMonth storeSalesMonth =new StoreSalesMonth();
+        storeSalesMonth.combine();
     }
 }
