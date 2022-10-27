@@ -5,7 +5,11 @@ import LoginBox from '../../organisms/LoginBox';
 const LoginPage = () => {
   return (
     <Wrapper>
-      <img src="assets/img/login_img.png" style={loginImg} />
+      <img
+        src="/assets/img/login_img.png"
+        style={loginImg}
+        alt="login_gage_open_image"
+      />
       <LoginPageBox>
         <span>나만의 가게를 열고 싶나요?</span>
         <span>가게 사장이 도와드릴게요!</span>
@@ -22,7 +26,8 @@ const loginImg: object = {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin: auto;
+  justify-content: center;
+  align-items: center;
   gap: 3rem;
 `;
 

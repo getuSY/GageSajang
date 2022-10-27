@@ -2,8 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import UnsetLabelInput from '../../molecules/UnsetLabelInput';
 import Button from '../../atoms/Button/index';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+  const toHome = () => {
+    navigate('');
+  };
   return (
     <Wrapper>
       <RegisterTitle>가게 사장 회원 가입</RegisterTitle>
@@ -24,7 +29,9 @@ const RegisterPage = () => {
           label="NAME"
           placeholder="한글 2~10자, 영어 3~15자, 특수문자 불포함"
         />
-        <Button type="main">회원가입</Button>
+        <Button type="main" onClick={toHome}>
+          회원가입
+        </Button>
       </RegisterBox>
     </Wrapper>
   );
@@ -60,6 +67,7 @@ const RegisterTitle = styled.p`
   font-style: bold;
   background: ${({ theme }) => theme.gradColor};
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 `;
 

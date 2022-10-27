@@ -11,16 +11,16 @@ interface NavUserInfoProps {
 const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
   const navigate = useNavigate();
   const toMyPage = () => {
-    navigate('/myPage');
+    navigate('/user/mypage');
   };
   const toMyStore = () => {
-    navigate('/myStore');
+    navigate('/user/mystore');
   };
   const toMyArea = () => {
-    navigate('/myArea');
+    navigate('/user/myarea');
   };
   const toLogin = () => {
-    navigate('/login');
+    navigate('/user/login');
   };
   return (
     <Wrapper>
