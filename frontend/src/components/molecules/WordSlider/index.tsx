@@ -45,6 +45,7 @@ const WordSlider = ({ wordList }: WordSliderProps) => {
           className={getClassName(i)}
           onClick={() => onClick(i)}
           onDragStart={(e) => e.preventDefault()}
+          key={i}
         >
           {e}
         </div>

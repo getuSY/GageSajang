@@ -2,8 +2,9 @@ import React, { Suspense } from 'react';
 import Navbar from '../components/organisms/NavBar';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { User } from '../models/user';
 import { NavItem } from '../models/common';
+import { useQuery } from '@tanstack/react-query';
+import { getUser } from '../api/user';
 
 const navList: Array<NavItem> = [
   {
@@ -25,10 +26,8 @@ const navList: Array<NavItem> = [
 ];
 
 const Layout = () => {
-  // dummy userInfo
-  const userInfo: User = {
-    username: '짱사장',
-  };
+  const query = useQuery(['user'], getUser);
+  const userInfo = query.data;
 
   return (
     <>
