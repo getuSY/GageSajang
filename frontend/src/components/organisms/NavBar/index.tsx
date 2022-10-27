@@ -9,7 +9,7 @@ import { User } from '../../../models/user';
 import { NavItem } from '../../../models/common';
 
 interface NavbarProps {
-  userInfo: User | null;
+  userInfo: User | undefined;
   navList: Array<NavItem>;
 }
 
