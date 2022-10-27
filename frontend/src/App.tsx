@@ -11,6 +11,7 @@ import Layout from './layout/Layout';
 import LoadingPage from './components/pages/LoadingPage';
 import { DefaultTheme } from 'styled-components';
 import LoginPage from '../src/components/pages/login/LoginPage';
+import RegisterPage from './components/pages/register/RegisterPage';
 
 const Home = lazy(() => import('./components/pages/IndexPage'));
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
@@ -66,6 +67,12 @@ function App() {
             element={<CustomThemeProvider theme={greenTheme} />}
           >
             <Route path="" element={<LoginPage />} />
+          </Route>
+          <Route
+            path="register"
+            element={<CustomThemeProvider theme={greenTheme} />}
+          >
+            <Route path="" element={<RegisterPage />} />
           </Route>
         </Routes>
       </Router>

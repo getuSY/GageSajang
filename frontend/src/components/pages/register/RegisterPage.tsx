@@ -57,8 +57,10 @@ const RegisterBox = styled.div`
 
 const RegisterTitle = styled.p`
   font-size: 40px;
-  /* font-style: bold; */
-  /* background-color: linear(#01ad7c, #37e19d, #fff80b); */
+  font-style: bold;
+  background: ${({ theme }) => theme.gradColor};
+  -webkit-background-clip: text;
+  color: transparent;
 `;
 
 export default RegisterPage;
