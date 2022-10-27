@@ -64,7 +64,7 @@ public class AuthController {
         }
         else{
             int state = userService.findByEmailToState(userDto.getEmail());
-            String token = "";
+            String token = "token : ";
             if(state == 1){ // 이미 로그인 한 경우라면
                 System.out.println("already login account");
                 error = "Local Login Error : already login";
@@ -73,7 +73,7 @@ public class AuthController {
                 boolean result = userService.checkPassword(userDto.getPw(), userDto.getEmail()); //비밀번호 체크
                 if(result){
                     try{
-                        token = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList()); // JWT 토큰
+                        token += jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList()); // JWT 토큰
                         userDto.setState(1); // 로그인 상태 변환
                         userService.updateState(1, userDto.getEmail()); // DB에서 로그인 상태 변환
                         System.out.println("Login Success");
@@ -160,7 +160,7 @@ public class AuthController {
                     try{
                         userService.updateState(1, userDto.getEmail());
                         userDto.setAuth(userService.findByEmail(userDto.getEmail()).get().getAuth());
-                        token = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList());
+                        token = "token : "+jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList());
                         return token;
                     }
                     catch (Exception e){
@@ -227,10 +227,10 @@ public class AuthController {
                     error = "Naver Login Error : already sign in another platform";
                 }
                 else{
-                    String token = "";
+                    String token = "token : ";
                     try{
                         userDto.setAuth(userService.findByEmail(userDto.getEmail()).get().getAuth());
-                        token = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList());
+                        token += jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList());
                         userService.updateState(1, userDto.getEmail());
                         System.out.println("Naver Login Success");
                     }
