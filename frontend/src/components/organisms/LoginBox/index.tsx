@@ -18,8 +18,11 @@ const buttonStyle = {
 
 const LoginBox = ({}: LoginBoxProps) => {
   const navigate = useNavigate();
-  const toSignUp = () => {
-    navigate('/register');
+  const toRegister = () => {
+    navigate('/user/register');
+  };
+  const toHome = () => {
+    navigate('');
   };
   return (
     <Wrapper>
@@ -30,10 +33,10 @@ const LoginBox = ({}: LoginBoxProps) => {
       />
       <CheckLabelInput label="로그인 유지" />
       <ButtonBox>
-        <Button type="main" style={buttonStyle}>
+        <Button type="main" style={buttonStyle} onClick={toHome}>
           로그인
         </Button>
-        <Button type="border" style={buttonStyle} onClick={toSignUp}>
+        <Button type="border" style={buttonStyle} onClick={toRegister}>
           회원가입
         </Button>
       </ButtonBox>

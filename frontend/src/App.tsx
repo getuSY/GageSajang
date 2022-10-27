@@ -12,6 +12,7 @@ import LoadingPage from './components/pages/LoadingPage';
 import { DefaultTheme } from 'styled-components';
 import LoginPage from './components/pages/user/LoginPage';
 import RegisterPage from './components/pages/user/RegisterPage';
+import MyPage from '../src/components/pages/user/MyPage';
 
 const Home = lazy(() => import('./components/pages/IndexPage'));
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
@@ -40,6 +41,9 @@ function App() {
             <Route path="user">
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
+              <Route path="mypage" element={<MyPage page="mypage" />} />
+              <Route path="mystore" element={<MyPage page="mystore" />} />
+              <Route path="myarea" element={<MyPage page="myarea" />} />
             </Route>
           </Route>
           {/* 상권 현황 */}
