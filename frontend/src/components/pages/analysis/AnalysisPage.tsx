@@ -11,6 +11,9 @@ declare global {
 
 const AnalysisPage = () => {
   const [areas, setAreas] = useState<Array<DongItem>>([...dongAreas]);
+  const [isMouseOver, setIsMouseOver] = useState(
+    Array.from({ length: dongAreas.length }, () => false)
+  );
 
   const [mousePosition, setMousePosition] = useState({
     lat: 0,
@@ -45,28 +48,23 @@ const AnalysisPage = () => {
             path={area.path}
             strokeWeight={1}
             strokeColor={'#001215'}
-            strokeOpacity={area.isMouseover ? 0 : 0}
+            strokeOpacity={isMouseOver[index] ? 0 : 0}
             fillColor={'#7579E7a0'}
-            fillOpacity={area.isMouseover ? 0.7 : 0.001}
+            fillOpacity={isMouseOver[index] ? 0.7 : 0.001}
             key={`area-${area.name}`}
             onMouseover={() =>
-              setAreas((prev) => [
-                ...prev.filter((_, i) => i !== index),
-                {
-                  ...prev[index],
-                  isMouseover: true,
-                },
-              ])
+              setIsMouseOver((prev) => [...prev.map((_, i) => i === index)])
             }
             onMouseout={() =>
-              setAreas((prev) => [
-                ...prev.filter((_, i) => i !== index),
-                {
-                  ...prev[index],
-                  isMouseover: false,
-                },
-              ])
+              setIsMouseOver((prev) => {
+                const current = [...prev];
+                current[index] = false;
+                return current;
+              })
             }
+            onClick={() => {
+              alert(`${area.name}`);
+            }}
           />
         ))}
       </Map>
