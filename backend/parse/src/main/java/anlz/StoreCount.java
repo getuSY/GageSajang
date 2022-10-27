@@ -89,11 +89,8 @@ public class StoreCount {
 
     public void combine(){
 
-        List<String[]> list = new ArrayList<>();  // rare 데이터
+        List<String[]> list = readCSV(2021); // rare 데이터
         List<String[]> result = new ArrayList<>();
-        for(int i=2017; i<=2021; i++){
-            list.addAll(readCSV(i));
-        }
         HashMap<String ,String> code = readCSV2();
 
 

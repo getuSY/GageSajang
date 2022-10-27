@@ -26,7 +26,7 @@ public class Main {
 //        ResidentPopulationStore residentPopulationStore = new ResidentPopulationStore();
 //        residentPopulationStore.combine();
 
-        // 상권-점포(점포수, 개업율, 폐업율) CSV 5개년 합병 및 구이름 붙이기
+        // 상권-점포(점포수, 개업율, 폐업율) CSV 구이름 붙이기
 //        StoreCount storeCount = new StoreCount();
 //        storeCount.combine();
 
@@ -39,8 +39,15 @@ public class Main {
 //        storeGuCS.sum();
 
         // 상권-점포(구별+상권 구분코드별)
-        StoreGuDiv storeGuDiv = new StoreGuDiv();
-        storeGuDiv.sum();
+//        StoreGuDiv storeGuDiv = new StoreGuDiv();
+//        storeGuDiv.sum();
 
+        // 상권-변화지표
+//        StoreChange storeChange = new StoreChange();
+//        storeChange.getApi();
+
+        // 상권-변화지표 구별로 다이나믹, 정체, 상권확장, 상권축소
+        StoreChangeGu storeChangeGu = new StoreChangeGu();
+        storeChangeGu.combine();
     }
 }
