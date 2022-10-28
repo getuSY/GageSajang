@@ -35,7 +35,7 @@ const AnalysisPage = () => {
           position: 'absolute',
           top: 0,
         }}
-        level={9} // 지도의 확대 레벨
+        level={8} // 지도의 확대 레벨
         onMouseMove={(_map, mouseEvent) =>
           setMousePosition({
             lat: mouseEvent.latLng.getLat(),

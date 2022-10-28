@@ -4,11 +4,12 @@ import LeftLineTitle from '../../atoms/LeftLineTitle/index';
 import RoundBox from '../../atoms/RoundBox/index';
 import WhiteLabelInput from '../../molecules/WhiteLabelInput/index';
 import Button from '../../atoms/Button/index';
+// import { useParams } from 'react-router-dom';
 
 interface MyPageProps {
   style?: object;
   children?: React.ReactElement;
-  page: 'mypage' | 'mystore' | 'myarea';
+  page?: 'mypage' | 'mystore' | 'myarea';
 }
 
 interface PageElement {
@@ -17,6 +18,9 @@ interface PageElement {
 }
 
 const MyPage = ({ page, style, children }: MyPageProps) => {
+  // const params = useParams();
+  // console.log(params);
+  console.log(page);
   let pageEl: PageElement = {
     title: '',
     info: <div></div>,
@@ -60,12 +64,16 @@ const MyPage = ({ page, style, children }: MyPageProps) => {
       ),
     };
   }
+
   return (
     <Wrapper>
       <RoundBox style={leftBoxStyle} />
+      {page === 'mypage' && <div>mypage</div>}
+      {page === 'mystore' && <div>mystore</div>}
+      {page === 'myarea' && <div>myarea</div>}
       <RightBox>
-        <LeftLineTitle children={pageEl.title} />
-        <RoundBox children={pageEl.info} />
+        <LeftLineTitle>{pageEl.title}</LeftLineTitle>
+        <RoundBox>{pageEl.info}</RoundBox>
       </RightBox>
     </Wrapper>
   );

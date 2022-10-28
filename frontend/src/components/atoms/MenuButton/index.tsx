@@ -4,10 +4,15 @@ import styled from 'styled-components';
 interface MenuButtonProps {
   menu: string;
   onClick?: any;
+  style?: object;
 }
 
-const MenuButton = ({ menu, onClick }: MenuButtonProps) => {
-  return <Wrapper onClick={onClick}>{menu}</Wrapper>;
+const MenuButton = ({ menu, onClick, style }: MenuButtonProps) => {
+  return (
+    <Wrapper onClick={onClick} style={style}>
+      {menu}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`

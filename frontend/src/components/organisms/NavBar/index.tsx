@@ -61,6 +61,7 @@ const Wrapper = styled.div`
   background-color: #ffffff;
   padding: 0px 80px;
   z-index: 9999;
+  font-family: 'Eoe_Zno_B';
 `;
 
 const NavLogo = styled.div`

@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   gap: 30px;
   margin-left: 40px;
   & .nav-item {
-    font-size: 18px;
+    font-size: 1.3rem;
   }
 `;
 

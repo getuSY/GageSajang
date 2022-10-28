@@ -47,8 +47,9 @@ const BlurButton = styled.button`
   position: relative;
 
   color: 000000;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 1.3rem;
+  /* font-weight: 700; */
+  font-family: 'Eoe_Zno_B';
   background: #ffffff;
   border-radius: 15px;
 
@@ -76,7 +77,7 @@ const GradButton = styled.button`
   height: 54px;
   background: ${({ theme }) => theme.gradColor};
   border-radius: 15px;
-  font-size: 20px;
+  font-size: 16px;
   color: white;
 `;
 
@@ -86,7 +87,7 @@ const MainButton = styled.button`
   height: 54px;
   background: ${({ theme }) => theme.mainColor};
   border-radius: 15px;
-  font-size: 20px;
+  font-size: 16px;
   color: white;
 `;
 
@@ -96,7 +97,7 @@ const SubButton = styled.button`
   height: 54px;
   background: ${({ theme }) => theme.subColor};
   border-radius: 15px;
-  font-size: 20px;
+  font-size: 16px;
   color: white;
 `;
 
@@ -104,6 +105,7 @@ const BorderWrapper = styled.div`
   position: relative;
   width: 145px;
   height: 54px;
+  font-size: 16px;
   border: 3px solid transparent;
   border-radius: 15px;
   background-image: linear-gradient(#fff, #fff),
@@ -115,6 +117,7 @@ const BorderWrapper = styled.div`
 
 const BorderButton = styled.button`
   position: absolute;
+  font-size: inherit;
   left: 0;
   right: 0;
   top: 0;
