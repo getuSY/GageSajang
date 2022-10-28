@@ -54,12 +54,15 @@ const Wrapper = styled.div`
   padding: 0 100px;
   height: calc(100vh - 80px);
   gap: 30px;
+
   & .content {
     flex-grow: 1;
     width: 40%;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    font-family: 'Eoe_Zno_M';
+    font-size: 1.3rem;
   }
   & .left {
     margin-left: 10vw;
