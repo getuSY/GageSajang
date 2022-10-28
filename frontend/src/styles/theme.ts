@@ -27,10 +27,10 @@ export const blueTheme: DefaultTheme = {
 };
 
 export const orangeTheme: DefaultTheme = {
-  mainColor: '#FF5722',
-  subColor: '#FCBCA8',
+  mainColor: '#FF7714',
+  subColor: '#FFA05B',
   blurColor:
-    'linear-gradient(92.86deg, #EB2B5E 0%, #FF0F00 46.35%, #FF9900 100%)',
+    'linear-gradient(90deg, #FF300C 0%, #FF8648 49.48%, #FFEC3F 96.35%)',
   gradColor:
-    'linear-gradient(90deg, #EB2B5E -10.69%, #FF4D00 31.97%, #FFB800 119.31%)',
+    'linear-gradient(90deg, #F1510C 0%, #FF8648 49.48%, #FFEC3F 96.35%)',
 };
