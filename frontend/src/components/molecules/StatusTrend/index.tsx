@@ -22,20 +22,11 @@ const StatusTrend = ({}: StatusTrendProps) => {
     <Wrapper>
       <Title>👑 요즘 뜨는 상권 Top10</Title>
       <Group>
-        <div>
-          {dummy.slice(0, 5).map((value, i) => (
-            <span>
-              {i + 1}.{value}
-            </span>
-          ))}
-        </div>
-        <div>
-          {dummy.slice(5, 10).map((value, i) => (
-            <span>
-              {i + 6}.{value}
-            </span>
-          ))}
-        </div>
+        {dummy.map((value, i) => (
+          <span>
+            {i + 1}.{value}
+          </span>
+        ))}
       </Group>
     </Wrapper>
   );
@@ -46,6 +37,12 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
 `;
-const Group = styled.div``;
+const Group = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, minmax(50px, auto));
+  grid-auto-flow: column dense;
+  align-items: center;
+`;
 
 export default StatusTrend;
