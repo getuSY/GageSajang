@@ -34,6 +34,7 @@ const GeometryMap = ({ areas }: GeometryProps) => {
         onClick={() => onClick(d)}
       />
       <text
+        key={`path${i}text`}
         transform={`translate(${pathGenerator.centroid(d)})`}
         style={{ textAnchor: 'middle', top: '10px' }}
         y={d.properties.y_offset ? d.properties.y_offset : ''}

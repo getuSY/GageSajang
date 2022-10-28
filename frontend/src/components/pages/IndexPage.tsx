@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import IndexSearchBar from '../organisms/IndexSearchBar';
 import Footer from '../organisms/Footer';
 import { IndexContent } from '../../models/common';
+import Transitions from '../atoms/Transition';
 
 const status: IndexContent = {
   title: '상권 현황',
@@ -45,21 +46,27 @@ const amatuer: IndexContent = {
 const IndexPage = () => {
   const navigate = useNavigate();
   return (
-    <Wrapper>
-      <IndexSearchBar />
-      <IndexItem content={status} onClick={() => navigate('/status')} />
-      <IndexItem
-        content={analysis}
-        onClick={() => navigate('/analysis')}
-        right
-      />
-      <IndexItem
-        content={professional}
-        onClick={() => navigate('/professional')}
-      />
-      <IndexItem content={amatuer} right onClick={() => navigate('/amatuer')} />
-      <Footer />
-    </Wrapper>
+    <Transitions>
+      <Wrapper>
+        <IndexSearchBar />
+        <IndexItem content={status} onClick={() => navigate('/status')} />
+        <IndexItem
+          content={analysis}
+          onClick={() => navigate('/analysis')}
+          right
+        />
+        <IndexItem
+          content={professional}
+          onClick={() => navigate('/professional')}
+        />
+        <IndexItem
+          content={amatuer}
+          right
+          onClick={() => navigate('/amatuer')}
+        />
+        <Footer />
+      </Wrapper>
+    </Transitions>
   );
 };
 
