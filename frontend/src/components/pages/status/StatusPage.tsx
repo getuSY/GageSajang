@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import areas from '../../../data/areaGu.json';
 import GeometryMap from '../../organisms/GeometryMap';
 import BaseSideBar from '../../molecules/BaseSideBar';
+import StatusTrend from '../../molecules/StatusTrend';
 
 const StatusPage = () => {
   return (
     <Wrapper>
-      <BaseSideBar title="상권 현황">칠드런이</BaseSideBar>
+      <BaseSideBar title="🏪 상권 현황">
+        <StatusTrend />
+      </BaseSideBar>
       <GeometryMap areas={areas.features} />
     </Wrapper>
   );
