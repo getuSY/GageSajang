@@ -25,8 +25,8 @@ const IndexItemDescription = ({
           background: content.buttonColor,
           width: '250px',
           height: '73px',
-          fontWeight: 600,
-          fontSize: '1.2rem',
+          fontSize: '1.3rem',
+          fontFamily: 'Eoe_Zno_B',
         }}
         onClick={onClick}
         type="grad"
