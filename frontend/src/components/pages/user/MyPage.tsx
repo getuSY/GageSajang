@@ -31,12 +31,18 @@ const MyPage = ({ page, style, children }: MyPageProps) => {
       info: (
         <InsideBox>
           <span>이메일 : userInfo 이메일이 들어갈 자리</span>
-          <WhiteLabelInput label="이름" placeholder="이름을 입력해주세요." />
           <WhiteLabelInput
+            type="text"
+            label="이름"
+            placeholder="이름을 입력해주세요."
+          />
+          <WhiteLabelInput
+            type="password"
             label="비밀번호"
             placeholder="바꿀 비밀번호를 입력해주세요."
           />
           <WhiteLabelInput
+            type="password"
             label="비밀번호 확인"
             placeholder="바꿀 비밀번호를 다시 한 번 입력해주세요."
           />

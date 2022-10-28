@@ -5,7 +5,7 @@ import UnsetInput from '../../atoms/UnsetInput';
 import { LabelInputContent } from '../../../models/common';
 
 interface UnsetLabelInputProps extends LabelInputContent {
-  type: string;
+  type: 'text' | 'email' | 'password';
   style?: object;
 }
 
@@ -19,12 +19,16 @@ const LinedBox = styled.div`
   padding: 5px none;
 `;
 
-const UnsetLabelInput = ({ label, placeholder }: LabelInputContent) => {
+const UnsetLabelInput = ({
+  type,
+  label,
+  placeholder,
+}: UnsetLabelInputProps) => {
   return (
     <Wrapper>
       <LinedBox>
         <Label>{label}</Label>
-        <UnsetInput placeholder={placeholder} />
+        <UnsetInput type={type} placeholder={placeholder} />
       </LinedBox>
     </Wrapper>
   );

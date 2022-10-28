@@ -4,17 +4,20 @@ import Label from '../../atoms/Label';
 import UnsetInput from '../../atoms/UnsetInput/index';
 import { LabelInputContent } from '../../../models/common';
 
-// interface WhiteLabelInputProps {
-//   label: string;
-//   placeholder: string;
-// }
+interface WhiteLabelInputProps extends LabelInputContent {
+  type?: 'text' | 'email' | 'password';
+}
 
-const WhiteLabelInput = ({ label, placeholder }: LabelInputContent) => {
+const WhiteLabelInput = ({
+  type,
+  label,
+  placeholder,
+}: WhiteLabelInputProps) => {
   return (
     <Wrapper>
       <Label>{label}</Label>
       <span>:</span>
-      <UnsetInput placeholder={placeholder} style={inputStyle} />
+      <UnsetInput type={type} placeholder={placeholder} style={inputStyle} />
     </Wrapper>
   );
 };

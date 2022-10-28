@@ -6,13 +6,14 @@ import { LabelInputContent } from '../../../models/common';
 
 interface CheckLabelInputProps {
   label: string;
+  style?: object;
 }
 
-const CheckLabelInput = ({ label }: CheckLabelInputProps) => {
+const CheckLabelInput = ({ style, label }: CheckLabelInputProps) => {
   return (
     <Wrapper>
       <CheckboxInput />
-      <Label>{label}</Label>
+      <Label style={style}>{label}</Label>
     </Wrapper>
   );
 };

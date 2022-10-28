@@ -5,16 +5,19 @@ import GeometryMap from '../../organisms/GeometryMap';
 import BaseSideBar from '../../molecules/BaseSideBar';
 import StatusTrend from '../../molecules/StatusTrend';
 import StatusButtons from '../../molecules/StatusButtons';
+import Transitions from '../../atoms/Transition';
 
 const StatusPage = () => {
   return (
-    <Wrapper>
-      <BaseSideBar title="🏪 상권 현황">
-        <StatusTrend />
-        <StatusButtons />
-      </BaseSideBar>
-      <GeometryMap areas={areas.features} />
-    </Wrapper>
+    <Transitions>
+      <Wrapper>
+        <BaseSideBar title="🏪 상권 현황">
+          <StatusTrend />
+          <StatusButtons />
+        </BaseSideBar>
+        <GeometryMap areas={areas.features} />
+      </Wrapper>
+    </Transitions>
   );
 };
 

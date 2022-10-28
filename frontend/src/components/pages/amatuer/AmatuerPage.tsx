@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import Transitions from '../../atoms/Transition';
 import PageIndexItem from '../../organisms/PageIndexItem';
 
 const AmatuerPage = () => {
   return (
-    <Wrapper>
-      <PageIndexItem type="ama" />
-    </Wrapper>
+    <Transitions>
+      <Wrapper>
+        <PageIndexItem type="ama" />
+      </Wrapper>
+    </Transitions>
   );
 };
 
