@@ -10,6 +10,7 @@ import {
 import Layout from './layout/Layout';
 import LoadingPage from './components/pages/LoadingPage';
 import { DefaultTheme } from 'styled-components';
+
 import LoginPage from './components/pages/user/LoginPage';
 import RegisterPage from './components/pages/user/RegisterPage';
 import MyPage from '../src/components/pages/user/MyPage';
@@ -28,6 +29,8 @@ const ProfessionalPage = lazy(
 const AmatuerPage = lazy(
   () => import('./components/pages/amatuer/AmatuerPage')
 );
+// const LoginPage = lazy(() => import('./components/pages/user/LoginPage'));
+// const RegisterPage = lazy(() => import('./components/pages/user/RegisterPage'));
 
 function App() {
   return (

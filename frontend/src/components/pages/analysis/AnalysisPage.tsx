@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AnalysisSideBar from '../../organisms/AnalysisSideBar';
-
+import { areas as dongAreas, DongItem } from '../../../data/areaDong';
+import { Map, Polygon } from 'react-kakao-maps-sdk';
 declare global {
   interface Window {
     kakao: any;
@@ -9,34 +10,71 @@ declare global {
 }
 
 const AnalysisPage = () => {
-  useEffect(() => {
-    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-    var options = {
-      //지도를 생성할 때 필요한 기본 옵션
-      center: new window.kakao.maps.LatLng(36.450701, 126.570667), //지도의 중심좌표.
-      level: 2, //지도의 레벨(확대, 축소 정도)
-    };
+  const [areas, setAreas] = useState<Array<DongItem>>([...dongAreas]);
+  const [isMouseOver, setIsMouseOver] = useState(
+    Array.from({ length: dongAreas.length }, () => false)
+  );
 
-    var map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-    var zoomControl = new window.kakao.maps.ZoomControl();
-    map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
-  }, []);
+  const [mousePosition, setMousePosition] = useState({
+    lat: 0,
+    lng: 0,
+  });
   return (
     <Wrapper>
       <AnalysisSideBar />
-      <div id="map" />
+      <Map
+        center={{
+          // 지도의 중심좌표
+          lat: 37.59,
+          lng: 126.97,
+        }}
+        style={{
+          // 지도의 크기
+          width: '100%',
+          height: '100vh',
+          position: 'absolute',
+          top: 0,
+        }}
+        level={9} // 지도의 확대 레벨
+        onMouseMove={(_map, mouseEvent) =>
+          setMousePosition({
+            lat: mouseEvent.latLng.getLat(),
+            lng: mouseEvent.latLng.getLng(),
+          })
+        }
+      >
+        {areas.map((area: DongItem, index) => (
+          <Polygon
+            path={area.path}
+            strokeWeight={1}
+            strokeColor={'#001215'}
+            strokeOpacity={isMouseOver[index] ? 0 : 0}
+            fillColor={'#7579E7a0'}
+            fillOpacity={isMouseOver[index] ? 0.7 : 0.001}
+            key={`area-${area.name}`}
+            onMouseover={() =>
+              setIsMouseOver((prev) => [...prev.map((_, i) => i === index)])
+            }
+            onMouseout={() =>
+              setIsMouseOver((prev) => {
+                const current = [...prev];
+                current[index] = false;
+                return current;
+              })
+            }
+            onClick={() => {
+              alert(`${area.name}`);
+            }}
+          />
+        ))}
+      </Map>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  & #map {
-    width: 100vw;
-    height: calc(100vh - 80px);
-    background: #595959;
-  }
+  height: calc(100vh - 80px);
+  /* overflow-y: hidden; */
 `;
 
 export default AnalysisPage;
