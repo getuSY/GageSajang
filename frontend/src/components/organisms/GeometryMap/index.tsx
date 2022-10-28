@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { geoMercator, geoPath } from 'd3-geo';
 import { Gu } from '../../../models/data';
+import { text } from 'd3';
+import { any } from 'prop-types';
 
 type GeometryProps = {
   areas: Array<Gu>;
@@ -9,11 +11,12 @@ type GeometryProps = {
 
 const GeometryMap = ({ areas }: GeometryProps) => {
   const mapData = areas;
-  const width = 800;
-  const height = 800;
+  const width = 1100;
+  const height = 1000;
+  const scale = 140000;
   const projection = geoMercator()
     .center([127.023136826325427, 37.57196080977203])
-    .scale(100000)
+    .scale(scale)
     .translate([width / 2 + 80, height / 2]);
   const pathGenerator = geoPath().projection(projection);
 
@@ -23,12 +26,22 @@ const GeometryMap = ({ areas }: GeometryProps) => {
   };
 
   const countries = mapData.map((d: any, i) => (
-    <path
-      key={'path' + i}
-      d={pathGenerator(d)!}
-      className={`path-gu path-gu-${d.properties.SIG_ENG_NM}`}
-      onClick={() => onClick(d)}
-    />
+    <>
+      <path
+        key={'path' + i}
+        d={pathGenerator(d)!}
+        className={`path-gu-1 path-gu-${d.properties.SIG_ENG_NM}`}
+        onClick={() => onClick(d)}
+      />
+      <text
+        transform={`translate(${pathGenerator.centroid(d)})`}
+        style={{ textAnchor: 'middle', top: '10px' }}
+        y={d.properties.y_offset ? d.properties.y_offset : ''}
+        x={d.properties.x_offset ? d.properties.x_offset : ''}
+      >
+        {d.properties.SIG_KOR_NM}
+      </text>
+    </>
   ));
 
   return (
@@ -41,9 +54,9 @@ const GeometryMap = ({ areas }: GeometryProps) => {
 };
 
 const Wrapper = styled.div`
-  & .path-gu {
-    fill: #d9d9d9;
-    stroke: ${({ theme }) => theme.mainColor};
+  & .path-gu-1 {
+    fill: #d9d9d9; // 채우는 색
+    stroke: ${({ theme }) => theme.mainColor}; // 테두리 색
     cursor: pointer;
     &:hover {
       fill: ${({ theme }) => theme.mainColor};
