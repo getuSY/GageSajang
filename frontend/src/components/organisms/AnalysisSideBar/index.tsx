@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import BaseSideBar from '../../molecules/BaseSideBar';
 import LabelInput from '../../molecules/LabelInput';
 import ButtonInputs from '../../molecules/ButtonInputs';
-import Label from '../../atoms/Label';
+import Button from '../../atoms/Button';
 
 const menuList = [
   { name: '요식업' },
@@ -13,10 +13,16 @@ const menuList = [
 
 const AnalysisSideBar = () => {
   return (
-    <BaseSideBar title="🏪 상권 분석" buttonContent="상권 분석하러 가기">
+    <BaseSideBar title="🏪 상권 분석">
       <Wrapper>
         <LabelInput label="📌주소 입력" placeholder="주소를 입력하세요." />
         <ButtonInputs label="🍴 업종 선택" menuList={menuList} />
+        <Button
+          type="blur"
+          style={{ width: '100%', fontSize: '1.4rem', fontWeight: '900' }}
+        >
+          상권 분석하러 가기
+        </Button>
       </Wrapper>
     </BaseSideBar>
   );

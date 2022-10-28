@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ShadowBox from '../../atoms/ShadowBox';
-import Button from '../../atoms/Button';
 
 interface BaseSideBarProps {
   children?: React.ReactNode;
   title: string;
-  buttonContent: string;
 }
 
-const BaseSideBar = ({ children, title, buttonContent }: BaseSideBarProps) => {
+const BaseSideBar = ({ children, title }: BaseSideBarProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <Wrapper isOpen={isOpen}>
@@ -28,19 +26,13 @@ const BaseSideBar = ({ children, title, buttonContent }: BaseSideBarProps) => {
           zIndex: '999',
           background: '#ffffff',
           borderRadius: '6px',
-          padding: '20px',
+          padding: '30px',
           display: 'flex',
           flexDirection: 'column',
         }}
       >
         <div className="title">{title}</div>
         <div className="content">{children}</div>
-        <Button
-          type="blur"
-          style={{ width: '100%', fontSize: '1.4rem', fontWeight: '900' }}
-        >
-          {buttonContent}
-        </Button>
       </ShadowBox>
     </Wrapper>
   );
@@ -61,7 +53,7 @@ const Wrapper = styled.div<WrapperProps>`
     height: 83px;
     /* padding-left: 15px; */
     top: 10px;
-    transform: translateX(calc(100% + 40px));
+    transform: translateX(calc(100% + 60px));
     background: white;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -73,13 +65,14 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   background: #ffffff;
   width: 360px;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 200px);
   max-height: 800px;
   position: absolute;
   /* left: -410px;
   left: 0; */
-  left: ${({ isOpen }) => (isOpen ? '0px' : '-406px')};
+  left: ${({ isOpen }) => (isOpen ? '0px' : '-426px')};
   top: 100px;
+  /* top: 80px; */
   transition: left 0.9s;
   z-index: 999;
   & .title {
