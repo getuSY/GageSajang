@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import PageIndexItem from '../../organisms/PageIndexItem';
 
 const ProfessionalPage = () => {
-  return <Wrapper>{/* <PageIndexItem content={} /> */}</Wrapper>;
+  return (
+    <Wrapper>
+      <PageIndexItem type="pro" />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div``;
