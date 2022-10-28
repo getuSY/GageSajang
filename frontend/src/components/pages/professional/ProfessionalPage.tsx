@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import PageIndexItem from '../../organisms/PageIndexItem';
 
 const ProfessionalPage = () => {
-  return (
-    <Wrapper>
-      <h1>ProfessionalPage</h1>
-    </Wrapper>
-  );
+  return <Wrapper>{/* <PageIndexItem content={} /> */}</Wrapper>;
 };
 
 const Wrapper = styled.div``;
