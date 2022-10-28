@@ -15,9 +15,3 @@ export interface LabelInputContent {
   label: string;
   placeholder: string;
 }
-
-export interface PageIndexContent {
-  content: string;
-  imgSrc: string;
-  buttonContent: string;
-}

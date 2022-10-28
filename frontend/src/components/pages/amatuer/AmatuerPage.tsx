@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import PageIndexItem from '../../organisms/PageIndexItem';
 
 const AmatuerPage = () => {
   return (
     <Wrapper>
-      <h1>AmatuerPage</h1>
+      <PageIndexItem type="ama" />
     </Wrapper>
   );
 };

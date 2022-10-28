@@ -1,29 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { PageIndexContent } from '../../../models/common';
-import IndexItemDescription from '../../molecules/IndexItemDescription';
+import Button from '../../atoms/Button';
 
 // 이미사장, 아마사장 메인 페이지
 
 interface PageIndexItemProps {
-  right?: boolean;
-  content: PageIndexContent;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type: 'pro' | 'ama';
 }
 
-const PageIndexItem = ({ content, right, onClick }: PageIndexItemProps) => {
+const PageIndexItem = ({ type }: PageIndexItemProps) => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <Wrapper>
-      {' '}
-      {right ? (
+      {type === 'pro' ? (
         <>
-          <img src={content.imgSrc} alt="" />
+          <div className="content left">
+            <div>
+              <div>내 가게 진단을 위해 가게 정보가 필요합니다.</div>
+              <div>정보를 입력해주세요.</div>
+            </div>
+            <Button type="blur">내 가게 정보 입력</Button>
+          </div>
+          <div className="img-div">
+            <img src="/assets/img/index_img_pro.png" alt="" />
+          </div>
         </>
       ) : (
         <>
-          <img src={content.imgSrc} alt="" />
+          <div className="img-div img-right">
+            <img src="/assets/img/index_img_ama.png" alt="" />
+          </div>
+          <div className="content right">
+            <div>
+              <div>내 가게 진단을 위해 가게 정보가 필요합니다.</div>
+              <div>정보를 입력해주세요.</div>
+            </div>
+            <Button type="blur">내 가게 상상하기</Button>
+          </div>
         </>
       )}
     </Wrapper>
@@ -34,11 +51,43 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 100px;
   height: calc(100vh - 80px);
   gap: 30px;
+  & .content {
+    flex-grow: 1;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  & .left {
+    margin-left: 10vw;
+  }
+  & .right {
+    margin-right: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    & > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+  & .img-div {
+    flex-grow: 1;
+    width: 60%;
+  }
   & img {
-    width: 675px;
-    height: 675px;
+    width: 100%;
+    max-width: 800px;
+    /* height: 675px; */
+    filter: drop-shadow(200px 100px 50px rgba(0, 0, 0, 0.25));
+  }
+  & .img-right {
+    display: flex;
+    justify-content: end;
   }
 `;
 
