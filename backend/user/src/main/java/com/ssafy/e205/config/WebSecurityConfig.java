@@ -1,6 +1,6 @@
 package com.ssafy.e205.config;
 
-import com.ssafy.e205.api.service.UserServiceImpl;
+import com.ssafy.e205.api.service.Auth.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
