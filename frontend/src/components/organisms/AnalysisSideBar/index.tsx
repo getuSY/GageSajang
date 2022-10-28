@@ -4,6 +4,7 @@ import BaseSideBar from '../../molecules/BaseSideBar';
 import LabelInput from '../../molecules/LabelInput';
 import ButtonInputs from '../../molecules/ButtonInputs';
 import Button from '../../atoms/Button';
+import Postcode from '../../atoms/Postcode';
 
 const menuList = [
   { name: '요식업' },
@@ -11,13 +12,18 @@ const menuList = [
   { name: '도소매업' },
 ];
 
-const AnalysisSideBar = () => {
+interface AnalysisSideBarProps {
+  map: any;
+}
+
+const AnalysisSideBar = ({ map }: AnalysisSideBarProps) => {
   return (
     <BaseSideBar title="🏪 상권 분석">
       <Wrapper>
         <LabelInput label="📌 주소 입력" placeholder="주소를 입력하세요." />
         <ButtonInputs label="🍴 업종 선택" menuList={menuList} />
       </Wrapper>
+      <Postcode map={map} />
       <Button
         type="blur"
         style={{ width: '100%', fontSize: '1.4rem', fontWeight: '900' }}

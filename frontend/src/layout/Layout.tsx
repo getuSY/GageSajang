@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { NavItem } from '../models/common';
 import { useQuery } from '@tanstack/react-query';
 import { getUser } from '../api/user';
+import { AnimatePresence } from 'framer-motion';
 
 const navList: Array<NavItem> = [
   {
@@ -32,11 +33,13 @@ const Layout = () => {
   return (
     <>
       <Navbar userInfo={userInfo} navList={navList} />
-      <Wrapper>
-        <Suspense fallback={<div />}>
-          <Outlet />
-        </Suspense>
-      </Wrapper>
+      <AnimatePresence exitBeforeEnter>
+        <Wrapper>
+          <Suspense fallback={<div />}>
+            <Outlet />
+          </Suspense>
+        </Wrapper>
+      </AnimatePresence>
     </>
   );
 };
