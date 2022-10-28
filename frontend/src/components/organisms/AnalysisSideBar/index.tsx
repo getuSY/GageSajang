@@ -17,13 +17,13 @@ const AnalysisSideBar = () => {
       <Wrapper>
         <LabelInput label="📌주소 입력" placeholder="주소를 입력하세요." />
         <ButtonInputs label="🍴 업종 선택" menuList={menuList} />
-        <Button
-          type="blur"
-          style={{ width: '100%', fontSize: '1.4rem', fontWeight: '900' }}
-        >
-          상권 분석하러 가기
-        </Button>
       </Wrapper>
+      <Button
+        type="blur"
+        style={{ width: '100%', fontSize: '1.4rem', fontWeight: '900' }}
+      >
+        상권 분석하러 가기
+      </Button>
     </BaseSideBar>
   );
 };
@@ -32,6 +32,7 @@ const Wrapper = styled.div`
   gap: 20px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 `;
 
 export default AnalysisSideBar;

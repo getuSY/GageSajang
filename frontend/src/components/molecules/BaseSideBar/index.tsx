@@ -85,6 +85,8 @@ const Wrapper = styled.div<WrapperProps>`
   }
   & .content {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
