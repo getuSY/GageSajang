@@ -26,8 +26,13 @@ const LoginBox = ({}: LoginBoxProps) => {
   };
   return (
     <Wrapper>
-      <UnsetLabelInput label="ID" placeholder="gagesajang@email.com" />
       <UnsetLabelInput
+        type="email"
+        label="ID"
+        placeholder="gagesajang@email.com"
+      />
+      <UnsetLabelInput
+        type="password"
         label="PASSWORD"
         placeholder="숫자, 영어, 특수문자 포함 9~15자"
       />
@@ -49,7 +54,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 3rem;
   background: linear-gradient(#ffffff 0 0) padding-box,
     linear-gradient(to right, #01ad7c, #fff80b) border-box;
   color: #313149;

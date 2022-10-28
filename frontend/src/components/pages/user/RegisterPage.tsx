@@ -14,18 +14,22 @@ const RegisterPage = () => {
       <RegisterTitle>가게 사장 회원 가입</RegisterTitle>
       <RegisterBox>
         <UnsetLabelInput
+          type="email"
           label="ID(E-mail)"
           placeholder="gagesajang@email.com"
         />
         <UnsetLabelInput
+          type="password"
           label="PASSWORD"
           placeholder="숫자, 영어, 특수문자 포함 9~15자"
         />
         <UnsetLabelInput
+          type="password"
           label="PASSWORD CONFIRM"
           placeholder="위에 입력한 비밀번호와 동일하게 입력"
         />
         <UnsetLabelInput
+          type="text"
           label="NAME"
           placeholder="한글 2~10자, 영어 3~15자, 특수문자 불포함"
         />
