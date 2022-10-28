@@ -1,4 +1,4 @@
-package com.ssafy.e205.api.service;
+package com.ssafy.e205.api.service.Auth;
 
 import com.ssafy.e205.api.dto.UserDto;
 

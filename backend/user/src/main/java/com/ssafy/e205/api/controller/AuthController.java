@@ -1,7 +1,7 @@
 package com.ssafy.e205.api.controller;
 
 import com.ssafy.e205.api.dto.UserDto;
-import com.ssafy.e205.api.service.*;
+import com.ssafy.e205.api.service.Auth.*;
 import com.ssafy.e205.config.JwtTokenProvider;
 import com.ssafy.e205.db.entity.UserEntity;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,8 +9,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

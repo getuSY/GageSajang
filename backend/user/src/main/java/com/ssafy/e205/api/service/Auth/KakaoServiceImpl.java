@@ -1,4 +1,4 @@
-package com.ssafy.e205.api.service;
+package com.ssafy.e205.api.service.Auth;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 

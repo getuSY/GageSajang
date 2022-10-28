@@ -1,11 +1,10 @@
-package com.ssafy.e205.api.service;
+package com.ssafy.e205.api.service.Auth;
 
 import com.ssafy.e205.api.dto.UserDto;
 import com.ssafy.e205.db.entity.UserEntity;
 import com.ssafy.e205.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
