@@ -88,6 +88,7 @@ const Wrapper = styled.div`
 const MyPageList = styled.li`
   background: transparent;
   color: black;
+  font-family: 'Noto Sans KR';
   font-size: 15px;
   margin: 0.5rem 0rem 0.5rem -40px;
   padding: 5px 0px;

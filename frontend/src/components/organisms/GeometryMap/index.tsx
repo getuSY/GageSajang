@@ -12,8 +12,8 @@ type GeometryProps = {
 const GeometryMap = ({ areas }: GeometryProps) => {
   const mapData = areas;
   const width = 1100;
-  const height = 1000;
-  const scale = 140000;
+  const height = 860;
+  const scale = 130000;
   const projection = geoMercator()
     .center([127.023136826325427, 37.57196080977203])
     .scale(scale)

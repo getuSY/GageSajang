@@ -16,8 +16,10 @@ const IndexItemDescription = ({
 }: IndexItemDescriptionProps) => {
   return (
     <Wrapper right={right}>
-      <div className="title">{content.title}</div>
-      <div className="content">{content.description}</div>
+      <div className="index-div">
+        <div className="title">{content.title}</div>
+        <div className="content">{content.description}</div>
+      </div>
       <Button
         style={{
           background: content.buttonColor,
@@ -43,14 +45,21 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
   align-items: ${({ right }) => (!right ? 'flex-end' : 'flex-start')};
-  gap: 0.75rem;
+  gap: 2.5rem;
+  font-family: 'Eoe_Zno_B';
+  & .index-div {
+    display: flex;
+    flex-direction: column;
+    align-items: ${({ right }) => (!right ? 'flex-end' : 'flex-start')};
+    gap: 1rem;
+  }
   & .title {
     font-size: 64px;
-    font-weight: 800;
+    /* font-weight: 800; */
   }
   & .content {
-    font-size: 40px;
-    font-weight: 800;
+    font-size: 2rem;
+    /* font-weight: 800; */
     margin-bottom: 1rem;
   }
 `;

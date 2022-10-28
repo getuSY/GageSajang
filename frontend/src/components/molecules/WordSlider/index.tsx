@@ -75,7 +75,6 @@ const Wrapper = styled.div`
   }
   & .active {
     transform: translate3d(0%, 0, 0px);
-    font-family: 'nunito';
     background: ${({ theme }) => theme.gradColor};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -89,17 +88,17 @@ const Wrapper = styled.div`
   }
 
   & .prevv {
-    transform: translate3d(0, -140%, 0) scale3d(0.6, 0.6, 0.6);
+    transform: translate3d(0, -180%, 0) scale3d(0.6, 0.6, 0.6);
     color: white;
   }
   & .prev {
-    transform: translate3d(0, -80%, 0) scale3d(0.8, 0.8, 0.8);
+    transform: translate3d(0, -90%, 0) scale3d(0.7, 0.7, 0.7);
   }
   & .next {
-    transform: translate3d(0, 80%, 0) scale3d(0.8, 0.8, 0.8);
+    transform: translate3d(0, 90%, 0) scale3d(0.7, 0.7, 0.7);
   }
   & .nextt {
-    transform: translate3d(0, 140%, 0) scale3d(0.6, 0.6, 0.6);
+    transform: translate3d(0, 180%, 0) scale3d(0.6, 0.6, 0.6);
     color: white;
   }
 `;

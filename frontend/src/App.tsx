@@ -47,6 +47,7 @@ function App() {
               <Route path="mypage" element={<MyPage page="mypage" />} />
               <Route path="mystore" element={<MyPage page="mystore" />} />
               <Route path="myarea" element={<MyPage page="myarea" />} />
+              {/* <Route path="mypage/:tab" element={<MyPage />} /> */}
             </Route>
           </Route>
           {/* 상권 현황 */}

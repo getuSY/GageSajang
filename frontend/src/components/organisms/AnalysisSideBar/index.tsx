@@ -15,7 +15,7 @@ const AnalysisSideBar = () => {
   return (
     <BaseSideBar title="🏪 상권 분석">
       <Wrapper>
-        <LabelInput label="📌주소 입력" placeholder="주소를 입력하세요." />
+        <LabelInput label="📌 주소 입력" placeholder="주소를 입력하세요." />
         <ButtonInputs label="🍴 업종 선택" menuList={menuList} />
       </Wrapper>
       <Button

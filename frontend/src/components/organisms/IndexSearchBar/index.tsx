@@ -48,8 +48,8 @@ const Wrapper = styled.div`
 
     margin-bottom: 2.5rem;
     font-size: 5rem;
-    font-weight: 800;
-    font-family: 'nunito';
+    /* font-weight: 800; */
+    font-family: 'Eoe_Zno_B';
     font-style: normal;
     & .search-bar {
       width: fit-content;
