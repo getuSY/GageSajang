@@ -22,7 +22,7 @@ const LoginBox = ({}: LoginBoxProps) => {
     navigate('/user/register');
   };
   const toHome = () => {
-    navigate('');
+    navigate('/');
   };
   return (
     <Wrapper>
@@ -30,11 +30,13 @@ const LoginBox = ({}: LoginBoxProps) => {
         type="email"
         label="ID"
         placeholder="gagesajang@email.com"
+        style={lineStyle}
       />
       <UnsetLabelInput
         type="password"
         label="PASSWORD"
         placeholder="숫자, 영어, 특수문자 포함 9~15자"
+        style={lineStyle}
       />
       <CheckLabelInput label="로그인 유지" />
       <ButtonBox>
@@ -53,25 +55,30 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 3rem;
+  align-items: flex-start;
+  gap: 2.5rem;
   background: linear-gradient(#ffffff 0 0) padding-box,
     linear-gradient(to right, #01ad7c, #fff80b) border-box;
   color: #313149;
   padding: 5rem;
   border: 10px solid transparent;
   border-radius: 20px;
-  width: 400px;
-  height: 400px;
-  margin: 75px 0;
+  width: 350px;
+  height: 350px;
+  /* margin: 75px 0; */
   filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
 `;
 
 const ButtonBox = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  margin: 0 auto;
   gap: 2rem;
 `;
+
+const lineStyle = {
+  width: '350px',
+};
 
 export default LoginBox;

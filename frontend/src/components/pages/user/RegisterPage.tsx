@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const RegisterPage = () => {
   const navigate = useNavigate();
   const toHome = () => {
-    navigate('');
+    navigate('/');
   };
   return (
     <Wrapper>
@@ -53,7 +53,7 @@ const RegisterBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 2.5rem;
   background: linear-gradient(#ffffff 0 0) padding-box,
     linear-gradient(to right, #01ad7c, #fff80b) border-box;
   color: #313149;
@@ -62,13 +62,13 @@ const RegisterBox = styled.div`
   border-radius: 20px;
   width: 400px;
   height: 400px;
-  margin: 75px 0;
+  margin: 1rem 0;
   filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
 `;
 
 const RegisterTitle = styled.p`
   font-size: 40px;
-  font-style: bold;
+  font-weight: bold;
   background: ${({ theme }) => theme.gradColor};
   -webkit-background-clip: text;
   background-clip: text;
