@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,8 +19,6 @@ public class StoreDto {
     private int storeArea;
     private String storeType;
     private String storeNum;
-    private int storeSalesDay;
-    private int storeSalesMonth;
 
     public StoreDto(StoreEntity entity){
         this.id = entity.getId();
@@ -33,8 +29,6 @@ public class StoreDto {
         this.storeNum = entity.getStoreNum();
         this.storeType = entity.getStoreType();
         this.storeEmployCount = entity.getStoreEmployCount();
-        this.storeSalesDay = entity.getStoreSalesDay();
-        this.storeSalesMonth = entity.getStoreSalesMonth();
     }
 
     public StoreEntity toEntity(StoreDto dto){
@@ -45,8 +39,6 @@ public class StoreDto {
                 .email(dto.email)
                 .storeArea(dto.storeArea)
                 .storeNum(dto.storeNum)
-                .storeSalesDay(dto.storeSalesDay)
-                .storeSalesMonth(dto.storeSalesMonth)
                 .storeType(dto.storeType)
                 .build();
     }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(
-        name = "Favorite"
+        name = "favorite"
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString

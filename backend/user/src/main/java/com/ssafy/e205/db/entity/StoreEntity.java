@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(
-        name = "Store"
+        name = "store"
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -31,13 +31,9 @@ public class StoreEntity {
     private String storeType;
     @Column(name="store_num")
     private String storeNum;
-    @Column(name="store_sales_day")
-    private int storeSalesDay;
-    @Column(name="store_sales_month")
-    private int storeSalesMonth;
 
     @Builder
-    public StoreEntity(String email, String storeName, String storeAddress, int storeEmployCount, int storeArea, String storeType, String storeNum, int storeSalesDay, int storeSalesMonth){
+    public StoreEntity(String email, String storeName, String storeAddress, int storeEmployCount, int storeArea, String storeType, String storeNum){
         this.email = email;
         this.storeName = storeName;
         this.storeAddress = storeAddress;
@@ -45,7 +41,5 @@ public class StoreEntity {
         this.storeArea = storeArea;
         this.storeType = storeType;
         this.storeNum = storeNum;
-        this.storeSalesDay = storeSalesDay;
-        this.storeSalesMonth = storeSalesMonth;
     }
 }
