@@ -18,7 +18,7 @@ interface AnalysisSideBarProps {
 
 const AnalysisSideBar = ({ map }: AnalysisSideBarProps) => {
   return (
-    <BaseSideBar title="🏪 상권 분석">
+    <BaseSideBar title="🏪 상권 분석" open={false}>
       <Wrapper>
         <LabelInput label="📌 주소 입력" placeholder="주소를 입력하세요." />
         <ButtonInputs label="🍴 업종 선택" menuList={menuList} />

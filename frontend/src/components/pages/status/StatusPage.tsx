@@ -11,7 +11,7 @@ const StatusPage = () => {
   return (
     <Transitions>
       <Wrapper>
-        <BaseSideBar title="🏪 상권 현황">
+        <BaseSideBar title="🏪 상권 현황" open={true}>
           <StatusTrend />
           <StatusButtons />
         </BaseSideBar>
