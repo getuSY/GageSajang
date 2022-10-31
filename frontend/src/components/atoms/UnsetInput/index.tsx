@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export interface UnsetInputProps {
   placeholder?: string;
   style?: object;
-  type?: 'text' | 'email' | 'password' | 'number';
+  type?: 'text' | 'email' | 'password' | 'number' | 'date';
   readonly value?: string;
 }
 

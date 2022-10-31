@@ -15,6 +15,7 @@ import LoginPage from './components/pages/user/LoginPage';
 import RegisterPage from './components/pages/user/RegisterPage';
 import MyPage from '../src/components/pages/user/MyPage';
 import Transitions from './components/atoms/Transition';
+import ProfessionalStorePage from './components/pages/professional/ProfessionalStorePage';
 
 const Home = lazy(() => import('./components/pages/IndexPage'));
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
@@ -72,6 +73,7 @@ function App() {
             element={<CustomThemeProvider theme={greenTheme} />}
           >
             <Route path="" element={<ProfessionalPage />} />
+            <Route path="store" element={<ProfessionalStorePage />} />
           </Route>
           {/* 아마 사장 */}
           <Route
