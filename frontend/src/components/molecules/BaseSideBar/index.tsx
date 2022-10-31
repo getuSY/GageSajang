@@ -31,6 +31,7 @@ const BaseSideBar = ({ children, title, open }: BaseSideBarProps) => {
           padding: '30px',
           display: 'flex',
           flexDirection: 'column',
+          // overflowY: 'scroll',
         }}
       >
         <div className="title">{title}</div>
@@ -68,10 +69,8 @@ const Wrapper = styled.div<WrapperProps>`
   background: #ffffff;
   width: 360px;
   height: calc(100vh - 200px);
-  max-height: 800px;
+  /* max-height: 900px; */
   position: absolute;
-  /* left: -410px;
-  left: 0; */
   left: ${({ isOpen }) => (isOpen ? '0px' : '-426px')};
   top: 100px;
   /* top: 80px; */

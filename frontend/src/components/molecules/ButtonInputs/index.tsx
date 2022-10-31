@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import BaseSideBarButton from '../../atoms/BaseSideBarButton';
-import MenuButton from '../../atoms/MenuButton';
+import Label from '../../atoms/Label';
 
 interface ButtonInputsProps {
   label: string;
@@ -11,7 +11,7 @@ interface ButtonInputsProps {
 const ButtonInputs = ({ label, menuList }: ButtonInputsProps) => {
   return (
     <Wrapper>
-      <Sub_Title>{label}</Sub_Title>
+      <Label style={{ marginBottom: '1.3rem' }}>{label}</Label>
       <div className="menu-container">
         {menuList.map((menu, idx) => (
           <BaseSideBarButton key={idx} onClick={menu.onClick}>
@@ -32,12 +32,6 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     gap: 10px;
   }
-`;
-
-const Sub_Title = styled.div`
-  font-size: 1.3rem;
-  font-family: 'Eoe_Zno_B';
-  margin-bottom: 1.2rem;
 `;
 
 export default ButtonInputs;

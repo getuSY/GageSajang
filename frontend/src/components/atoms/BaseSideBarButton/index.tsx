@@ -30,10 +30,12 @@ const BorderWrapper = styled.div`
   box-sizing: border-box;
   background-origin: border-box;
   background-clip: content-box, border-box;
+  overflow: hidden;
 
   & :hover {
     cursor: pointer;
     background: ${({ theme }) => theme.gradColor};
+    color: white;
   }
 `;
 
