@@ -1,20 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface UnsetInputProps {
-  placeholder: string;
+export interface UnsetInputProps {
+  placeholder?: string;
   style?: object;
-  type?: 'text' | 'email' | 'password';
+  type?: 'text' | 'email' | 'password' | 'number';
+  readonly value?: string;
 }
 
-const UnsetInput = ({ type, placeholder, style }: UnsetInputProps) => {
-  return <StyledInput type={type} placeholder={placeholder} style={style} />;
+const UnsetInput = ({ type, placeholder, style, value }: UnsetInputProps) => {
+  return (
+    <StyledInput
+      type={type}
+      placeholder={placeholder}
+      style={style}
+      value={value}
+    />
+  );
 };
 
 const StyledInput = styled.input`
   height: 45px;
   font-weight: 900;
-  font-size: 20px;
+  font-size: 24px;
   all: unset;
   /* @font-face {
     font-family: 'Eoe_Zno_EB';
