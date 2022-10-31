@@ -179,6 +179,7 @@ const Group = styled.div`
     padding-left: 10px;
     white-space: nowrap;
     overflow: hidden;
+    /* border-bottom: 1px solid gray; */
   }
 `;
 
