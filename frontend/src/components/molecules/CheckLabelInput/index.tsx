@@ -6,14 +6,13 @@ import { LabelInputContent } from '../../../models/common';
 
 interface CheckLabelInputProps {
   label: string;
-  style?: object;
 }
 
-const CheckLabelInput = ({ style, label }: CheckLabelInputProps) => {
+const CheckLabelInput = ({ label }: CheckLabelInputProps) => {
   return (
     <Wrapper>
       <CheckboxInput />
-      <Label style={style}>{label}</Label>
+      <Label style={labelStyle}>{label}</Label>
     </Wrapper>
   );
 };
@@ -21,7 +20,10 @@ const CheckLabelInput = ({ style, label }: CheckLabelInputProps) => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 1rem;
 `;
+
+const labelStyle = {};
 
 export default CheckLabelInput;

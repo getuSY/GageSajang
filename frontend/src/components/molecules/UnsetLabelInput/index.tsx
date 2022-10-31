@@ -23,10 +23,11 @@ const UnsetLabelInput = ({
   type,
   label,
   placeholder,
+  style,
 }: UnsetLabelInputProps) => {
   return (
     <Wrapper>
-      <LinedBox>
+      <LinedBox style={style}>
         <Label>{label}</Label>
         <UnsetInput type={type} placeholder={placeholder} />
       </LinedBox>
