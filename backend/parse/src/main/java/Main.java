@@ -51,7 +51,11 @@ public class Main {
 //        storeChangeGu.combine();
 
         // 상권 매출 (구별 + 분기별 + 업종별) 월 매출
-        StoreSalesMonth storeSalesMonth =new StoreSalesMonth();
-        storeSalesMonth.combine();
+//        StoreSalesMonth storeSalesMonth =new StoreSalesMonth();
+//        storeSalesMonth.combine();
+
+        // 상권 매출 (구별 + 분기별 + 업종별) 월 매출
+        StoreSalesVarious storeSalesVarious =new StoreSalesVarious();
+        storeSalesVarious.combine();
     }
 }

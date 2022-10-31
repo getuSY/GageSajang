@@ -1,13 +1,12 @@
 package anlz;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class StoreSalesMonth {
+public class StoreSalesVarious {
 
     public static List<String[]> readCSV(){
         List<String[]> list = new ArrayList<>();
@@ -29,11 +28,12 @@ public class StoreSalesMonth {
                     lineArr[i] = lineArr[i].replaceAll("\"", "");
                 }
 
-//                for(int i=0; i<lineArr.length; i++){
-//                    System.out.print(lineArr[i]+" ");
-//                }
-//                System.out.println();
-                list.add(new String[]{lineArr[1], lineArr[4], lineArr[6], lineArr[8]});
+                String[] tmp = new String[22];
+                tmp[0] = lineArr[4];
+                for(int i=1; i<22; i++){
+                    tmp[i] = lineArr[i+11];
+                }
+                list.add(tmp);
             }
 
         } catch (IOException e) {
@@ -101,47 +101,24 @@ public class StoreSalesMonth {
 
 
         for(int i=0; i<list.size(); i++){
-            String guName = code.get(list.get(i)[1]);
+            String guName = code.get(list.get(i)[0]);
             String[] rare = list.get(i);
-            String key = guName+rare[0]+rare[2].substring(0,3);
-
-//            System.out.println(rare[3]);
+            String key = guName;
 
             if(gu.containsKey(key)){
-                String[] tmp = new String[4];
+                String[] tmp = new String[22];
 
                 tmp[0] = guName;
-                tmp[1] = rare[0];
-                tmp[2] = rare[2].substring(0,3);
-
-                Long rare3 = 0L;
-                if(rare[3].contains("E+11")){
-                    int temp = (int)(Double.parseDouble(rare[3].substring(0, rare[3].length()-4))*100000);
-                    //System.out.println(rare[3]);
-                    rare3 = temp * 1000000L;
-                } else{
-                    rare3 = Long.parseLong(rare[3]);
+                for(int j=1; j<22; j++){
+                    tmp[j] = String.valueOf(Integer.parseInt(rare[j]) + Integer.parseInt(gu.get(key)[j]));
                 }
-                tmp[3] = String.valueOf(rare3 + Long.parseLong(gu.get(key)[3]));
-//                for(int j=0; j<rare[3].length(); j++){
-//                    if(!Character.isDigit(rare[3].charAt(j))) System.out.println(rare[3] + "의 " + j + "번째가 아님");
-//                }
 
                 gu.replace(key, tmp);
                 cnt.replace(key, cnt.get(key)+1);
 
             } else {
-                Long tmp = 0L;
-                if(rare[3].contains("E+11")){
-                    int temp = (int)(Double.parseDouble(rare[3].substring(0, 7))*100000);
-                    tmp = temp * 1000000L;
-
-                } else{
-                    tmp = Long.parseLong(rare[3]);
-                }
-                gu.put(key, new String[]{guName, rare[0], rare[2].substring(0,3), String.valueOf(tmp)});
+                gu.put(key, rare);
                 cnt.put(key, 1);
-             //   System.out.println(rare[3]);
             }
         }
 
@@ -150,17 +127,18 @@ public class StoreSalesMonth {
 
             String[] tmp = gu.get(key);
 
-            for(int i=0; i<3; i++){
-                sb.append("\"" + tmp[i] + "\",");
+            sb.append("\"" + tmp[0] + "\",");
+            for(int i=1; i<21; i++){
+                sb.append("\"" + Math.round(Float.parseFloat(tmp[i])*100/(100*cnt.get(key))) + "\",");
             }
-            sb.append("\"" + Long.parseLong(tmp[3])/3/cnt.get(key) + "\"");
+            sb.append("\"" + Math.round(Float.parseFloat(tmp[2])*100/(100*cnt.get(key))) + "\"");
             sb.append("\n");
         }
 
         //System.out.println(sb.toString());
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\SSAFY\\Documents\\GitHub\\S07P31E205\\backend\\parse\\src\\main\\resources\\csv\\ResultSalesMonth.csv", StandardCharsets.UTF_8));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\SSAFY\\Documents\\GitHub\\S07P31E205\\backend\\parse\\src\\main\\resources\\csv\\ResultSalesVarious.csv", StandardCharsets.UTF_8));
             bw.write(sb.toString());
             bw.flush();
             bw.close();
