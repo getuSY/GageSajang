@@ -58,7 +58,8 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   height: 80px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  background: ${({ theme }) => theme.gradColor};
   padding: 0px 80px;
   z-index: 9999;
   font-family: 'Eoe_Zno_B';

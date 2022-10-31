@@ -24,6 +24,9 @@ const StatusPage = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  /* background-color: rgba(252, 252, 147, 0.3); */
+  /* background-color: rgba(252, 214, 182, 0.5); */
+  /* background-color: rgba(245, 121, 19, 0.2); */
 `;
 
 export default StatusPage;

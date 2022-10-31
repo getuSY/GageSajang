@@ -11,11 +11,12 @@ type GeometryProps = {
 
 const GeometryMap = ({ areas }: GeometryProps) => {
   const mapData = areas;
-  const width = 1100;
-  const height = 860;
+  const width = 1500;
+  const height = 850;
   const scale = 130000;
   const projection = geoMercator()
-    .center([127.023136826325427, 37.57196080977203])
+    // .center([127.023136826325427, 37.57196080977203])
+    .center([126.913136826325427, 37.57196080977203])
     .scale(scale)
     .translate([width / 2 + 80, height / 2]);
   const pathGenerator = geoPath().projection(projection);
@@ -30,7 +31,9 @@ const GeometryMap = ({ areas }: GeometryProps) => {
       <path
         key={'path' + i}
         d={pathGenerator(d)!}
-        className={`path-gu-1 path-gu-${d.properties.SIG_ENG_NM}`}
+        className={`path-gu-1 path-gu-${d.properties.SIG_ENG_NM} color-${
+          i % 6
+        }`}
         onClick={() => onClick(d)}
       />
       <text
@@ -57,11 +60,41 @@ const GeometryMap = ({ areas }: GeometryProps) => {
 const Wrapper = styled.div`
   & .path-gu-1 {
     fill: #d9d9d9; // 채우는 색
-    stroke: ${({ theme }) => theme.mainColor}; // 테두리 색
+    /* stroke: ${({ theme }) => theme.mainColor}; // 테두리 색 */
+    /* stroke: #fff; */
+    /* stroke: black; */
+    /* stroke: lightgray; */
+    stroke: darkgray;
+    /* stroke: rgba(245, 121, 19, 0.2); */
+    stroke-width: 1px;
     cursor: pointer;
     &:hover {
       fill: ${({ theme }) => theme.mainColor};
     }
+  }
+
+  & .color-0 {
+    fill: rgb(226, 23, 149);
+  }
+
+  & .color-1 {
+    fill: rgb(243, 132, 198);
+  }
+
+  & .color-2 {
+    fill: rgb(239, 99, 182);
+  }
+
+  & .color-3 {
+    fill: rgb(255, 223, 238);
+  }
+
+  & .color-4 {
+    fill: rgb(250, 195, 226);
+  }
+
+  & .color-5 {
+    fill: rgb(232, 67, 169);
   }
 `;
 
