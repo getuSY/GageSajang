@@ -9,7 +9,7 @@ import { LabelInputContent } from '../../../models/common';
 const LabelInput = ({ label, placeholder }: LabelInputContent) => {
   return (
     <Wrapper>
-      <Label>{label}</Label>
+      <Label style={{ marginBottom: '1.3rem' }}>{label}</Label>
       <Input placeholder={placeholder} />
     </Wrapper>
   );

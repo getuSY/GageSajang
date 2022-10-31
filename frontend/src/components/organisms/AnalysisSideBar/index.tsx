@@ -39,6 +39,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  margin-top: 1.3rem;
 `;
 
 export default AnalysisSideBar;

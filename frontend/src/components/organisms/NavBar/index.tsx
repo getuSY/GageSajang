@@ -58,16 +58,17 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   height: 80px;
-  /* background-color: #ffffff; */
-  background: ${({ theme }) => theme.gradColor};
-  padding: 0px 80px;
+  background-color: #ffffff;
+  /* background: ${({ theme }) => theme.gradColor}; */
+  padding: 0px 200px;
   z-index: 9999;
   font-family: 'Eoe_Zno_B';
+  box-shadow: 0px 0.5px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const NavLogo = styled.div`
   & a {
-    font-size: 26px;
+    font-size: 1.5rem;
   }
 `;
 

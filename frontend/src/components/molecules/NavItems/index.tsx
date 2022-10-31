@@ -22,10 +22,11 @@ const NavItems = ({ items }: NavItemsProps) => {
 const Wrapper = styled.div`
   display: flex;
   flex-grow: 1;
-  gap: 30px;
-  margin-left: 40px;
+  gap: 40px;
+  margin-left: 100px;
   & .nav-item {
-    font-size: 1.3rem;
+    font-family: 'Eoe_Zno_M';
+    font-size: 1.1rem;
   }
 `;
 

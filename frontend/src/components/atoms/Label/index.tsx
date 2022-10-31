@@ -11,13 +11,8 @@ const Label = ({ children, style }: LabelProps) => {
 };
 
 const Wrapper = styled.label`
-  /* padding: 0px 12px; */
-  /* height: 40px; */
-  font-family: 'Nunito';
-  font-style: normal;
-  font-weight: 900;
-  font-size: 14px;
-  /* line-height: 29px; */
+  font-size: 1.3rem;
+  font-family: 'Eoe_Zno_B';
 `;
 
 export default Label;

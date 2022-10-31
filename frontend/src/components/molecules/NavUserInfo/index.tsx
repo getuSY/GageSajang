@@ -63,25 +63,27 @@ const Wrapper = styled.div`
     border-radius: 50%;
   }
   & .username {
-    font-size: 22px;
-    padding: 1rem;
+    font-size: 1.2rem;
+    padding: 0.6rem;
+    position: relative;
   }
   & .username ul {
     display: none;
     position: absolute;
     top: 43px;
-    right: 165px;
-  }
-  & .username:hover ul {
-    display: visible;
+    /* right: 165px; */
+    left: 50%;
+    transform: translateX(-50%);
     background: #ffffff;
-    display: block;
     list-style: none;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 15px 15px;
     font-size: 15px;
     width: 90px;
     height: 120px;
+  }
+  & .username:hover ul {
+    display: block;
   }
 `;
 
