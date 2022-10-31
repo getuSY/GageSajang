@@ -54,8 +54,12 @@ public class Main {
 //        StoreSalesMonth storeSalesMonth =new StoreSalesMonth();
 //        storeSalesMonth.combine();
 
-        // 상권 매출 (구별 + 분기별 + 업종별) 월 매출
-        StoreSalesVarious storeSalesVarious =new StoreSalesVarious();
-        storeSalesVarious.combine();
+        // 상권 매출 요일, 시간대, 성별, 연령별 비율
+//        StoreSalesVarious storeSalesVarious =new StoreSalesVarious();
+//        storeSalesVarious.combine();
+
+        // 상권 구별 정보
+        ResultStore resultStore = new ResultStore();
+        resultStore.combine();
     }
 }
