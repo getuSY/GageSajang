@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class KafkaProducerServiceImpl implements KafkaProducerService{
 
     private String topicName = "TOPICNAME";
+    private String topicNameSub = "test";
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -24,5 +25,11 @@ public class KafkaProducerServiceImpl implements KafkaProducerService{
         System.out.printf("Produce message : %s%n", message);
         this.kafkaTemplate.send(topicName, message);
 
+    }
+
+    @Override
+    public void sendMessageSub(String message) {
+        System.out.printf("Produce2 message : %s%n", message);
+        this.kafkaTemplate.send(topicNameSub, message);
     }
 }

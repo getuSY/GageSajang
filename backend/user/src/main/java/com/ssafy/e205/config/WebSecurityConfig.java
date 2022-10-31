@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/Auth/**").permitAll()
+                .antMatchers("/kafka/**").permitAll()
                 .antMatchers("/user/kakao/**").permitAll()
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
