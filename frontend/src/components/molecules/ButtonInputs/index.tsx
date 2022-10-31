@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Label from '../../atoms/Label';
+import BaseSideBarButton from '../../atoms/BaseSideBarButton';
 import MenuButton from '../../atoms/MenuButton';
 
 interface ButtonInputsProps {
@@ -11,23 +11,33 @@ interface ButtonInputsProps {
 const ButtonInputs = ({ label, menuList }: ButtonInputsProps) => {
   return (
     <Wrapper>
-      <>
-        <Label>{label}</Label>
-        <div className="menu-container">
-          {menuList.map((menu, idx) => (
-            <MenuButton menu={menu.name} key={idx} onClick={menu.onClick} />
-          ))}
-        </div>
-      </>
+      <Sub_Title>{label}</Sub_Title>
+      <div className="menu-container">
+        {menuList.map((menu, idx) => (
+          <BaseSideBarButton key={idx} onClick={menu.onClick}>
+            {menu.name}
+          </BaseSideBarButton>
+        ))}
+      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 3.5rem;
   & .menu-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
   }
+`;
+
+const Sub_Title = styled.div`
+  font-size: 1.3rem;
+  font-family: 'Eoe_Zno_B';
+  margin-bottom: 1.2rem;
 `;
 
 export default ButtonInputs;

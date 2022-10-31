@@ -14,19 +14,12 @@ const StatusButtons = ({}: StatusButtonsProps) => {
   ];
   return (
     <Wrapper>
-      <Buttons>
-        <ButtonInputs label="상권 현황" menuList={content} />
-        <ButtonInputs label="상권 배후지 현황" menuList={content} />
-      </Buttons>
+      <ButtonInputs label="상권 현황" menuList={content} />
+      <ButtonInputs label="상권 배후지 현황" menuList={content} />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div``;
-const Title = styled.div`
-  font-size: 1.3rem;
-  font-family: 'Eoe_Zno_B';
-`;
-const Buttons = styled.div``;
 
 export default StatusButtons;

@@ -5,10 +5,12 @@ import ShadowBox from '../../atoms/ShadowBox';
 interface BaseSideBarProps {
   children?: React.ReactNode;
   title: string;
+  open: boolean;
 }
 
-const BaseSideBar = ({ children, title }: BaseSideBarProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+const BaseSideBar = ({ children, title, open }: BaseSideBarProps) => {
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(open);
   return (
     <Wrapper isOpen={isOpen}>
       <button
