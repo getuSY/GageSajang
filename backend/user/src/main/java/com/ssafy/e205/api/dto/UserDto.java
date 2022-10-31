@@ -33,7 +33,6 @@ public class UserDto {
         return list;
     }
 
-    @Builder
     public UserDto(UserEntity userEntity){
         this.id = userEntity.getId();
         this.email = userEntity.getEmail();
@@ -54,5 +53,19 @@ public class UserDto {
         this.type = userEntity.get().getType();
         this.pw = userEntity.get().getPw();
         this.state = userEntity.get().getState();
+    }
+
+    public UserEntity toEntity(UserDto dto){
+        return UserEntity.builder()
+                .id(dto.getId())
+                .accessToken(dto.getAccessToken())
+                .auth(dto.getAuth())
+                .email(dto.getEmail())
+                .nickName(dto.getNickName())
+                .pw(dto.getPw())
+                .refreshToken(dto.getRefreshToken())
+                .state(dto.getState())
+                .type(dto.getType())
+                .build();
     }
 }

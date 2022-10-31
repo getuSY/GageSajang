@@ -87,7 +87,7 @@ public class UserEntity implements UserDetails {
         return true; // true -> 사용 가능
     }
     @Builder
-    public UserEntity(Long id, String email, String accessToken, String refreshToken, String nickName, String pw, int state, String auth){
+    public UserEntity(Long id, String email, String accessToken, String refreshToken, String nickName, String pw, int state, String auth, String type){
         this.id = id;
         this.email = email;
         this.accessToken = accessToken;
@@ -96,6 +96,7 @@ public class UserEntity implements UserDetails {
         this.pw = pw;
         this.state = state;
         this.auth = auth;
+        this.type = type;
     }
 
     @Builder
