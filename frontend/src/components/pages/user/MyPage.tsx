@@ -5,7 +5,6 @@ import RoundBox from '../../atoms/RoundBox/index';
 import WhiteLabelInput from '../../molecules/WhiteLabelInput/index';
 import Button from '../../atoms/Button/index';
 import { useNavigate } from 'react-router-dom';
-import { NONAME } from 'dns';
 // import { useParams } from 'react-router-dom';
 
 interface MyPageProps {
@@ -169,7 +168,6 @@ const InsideBox = styled.div`
 `;
 
 const SideIndex = styled.ul`
-  @basicbackground :green;
   font-size: 20px;
   font-family: 'NanumBarunGothic';
   list-style: none;

@@ -5,7 +5,7 @@ import UnsetInput from '../../atoms/UnsetInput';
 import { LabelInputContent } from '../../../models/common';
 
 interface UnsetLabelInputProps extends LabelInputContent {
-  type: 'text' | 'email' | 'password';
+  type: 'text' | 'email' | 'password' | 'date' | 'number';
   style?: object;
 }
 

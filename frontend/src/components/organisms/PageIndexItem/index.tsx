@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Button from '../../atoms/Button';
+import { useNavigate } from 'react-router-dom';
 
 // 이미사장, 아마사장 메인 페이지
 
@@ -14,6 +15,11 @@ const PageIndexItem = ({ type }: PageIndexItemProps) => {
   useEffect(() => {
     AOS.init();
   }, []);
+
+  const navigate = useNavigate();
+  const toProStore = () => {
+    navigate('/professional/store');
+  };
   return (
     <Wrapper>
       {type === 'pro' ? (
@@ -23,7 +29,9 @@ const PageIndexItem = ({ type }: PageIndexItemProps) => {
               <div>내 가게 진단을 위해 가게 정보가 필요합니다.</div>
               <div>정보를 입력해주세요.</div>
             </div>
-            <Button type="blur">내 가게 정보 입력</Button>
+            <Button type="blur" onClick={toProStore}>
+              내 가게 정보 입력
+            </Button>
           </div>
           <div className="img-div">
             <img src="/assets/img/index_img_pro.png" alt="" />
