@@ -32,8 +32,6 @@ const Postcode = ({ map }: PostcodeProps) => {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
 
-    console.log('data', data);
-
     var geocoder = new window.kakao.maps.services.Geocoder();
     geocoder.addressSearch(data.address, function (result: any, status: any) {
       // 정상적으로 검색이 완료됐으면

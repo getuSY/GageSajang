@@ -26,7 +26,7 @@ const IndexItemDescription = ({
           width: '250px',
           height: '73px',
           fontSize: '1.3rem',
-          fontFamily: 'Eoe_Zno_B',
+          fontFamily: 'Pretendard-Regular',
         }}
         onClick={onClick}
         type="grad"
@@ -44,9 +44,10 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
+
+  font-family: 'Pretendard-Regular';
   align-items: ${({ right }) => (!right ? 'flex-end' : 'flex-start')};
   gap: 2.5rem;
-  font-family: 'Eoe_Zno_B';
   & .index-div {
     display: flex;
     flex-direction: column;
@@ -55,11 +56,9 @@ const Wrapper = styled.div<WrapperProps>`
   }
   & .title {
     font-size: 64px;
-    /* font-weight: 800; */
   }
   & .content {
     font-size: 2rem;
-    /* font-weight: 800; */
     margin-bottom: 1rem;
   }
 `;

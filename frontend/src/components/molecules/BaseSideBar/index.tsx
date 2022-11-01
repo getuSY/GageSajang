@@ -27,7 +27,7 @@ const BaseSideBar = ({ children, title, open }: BaseSideBarProps) => {
           top: '0',
           zIndex: '999',
           background: '#ffffff',
-          borderRadius: '6px',
+          // borderRadius: '6px',
           padding: '30px',
           display: 'flex',
           flexDirection: 'column',
@@ -52,15 +52,14 @@ const Wrapper = styled.div<WrapperProps>`
     align-items: center;
     justify-content: center;
     right: 0;
-    width: 39px;
-    height: 83px;
-    /* padding-left: 15px; */
+    width: 25px;
+    height: 53px;
     top: 10px;
     transform: translateX(calc(100% + 60px));
     background: white;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    box-shadow: 4px 4px 3px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.25);
     z-index: 10111;
     cursor: pointer;
     font-size: 20px;
@@ -68,19 +67,19 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   background: #ffffff;
   width: 360px;
-  height: calc(100vh - 200px);
+  height: calc(100% - 125px);
   /* max-height: 900px; */
   position: absolute;
   left: ${({ isOpen }) => (isOpen ? '0px' : '-426px')};
-  top: 100px;
+  /* top: 60px; */
+  top: 66px;
   /* top: 80px; */
   transition: left 0.9s;
   z-index: 999;
   & .title {
     margin: 12px 0;
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 900;
+    font-weight: 600;
+    font-family: 'Pretendard-Regular';
     font-size: 24px;
     line-height: 29px;
   }

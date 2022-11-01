@@ -20,7 +20,6 @@ const Wrapper = styled.div<WrapperProps>`
   height: 73px;
   justify-content: center;
   align-items: center;
-  font-family: 'Nunito';
   font-style: normal;
   font-weight: ${({ select }) => (select ? 900 : 500)};
   font-size: 24px;

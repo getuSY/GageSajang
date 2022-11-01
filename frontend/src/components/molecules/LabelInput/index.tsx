@@ -4,13 +4,17 @@ import Label from '../../atoms/Label';
 import Input from '../../atoms/Input';
 import { LabelInputContent } from '../../../models/common';
 
-// interface LabelInputProps {}
+interface LabelInputProps {
+  label: string;
+  placeholder: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+}
 
-const LabelInput = ({ label, placeholder }: LabelInputContent) => {
+const LabelInput = ({ label, placeholder, onChange }: LabelInputProps) => {
   return (
     <Wrapper>
       <Label style={{ marginBottom: '1.3rem' }}>{label}</Label>
-      <Input placeholder={placeholder} />
+      <Input placeholder={placeholder} onChange={onChange} />
     </Wrapper>
   );
 };
