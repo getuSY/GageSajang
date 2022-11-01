@@ -67,7 +67,11 @@ public class Main {
 //        storeCountTop.combine();
 
         // 개/폐업 높은 업종 및 상권
-        StoreOpenCloseTop storeOpenCloseTop = new StoreOpenCloseTop();
-        storeOpenCloseTop.combine();
+//        StoreOpenCloseTop storeOpenCloseTop = new StoreOpenCloseTop();
+//        storeOpenCloseTop.combine();
+
+        // 유동인구 최종 전처리
+        ResultLivingPopulation resultLivingPopulation = new ResultLivingPopulation();
+        resultLivingPopulation.combine();
     }
 }
