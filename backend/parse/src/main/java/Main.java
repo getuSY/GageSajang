@@ -59,7 +59,15 @@ public class Main {
 //        storeSalesVarious.combine();
 
         // 상권 구별 정보
-        ResultStore resultStore = new ResultStore();
-        resultStore.combine();
+//        ResultStore resultStore = new ResultStore();
+//        resultStore.combine();
+
+        // 점포 수 업종별 top 3
+//        StoreCountTop storeCountTop = new StoreCountTop();
+//        storeCountTop.combine();
+
+        // 개/폐업 높은 업종 및 상권
+        StoreOpenCloseTop storeOpenCloseTop = new StoreOpenCloseTop();
+        storeOpenCloseTop.combine();
     }
 }
