@@ -18,9 +18,12 @@ const IndexSearchBar = () => {
     <Wrapper>
       <div className="search-bar-container">
         <div className="search-bar">
-          <span>나</span>
+          <div>나</div>
           <WordSlider wordList={wordList} />
-          <span>할 건데 어디에 차리지?</span>
+
+          {'할 건데 어디에 차리지?'.split(' ').map((e, i) => (
+            <div style={{ marginRight: '1.3rem' }}>{e}</div>
+          ))}
         </div>
         <Button type="blur">보러 가기</Button>
       </div>
@@ -56,6 +59,7 @@ const Wrapper = styled.div`
       width: fit-content;
       display: flex;
       justify-content: center;
+      align-items: center;
       position: relative;
     }
   }

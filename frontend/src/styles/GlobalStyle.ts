@@ -57,6 +57,7 @@ const GlobalStyle = createGlobalStyle`
   }
   button {
     border: none;
+    font-family: inherit;
   }
 
   code {

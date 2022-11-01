@@ -74,7 +74,7 @@ const AnalysisPage = () => {
 
   useEffect(() => {
     if (map) {
-      areas.map((area: DongItem, index) => {
+      const polygons = areas.map((area: DongItem, index) => {
         const polygon = new window.kakao.maps.Polygon(
           polygonOption(area.path, index === select)
         );
@@ -104,13 +104,19 @@ const AnalysisPage = () => {
         window.kakao.maps.event.addListener(polygon, 'click', function () {
           if (select === null) {
             setSelect(index);
+            setSelectedDong(area.name);
             map.setCenter(
               new window.kakao.maps.LatLng(...getCenter(area.path))
             );
             map.setLevel(5);
           }
         });
+        return polygon;
       });
+
+      return () => {
+        polygons.map((polygon, idx) => polygon.setMap(null));
+      };
     }
   }, [map, select]);
 
@@ -126,10 +132,20 @@ const AnalysisPage = () => {
     setKeyword(e.target.value);
   };
 
+  const clearValue = () => {
+    setSelectedDong('');
+    setSelect(null);
+  };
+
   return (
     <Transitions>
       <Wrapper>
-        <AnalysisSideBar map={map} onChange={onChange} />
+        <AnalysisSideBar
+          map={map}
+          onChange={onChange}
+          inputValue={selectedDong}
+          clearValue={clearValue}
+        />
         <div
           className="map"
           style={{
