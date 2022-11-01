@@ -15,14 +15,16 @@ public class SalesMonthDto {
     private Long id;
     private String email;
     private int salesMonth;
+    private int salesQuarter;
     private int salesYear;
     private int salesCost;
 
-    public SalesMonthDto(SalesDayEntity entity){
+    public SalesMonthDto(SalesMonthEntity entity){
         this.id = entity.getId();
         this.email = entity.getEmail();
         this.salesCost = entity.getSalesCost();
         this.salesMonth = entity.getSalesMonth();
+        this.salesQuarter = entity.getSalesQuarter();
         this.salesYear = entity.getSalesYear();
     }
 
@@ -31,6 +33,7 @@ public class SalesMonthDto {
                 .id(dto.id)
                 .email(dto.email)
                 .salesMonth(dto.salesMonth)
+                .salesQuarter(dto.salesQuarter)
                 .salesYear(dto.salesYear)
                 .salesCost(dto.salesCost)
                 .build();

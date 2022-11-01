@@ -11,6 +11,7 @@ public interface SalesService {
     List<SalesMonthEntity> findSalesMonthAll();
     List<SalesMonthEntity> findSalesMonthUserAll(String email);
     SalesMonthEntity findSalesMonthEntity(String email, int year, int month);
+    int findQuarterCostSum(String email, int year, int quarter);
     int saveSalesMonth(SalesMonthDto dto);
     int deleteSalesMonthUserAll(String email);
     int deleteSalesMonth(String email, int year, int month);

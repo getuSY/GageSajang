@@ -18,4 +18,5 @@ public interface FavoriteRepository extends JpaRepository<FavoriteEntity, Intege
     int save(FavoriteDto favoriteDto);
     List<FavoriteEntity> findAll();
     int delete(String email);
+    int deleteByEmailAndAddress(String email, String address);
 }

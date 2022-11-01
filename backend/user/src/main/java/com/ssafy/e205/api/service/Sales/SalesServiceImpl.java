@@ -36,6 +36,11 @@ public class SalesServiceImpl implements SalesService {
     }
 
     @Override
+    public int findQuarterCostSum(String email, int year, int quarter) {
+        return monthRepository.findByQuarterCostSum(email, year, quarter);
+    }
+
+    @Override
     public int saveSalesMonth(SalesMonthDto dto) {
         return monthRepository.save(dto);
     }

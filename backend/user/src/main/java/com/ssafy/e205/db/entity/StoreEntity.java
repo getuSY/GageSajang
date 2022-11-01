@@ -21,25 +21,31 @@ public class StoreEntity {
     private String email;
     @Column(name="store_name")
     private String storeName;
-    @Column(name="store_address")
-    private String storeAddress;
+    @Column(name="store_address_administrative")
+    private String storeAddressAdministrative;
+    @Column(name="store_address_court")
+    private String storeAddressCourt;
     @Column(name="store_employ_count")
     private int storeEmployCount;
     @Column(name="store_area")
     private int storeArea;
-    @Column(name="store_type")
-    private String storeType;
+    @Column(name="store_type_code")
+    private String storeTypeCode;
+    @Column(name = "store_type_name")
+    private String storeTypeName;
     @Column(name="store_num")
     private String storeNum;
 
     @Builder
-    public StoreEntity(String email, String storeName, String storeAddress, int storeEmployCount, int storeArea, String storeType, String storeNum){
+    public StoreEntity(String email, String storeName, String storeAddressAdministrative, String storeAddressCourt,int storeEmployCount, int storeArea, String storeTypeName, String storeTypeCode,String storeNum){
         this.email = email;
         this.storeName = storeName;
-        this.storeAddress = storeAddress;
+        this.storeAddressAdministrative = storeAddressAdministrative;
+        this.storeAddressCourt = storeAddressCourt;
         this.storeEmployCount = storeEmployCount;
         this.storeArea = storeArea;
-        this.storeType = storeType;
+        this.storeTypeName = storeTypeName;
+        this.storeTypeCode = storeTypeCode;
         this.storeNum = storeNum;
     }
 }

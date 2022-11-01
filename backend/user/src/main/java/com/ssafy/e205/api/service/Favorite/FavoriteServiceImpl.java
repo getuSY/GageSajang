@@ -30,7 +30,12 @@ public class FavoriteServiceImpl implements FavoriteService{
     }
 
     @Override
-    public int delete(String email) {
+    public int deleteUserAll(String email) {
         return repository.delete(email);
+    }
+
+    @Override
+    public int delete(String email, String address) {
+        return repository.deleteByEmailAndAddress(email, address);
     }
 }

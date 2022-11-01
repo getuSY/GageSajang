@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,32 +16,38 @@ public class StoreDto {
     private Long id;
     private String email;
     private String storeName;
-    private String storeAddress;
+    private String storeAddressAdministrative;
+    private String storeAddressCourt;
     private int storeEmployCount;
     private int storeArea;
-    private String storeType;
+    private String storeTypeCode;
+    private String storeTypeName;
     private String storeNum;
 
     public StoreDto(StoreEntity entity){
         this.id = entity.getId();
         this.email = entity.getEmail();
-        this.storeAddress = entity.getStoreAddress();
+        this.storeAddressAdministrative = entity.getStoreAddressAdministrative();
+        this.storeAddressCourt = entity.getStoreAddressCourt();
         this.storeArea = entity.getStoreArea();
         this.storeName = entity.getStoreName();
         this.storeNum = entity.getStoreNum();
-        this.storeType = entity.getStoreType();
+        this.storeTypeCode = entity.getStoreTypeCode();
+        this.storeTypeName = entity.getStoreTypeName();
         this.storeEmployCount = entity.getStoreEmployCount();
     }
 
     public StoreEntity toEntity(StoreDto dto){
         return StoreEntity.builder()
                 .storeName(dto.storeName)
-                .storeAddress(dto.storeAddress)
+                .storeAddressAdministrative(dto.storeAddressAdministrative)
+                .storeAddressCourt(dto.storeAddressCourt)
                 .storeEmployCount(dto.storeEmployCount)
                 .email(dto.email)
                 .storeArea(dto.storeArea)
                 .storeNum(dto.storeNum)
-                .storeType(dto.storeType)
+                .storeTypeCode(dto.storeTypeCode)
+                .storeTypeName(dto.storeTypeName)
                 .build();
     }
 }

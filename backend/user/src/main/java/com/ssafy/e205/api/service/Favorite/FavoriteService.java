@@ -9,5 +9,6 @@ public interface FavoriteService {
     FavoriteEntity getFavoriteEntity(String email);
     int saveFavoriteEntity(FavoriteDto favoriteDto);
     List<FavoriteEntity> getFavoriteEntityAll();
-    int delete(String email);
+    int deleteUserAll(String email);
+    int delete(String email, String address);
 }
