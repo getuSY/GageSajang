@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ShadowBox from '../../atoms/ShadowBox';
 
 interface BaseSideBarProps {
   children?: React.ReactNode;
   title: string;
-  open: boolean;
+  open?: boolean;
+  setStatus?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const BaseSideBar = ({ children, title, open }: BaseSideBarProps) => {
+const BaseSideBar = ({
+  children,
+  title,
+  open,
+  setStatus,
+}: BaseSideBarProps) => {
   // const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(open);
+  const [isOpen, setIsOpen] = useState<boolean>(open ? open : false);
+
+  useEffect(() => {
+    if (setStatus) {
+      setStatus(isOpen);
+    }
+  }, [isOpen]);
+
   return (
     <Wrapper isOpen={isOpen}>
       <button

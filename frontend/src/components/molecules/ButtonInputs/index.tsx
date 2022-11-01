@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import BaseSideBarButton from '../../atoms/BaseSideBarButton';
+import Button from '../../atoms/Button';
 import Label from '../../atoms/Label';
 
 interface ButtonInputsProps {
   label: string;
   menuList: Array<any>;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 const ButtonInputs = ({ label, menuList }: ButtonInputsProps) => {

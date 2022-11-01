@@ -7,22 +7,21 @@ import { any } from 'prop-types';
 
 type GeometryProps = {
   areas: Array<Gu>;
+  isOpen: boolean;
 };
 
-const GeometryMap = ({ areas }: GeometryProps) => {
+const GeometryMap = ({ areas, isOpen }: GeometryProps) => {
   const mapData = areas;
-  const width = 1500;
+  const width = 1000;
   const height = 850;
   const scale = 130000;
   const projection = geoMercator()
-    // .center([127.023136826325427, 37.57196080977203])
-    .center([126.913136826325427, 37.57196080977203])
+    .center([127.023136826325427, 37.57196080977203])
     .scale(scale)
     .translate([width / 2 + 80, height / 2]);
   const pathGenerator = geoPath().projection(projection);
 
   const onClick = (d: any) => {
-    // onClick 함수
     alert(`${d.properties.SIG_KOR_NM}`);
   };
 
@@ -49,7 +48,7 @@ const GeometryMap = ({ areas }: GeometryProps) => {
   ));
 
   return (
-    <Wrapper>
+    <Wrapper isOpen={isOpen}>
       <svg width={width} height={height}>
         {countries}
       </svg>
@@ -57,15 +56,16 @@ const GeometryMap = ({ areas }: GeometryProps) => {
   );
 };
 
-const Wrapper = styled.div`
+interface WrapperInterface {
+  isOpen: boolean;
+}
+
+const Wrapper = styled.div<WrapperInterface>`
+  margin-left: ${({ isOpen }) => (isOpen ? '30vw' : '')};
+  transition: margin-left 0.9s;
   & .path-gu-1 {
     fill: #d9d9d9; // 채우는 색
-    /* stroke: ${({ theme }) => theme.mainColor}; // 테두리 색 */
-    /* stroke: #fff; */
-    /* stroke: black; */
-    /* stroke: lightgray; */
     stroke: darkgray;
-    /* stroke: rgba(245, 121, 19, 0.2); */
     stroke-width: 1px;
     cursor: pointer;
     &:hover {
