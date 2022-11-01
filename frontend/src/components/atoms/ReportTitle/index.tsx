@@ -20,8 +20,6 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 0 20px;
 
-  font-family: 'Nunito';
-  font-style: normal;
   font-weight: 900;
   font-size: 24px;
   background: #ffffff;

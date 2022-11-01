@@ -6,9 +6,6 @@ export interface DongItem {
 }
 
 export const areas: Array<DongItem> = areaDong.features.map((area, i) => ({
-  name: area.properties.adm_nm,
-  path: area.geometry.coordinates[0][0].map((point, i) => ({
-    lat: point[1],
-    lng: point[0],
-  })),
+  name: area.properties.adm_nm.replace('서울특별시 ', ''),
+  path: area.geometry.coordinates[0][0].map((point, i) => [point[1], point[0]]),
 }));

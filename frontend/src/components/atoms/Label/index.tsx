@@ -12,7 +12,6 @@ const Label = ({ children, style }: LabelProps) => {
 
 const Wrapper = styled.label`
   font-size: 1.3rem;
-  font-family: 'Eoe_Zno_B';
 `;
 
 export default Label;
