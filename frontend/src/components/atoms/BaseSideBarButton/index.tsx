@@ -47,7 +47,7 @@ const BorderButton = styled.button`
   top: 0;
   bottom: 0;
   background: transparent;
-  font-family: 'NanumBarunGothic';
+  font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
 
   & :hover {

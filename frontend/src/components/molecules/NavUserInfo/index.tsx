@@ -69,8 +69,11 @@ const Wrapper = styled.div`
   }
   & .username ul {
     display: none;
+    z-index: 10000;
     position: absolute;
-    top: 43px;
+    top: 23px;
+    /* top: 0px; */
+
     /* right: 165px; */
     left: 50%;
     transform: translateX(-50%);
@@ -83,6 +86,7 @@ const Wrapper = styled.div`
     height: 120px;
   }
   & .username:hover ul {
+    display: visible;
     display: block;
   }
 `;

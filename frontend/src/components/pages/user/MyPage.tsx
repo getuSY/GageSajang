@@ -169,7 +169,6 @@ const InsideBox = styled.div`
 
 const SideIndex = styled.ul`
   font-size: 20px;
-  font-family: 'NanumBarunGothic';
   list-style: none;
   margin: auto 3rem;
   padding: 1rem;

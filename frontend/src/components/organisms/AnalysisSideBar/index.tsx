@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import BaseSideBar from '../../molecules/BaseSideBar';
 import LabelInput from '../../molecules/LabelInput';
@@ -14,13 +14,18 @@ const menuList = [
 
 interface AnalysisSideBarProps {
   map: any;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const AnalysisSideBar = ({ map }: AnalysisSideBarProps) => {
+const AnalysisSideBar = ({ map, onChange }: AnalysisSideBarProps) => {
   return (
     <BaseSideBar title="🏪 상권 분석" open={false}>
       <Wrapper>
-        <LabelInput label="📌 주소 입력" placeholder="주소를 입력하세요." />
+        <LabelInput
+          label="📌 주소 입력"
+          placeholder="주소를 입력하세요."
+          onChange={onChange}
+        />
         <ButtonInputs label="🍴 업종 선택" menuList={menuList} />
       </Wrapper>
       <Postcode map={map} />

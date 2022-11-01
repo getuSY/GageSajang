@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   gap: 40px;
   margin-left: 100px;
   & .nav-item {
-    font-family: 'Eoe_Zno_M';
+    font-family: 'Pretendard-Regular';
     font-size: 1.1rem;
   }
 `;

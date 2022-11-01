@@ -4,10 +4,13 @@ import styled from 'styled-components';
 interface InputProps {
   placeholder: string;
   style?: object;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input = ({ placeholder, style }: InputProps) => {
-  return <StyledInput placeholder={placeholder} style={style} />;
+const Input = ({ placeholder, style, onChange }: InputProps) => {
+  return (
+    <StyledInput placeholder={placeholder} style={style} onChange={onChange} />
+  );
 };
 
 const StyledInput = styled.input`
@@ -18,6 +21,7 @@ const StyledInput = styled.input`
   background: #eaeaea;
   border: none;
   border-radius: 10px;
+  outline: none;
 `;
 
 export default Input;

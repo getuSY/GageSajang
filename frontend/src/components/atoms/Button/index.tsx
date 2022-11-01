@@ -48,8 +48,6 @@ const BlurButton = styled.button`
 
   color: 000000;
   font-size: 1.3rem;
-  /* font-weight: 700; */
-  font-family: 'Eoe_Zno_B';
   background: #ffffff;
   border-radius: 15px;
 

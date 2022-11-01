@@ -145,10 +145,8 @@ const Title_div = styled.div`
 
 const Title = styled.div`
   font-size: 1.3rem;
-  font-family: 'Eoe_Zno_B';
 `;
 const Group = styled.div`
-  font-family: 'NanumBarunGothic';
   letter-spacing: 2px;
   font-size: 1rem;
   margin-top: 1rem;
