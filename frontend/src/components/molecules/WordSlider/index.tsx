@@ -58,6 +58,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
   transform-style: preserve-3d;
   height: 100%;
@@ -70,6 +71,7 @@ const Wrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     transition: 400ms ease;
     cursor: pointer;
   }

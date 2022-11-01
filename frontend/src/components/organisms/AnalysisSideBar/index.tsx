@@ -14,10 +14,17 @@ const menuList = [
 
 interface AnalysisSideBarProps {
   map: any;
+  inputValue?: string;
+  clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const AnalysisSideBar = ({ map, onChange }: AnalysisSideBarProps) => {
+const AnalysisSideBar = ({
+  map,
+  onChange,
+  inputValue,
+  clearValue,
+}: AnalysisSideBarProps) => {
   return (
     <BaseSideBar title="🏪 상권 분석" open={false}>
       <Wrapper>
@@ -25,6 +32,8 @@ const AnalysisSideBar = ({ map, onChange }: AnalysisSideBarProps) => {
           label="📌 주소 입력"
           placeholder="주소를 입력하세요."
           onChange={onChange}
+          inputValue={inputValue}
+          clearValue={clearValue}
         />
         <ButtonInputs label="🍴 업종 선택" menuList={menuList} />
       </Wrapper>
