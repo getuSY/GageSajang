@@ -8,7 +8,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 import matplotlib.pyplot as plt
 
-print(inspect.getfile(plt))
+# print(inspect.getfile(plt))
 
 
 connection = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -27,24 +27,27 @@ df.info()
 len(df)
 df[df['기준_년_코드']== 2019]
 
-df = df.astype({'분기당_매출_건수/점포수':'int64'})
+df = df.astype({'분기당_매출_금액/점포수':'int64'})
 
-df.drop(['_id', '시군구명', '읍면동명', '서비스_업종_코드', '서비스_업종_코드_명', '분기당_매출_금액'], axis = 1, inplace=True)
+df.drop(['_id', '시군구명', '읍면동명', '서비스_업종_코드', '서비스_업종_코드_명'], axis = 1, inplace=True)
 
-x = df[['기준_년_코드', '기준_분기_코드', '분기당_매출_건수', '점포수', '유사_업종_점포_수',
-        '개업_점포_수', '폐업_점포_수', '프랜차이즈_점포_수', '총_생활인구_수' ,'남성_생활인구_수',
-        '여성_생활인구_수', '월_평균_소득_금액', '소득_구간_코드', '지출_총금액', '총 상주인구 수',
-        '총_직장_인구_수', '남성_직장_인구_수', '여성_직장_인구_수', '아파트_평균_시가',
-        '집객시설_수']]
+x = df[['기준_년_코드', '기준_분기_코드', '분기당_매출_건수', '점포수', '프랜차이즈_점포_수', '총_생활인구_수' , '소득_구간_코드', '지출_총금액', '총 상주인구 수',
+        '총_직장_인구_수', '아파트_평균_시가', '집객시설_수']]
 
-y = df[['분기당_매출_건수/점포수']]
+y = df[['분기당_매출_금액/점포수']]
 
 
 
 polynomial = PolynomialFeatures(degree = 2, include_bias = False)
 features_polynomial = polynomial.fit_transform(x)
 
-x_train, x_test, y_train, y_test = train_test_split(features_polynomial, y, train_size=0.8, test_size=0.2)
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+
+normalization_df = features_polynomial.copy()
+normalization_df[:] = scaler.fit_transform(normalization_df[:])
+
+x_train, x_test, y_train, y_test = train_test_split(normalization_df, y, train_size=0.8, test_size=0.2)
 
 regression = LinearRegression()
 regression.fit(x_train, y_train)
@@ -55,16 +58,16 @@ regression.fit(x_train, y_train)
 
 y_predict = regression.predict(x_test)
 
-print(x_test['기준_년_코드'])
+# print(x_test['기준_년_코드'])
 print(y_predict)
 print(y_test)
 
 #  시각화
-# plt.scatter(y_test, y_predict, alpha=0.4)
-# plt.xlabel("Actual Sales")
-# plt.ylabel("Predicted Sales")
-# plt.title("MULTIPLE LINEAR REGRESSION")
-# plt.show()
+plt.scatter(y_test, y_predict, alpha=0.4)
+plt.xlabel("Actual Sales")
+plt.ylabel("Predicted Sales")
+plt.title("MULTIPLE LINEAR REGRESSION")
+plt.show()
 
 
 print(regression.coef_) #[1.24836601] #계수(coefficient) = 기울기 = 가중치(weight)
