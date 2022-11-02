@@ -101,12 +101,12 @@ public class Main {
 //        storeGu.sum();
 
         // 상권배후지 매출 (구별 + 분기별 + 업종별) 월 매출
-        StoreHinSalesMonth storeSalesMonth =new StoreHinSalesMonth();
-        storeSalesMonth.combine();
+//        StoreHinSalesMonth storeSalesMonth =new StoreHinSalesMonth();
+//        storeSalesMonth.combine();
 
-        // 상권 구별 정보
-//        ResultStore resultStore = new ResultStore();
-//        resultStore.combine();
+        // 상권배후지 구별 정보
+        ResultStoreHin resultStore = new ResultStoreHin();
+        resultStore.combine();
 
     }
 }
