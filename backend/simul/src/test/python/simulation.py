@@ -1,7 +1,7 @@
 from flask import Flask  #간단히 플라스크 서버를 만든다
 from flask import request
 
-import urllib.request
+from urllib import parse
 
 app = Flask(__name__)
 
@@ -22,12 +22,14 @@ def simulation():
         db = connection["simulation"]
         simul = db["simul"]
 
-        dongName = request.args.get('dongName')
-        industryName = request.args.get('industryName')
+        dongName = parse.unquote(request.args.get('dongName'))
+        industryName = parse.unquote(request.args.get('industryName'))
+        # sales = request.args.get('sales')
 
-        print("dongName :" + dongName + ", industryName : " + industryName)
+        # print(type(dongName) + " "  + type(industryName ))
+        print("dongName :" + dongName + ", industryName : " + industryName )
 
-        myquery = {"읍면동명": "개포2동", "서비스_업종_코드_명": "한식음식점"}
+        myquery = {"읍면동명": dongName, "서비스_업종_코드_명": industryName}
 
         doc = simul.find(myquery)
 
@@ -68,17 +70,15 @@ def simulation():
 
         y_predict = regression.predict(x_test)
 
-        print(x_test['기준_년_코드'])
-        print("predict")
-        print(y_predict.tolist())
-        print("answer")
-        print(y_test)
+        # print(x_test['기준_년_코드'])
+        # print("predict")
+        # print(y_predict.tolist())
+        # print("answer")
+        # print(y_test)
 
-        return json.dumps(y_predict.tolist())
+        return json.dumps(y_predict.flatten().tolist())
 
-@app.route("/test")
-def test():
-        return "test"
+
 
 if __name__ == "__main__":
         # print(simulation("개포2동", "한식음식점"))
