@@ -16,7 +16,6 @@ public class StoreLivingPopulation {
     String _id;
 
     String guName;
-    String quCode;
     int total;
     int male;
     int female;
@@ -39,5 +38,9 @@ public class StoreLivingPopulation {
     int fri;
     int sat;
     int sun;
+    int quarter1;
+    int quarter2;
+    int quarter3;
+    int quarter4;
 
 }
