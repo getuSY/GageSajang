@@ -165,6 +165,9 @@ const InsideBox = styled.div`
   /* & div > input {
     cursor: none;
   } */
+  & button {
+    margin: 2rem auto;
+  }
 `;
 
 const SideIndex = styled.ul`
@@ -173,7 +176,7 @@ const SideIndex = styled.ul`
   margin: auto 3rem;
   padding: 1rem;
   & .colordLine {
-    border: 5px solid #53c882;
+    border: 7px solid #53c882;
   }
 `;
 

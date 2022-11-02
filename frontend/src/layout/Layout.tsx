@@ -6,6 +6,7 @@ import { NavItem } from '../models/common';
 import { useQuery } from '@tanstack/react-query';
 import { getUser } from '../api/user';
 import { AnimatePresence } from 'framer-motion';
+import HelpButton from '../components/atoms/HelpButton';
 
 const navList: Array<NavItem> = [
   {
@@ -38,6 +39,7 @@ const Layout = () => {
           <Suspense fallback={<div />}>
             <Outlet />
           </Suspense>
+          <HelpButton />
         </Wrapper>
       </AnimatePresence>
     </>
