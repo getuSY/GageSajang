@@ -5,6 +5,8 @@ import RoundBox from '../../atoms/RoundBox/index';
 import UnsetLabelInput from '../../molecules/UnsetLabelInput';
 import Button from '../../atoms/Button/index';
 import { useNavigate } from 'react-router-dom';
+import DoubledBox from '../../molecules/DoubledBox/index';
+import Input from '../../atoms/Input/index';
 
 interface ProfessionalStorePageProps {}
 
@@ -20,7 +22,7 @@ const ProfessionalStorePage = ({}: ProfessionalStorePageProps) => {
       <Wrapper>
         {/* <span>이미 사장 가게 정보 입력 페이지입니다.</span> */}
         <BoxRow>
-          <RoundBox style={leftBoxStyle}>
+          {/* <RoundBox style={leftBoxStyle}>
             <InnerBox>
               <UnsetLabelInput
                 label="가게 이름"
@@ -35,10 +37,23 @@ const ProfessionalStorePage = ({}: ProfessionalStorePageProps) => {
                 style={{ width: '300px' }}
               ></UnsetLabelInput>
             </InnerBox>
-          </RoundBox>
+          </RoundBox> */}
+          <InnerBox>
+            <Input placeholder="가게 이름을 입력해주세요"></Input>
+            <SelectBox>
+              <option value="none">구 선택</option>
+              <option value="관악구">관악구</option>
+              <option value="동작구">동작구</option>
+              <option value="성북구">성북구 </option>
+            </SelectBox>
+          </InnerBox>
           <RoundBox style={rightBoxStyle}>
             <InfoBox>
               <InfoList></InfoList>
+              <DoubledBox
+                title="가게 정보 입력"
+                style={{ 'background-color': 'green' }}
+              />
             </InfoBox>
           </RoundBox>
         </BoxRow>
@@ -115,6 +130,16 @@ const InfoBox = styled.div`
   width: 200px;
   height: 500px;
   border: 2px solid;
+`;
+
+const SelectBox = styled.select`
+  height: 60px;
+  width: 200px;
+  background-color: ${({ theme }) => theme.subColor};
+  border: none;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0px 0px 20px 5px #ebebeb;
 `;
 
 export default ProfessionalStorePage;

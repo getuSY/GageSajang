@@ -71,7 +71,7 @@ const Wrapper = styled.div`
     display: none;
     z-index: 10000;
     position: absolute;
-    top: 23px;
+    top: 28px;
     /* top: 0px; */
 
     /* right: 165px; */
