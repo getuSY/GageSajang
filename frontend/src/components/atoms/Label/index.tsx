@@ -4,10 +4,15 @@ import styled from 'styled-components';
 interface LabelProps {
   children?: React.ReactNode;
   style?: object;
+  onClickLabelHandler?: React.MouseEventHandler<HTMLLabelElement>;
 }
 
-const Label = ({ children, style }: LabelProps) => {
-  return <Wrapper style={style}>{children}</Wrapper>;
+const Label = ({ children, style, onClickLabelHandler }: LabelProps) => {
+  return (
+    <Wrapper style={style} onClick={onClickLabelHandler}>
+      {children}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.label`
