@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ShadowBox from '../../atoms/ShadowBox';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChartArea } from '@fortawesome/free-solid-svg-icons';
 
 interface BaseSideBarProps {
   children?: React.ReactNode;
   title: string;
-  open: boolean;
+  open?: boolean;
+  statusmark?: boolean;
+  setStatus?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const BaseSideBar = ({ children, title, open }: BaseSideBarProps) => {
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(open);
+const BaseSideBar = ({
+  children,
+  title,
+  open,
+  statusmark,
+  setStatus,
+}: BaseSideBarProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(open ? open : false);
+
+  useEffect(() => {
+    if (setStatus) {
+      setStatus(isOpen);
+    }
+  }, [isOpen]);
+
   return (
     <Wrapper isOpen={isOpen}>
       <button
@@ -27,14 +43,21 @@ const BaseSideBar = ({ children, title, open }: BaseSideBarProps) => {
           top: '0',
           zIndex: '999',
           background: '#ffffff',
-          // borderRadius: '6px',
           padding: '30px',
           display: 'flex',
           flexDirection: 'column',
           // overflowY: 'scroll',
         }}
       >
-        <div className="title">{title}</div>
+        {statusmark ? (
+          <div className="title-div">
+            <FontAwesomeIcon icon={faChartArea} className="title-icon" />
+            <div className="title">{title}</div>
+          </div>
+        ) : (
+          <div className="title">{title}</div>
+        )}
+
         <div className="content">{children}</div>
       </ShadowBox>
     </Wrapper>
@@ -68,14 +91,22 @@ const Wrapper = styled.div<WrapperProps>`
   background: #ffffff;
   width: 360px;
   height: calc(100% - 125px);
-  /* max-height: 900px; */
   position: absolute;
   left: ${({ isOpen }) => (isOpen ? '0px' : '-426px')};
-  /* top: 60px; */
   top: 66px;
-  /* top: 80px; */
   transition: left 0.9s;
   z-index: 999;
+
+  & .title-div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & .title-icon {
+      font-size: 22px;
+    }
+  }
+
   & .title {
     margin: 12px 0;
     font-weight: 600;

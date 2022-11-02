@@ -71,7 +71,7 @@ const StatusTrend = ({}: StatusTrendProps) => {
     if (!isHover) {
       const timer = setInterval(
         () => setTrend((trend) => (trend + 1) % 10),
-        2000
+        5000
       );
       return () => clearInterval(timer);
     }
@@ -106,7 +106,7 @@ const StatusTrend = ({}: StatusTrendProps) => {
           className="trend-icon"
           onClick={onClickLeftHandler}
         />
-        <Title>{dummy_title[getNumber]} Top10</Title>
+        <div className="title">{dummy_title[getNumber]} Top10</div>
         <FontAwesomeIcon
           icon={faAngleRight}
           className="trend-icon"
@@ -121,7 +121,8 @@ const StatusTrend = ({}: StatusTrendProps) => {
             onMouseOver={() => onHoverHandler(i)}
             onMouseOut={() => onNotHoverHandler()}
           >
-            {i + 1} {value}
+            <div className="rank">{i + 1}</div>
+            <div className="content">{value}</div>
           </div>
         ))}
       </Group>
@@ -129,30 +130,44 @@ const StatusTrend = ({}: StatusTrendProps) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-top: 3vh;
+  border: 1px solid darkgray;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+`;
 
 const Title_div = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  margin-top: 1rem;
+  justify-content: center;
+  margin-top: 0.2rem;
   margin-bottom: 1rem;
+
+  & .title {
+    font-size: 1.3rem;
+    margin-left: 2vw;
+    margin-right: 2vw;
+  }
 
   & .trend-icon {
     cursor: pointer;
+    font-size: 1.3rem;
+    color: darkgray;
+    & :hover {
+      color: black;
+    }
   }
 `;
 
-const Title = styled.div`
-  font-size: 1.3rem;
-`;
 const Group = styled.div`
   letter-spacing: 2px;
   font-size: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   display: grid;
   grid-template-columns: 140px 140px;
-  grid-template-rows: repeat(5, minmax(35px, auto));
+  grid-template-rows: repeat(5, minmax(40px, auto));
   grid-auto-flow: column dense;
   column-gap: 20px;
   align-items: center;
@@ -163,10 +178,14 @@ const Group = styled.div`
   }
 
   & .trend {
-    border: 1px solid white;
-    color: white;
-    border-radius: 5px;
-    background: ${({ theme }) => theme.gradColor};
+    border: 2px solid #0066ff;
+    border-radius: 10px;
+
+    & :hover {
+      transform: translateX(calc(-100% + 105px));
+      overflow-wrap: hidden;
+      transition: 2s;
+    }
   }
 
   & .gu-div {
@@ -174,10 +193,19 @@ const Group = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     white-space: nowrap;
     overflow: hidden;
-    /* border-bottom: 1px solid gray; */
+  }
+
+  & .rank {
+    font-weight: 700;
+    color: red;
+    margin-right: 0.3vw;
+    background: #fff;
+    z-index: 100;
+    padding-left: 10px;
+    padding-right: 2px;
   }
 `;
 

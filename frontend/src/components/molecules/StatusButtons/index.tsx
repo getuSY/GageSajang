@@ -1,25 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ButtonInputs from '../ButtonInputs';
-interface StatusButtonsProps {}
+import BaseSideBarLabel from '../../atoms/BaseSideBarLabel';
 
-const StatusButtons = ({}: StatusButtonsProps) => {
-  const content = [
-    { name: '유동인구' },
-    { name: '거주인구' },
-    { name: '점포 수' },
-    { name: '개업률' },
-    { name: '폐업률' },
-    { name: '매출' },
-  ];
+interface StatusButtonsProps {
+  content: any;
+  category: string;
+  onClickLabelHandler: any;
+  tab?: number;
+}
+
+const statusList = [
+  { name: 'main', content: '상권' },
+  { name: 'sub', content: '상권 배후지' },
+];
+
+const StatusButtons = ({
+  content,
+  category,
+  onClickLabelHandler,
+  tab,
+}: StatusButtonsProps) => {
   return (
     <Wrapper>
-      <ButtonInputs label="상권 현황" menuList={content} />
-      <ButtonInputs label="상권 배후지 현황" menuList={content} />
+      <div className="label-div">
+        {statusList.map((e, i) => (
+          <BaseSideBarLabel
+            style={{ width: '50%' }}
+            onClick={() => onClickLabelHandler(e.name)}
+            active={e.name === category}
+          >
+            {e.content}
+          </BaseSideBarLabel>
+        ))}
+      </div>
+      <ButtonInputs menuList={content} tab={tab} />
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+
+  & .label-div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+`;
 
 export default StatusButtons;

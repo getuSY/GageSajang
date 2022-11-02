@@ -6,51 +6,42 @@ interface ButtonProps {
   style?: object;
   children?: React.ReactNode;
   title?: string;
+  active?: boolean;
 }
 
-const BaseSideBarButton = ({ onClick, style, children }: ButtonProps) => {
+const BaseSideBarButton = ({
+  onClick,
+  style,
+  children,
+  active,
+}: ButtonProps) => {
   return (
-    <>
-      <BorderWrapper style={style}>
-        <BorderButton onClick={onClick}>{children}</BorderButton>
-      </BorderWrapper>
-    </>
+    <Wrapper style={style} active={active} onClick={onClick}>
+      {children}
+    </Wrapper>
   );
 };
 
-const BorderWrapper = styled.div`
-  position: relative;
-  width: 100px;
-  height: 60px;
+interface WrapperProps {
+  active?: boolean;
+}
+
+const Wrapper = styled.button<WrapperProps>`
+  width: 6.5rem;
+  height: 4.5rem;
   font-size: 16px;
-  border: 2px solid transparent;
   border-radius: 15px;
-  background-image: linear-gradient(#fff, #fff),
-    ${({ theme }) => theme.gradColor};
-  box-sizing: border-box;
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  overflow: hidden;
-
-  & :hover {
-    cursor: pointer;
-    background: ${({ theme }) => theme.gradColor};
-    color: white;
-  }
-`;
-
-const BorderButton = styled.button`
-  position: absolute;
-  font-size: inherit;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: transparent;
+  border: ${({ active }) =>
+    active ? '3px solid #0066ff' : '1px solid darkgray'};
+  color: ${({ active }) => (active ? '#0066ff' : '#000')};
   font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
+  background: transparent;
 
-  & :hover {
+  &:hover {
+    cursor: pointer;
+    border-radius: 15px;
+    border: 3px solid #0066ff;
   }
 `;
 
