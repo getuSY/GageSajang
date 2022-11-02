@@ -122,7 +122,7 @@ const StatusTrend = ({}: StatusTrendProps) => {
             onMouseOut={() => onNotHoverHandler()}
           >
             <div className="rank">{i + 1}</div>
-            <div>{value}</div>
+            <div className="content">{value}</div>
           </div>
         ))}
       </Group>
@@ -180,6 +180,12 @@ const Group = styled.div`
   & .trend {
     border: 2px solid #0066ff;
     border-radius: 10px;
+
+    & :hover {
+      transform: translateX(calc(-100% + 105px));
+      overflow-wrap: hidden;
+      transition: 2s;
+    }
   }
 
   & .gu-div {
@@ -187,7 +193,7 @@ const Group = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     white-space: nowrap;
     overflow: hidden;
   }
@@ -196,6 +202,10 @@ const Group = styled.div`
     font-weight: 700;
     color: red;
     margin-right: 0.3vw;
+    background: #fff;
+    z-index: 100;
+    padding-left: 10px;
+    padding-right: 2px;
   }
 `;
 

@@ -5,6 +5,7 @@ import LabelInput from '../../molecules/LabelInput';
 import ButtonInputs from '../../molecules/ButtonInputs';
 import Button from '../../atoms/Button';
 import Postcode from '../../atoms/Postcode';
+import Label from '../../atoms/Label';
 
 const menuList = [
   { name: '요식업' },
@@ -26,7 +27,8 @@ const AnalysisSideBar = ({ map, onChange }: AnalysisSideBarProps) => {
           placeholder="주소를 입력하세요."
           onChange={onChange}
         />
-        <ButtonInputs label="🍴 업종 선택" menuList={menuList} />
+        <Label>🍴 업종 선택</Label>
+        <ButtonInputs menuList={menuList} />
       </Wrapper>
       <Postcode map={map} />
       <Button

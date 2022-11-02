@@ -3,34 +3,26 @@ import styled from 'styled-components';
 import BaseSideBarButton from '../../atoms/BaseSideBarButton';
 import Button from '../../atoms/Button';
 import Label from '../../atoms/Label';
+import MenuButton from '../../atoms/MenuButton';
 
 interface ButtonInputsProps {
-  label: string;
+  // label: string;
+  style?: object;
   menuList: Array<any>;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-  category?: string;
-  isHide?: boolean | undefined;
-  onClickLabelHandler?: React.MouseEventHandler<HTMLLabelElement>;
+  tab?: number;
 }
 
-const ButtonInputs = ({
-  label,
-  menuList,
-  category,
-  isHide,
-  onClickLabelHandler,
-}: ButtonInputsProps) => {
+const ButtonInputs = ({ style, menuList, tab }: ButtonInputsProps) => {
   return (
-    <Wrapper isHide={isHide}>
-      <Label
-        style={{ marginBottom: '1.3rem' }}
-        onClickLabelHandler={onClickLabelHandler}
-      >
-        {label}
-      </Label>
+    <Wrapper style={style}>
       <div className="menu-container">
         {menuList.map((menu, idx) => (
-          <BaseSideBarButton key={idx} onClick={menu.onClick}>
+          <BaseSideBarButton
+            key={idx}
+            onClick={menu.onClick}
+            active={tab === idx + 1}
+          >
             {menu.name}
           </BaseSideBarButton>
         ))}
@@ -46,11 +38,11 @@ interface WrapperInterface {
 const Wrapper = styled.div<WrapperInterface>`
   display: flex;
   flex-direction: column;
-  margin-top: 3.5rem;
   & .menu-container {
     display: ${({ isHide }) => (isHide ? 'none' : 'flex')};
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 1.3rem;
+    margin-top: 1rem;
   }
 `;
 

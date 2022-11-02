@@ -15,23 +15,17 @@ const StatusPage = () => {
   const [params] = useSearchParams();
   const [sideBarStatus, setSideBarStatus] = useState<boolean>(false);
   const category = params.get('category') ? params.get('category') : 'main';
-  const [isHide, setIsHide] = useState<boolean>(true); // hide
-  const mainContent = content.map((e: string, i: number) => ({
+  const tab = params.get('tab') ? parseInt(params.get('tab')!) : undefined;
+  const contentList = content.map((e: string, i: number) => ({
     name: e,
-    onClick: () =>
-      navigate(`/status?category=${'main'}&tab=${i + 1}`, { replace: true }),
+    onClick: () => {
+      navigate(`?category=${category}&tab=${i + 1}`, { replace: true });
+    },
   }));
 
-  const subContent = content.map((e: string, i: number) => ({
-    name: e,
-    onClick: () =>
-      navigate(`/status?category=${'sub'}&tab=${i + 1}`, { replace: true }),
-  }));
-
-  const onClickLabelHandler = () => {
-    setIsHide(!isHide); // 라벨 클릭 시 hide 바뀌게
+  const onClickLabelHandler = (category: string) => {
+    navigate(`/status?category=${category}`);
   };
-
   return (
     <Transitions>
       <Wrapper>
@@ -44,11 +38,10 @@ const StatusPage = () => {
           <div>서울시 행정구 기준</div>
           <StatusTrend />
           <StatusButtons
-            mainContent={mainContent}
-            subContent={subContent}
+            content={contentList}
             category={category!}
-            isHide={isHide}
             onClickLabelHandler={onClickLabelHandler}
+            tab={tab}
           />
         </BaseSideBar>
         <GeometryMap areas={areas.features} isOpen={sideBarStatus} />

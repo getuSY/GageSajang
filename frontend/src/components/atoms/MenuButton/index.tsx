@@ -19,7 +19,6 @@ const Wrapper = styled.div`
   width: 80px;
   height: 80px;
   cursor: pointer;
-
   border: 1px solid #000000;
   border-radius: 10px;
   display: flex;
