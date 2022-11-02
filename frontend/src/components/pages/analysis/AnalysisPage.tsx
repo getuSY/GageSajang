@@ -12,8 +12,8 @@ declare global {
 
 const options = {
   //지도를 생성할 때 필요한 기본 옵션
-  center: new window.kakao.maps.LatLng(37.59, 126.97), //지도의 중심좌표.
-  level: 8, //지도의 레벨(확대, 축소 정도)
+  center: new window.kakao.maps.LatLng(37.5666805, 126.9784147), //지도의 중심좌표.
+  level: 7, //지도의 레벨(확대, 축소 정도)
 };
 
 const polygonOption = (paths: any, isSelected: boolean) => ({
@@ -47,6 +47,7 @@ const getCenter = (path: Array<any>) => {
 
   sum[0] /= path.length;
   sum[1] /= path.length;
+  sum[1] -= 0.01;
 
   return sum;
 };
@@ -163,10 +164,6 @@ const AnalysisPage = () => {
 
 const Wrapper = styled.div`
   height: calc(100vh - 80px);
-  & #daum-maps-shape-0 {
-    fill-opacity: 1;
-  }
-  /* overflow-y: hidden; */
 `;
 
 export default AnalysisPage;
