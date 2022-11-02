@@ -71,7 +71,42 @@ public class Main {
 //        storeOpenCloseTop.combine();
 
         // 유동인구 최종 전처리
-        ResultLivingPopulation resultLivingPopulation = new ResultLivingPopulation();
-        resultLivingPopulation.combine();
+//        ResultLivingPopulation resultLivingPopulation = new ResultLivingPopulation();
+//        resultLivingPopulation.combine();
+
+        /////////////////////////////////////////////////////////////////////////////////////////////
+
+        // 상권배후지-생활인구(유동인구) API -> CSV
+//        StoreHinLivingPopulation storeHinLivingPopulation = new StoreHinLivingPopulation();
+//        storeHinLivingPopulation.getApi();
+
+        // 상권배후지-생활인구(유동인구) CSV -> 최종 정리본 CSV
+//        LivingPopulationStoreHin livingPopulationStore = new LivingPopulationStoreHin();
+//        livingPopulationStore.combine();
+
+        // 상권배후지-상주인구(거주인구) API -> CSV
+//        StoreHinResidentPopulation storeResidentPopulation = new StoreHinResidentPopulation();
+//        storeResidentPopulation.getApi();
+
+        // 상권배후지-상주인구(거주인구) CSV -> 최종 정리본 CSV
+//        ResidentPopulationStoreHin residentPopulationStore = new ResidentPopulationStoreHin();
+//        residentPopulationStore.combine();
+
+        // 상권배후지-점포(점포수, 개업율, 폐업율) CSV 구이름 붙이기
+//        StoreHinCount storeCount = new StoreHinCount();
+//        storeCount.combine();
+
+        // 상권배후지-점포(구별)
+//        StoreHinGu storeGu = new StoreHinGu();
+//        storeGu.sum();
+
+        // 상권배후지 매출 (구별 + 분기별 + 업종별) 월 매출
+        StoreHinSalesMonth storeSalesMonth =new StoreHinSalesMonth();
+        storeSalesMonth.combine();
+
+        // 상권 구별 정보
+//        ResultStore resultStore = new ResultStore();
+//        resultStore.combine();
+
     }
 }
