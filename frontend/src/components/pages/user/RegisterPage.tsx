@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import UnsetLabelInput from '../../molecules/UnsetLabelInput';
 import Button from '../../atoms/Button/index';
 import { useNavigate } from 'react-router-dom';
+import { useCreateUser } from '../../../hooks/user';
+import { SignUpParams } from '../../../models/user';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const toHome = () => {
     navigate('/');
   };
+  // const mutation = useMutation({
+  //   mutationFn: (signUpParams: SignUpParams) => signUp(signUpParams),
+  // });
+  const mutation = useCreateUser();
+  const [signUpInputs, setSignUpInputs] = useState<SignUpParams>({
+    accessToken: 'string',
+    auth: 'string',
+    email: 'string',
+    id: 0,
+    nickName: 'string',
+    pw: 'string',
+    refreshToken: 'string',
+    state: 0,
+    type: 'string',
+  });
+
+  // useEffect(() => {
+  //   console.log('loading', mutation.isLoading);
+  //   console.log('error', mutation.isError);
+  //   console.log('success', mutation.isSuccess);
+  // }, [mutation]);
+
   return (
     <Wrapper>
       <RegisterTitle>가게 사장 회원 가입</RegisterTitle>
@@ -33,7 +57,12 @@ const RegisterPage = () => {
           label="NAME"
           placeholder="한글 2~10자, 영어 3~15자, 특수문자 불포함"
         />
-        <Button type="main" onClick={toHome}>
+        <Button
+          type="main"
+          onClick={() => {
+            mutation.mutate(signUpInputs);
+          }}
+        >
           회원가입
         </Button>
       </RegisterBox>

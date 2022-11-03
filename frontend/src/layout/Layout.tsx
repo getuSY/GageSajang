@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import Navbar from '../components/organisms/NavBar';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getUser } from '../api/user';
 import { AnimatePresence } from 'framer-motion';
 import HelpButton from '../components/atoms/HelpButton';
+import { useHelloUser, useFetchUser } from '../hooks/user';
 
 const navList: Array<NavItem> = [
   {
@@ -28,8 +29,14 @@ const navList: Array<NavItem> = [
 ];
 
 const Layout = () => {
-  const query = useQuery(['user'], getUser);
-  const userInfo = query.data;
+  // const query = useQuery(['user'], getUser);
+  // const userInfo = query.data;
+  const { data: userInfo } = useFetchUser();
+
+  const test = useHelloUser('mok');
+  useEffect(() => {
+    console.log(test.data);
+  }, [test]);
 
   return (
     <>
