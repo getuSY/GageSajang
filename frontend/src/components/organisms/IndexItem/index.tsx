@@ -39,7 +39,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 65px);
   gap: 30px;
   & img {
     width: 675px;

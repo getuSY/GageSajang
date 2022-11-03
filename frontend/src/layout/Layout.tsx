@@ -47,7 +47,7 @@ const Layout = () => {
 };
 
 const Wrapper = styled.div`
-  padding-top: 80px;
+  padding-top: 65px;
 `;
 
 export default Layout;

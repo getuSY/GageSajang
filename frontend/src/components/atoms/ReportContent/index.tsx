@@ -7,15 +7,16 @@ interface ReportContentProps {
 }
 
 const ReportContent = ({ children, style }: ReportContentProps) => {
-  return <Wrapper>{children}</Wrapper>;
+  return <Wrapper style={style}>{children}</Wrapper>;
 };
 
 const Wrapper = styled.div`
   background: #ffffff;
-  min-height: 60px;
+  /* min-height: 60px; */
   display: flex;
-  align-items: center;
-  padding: 0 20px;
+
+  padding: 20px 20px;
+  border-radius: 10px;
 `;
 
 export default ReportContent;
