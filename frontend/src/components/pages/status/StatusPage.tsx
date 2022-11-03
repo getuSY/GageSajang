@@ -6,6 +6,9 @@ import BaseSideBar from '../../molecules/BaseSideBar';
 import StatusTrend from '../../molecules/StatusTrend';
 import StatusButtons from '../../molecules/StatusButtons';
 import Transitions from '../../atoms/Transition';
+import ReportModal from '../../atoms/ReportModal';
+import StatusReportIndex from '../../molecules/StatusReportIndex';
+import StatusReport from '../../organisms/StatusReport';
 
 const content = ['유동인구', '거주인구', '점포 수', '개업률', '폐업률', '매출'];
 
@@ -13,6 +16,7 @@ const StatusPage = () => {
   const [sideBarStatus, setSideBarStatus] = useState<boolean>(false);
   const [category, setCategory] = useState<string>('main');
   const [tab, setTab] = useState<number>(1);
+  const [region, setRegion] = useState<string>(''); // 현재 선택한 구 이름
 
   const contentList = content.map((e: string, i: number) => ({
     name: e,
@@ -23,6 +27,12 @@ const StatusPage = () => {
     setCategory(category);
     setTab(1);
   };
+
+  const onClickRegionHandler = (region: string) => {
+    setRegion(region);
+    console.log(region);
+  };
+
   return (
     <Transitions>
       <Wrapper>
@@ -41,8 +51,16 @@ const StatusPage = () => {
             tab={tab}
           />
         </BaseSideBar>
-        <GeometryMap areas={areas.features} isOpen={sideBarStatus} />
-        {/* <BaseSideBar title={'good'} style={{ width: '1000px' }}></BaseSideBar> */}
+        <GeometryMap
+          areas={areas.features}
+          isOpen={sideBarStatus}
+          onClickRegionHandler={onClickRegionHandler}
+        />
+        <StatusReport
+          region={region}
+          content={contentList}
+          onClickLabelHandler={onClickLabelHandler}
+        ></StatusReport>
       </Wrapper>
     </Transitions>
   );
