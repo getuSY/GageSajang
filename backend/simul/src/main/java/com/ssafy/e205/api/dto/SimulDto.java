@@ -16,8 +16,8 @@ import lombok.ToString;
 @ToString
 public class SimulDto {
     private int year; //년도
-    private int boongi; //분기
-    private int sales; //해당 분기 매출 금액 합
+    private int quarter; //분기
+    private int value; // 결과값
     private String dongName; // 행정동명
     private String industryName; // 업종 이름
 }

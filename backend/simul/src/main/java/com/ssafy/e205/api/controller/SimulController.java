@@ -1,5 +1,6 @@
 package com.ssafy.e205.api.controller;
 
+import com.ssafy.e205.api.dto.SimulDto;
 import com.ssafy.e205.api.service.SimulService;
 import com.ssafy.e205.api.service.SimulServiceImpl;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -48,10 +49,23 @@ public class SimulController {
      *  @return : ResponseEntity<List<Integer>>
      *  @author : LDY, 98dlstod@naver.com
      */
-    @GetMapping(value = "/simulationForMaybe/{dongName}/{industryName}")
-    public ResponseEntity<List<Integer>> list(@Parameter(description = "행정동 명", required = true, example = "개포2동") @PathVariable String dongName, @Parameter(description = "한식음식점", required = true, example = "고고") @PathVariable String industryName){
-        return new ResponseEntity<List<Integer>>(service.salesListforMaybe(dongName, industryName), HttpStatus.OK);
+    @GetMapping(value = "/sales/maybe/{dongName}/{industryName}")
+    public ResponseEntity<List<SimulDto>> salesListforMaybe(@Parameter(description = "행정동 명", required = true, example = "개포2동") @PathVariable String dongName, @Parameter(description = "한식음식점", required = true, example = "고고") @PathVariable String industryName){
+        return new ResponseEntity<List<SimulDto>>(service.salesListforMaybe(dongName, industryName), HttpStatus.OK);
     }
+
+    /** @brief : 이미 사장의 매출 예측 시뮬레이션
+     *  @date : 2022-11-02
+     *  @param  : dongName, industryName
+     *  @return : ResponseEntity<List<Integer>>
+     *  @author : LDY, 98dlstod@naver.com
+     */
+    @PostMapping(value = "/sales/already")
+    public ResponseEntity<List<SimulDto>> salesListforAlready(@Parameter(description = "object (년도, 분기, 행정동명, 분기 매출금액)", required = true, example = "Simul dto")@RequestBody  SimulDto dto) {
+        System.out.println(dto);
+        return new ResponseEntity<List<SimulDto>>(service.salesListforAlready(dto), HttpStatus.OK);
+    }
+
 
 
 }
