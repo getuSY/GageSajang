@@ -26,7 +26,7 @@ public class SalesServiceImpl implements SalesService {
 
     @Override
     public SalesQuarterEntity findSalesQuarterEntity(String email, int year, int month) {
-        return quarterRepository.findByEmailAndYearAndMonth(email,year,month);
+        return quarterRepository.findByEmailAndSalesYearAndSalesQuarter(email,year,month);
     }
 
     @Override
@@ -46,6 +46,6 @@ public class SalesServiceImpl implements SalesService {
 
     @Override
     public int deleteSalesQuarter(String email, int year, int month) {
-        return quarterRepository.deleteByEmailAndYearAndMonth(email, year, month);
+        return quarterRepository.deleteByEmailAndSalesYearAndSalesQuarter(email, year, month);
     }
 }

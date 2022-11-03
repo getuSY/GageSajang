@@ -17,10 +17,10 @@ public interface SalesQuarterRepository extends JpaRepository<SalesQuarterEntity
 
     List<SalesQuarterEntity> findAll();
     List<SalesQuarterEntity> findByEmail(String email);
-    SalesQuarterEntity findByEmailAndYearAndMonth(String email, int year, int quarter);
-    @Query(value = "select sum(cost) from sales_month where email=:email and year=:year and quarter=:quarter", nativeQuery = true)
-    int findByQuarterCostSum(String email, int year, int quarter);
+    SalesQuarterEntity findByEmailAndSalesYearAndSalesQuarter(String email, int sales_year, int sales_quarter);
+    @Query(value = "select sum(cost) from sales_month where email=:email and sales_year=:sales_year and sales_quarter=:sales_quarter", nativeQuery = true)
+    int findByQuarterCostSum(String email, int sales_year, int sales_quarter);
     int save(SalesQuarterDto salesQuarterDto);
     int deleteByEmail(String email);
-    int deleteByEmailAndYearAndMonth(String email, int year, int quarter);
+    int deleteByEmailAndSalesYearAndSalesQuarter(String email, int sales_year, int sales_quarter);
 }
