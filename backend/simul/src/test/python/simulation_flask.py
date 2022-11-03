@@ -5,7 +5,7 @@ from urllib import parse
 
 app = Flask(__name__)
 
-@app.route("/simul/sales/maybe")
+@app.route("/simulation")
 def simulation():
         import sys
         import inspect
@@ -24,6 +24,9 @@ def simulation():
 
         dongName = parse.unquote(request.args.get('dongName'))
         industryName = parse.unquote(request.args.get('industryName'))
+
+        # dongName = request.args.get('dongName')
+        # industryName = request.args.get('industryN')
         # sales = request.args.get('sales')
 
         # print(type(dongName) + " "  + type(industryName ))
@@ -58,17 +61,12 @@ def simulation():
         normalization_df = features_polynomial.copy()
         normalization_df[:] = scaler.fit_transform(normalization_df[:])
 
+        # x_train, x_test, y_train, y_test = train_test_split(normalization_df, y, train_size=0.8, test_size=0.2)
+
         x_train = x.copy()
-
-        x_test1 = x[(x['기준_년_코드']==2022) & (x['기준_분기_코드']==4)]
-        x_test2 = x[x['기준_년_코드'] == 2023]
-        x_test = pd.concat([x_test1, x_test2])
-        print(x_test)
+        x_test = x.copy()
         y_train = y.copy()
-
-        # y_test1 = y[(y['기준_년_코드']==2022) & (y['기준_분기_코드']==4)]
-        # y_test2 = y[y['기준_년_코드'] == 2023]
-        # y_test = pd.concat([y_test1, y_test2])
+        y_test = y.copy()
 
         regression = LinearRegression()
         regression.fit(x_train, y_train)
@@ -81,13 +79,7 @@ def simulation():
         # print("answer")
         # print(y_test)
 
-        result = y_predict.flatten().tolist()
-
-        obj = {"result" : result}
-
-        return json.dumps(obj)
-
-
+        return json.dumps(y_predict.flatten().tolist())
 
 if __name__ == "__main__":
         # print(simulation("개포2동", "한식음식점"))
