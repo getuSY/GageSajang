@@ -22,11 +22,11 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     void save(UserDto userDto);
     void deleteByEmail(String email);
 
-    @Query(value = "select state from user_server where email = :email", nativeQuery = true)
+    @Query(value = "select state from user where email = :email", nativeQuery = true)
     int findByEmailToState(@Param("email") String email);
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "update user_server set state=:state where email=:email", nativeQuery = true)
+    @Query(value = "update user set state=:state where email=:email", nativeQuery = true)
     void updateState(@Param("state") int state, @Param("email") String email);
 }
