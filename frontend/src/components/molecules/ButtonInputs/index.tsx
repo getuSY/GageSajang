@@ -34,7 +34,7 @@ const Wrapper = styled.div<WrapperInterface>`
   display: flex;
   flex-direction: column;
   & .menu-container {
-    display: ${({ isHide }) => (isHide ? 'none' : 'flex')};
+    display: flex;
     flex-wrap: wrap;
     gap: 1.3rem;
     margin-top: 1rem;

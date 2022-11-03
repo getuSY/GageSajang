@@ -22,7 +22,9 @@ const IndexSearchBar = () => {
           <WordSlider wordList={wordList} />
 
           {'할 건데 어디에 차리지?'.split(' ').map((e, i) => (
-            <div style={{ marginRight: '1.3rem' }}>{e}</div>
+            <div style={{ marginRight: '1.3rem' }} key={i}>
+              {e}
+            </div>
           ))}
         </div>
         <Button type="blur">보러 가기</Button>

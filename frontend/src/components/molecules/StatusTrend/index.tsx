@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-interface StatusTrendProps {}
-
-const StatusTrend = ({}: StatusTrendProps) => {
+const StatusTrend = () => {
   const dummy_title = [
     '입점 많은 상권',
     '요즘 뜨는 업종',
@@ -98,7 +96,7 @@ const StatusTrend = ({}: StatusTrendProps) => {
 
   return (
     <Wrapper>
-      <Title_div>
+      <TitleDiv>
         <FontAwesomeIcon
           icon={faAngleLeft}
           className="trend-icon"
@@ -110,7 +108,7 @@ const StatusTrend = ({}: StatusTrendProps) => {
           className="trend-icon"
           onClick={onClickRightHandler}
         />
-      </Title_div>
+      </TitleDiv>
       <Group>
         {dummy[getNumber].map((value, i) => (
           <div
@@ -135,7 +133,7 @@ const Wrapper = styled.div`
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
 `;
 
-const Title_div = styled.div`
+const TitleDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -27,7 +27,7 @@ const BaseSideBar = ({
     if (setStatus) {
       setStatus(isOpen);
     }
-  }, [isOpen]);
+  }, [isOpen, setStatus]);
   useEffect(() => {
     if (open) {
       setIsOpen(true);
@@ -45,7 +45,7 @@ const BaseSideBar = ({
       <ShadowBox
         style={{
           width: '100%',
-          height: '100%',
+          height: 'calc(100% - 1px)',
           position: 'absolute',
           top: '0',
           zIndex: '999',
