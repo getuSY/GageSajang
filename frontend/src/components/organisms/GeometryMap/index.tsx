@@ -4,6 +4,7 @@ import { geoMercator, geoPath } from 'd3-geo';
 import { Gu } from '../../../models/data';
 import { text } from 'd3';
 import { any } from 'prop-types';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 type GeometryProps = {
   areas: Array<Gu>;
@@ -11,6 +12,8 @@ type GeometryProps = {
 };
 
 const GeometryMap = ({ areas, isOpen }: GeometryProps) => {
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
   const mapData = areas;
   const width = 1000;
   const height = 850;
@@ -22,7 +25,15 @@ const GeometryMap = ({ areas, isOpen }: GeometryProps) => {
   const pathGenerator = geoPath().projection(projection);
 
   const onClick = (d: any) => {
-    alert(`${d.properties.SIG_KOR_NM}`);
+    // alert(`${d.properties.SIG_KOR_NM}`);
+    navigate(
+      `?category=${
+        params.get('category') ? params.get('category') : 'main'
+      }&tab=${params.get('tab') ? params.get('tab') : '1'}&region=${
+        d.properties.SIG_ENG_NM
+      }`,
+      { replace: true }
+    );
   };
 
   const countries = mapData.map((d: any, i) => (

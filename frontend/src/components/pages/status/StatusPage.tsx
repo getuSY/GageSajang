@@ -42,6 +42,7 @@ const StatusPage = () => {
           />
         </BaseSideBar>
         <GeometryMap areas={areas.features} isOpen={sideBarStatus} />
+        {/* <BaseSideBar title={'good'} style={{ width: '1000px' }}></BaseSideBar> */}
       </Wrapper>
     </Transitions>
   );
