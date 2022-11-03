@@ -6,13 +6,14 @@ interface ButtonProps {
   type: 'blur' | 'border' | 'grad' | 'main' | 'sub';
   style?: object;
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
-const Button = ({ onClick, type, style, children }: ButtonProps) => {
+const Button = ({ onClick, type, style, children, disabled }: ButtonProps) => {
   return (
     <>
       {type === 'blur' && (
-        <BlurButton onClick={onClick} style={style}>
+        <BlurButton onClick={onClick} style={style} disabled={disabled}>
           <div className="blur-effect" style={style} />
           {children}
         </BlurButton>
@@ -41,7 +42,11 @@ const Button = ({ onClick, type, style, children }: ButtonProps) => {
   );
 };
 
-const BlurButton = styled.button`
+interface BlurButtonProps {
+  disabled?: boolean;
+}
+
+const BlurButton = styled.button<BlurButtonProps>`
   width: 250px;
   height: 72px;
   position: relative;
@@ -50,6 +55,7 @@ const BlurButton = styled.button`
   font-size: 1.3rem;
   background: #ffffff;
   border-radius: 15px;
+  border: ${({ disabled }) => (!disabled ? '' : '1px solid #d9d9d9')};
 
   & .blur-effect {
     position: absolute;
@@ -60,13 +66,11 @@ const BlurButton = styled.button`
 
     height: 57px;
     z-index: -1;
-    background: ${({ theme }) => theme.blurColor};
+    background: ${({ theme, disabled }) => (!disabled ? theme.blurColor : '')};
+
     filter: blur(18.7089px);
   }
-
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const GradButton = styled.button`

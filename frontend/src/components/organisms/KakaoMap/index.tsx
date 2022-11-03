@@ -17,7 +17,7 @@ interface KakaoMapProps {
 
 const getCenter = (path: Array<any>) => {
   let sum = [0, 0];
-  path.map((e, i) => {
+  path.forEach((e, i) => {
     sum[0] += e[0];
     sum[1] += e[1];
   });

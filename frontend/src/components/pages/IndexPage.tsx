@@ -55,6 +55,7 @@ const IndexPage = () => {
           onClick={() => navigate('/analysis')}
           right
         />
+        {/* <div style={{ height: '2000px' }}>asdas</div> */}
         <IndexItem
           content={professional}
           onClick={() => navigate('/professional')}
@@ -73,6 +74,7 @@ const IndexPage = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 `;
 
 export default IndexPage;

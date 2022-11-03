@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Spinner from '../atoms/Spinner';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const LoadingPage = () => {
+  const [params] = useSearchParams();
+  const nextTo = params.get('nextTo');
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (nextTo) setTimeout(() => navigate(nextTo, { replace: true }), 2000);
+  }, [nextTo, navigate]);
   return (
     <Wrapper>
       <Spinner />

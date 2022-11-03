@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { geoMercator, geoPath } from 'd3-geo';
 import { Gu } from '../../../models/data';
-import { text } from 'd3';
-import { any } from 'prop-types';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 type GeometryProps = {

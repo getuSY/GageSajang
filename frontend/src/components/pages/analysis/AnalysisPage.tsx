@@ -43,7 +43,7 @@ const AnalysisPage = () => {
   const container = useRef<any>();
 
   // 주소-좌표 변환 객체를 생성합니다
-  const geocoder = new kakao.maps.services.Geocoder();
+  // const geocoder = new kakao.maps.services.Geocoder();
 
   useEffect(() => {
     // 동 검색

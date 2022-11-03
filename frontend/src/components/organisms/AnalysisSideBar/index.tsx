@@ -4,9 +4,9 @@ import BaseSideBar from '../../molecules/BaseSideBar';
 import LabelInput from '../../molecules/LabelInput';
 import ButtonInputs from '../../molecules/ButtonInputs';
 import Button from '../../atoms/Button';
-import Postcode from '../../atoms/Postcode';
 import Label from '../../atoms/Label';
 import AnalysisSubButtons from '../../molecules/AnalysisSubButtons';
+import { useNavigate } from 'react-router-dom';
 
 interface AnalysisSideBarProps {
   map: any;
@@ -24,6 +24,7 @@ const AnalysisSideBar = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [mainCategory, setMainCategory] = useState<number>(0);
   const [subCategory, setSubCategory] = useState<number>(0);
+  const navigate = useNavigate();
   const menuList = useMemo(
     () => [
       {
@@ -33,8 +34,8 @@ const AnalysisSideBar = ({
             setMainCategory(1);
           } else {
             setMainCategory(0);
-            setSubCategory(0);
           }
+          setSubCategory(0);
         },
       },
       {
@@ -44,8 +45,8 @@ const AnalysisSideBar = ({
             setMainCategory(2);
           } else {
             setMainCategory(0);
-            setSubCategory(0);
           }
+          setSubCategory(0);
         },
       },
       {
@@ -55,8 +56,8 @@ const AnalysisSideBar = ({
             setMainCategory(3);
           } else {
             setMainCategory(0);
-            setSubCategory(0);
           }
+          setSubCategory(0);
         },
       },
     ],
@@ -82,14 +83,19 @@ const AnalysisSideBar = ({
         {mainCategory ? (
           <>
             <Label>🍴 상세 선택</Label>
-            <AnalysisSubButtons />
+            <AnalysisSubButtons
+              tab={mainCategory}
+              setSubCategory={setSubCategory}
+              subCategory={subCategory}
+            />
           </>
         ) : null}
       </Wrapper>
-      {/* <Postcode map={map} /> */}
       <Button
         type="blur"
         style={{ width: '100%', fontSize: '1.4rem', fontWeight: '900' }}
+        disabled={!(mainCategory && subCategory && inputValue)}
+        onClick={() => navigate(`/loading?nextTo=/analysis/result`)}
       >
         상권 분석하러 가기
       </Button>
