@@ -6,6 +6,7 @@ import WhiteLabelInput from '../../molecules/WhiteLabelInput/index';
 import Button from '../../atoms/Button/index';
 import { useNavigate } from 'react-router-dom';
 // import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 interface MyPageProps {
   style?: object;
