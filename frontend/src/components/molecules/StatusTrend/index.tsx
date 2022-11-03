@@ -89,13 +89,11 @@ const StatusTrend = ({}: StatusTrendProps) => {
   const onClickLeftHandler = () => {
     setGetNumber((getNumber) => (getNumber + 3) % 4);
     setTrend(0);
-    console.log(getNumber);
   };
 
   const onClickRightHandler = () => {
     setGetNumber((getNumber) => (getNumber + 1) % 4);
     setTrend(0);
-    console.log(getNumber);
   };
 
   return (

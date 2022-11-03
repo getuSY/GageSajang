@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import BaseSideBarButton from '../../atoms/BaseSideBarButton';
-import Button from '../../atoms/Button';
-import Label from '../../atoms/Label';
-import MenuButton from '../../atoms/MenuButton';
 
 interface ButtonInputsProps {
-  // label: string;
   style?: object;
   menuList: Array<any>;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
   tab?: number;
 }
 

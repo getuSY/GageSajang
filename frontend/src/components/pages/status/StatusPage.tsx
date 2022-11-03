@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import areas from '../../../data/areaGu.json';
 import GeometryMap from '../../organisms/GeometryMap';
@@ -6,25 +6,22 @@ import BaseSideBar from '../../molecules/BaseSideBar';
 import StatusTrend from '../../molecules/StatusTrend';
 import StatusButtons from '../../molecules/StatusButtons';
 import Transitions from '../../atoms/Transition';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const content = ['유동인구', '거주인구', '점포 수', '개업률', '폐업률', '매출'];
 
 const StatusPage = () => {
-  const navigate = useNavigate();
-  const [params] = useSearchParams();
   const [sideBarStatus, setSideBarStatus] = useState<boolean>(false);
-  const category = params.get('category') ? params.get('category') : 'main';
-  const tab = params.get('tab') ? parseInt(params.get('tab')!) : undefined;
+  const [category, setCategory] = useState<string>('main');
+  const [tab, setTab] = useState<number>(1);
+
   const contentList = content.map((e: string, i: number) => ({
     name: e,
-    onClick: () => {
-      navigate(`?category=${category}&tab=${i + 1}`, { replace: true });
-    },
+    onClick: () => setTab(i + 1),
   }));
 
   const onClickLabelHandler = (category: string) => {
-    navigate(`/status?category=${category}`);
+    setCategory(category);
+    setTab(1);
   };
   return (
     <Transitions>

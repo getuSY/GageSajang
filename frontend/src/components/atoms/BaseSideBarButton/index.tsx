@@ -5,7 +5,6 @@ interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   style?: object;
   children?: React.ReactNode;
-  title?: string;
   active?: boolean;
 }
 

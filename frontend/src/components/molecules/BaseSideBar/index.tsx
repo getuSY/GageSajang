@@ -19,13 +19,18 @@ const BaseSideBar = ({
   statusmark,
   setStatus,
 }: BaseSideBarProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(open ? open : false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (setStatus) {
       setStatus(isOpen);
     }
   }, [isOpen]);
+  useEffect(() => {
+    if (open) {
+      setIsOpen(true);
+    }
+  }, [open]);
 
   return (
     <Wrapper isOpen={isOpen}>
@@ -94,7 +99,7 @@ const Wrapper = styled.div<WrapperProps>`
   position: absolute;
   left: ${({ isOpen }) => (isOpen ? '0px' : '-426px')};
   top: 66px;
-  transition: left 0.9s;
+  transition: left 0.6s;
   z-index: 999;
 
   & .title-div {

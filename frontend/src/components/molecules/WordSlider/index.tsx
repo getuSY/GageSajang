@@ -8,13 +8,6 @@ interface WordSliderProps {
 const WordSlider = ({ wordList }: WordSliderProps) => {
   const [active, setActive] = useState<number>(0);
 
-  // useEffect(() => {
-  //   console.log('interval');
-  //   let slideInterval: NodeJS.Timer = setInterval(() => {
-  //     setActive((active) => (active + 1) % wordList.length);
-  //   }, 1000);
-  // }, []);
-
   const getClassName = (idx: number) => {
     if (active === idx) {
       return 'active word';
