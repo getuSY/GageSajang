@@ -89,13 +89,11 @@ const StatusTrend = ({}: StatusTrendProps) => {
   const onClickLeftHandler = () => {
     setGetNumber((getNumber) => (getNumber + 3) % 4);
     setTrend(0);
-    console.log(getNumber);
   };
 
   const onClickRightHandler = () => {
     setGetNumber((getNumber) => (getNumber + 1) % 4);
     setTrend(0);
-    console.log(getNumber);
   };
 
   return (
@@ -178,7 +176,7 @@ const Group = styled.div`
   }
 
   & .trend {
-    border: 2px solid #0066ff;
+    border: 2px solid #001aa4;
     border-radius: 10px;
 
     & :hover {
