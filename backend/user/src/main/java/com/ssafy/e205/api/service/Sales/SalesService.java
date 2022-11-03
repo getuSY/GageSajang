@@ -1,25 +1,16 @@
 package com.ssafy.e205.api.service.Sales;
 
-import com.ssafy.e205.api.dto.SalesDayDto;
-import com.ssafy.e205.api.dto.SalesMonthDto;
-import com.ssafy.e205.db.entity.SalesDayEntity;
-import com.ssafy.e205.db.entity.SalesMonthEntity;
+import com.ssafy.e205.api.dto.SalesQuarterDto;
+import com.ssafy.e205.db.entity.SalesQuarterEntity;
 
 import java.util.List;
 
 public interface SalesService {
-    List<SalesMonthEntity> findSalesMonthAll();
-    List<SalesMonthEntity> findSalesMonthUserAll(String email);
-    SalesMonthEntity findSalesMonthEntity(String email, int year, int month);
+    List<SalesQuarterEntity> findSalesQuarterAll();
+    List<SalesQuarterEntity> findSalesQuarterUserAll(String email);
+    SalesQuarterEntity findSalesQuarterEntity(String email, int year, int quarter);
     int findQuarterCostSum(String email, int year, int quarter);
-    int saveSalesMonth(SalesMonthDto dto);
-    int deleteSalesMonthUserAll(String email);
-    int deleteSalesMonth(String email, int year, int month);
-
-    List<SalesDayEntity> findSalesDayEntityAll();
-    List<SalesDayEntity> findSalesDayEntityUserAll(String email);
-    SalesDayEntity findSalesDayEntity(String email, int year, int month, int day);
-    int saveSalesDayEntity(SalesDayDto dto);
-    int deleteSalesDayUserAll(String email);
-    int deleteSalesDayEntity(String email, int year, int month, int day);
+    int saveSalesQuarter(SalesQuarterDto dto);
+    int deleteSalesQuarterUserAll(String email);
+    int deleteSalesQuarter(String email, int year, int quarter);
 }

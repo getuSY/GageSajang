@@ -106,8 +106,8 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/overlap")
-    public boolean overlapCheck(String email){
+    @GetMapping("/overlap/{email}")
+    public boolean overlapCheck(@PathVariable  String email){
         Optional<UserEntity> userEntity = userService.findByEmail(email);
         return userEntity.isPresent();
     }

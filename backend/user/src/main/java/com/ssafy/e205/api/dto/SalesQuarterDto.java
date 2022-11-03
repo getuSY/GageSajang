@@ -1,7 +1,6 @@
 package com.ssafy.e205.api.dto;
 
-import com.ssafy.e205.db.entity.SalesDayEntity;
-import com.ssafy.e205.db.entity.SalesMonthEntity;
+import com.ssafy.e205.db.entity.SalesQuarterEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,28 +10,25 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class SalesMonthDto {
+public class SalesQuarterDto {
     private Long id;
     private String email;
-    private int salesMonth;
     private int salesQuarter;
     private int salesYear;
     private int salesCost;
 
-    public SalesMonthDto(SalesMonthEntity entity){
+    public SalesQuarterDto(SalesQuarterEntity entity){
         this.id = entity.getId();
         this.email = entity.getEmail();
         this.salesCost = entity.getSalesCost();
-        this.salesMonth = entity.getSalesMonth();
         this.salesQuarter = entity.getSalesQuarter();
         this.salesYear = entity.getSalesYear();
     }
 
-    public SalesMonthEntity toEntity(SalesMonthDto dto){
-        return SalesMonthEntity.builder()
+    public SalesQuarterEntity toEntity(SalesQuarterDto dto){
+        return SalesQuarterEntity.builder()
                 .id(dto.id)
                 .email(dto.email)
-                .salesMonth(dto.salesMonth)
                 .salesQuarter(dto.salesQuarter)
                 .salesYear(dto.salesYear)
                 .salesCost(dto.salesCost)

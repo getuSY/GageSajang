@@ -1,11 +1,8 @@
 package com.ssafy.e205.api.service.Sales;
 
-import com.ssafy.e205.api.dto.SalesDayDto;
-import com.ssafy.e205.api.dto.SalesMonthDto;
-import com.ssafy.e205.db.entity.SalesDayEntity;
-import com.ssafy.e205.db.entity.SalesMonthEntity;
-import com.ssafy.e205.db.repository.SalesDayRepository;
-import com.ssafy.e205.db.repository.SalesMonthRepository;
+import com.ssafy.e205.api.dto.SalesQuarterDto;
+import com.ssafy.e205.db.entity.SalesQuarterEntity;
+import com.ssafy.e205.db.repository.SalesQuarterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,73 +12,40 @@ import java.util.List;
 public class SalesServiceImpl implements SalesService {
 
     @Autowired
-    SalesDayRepository dayRepository;
-
-    @Autowired
-    SalesMonthRepository monthRepository;
+    SalesQuarterRepository quarterRepository;
 
     @Override
-    public List<SalesMonthEntity> findSalesMonthAll() {
-        return monthRepository.findAll();
+    public List<SalesQuarterEntity> findSalesQuarterAll() {
+        return quarterRepository.findAll();
     }
 
     @Override
-    public List<SalesMonthEntity> findSalesMonthUserAll(String email) {
-        return monthRepository.findByEmail(email);
+    public List<SalesQuarterEntity> findSalesQuarterUserAll(String email) {
+        return quarterRepository.findByEmail(email);
     }
 
     @Override
-    public SalesMonthEntity findSalesMonthEntity(String email, int year, int month) {
-        return monthRepository.findByEmailAndYearAndMonth(email,year,month);
+    public SalesQuarterEntity findSalesQuarterEntity(String email, int year, int month) {
+        return quarterRepository.findByEmailAndYearAndMonth(email,year,month);
     }
 
     @Override
     public int findQuarterCostSum(String email, int year, int quarter) {
-        return monthRepository.findByQuarterCostSum(email, year, quarter);
+        return quarterRepository.findByQuarterCostSum(email, year, quarter);
     }
 
     @Override
-    public int saveSalesMonth(SalesMonthDto dto) {
-        return monthRepository.save(dto);
+    public int saveSalesQuarter(SalesQuarterDto dto) {
+        return quarterRepository.save(dto);
     }
 
     @Override
-    public int deleteSalesMonthUserAll(String email) {
-        return monthRepository.deleteByEmail(email);
+    public int deleteSalesQuarterUserAll(String email) {
+        return quarterRepository.deleteByEmail(email);
     }
 
     @Override
-    public int deleteSalesMonth(String email, int year, int month) {
-        return monthRepository.deleteByEmailAndYearAndMonth(email, year, month);
-    }
-
-    @Override
-    public List<SalesDayEntity> findSalesDayEntityAll() {
-        return dayRepository.findAll();
-    }
-
-    @Override
-    public List<SalesDayEntity> findSalesDayEntityUserAll(String email) {
-        return dayRepository.findByEmail(email);
-    }
-
-    @Override
-    public SalesDayEntity findSalesDayEntity(String email, int year, int month, int day) {
-        return dayRepository.findByEmailAndYearAndMonthAndDay(email, year, month, day);
-    }
-
-    @Override
-    public int saveSalesDayEntity(SalesDayDto dto) {
-        return dayRepository.save(dto);
-    }
-
-    @Override
-    public int deleteSalesDayUserAll(String email) {
-        return dayRepository.deleteByEmail(email);
-    }
-
-    @Override
-    public int deleteSalesDayEntity(String email, int year, int month, int day) {
-        return dayRepository.deleteByEmailAndYearAndMonthAndDay(email, year, month, day);
+    public int deleteSalesQuarter(String email, int year, int month) {
+        return quarterRepository.deleteByEmailAndYearAndMonth(email, year, month);
     }
 }

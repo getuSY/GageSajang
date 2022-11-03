@@ -1,11 +1,9 @@
 package com.ssafy.e205.api.controller;
 
-import com.ssafy.e205.api.dto.SalesDayDto;
-import com.ssafy.e205.api.dto.SalesMonthDto;
+import com.ssafy.e205.api.dto.SalesQuarterDto;
 import com.ssafy.e205.api.service.Sales.SalesService;
 import com.ssafy.e205.api.service.Sales.SalesServiceImpl;
-import com.ssafy.e205.db.entity.SalesDayEntity;
-import com.ssafy.e205.db.entity.SalesMonthEntity;
+import com.ssafy.e205.db.entity.SalesQuarterEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -32,53 +30,30 @@ public class SalesController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
-    @GetMapping("/getSalesDayAll")
-    public ResponseEntity<List<SalesDayEntity>> getSalesDayAll(){
-        return new ResponseEntity<List<SalesDayEntity>>(service.findSalesDayEntityAll(), HttpStatus.OK);
-    }
-    @GetMapping("/getSalesDayUserAll/{email}")
-    public ResponseEntity<List<SalesDayEntity>> getSalesDayUserAll(@PathVariable String email){
-        return new ResponseEntity<List<SalesDayEntity>>(service.findSalesDayEntityUserAll(email), HttpStatus.OK);
-    }
-    @GetMapping("/getSalesDay/{email}/{year}/{month}/{day}")
-    public ResponseEntity<SalesDayEntity> getSalesDayEntity(@PathVariable String email, @PathVariable int year, @PathVariable int month, @PathVariable int day){
-        return new ResponseEntity<SalesDayEntity>(service.findSalesDayEntity(email, year, month, day), HttpStatus.OK);
-    }
-    @PostMapping("/setSalesDay")
-    public ResponseEntity<Integer> setSalesDay(@RequestBody SalesDayDto dto){
-        return new ResponseEntity<Integer>(service.saveSalesDayEntity(dto), HttpStatus.OK);
-    }
-    @DeleteMapping("/deleteSalesDayUserAll/{email}")
-    public ResponseEntity<Integer> deleteSalesDayUserAll(@PathVariable String email){
-        return new ResponseEntity<Integer>(service.deleteSalesDayUserAll(email), HttpStatus.OK);
-    }
-    @DeleteMapping("/deleteSalesDay/{email}/{year}/{month}/{day}")
-    public ResponseEntity<Integer> deleteSalesDayEntity(@PathVariable String email, @PathVariable int year, @PathVariable int month, @PathVariable int day){
-        return new ResponseEntity<Integer>(service.deleteSalesDayEntity(email, year, month, day),HttpStatus.OK);
-    }
 
-    @GetMapping("/getSalesDayAll")
-    public ResponseEntity<List<SalesMonthEntity>> getSalesMonthAll(){
-        return new ResponseEntity<List<SalesMonthEntity>>(service.findSalesMonthAll(), HttpStatus.OK);
+
+    @GetMapping("/getSalesQuarterAll")
+    public ResponseEntity<List<SalesQuarterEntity>> getSalesMonthAll(){
+        return new ResponseEntity<List<SalesQuarterEntity>>(service.findSalesQuarterAll(), HttpStatus.OK);
     }
-    @GetMapping("/getSalesDayUserAll/{email}")
-    public ResponseEntity<List<SalesMonthEntity>> getSalesMonthUserAll(@PathVariable String email){
-        return new ResponseEntity<List<SalesMonthEntity>>(service.findSalesMonthUserAll(email), HttpStatus.OK);
+    @GetMapping("/getSalesQuarterUserAll/{email}")
+    public ResponseEntity<List<SalesQuarterEntity>> getSalesMonthUserAll(@PathVariable String email){
+        return new ResponseEntity<List<SalesQuarterEntity>>(service.findSalesQuarterUserAll(email), HttpStatus.OK);
     }
-    @GetMapping("/getSalesDay/{email}/{year}/{month}")
-    public ResponseEntity<SalesMonthEntity> getSalesMonthEntity(@PathVariable String email, @PathVariable int year, @PathVariable int month){
-        return new ResponseEntity<SalesMonthEntity>(service.findSalesMonthEntity(email, year, month), HttpStatus.OK);
+    @GetMapping("/getSalesQuarter/{email}/{year}/{quarter}")
+    public ResponseEntity<SalesQuarterEntity> getSalesMonthEntity(@PathVariable String email, @PathVariable int year, @PathVariable int month){
+        return new ResponseEntity<SalesQuarterEntity>(service.findSalesQuarterEntity(email, year, month), HttpStatus.OK);
     }
-    @PostMapping("/setSalesDay")
-    public ResponseEntity<Integer> setSalesMonth(@RequestBody SalesMonthDto dto){
-        return new ResponseEntity<Integer>(service.saveSalesMonth(dto), HttpStatus.OK);
+    @PostMapping("/setSalesQuarter")
+    public ResponseEntity<Integer> setSalesMonth(@RequestBody SalesQuarterDto dto){
+        return new ResponseEntity<Integer>(service.saveSalesQuarter(dto), HttpStatus.OK);
     }
-    @DeleteMapping("/deleteSalesDayUserAll/{email}")
+    @DeleteMapping("/deleteSalesQuarterUserAll/{email}")
     public ResponseEntity<Integer> deleteSalesMonthUserAll(@PathVariable String email){
-        return new ResponseEntity<Integer>(service.deleteSalesMonthUserAll(email), HttpStatus.OK);
+        return new ResponseEntity<Integer>(service.deleteSalesQuarterUserAll(email), HttpStatus.OK);
     }
-    @DeleteMapping("/deleteSalesDay/{email}/{year}/{month}")
+    @DeleteMapping("/deleteSalesQuarter/{email}/{year}/{quarter}")
     public ResponseEntity<Integer> deleteSalesMonthEntity(@PathVariable String email, @PathVariable int year, @PathVariable int month){
-        return new ResponseEntity<Integer>(service.deleteSalesMonth(email, year, month),HttpStatus.OK);
+        return new ResponseEntity<Integer>(service.deleteSalesQuarter(email, year, month),HttpStatus.OK);
     }
 }

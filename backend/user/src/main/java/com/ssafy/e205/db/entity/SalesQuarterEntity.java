@@ -7,11 +7,11 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(
-        name = "sales_day"
+        name = "sales_month"
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class SalesDayEntity {
+public class SalesQuarterEntity {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,22 +19,19 @@ public class SalesDayEntity {
 
     @Column(name="email")
     private String email;
-    @Column(name="sales_day")
-    private int salesDay;
-    @Column(name="sales_month")
-    private int salesMonth;
+    @Column(name = "sales_quarter")
+    private int salesQuarter;
     @Column(name="sales_year")
     private int salesYear;
     @Column(name="sales_cost")
     private int salesCost;
 
     @Builder
-    public SalesDayEntity(Long id, String email, int salesCost, int salesMonth, int salesDay, int salesYear){
+    public SalesQuarterEntity(Long id, String email, int salesCost, int salesQuarter, int salesYear){
         this.id = id;
         this.email = email;
         this.salesCost = salesCost;
         this.salesYear = salesYear;
-        this.salesDay = salesDay;
-        this.salesMonth = salesMonth;
+        this.salesQuarter = salesQuarter;
     }
 }
