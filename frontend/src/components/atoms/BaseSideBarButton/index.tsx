@@ -32,8 +32,8 @@ const Wrapper = styled.button<WrapperProps>`
   font-size: 16px;
   border-radius: 15px;
   border: ${({ active }) =>
-    active ? '3px solid #0066ff' : '1px solid darkgray'};
-  color: ${({ active }) => (active ? '#0066ff' : '#000')};
+    active ? '3px solid #001aa4' : '1px solid darkgray'};
+  color: ${({ active }) => (active ? '#001aa4' : '#000')};
   font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
   background: transparent;
@@ -41,7 +41,7 @@ const Wrapper = styled.button<WrapperProps>`
   &:hover {
     cursor: pointer;
     border-radius: 15px;
-    border: 3px solid #0066ff;
+    border: 3px solid #001aa4;
   }
 `;
 

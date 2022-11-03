@@ -19,7 +19,9 @@ const StatusPage = () => {
   const contentList = content.map((e: string, i: number) => ({
     name: e,
     onClick: () => {
-      navigate(`?category=${category}&tab=${i + 1}`, { replace: true });
+      navigate(`?category=${category ? category : 'main'}&tab=${i + 1}`, {
+        replace: true,
+      });
     },
   }));
 
@@ -45,6 +47,7 @@ const StatusPage = () => {
           />
         </BaseSideBar>
         <GeometryMap areas={areas.features} isOpen={sideBarStatus} />
+        {/* <BaseSideBar title={'good'} style={{ width: '1000px' }}></BaseSideBar> */}
       </Wrapper>
     </Transitions>
   );

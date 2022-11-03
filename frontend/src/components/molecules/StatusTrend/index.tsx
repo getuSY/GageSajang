@@ -178,7 +178,7 @@ const Group = styled.div`
   }
 
   & .trend {
-    border: 2px solid #0066ff;
+    border: 2px solid #001aa4;
     border-radius: 10px;
 
     & :hover {
