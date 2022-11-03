@@ -20,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class  AuthController {
 
     private String TEST_TOKEN_SERVER = "";

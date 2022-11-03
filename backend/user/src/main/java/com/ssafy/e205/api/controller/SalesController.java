@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class SalesController {
 
     @Autowired
