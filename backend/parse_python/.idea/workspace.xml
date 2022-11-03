@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="02957e8d-5266-42df-9b81-fa7b164ee3df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/code/simul_dummy_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/simul_dummy_data.py" afterDir="false" />
-    </list>
+    <list default="true" id="02957e8d-5266-42df-9b81-fa7b164ee3df" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +44,7 @@
     <session id="173836706">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
@@ -83,8 +81,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/simul_dummy_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="40" column="48" lean-forward="true" selection-start-line="8" selection-end-line="40" selection-end-column="48" />
+            <state relative-caret-position="245">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
               <folding>
                 <element signature="e#36#55#0" expanded="true" />
               </folding>
@@ -230,7 +228,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15201586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -280,8 +277,8 @@
     <entry file="file://$PROJECT_DIR$/code/simul_groupby_total__dong_name.py" />
     <entry file="file://$PROJECT_DIR$/code/simul_dummy_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="40" column="48" lean-forward="true" selection-start-line="8" selection-end-line="40" selection-end-column="48" />
+        <state relative-caret-position="245">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
           <folding>
             <element signature="e#36#55#0" expanded="true" />
           </folding>
