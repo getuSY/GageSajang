@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(
-        name = "user_server"
+        name = "user"
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -28,7 +28,7 @@ public class UserEntity implements UserDetails {
     private String email;
     @Column(name="nickname")
     private String nickName;
-    @Column(name="password")
+    @Column(name="pw")
     private String pw;
     @Column(name="access_token")
     private String accessToken;
