@@ -2,12 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import ReportIndexItem from '../../atoms/ReportIndexItem';
 import ReportRegionLabel from '../../atoms/ReportRegionLabel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 interface StatusReportIndexProps {
   region?: string;
   content: any;
   category: string;
   tab?: number;
+  icon?: any;
 }
 
 const StatusReportIndex = ({
@@ -15,6 +18,7 @@ const StatusReportIndex = ({
   content,
   category,
   tab,
+  icon,
 }: StatusReportIndexProps) => {
   return (
     <Wrapper>
@@ -27,15 +31,18 @@ const StatusReportIndex = ({
         </div>
       </ReportRegionLabel>
       <div className="label-div">
-        {content.map((e: any, i: number) => (
-          <ReportIndexItem
-            onClick={e.onClick}
-            active={tab === i + 1}
-            style={{ padding: '10px', marginRight: '0.5rem' }}
-          >
-            {e.name}
-          </ReportIndexItem>
-        ))}
+        {content.map((e: any, i: number) => {
+          return (
+            <ReportIndexItem
+              onClick={e.onClick}
+              active={tab === i + 1}
+              style={{ padding: '10px', marginRight: '0.5rem' }}
+              icon={icon[i]}
+            >
+              {e.name}
+            </ReportIndexItem>
+          );
+        })}
       </div>
     </Wrapper>
   );
