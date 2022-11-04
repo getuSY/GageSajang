@@ -12,7 +12,17 @@ import java.util.Optional;
 
 public interface SimulService {
     List<SimulDto> salesListforMaybe(String dongName, String industryName); // 아마사장 매출데이터 리스트 출력
+    List<SimulDto> lifeListforMaybe(String dongName, String industryName); // 아마사장 생활 인구 데이터 리스트 출력
+    List<SimulDto> residentListforMaybe(String dongName, String industryName); // 아마사장 거주 인구 데이터 리스트 출력
+    List<SimulDto> jobListforMaybe(String dongName, String industryName); // 아마사장 직장 인구 데이터 리스트 출력
+    List<SimulDto> countListforMaybe(String dongName, String industryName); // 아마사장 매출 건수 데이터 리스트 출력
+
     List<SimulDto> salesListforAlready(SimulDto dto); // 이미 사장 매출데이터 리스트 출력
+
+    List<SimulDto> lifeListforAlready(SimulDto dto); // 이미 사장 생활 인구 데이터 리스트 출력
+    List<SimulDto> residentListforAlready(SimulDto dto); // 이미 사장 거주 인구 데이터 리스트 출력
+    List<SimulDto> jobListforAlready(SimulDto dto); // 이미 사장 직장 인구 데이터 리스트 출력
+    List<SimulDto> countListforAlready(SimulDto dto); // 이미 사장 매출 건수 데이터 리스트 출력
 
     List<SimulDto> salesListforAlready_Post(SimulDto dto); // 이미 사장 매출데이터 리스트 출력
 }
