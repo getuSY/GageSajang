@@ -1,6 +1,8 @@
 package com.ssafy.e205.api.dto;
 
 import com.ssafy.e205.db.entity.StoreGu;
+import com.ssafy.e205.db.entity.StoreHinGu;
+import com.ssafy.e205.db.repository.StoreHinGuRepository;
 import lombok.*;
 
 @Getter
@@ -15,6 +17,11 @@ public class StoreGuLivingDto {
     int level;
 
     public StoreGuLivingDto(StoreGu storeGu){
+        guName = storeGu.getGuName();
+        living = storeGu.getLiving();
+    }
+
+    public StoreGuLivingDto(StoreHinGu storeGu){
         guName = storeGu.getGuName();
         living = storeGu.getLiving();
     }

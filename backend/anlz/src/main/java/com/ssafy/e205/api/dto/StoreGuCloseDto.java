@@ -1,6 +1,7 @@
 package com.ssafy.e205.api.dto;
 
 import com.ssafy.e205.db.entity.StoreGu;
+import com.ssafy.e205.db.entity.StoreHinGu;
 import lombok.*;
 
 @Getter
@@ -15,6 +16,11 @@ public class StoreGuCloseDto {
     int level;
 
     public StoreGuCloseDto(StoreGu storeGu){
+        guName = storeGu.getGuName();
+        close = storeGu.getClose();
+    }
+
+    public StoreGuCloseDto(StoreHinGu storeGu){
         guName = storeGu.getGuName();
         close = storeGu.getClose();
     }

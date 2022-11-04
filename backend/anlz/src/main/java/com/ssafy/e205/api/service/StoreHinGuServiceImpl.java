@@ -2,7 +2,9 @@ package com.ssafy.e205.api.service;
 
 import com.ssafy.e205.api.dto.*;
 import com.ssafy.e205.db.entity.StoreGu;
+import com.ssafy.e205.db.entity.StoreHinGu;
 import com.ssafy.e205.db.repository.StoreGuRepository;
+import com.ssafy.e205.db.repository.StoreHinGuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -11,26 +13,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StoreGuServiceImpl implements StoreGuService{
+public class StoreHinGuServiceImpl implements StoreHinGuService{
 
     @Autowired
-    StoreGuRepository repository;
+    StoreHinGuRepository repository;
 
-    @Cacheable(value = "guLiving")
+    @Cacheable(value = "guLivingHin")
     @Override
     public List<StoreGuLivingDto> findAllLiving() {
-        List<StoreGu> list = repository.findAll();
+        List<StoreHinGu> list = repository.findAll();
 
         List<StoreGuLivingDto> result = new ArrayList<>();
-        for(StoreGu storeGu : list){
+        for(StoreHinGu storeGu : list){
             int level = 0;
-            if(storeGu.getLiving()<40000000){
+            if(storeGu.getLiving()<100000000){
                 level = 1;
-            } else if(storeGu.getLiving()<50000000){
+            } else if(storeGu.getLiving()<150000000){
                 level = 2;
-            } else if(storeGu.getLiving()<60000000){
+            } else if(storeGu.getLiving()<200000000){
                 level = 3;
-            } else if(storeGu.getLiving()<70000000){
+            } else if(storeGu.getLiving()<250000000){
                 level = 4;
             } else {
                 level = 5;
@@ -41,21 +43,21 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guResident")
+    @Cacheable(value = "guResidentHin")
     @Override
     public List<StoreGuResidentDto> findAllResident() {
-        List<StoreGu> list = repository.findAll();
+        List<StoreHinGu> list = repository.findAll();
 
         List<StoreGuResidentDto> result = new ArrayList<>();
-        for(StoreGu storeGu : list){
+        for(StoreHinGu storeGu : list){
             int level = 0;
-            if(storeGu.getResident()<100000){
+            if(storeGu.getResident()<600000){
                 level = 1;
-            } else if(storeGu.getResident()<150000){
+            } else if(storeGu.getResident()<800000){
                 level = 2;
-            } else if(storeGu.getResident()<200000){
+            } else if(storeGu.getResident()<900000){
                 level = 3;
-            } else if(storeGu.getResident()<250000){
+            } else if(storeGu.getResident()<1000000){
                 level = 4;
             } else {
                 level = 5;
@@ -66,21 +68,21 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guStore")
+    @Cacheable(value = "guStoreHin")
     @Override
     public List<StoreGuStoreDto> findAllStore() {
-        List<StoreGu> list = repository.findAll();
+        List<StoreHinGu> list = repository.findAll();
 
         List<StoreGuStoreDto> result = new ArrayList<>();
-        for(StoreGu storeGu : list){
+        for(StoreHinGu storeGu : list){
             int level = 0;
-            if(storeGu.getStore()<10000){
+            if(storeGu.getStore()<30000){
                 level = 1;
-            } else if(storeGu.getStore()<15000){
-                level = 2;
-            } else if(storeGu.getStore()<20000){
-                level = 3;
             } else if(storeGu.getStore()<40000){
+                level = 2;
+            } else if(storeGu.getStore()<50000){
+                level = 3;
+            } else if(storeGu.getStore()<60000){
                 level = 4;
             } else {
                 level = 5;
@@ -91,21 +93,21 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guOpen")
+    @Cacheable(value = "guOpenHin")
     @Override
     public List<StoreGuOpenDto> findAllOpen() {
-        List<StoreGu> list = repository.findAll();
+        List<StoreHinGu> list = repository.findAll();
 
         List<StoreGuOpenDto> result = new ArrayList<>();
-        for(StoreGu storeGu : list){
+        for(StoreHinGu storeGu : list){
             int level = 0;
-            if(storeGu.getOpen()<7){
+            if(storeGu.getOpen()<8){
                 level = 1;
             } else if(storeGu.getOpen()<9){
                 level = 2;
-            } else if(storeGu.getOpen()<11){
+            } else if(storeGu.getOpen()<10){
                 level = 3;
-            } else if(storeGu.getOpen()<13){
+            } else if(storeGu.getOpen()<11){
                 level = 4;
             } else {
                 level = 5;
@@ -116,21 +118,21 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guClose")
+    @Cacheable(value = "guCloseHin")
     @Override
     public List<StoreGuCloseDto> findAllClose() {
-        List<StoreGu> list = repository.findAll();
+        List<StoreHinGu> list = repository.findAll();
 
         List<StoreGuCloseDto> result = new ArrayList<>();
-        for(StoreGu storeGu : list){
+        for(StoreHinGu storeGu : list){
             int level = 0;
-            if(storeGu.getClose()<9){
+            if(storeGu.getClose()<8){
                 level = 1;
-            } else if(storeGu.getClose()<10){
+            } else if(storeGu.getClose()<9){
                 level = 2;
-            } else if(storeGu.getClose()<11){
+            } else if(storeGu.getClose()<10){
                 level = 3;
-            } else if(storeGu.getClose()<12){
+            } else if(storeGu.getClose()<11){
                 level = 4;
             } else {
                 level = 5;
@@ -141,26 +143,26 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guSales")
+    @Cacheable(value = "guSalesHin")
     @Override
-    public List<StoreGuSalesDto> findAllSales() {
-        List<StoreGu> list = repository.findAll();
+    public List<StoreHinGuSalesDto> findAllSales() {
+        List<StoreHinGu> list = repository.findAll();
 
-        List<StoreGuSalesDto> result = new ArrayList<>();
-        for(StoreGu storeGu : list){
+        List<StoreHinGuSalesDto> result = new ArrayList<>();
+        for(StoreHinGu storeGu : list){
             int level = 0;
-            if(storeGu.getSales()<10000000){
+            if(storeGu.getSales()<12000000){
                 level = 1;
-            } else if(storeGu.getSales()<13000000){
+            } else if(storeGu.getSales()<14000000){
                 level = 2;
-            } else if(storeGu.getSales()<18000000){
+            } else if(storeGu.getSales()<16000000){
                 level = 3;
             } else if(storeGu.getSales()<20000000){
                 level = 4;
             } else {
                 level = 5;
             }
-            result.add(new StoreGuSalesDto(storeGu.getGuName(), storeGu.getSales(), level));
+            result.add(new StoreHinGuSalesDto(storeGu.getGuName(), storeGu.getSales(), level));
         }
 
         return result;
