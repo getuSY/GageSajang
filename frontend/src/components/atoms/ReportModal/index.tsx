@@ -1,48 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ReportModalProps {
-  open?: boolean;
+  isOpen?: boolean;
   style?: object;
   children?: React.ReactNode;
   setStatus?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ReportModal = ({
-  open,
+  isOpen,
   style,
-  setStatus,
   children,
+  setIsOpen,
 }: ReportModalProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (setStatus) {
-      setStatus(isOpen);
-    }
-  }, [isOpen]);
-  useEffect(() => {
-    if (open) {
-      setIsOpen(true);
-    }
-  }, [open]);
-
   return (
     <Wrapper isOpen={isOpen} style={style}>
-      <FontAwesomeIcon icon={faXmark} className="close-icon"></FontAwesomeIcon>
+      <FontAwesomeIcon
+        // close 버튼
+        icon={faXmark}
+        className="close-icon"
+        onClick={() => (setIsOpen ? setIsOpen(false) : null)}
+      ></FontAwesomeIcon>
       {children}
     </Wrapper>
   );
 };
 
 interface WrapperProps {
-  isOpen: boolean;
+  isOpen?: boolean;
 }
 
 const Wrapper = styled.div<WrapperProps>`
-  display: flex;
+  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   background: #ffffff;
   flex-direction: column;
   width: 1000px;
@@ -59,9 +52,7 @@ const Wrapper = styled.div<WrapperProps>`
     position: absolute;
     right: 1.5rem;
     top: 15px;
-    /* font-size: 2rem; */
     cursor: pointer;
-    /* color: ; */
     width: 2rem;
     height: 2rem;
 

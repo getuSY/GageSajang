@@ -28,39 +28,9 @@ const GeometryMap = ({
   const pathGenerator = geoPath().projection(projection);
 
   const onClick = (d: any) => {
-    // alert(`${d.properties.SIG_KOR_NM}`);
-    // navigate(
-    //   `?category=${
-    //     params.get('category') ? params.get('category') : 'main'
-    //   }&tab=${params.get('tab') ? params.get('tab') : '1'}&region=${
-    //     d.properties.SIG_ENG_NM
-    //   }`,
-    //   { replace: true }
-    // );
     onClickRegionHandler(d.properties.SIG_KOR_NM);
   };
 
-  // const countries = mapData.map((d: any, i) => (
-  //   <>
-  //     <path
-  //       key={'path' + i}
-  //       d={pathGenerator(d)!}
-  //       className={`path-gu-1 path-gu-${d.properties.SIG_ENG_NM} color-${
-  //         i % 6
-  //       }`}
-  //       onClick={() => onClick(d)}
-  //     />
-  //     <text
-  //       key={`path${i}text`}
-  //       transform={`translate(${pathGenerator.centroid(d)})`}
-  //       style={{ textAnchor: 'middle', top: '10px' }}
-  //       y={d.properties.y_offset ? d.properties.y_offset : ''}
-  //       x={d.properties.x_offset ? d.properties.x_offset : ''}
-  //     >
-  //       {d.properties.SIG_KOR_NM}
-  //     </text>
-  //   </>
-  // ));
   const countries = mapData.map((d: any, i) => (
     <path
       key={'path' + i}

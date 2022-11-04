@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import ReportModal from '../../atoms/ReportModal';
 import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 interface StatusReportProps {
   region?: string;
@@ -12,6 +10,8 @@ interface StatusReportProps {
   category: string;
   tab: number;
   icon?: any;
+  isOpen?: boolean;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const StatusReport = ({
@@ -20,6 +20,8 @@ const StatusReport = ({
   category,
   tab,
   icon,
+  isOpen,
+  setIsOpen,
 }: StatusReportProps) => {
   const [title, setTitle] = useState({
     name: content[0].name,
@@ -33,15 +35,23 @@ const StatusReport = ({
     });
   }, [tab]);
   return (
-    <ReportModal>
+    <ReportModal
+      // 상세 페이지, 모달 + close 버튼
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+    >
       <StatusReportIndex
+        // 상세페이지 상단 버튼들
         region={region}
         content={content}
         category={category}
         tab={tab}
         icon={icon}
       ></StatusReportIndex>
-      <StatusReportTitle title={title} />
+      <StatusReportTitle
+        // 상세 페이지 내용
+        title={title}
+      />
     </ReportModal>
   );
 };

@@ -28,8 +28,9 @@ const icons = [
 
 const StatusPage = () => {
   const [sideBarStatus, setSideBarStatus] = useState<boolean>(false);
-  const [category, setCategory] = useState<string>('main');
-  const [tab, setTab] = useState<number>(1);
+  const [reportModal, setReportModal] = useState<boolean>(false); // 분석 상세 모달 열고 닫기
+  const [category, setCategory] = useState<string>('main'); // 카테고리 : 상권 / 상권 배후지
+  const [tab, setTab] = useState<number>(1); // category별 버튼, 순서 : content
   const [region, setRegion] = useState<string>(''); // 현재 선택한 구 이름
 
   const contentList = content.map((e: string, i: number) => ({
@@ -44,13 +45,17 @@ const StatusPage = () => {
 
   const onClickRegionHandler = (region: string) => {
     setRegion(region);
+    setReportModal(true);
     console.log(region);
+    console.log(category);
+    console.log(tab + 1);
   };
 
   return (
     <Transitions>
       <Wrapper>
         <BaseSideBar
+          // 왼쪽 사이드 바, 코드 패턴 수정 예정
           title="상권 현황"
           open={true}
           statusmark={true}
@@ -71,11 +76,15 @@ const StatusPage = () => {
           onClickRegionHandler={onClickRegionHandler}
         />
         <StatusReport
+          // 상세 페이지, 모달 + close 버튼
+          // isOpen={false}
           icon={icons}
           region={region}
           content={contentList}
           category={category!}
           tab={tab}
+          isOpen={reportModal}
+          setIsOpen={setReportModal}
         ></StatusReport>
       </Wrapper>
     </Transitions>
