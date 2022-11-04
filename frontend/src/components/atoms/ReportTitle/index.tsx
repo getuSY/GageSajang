@@ -9,17 +9,18 @@ import {
 interface ReportTitleProps {
   style?: object;
   icon?: IconDefinition;
-  children?: React.ReactNode;
+  title: any;
 }
 
-const ReportTitle = ({ style, icon, children }: ReportTitleProps) => {
+const ReportTitle = ({ style, icon, title }: ReportTitleProps) => {
+  console.log(title);
   return (
     <Wrapper style={style}>
       <FontAwesomeIcon
-        icon={icon ? icon : faCashRegister}
+        icon={title.icon}
         className="report-title-icon"
       ></FontAwesomeIcon>
-      <div>{children}</div>
+      <div>{title.name}</div>
     </Wrapper>
   );
 };

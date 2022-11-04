@@ -8,5 +8,5 @@ export default {
 } as ComponentMeta<typeof ReportTitle>;
 
 export const reportTitle: ComponentStory<typeof ReportTitle> = () => (
-  <ReportTitle>유동인구</ReportTitle>
+  <ReportTitle title={{}}></ReportTitle>
 );
