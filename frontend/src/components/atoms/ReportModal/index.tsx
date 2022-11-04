@@ -44,6 +44,7 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   display: flex;
   background: #ffffff;
+  flex-direction: column;
   width: 1000px;
   height: calc(100% - 100px);
   position: absolute;

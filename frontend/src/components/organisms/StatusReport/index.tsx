@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReportModal from '../../atoms/ReportModal';
 import StatusReportIndex from '../../molecules/StatusReportIndex';
+import StatusReportTitle from '../../molecules/StatusReportTitle';
 
 interface StatusReportProps {
   region?: string;
@@ -24,6 +25,7 @@ const StatusReport = ({
         category={category}
         tab={tab}
       ></StatusReportIndex>
+      <StatusReportTitle></StatusReportTitle>
     </ReportModal>
   );
 };

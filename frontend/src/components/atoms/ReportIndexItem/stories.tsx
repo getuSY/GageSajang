@@ -8,5 +8,5 @@ export default {
 } as ComponentMeta<typeof ReportIndexItem>;
 
 export const reportIndexItem: ComponentStory<typeof ReportIndexItem> = () => (
-  <ReportIndexItem active={true} />
+  <ReportIndexItem active={false}>거주인구</ReportIndexItem>
 );
