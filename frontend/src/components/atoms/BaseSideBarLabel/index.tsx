@@ -26,15 +26,15 @@ const Wrapper = styled.label<WrapperProps>`
   font-size: 1.3rem;
   padding: 0rem 0rem 1.2rem 0rem;
   width: 100px;
-  color: ${({ active }) => (active ? '#001aa4' : 'darkgray')};
-  border-bottom: ${({ active }) =>
-    active ? '3px solid #001aa4' : '3px solid darkgray'};
+  color: ${({ active, theme }) => (active ? theme.darkColor : 'darkgray')};
+  border-bottom: ${({ active, theme }) =>
+    active ? `3px solid ${theme.darkColor}` : '3px solid darkgray'};
   text-align: center;
   cursor: pointer;
 
   &:hover {
-    color: #001aa4;
-    border-bottom: 3px solid #001aa4;
+    color: ${({ theme }) => theme.darkColor};
+    border-bottom: ${({ theme }) => `3px solid ${theme.darkColor}`};
   }
 `;
 

@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #001aa4;
+  background: ${({ theme }) => theme.darkColor};
   font-family: 'Pretendard-Regular';
   font-size: 1.2rem;
   color: white;

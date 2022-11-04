@@ -67,9 +67,8 @@ const Wrapper = styled.div<WrapperProps>`
 
     &:hover {
       color: white;
-      /* border: 1px solid #001aa4; */
       border-radius: 5px;
-      background-color: #001aa4;
+      background-color: ${({ theme }) => theme.darkColor};
     }
   }
 `;

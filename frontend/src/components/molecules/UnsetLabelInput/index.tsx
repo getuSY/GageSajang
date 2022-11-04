@@ -32,8 +32,6 @@ const UnsetLabelInput = ({
   return (
     <Wrapper>
       <LinedBox style={style}>
-        <Label>{label}</Label>
-        <UnsetInput type={type} placeholder={placeholder} onChange={onChange} />
         <Label htmlFor={id}>{label}</Label>
         <UnsetInput
           type={type}

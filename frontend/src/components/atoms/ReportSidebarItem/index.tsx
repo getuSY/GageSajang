@@ -39,10 +39,11 @@ const Wrapper = styled.div<WrapperProps>`
   /* font-weight: ${({ select }) => (select ? 900 : 500)}; */
   cursor: ${({ select }) => (select ? '' : 'pointer')};
   &:hover {
-    background: #001aa4;
+    background: ${({ theme }) => theme.darkColor};
   }
   font-size: 1.3rem;
-  background: ${({ select }) => (select ? '#001AA4' : 'transparent')};
+  background: ${({ select, theme }) =>
+    select ? theme.darkColor : 'transparent'};
 
   /* border-bottom: ${({ select }) =>
     select ? '3px solid #7579E7' : '1px solid #797979'}; */

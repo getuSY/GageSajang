@@ -1,7 +1,6 @@
 import client from './client';
 import { User, UserModel } from '../models/user';
 
-<<<<<<< HEAD
 export const getUser = (): User => ({
   username: '홍사장',
   userId: 'gagesajang@gmail.com',
@@ -15,7 +14,6 @@ export const getUser = (): User => ({
     area: 20.4,
   },
 });
-=======
 export const helloUser = async (name: string) => {
   const { data } = await client.get(`user/hello?name=${name}`);
 
@@ -33,4 +31,3 @@ export const userLogin = async (params: UserModel) => {
 
   return data;
 };
->>>>>>> feature/front/user_signup

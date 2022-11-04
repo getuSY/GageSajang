@@ -86,15 +86,15 @@ const SubButton = styled.button<SubButtonProps>`
   height: 2.5rem;
   font-size: 0.9rem;
   border-radius: 8px;
-  border: ${({ active }) =>
-    active ? '2px solid #001aa4' : '1px solid darkgray'};
-  color: ${({ active }) => (active ? '#001aa4' : '#000')};
+  border: ${({ active, theme }) =>
+    active ? `2px solid ${theme.darkColor}` : '1px solid darkgray'};
+  color: ${({ active, theme }) => (active ? theme.darkColor : '#000')};
   font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
   background: transparent;
   &:hover {
     cursor: pointer;
-    border: 2px solid #001aa4;
+    border: ${({ theme }) => `2px solid ${theme.darkColor}`};
   }
 `;
 

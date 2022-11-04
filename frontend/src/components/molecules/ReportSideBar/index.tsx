@@ -60,7 +60,7 @@ const ReportSideBar = () => {
 
 const Wrapper = styled.div`
   height: 100%;
-  background: #0066ff;
+  background: ${({ theme }) => theme.lightColor};
   padding: 20px;
   font-size: 1.4rem;
   border-radius: 20px;
