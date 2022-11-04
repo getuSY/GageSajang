@@ -116,6 +116,8 @@ public class  AuthController {
     @PostMapping("/signup")
     public void signup(@RequestBody UserDto userDto){
         System.out.println("SignUp : " + userDto);
+        userDto.setAuth("user");
+        userDto.setState(1);
         userService.save(userDto);
     }
 
