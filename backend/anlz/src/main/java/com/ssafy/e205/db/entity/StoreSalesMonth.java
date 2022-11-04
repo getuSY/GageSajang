@@ -16,8 +16,7 @@ public class StoreSalesMonth {
     String _id;
 
     String guName;
-    String quCode;
-    String CS;
+    String cs;
     int sales;
 
 }

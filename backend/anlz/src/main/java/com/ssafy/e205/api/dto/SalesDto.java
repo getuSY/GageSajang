@@ -22,9 +22,9 @@ public class SalesDto {
     public SalesDto(List<StoreSalesMonth> storeSalesMonth, StoreSalesVarious storeSalesVarious){
         cs = new int[3];
         for(int i=0; i<storeSalesMonth.size(); i++){
-            if(storeSalesMonth.get(i).getCS().equals("CS1")){
+            if(storeSalesMonth.get(i).getCs().equals("CS1")){
                 cs[0] = storeSalesMonth.get(i).getSales();
-            } else if(storeSalesMonth.get(i).getCS().equals("CS2")){
+            } else if(storeSalesMonth.get(i).getCs().equals("CS2")){
                 cs[1] = storeSalesMonth.get(i).getSales();
             } else{
                 cs[2] = storeSalesMonth.get(i).getSales();
