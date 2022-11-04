@@ -101,6 +101,12 @@ export const CustomThemeProvider = ({ theme }: CustomThemeProviderProps) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  background-image: url('/assets/img/bg-hero-tiles.png');
+  background-size: 100%;
+  background-position-y: -30%;
+  background-position-x: center;
+  background-size: 2560px 1836px;
+`;
 
 export default App;
