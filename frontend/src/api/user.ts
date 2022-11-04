@@ -1,13 +1,20 @@
 import client from './client';
-import { User, SignUpParams } from '../models/user';
+import { User, UserModel } from '../models/user';
 
-export const getUser = (): User => ({ username: '홍사장' });
+export const helloUser = async (name: string) => {
+  const { data } = await client.get(`user/hello?name=${name}`);
 
-export const helloUser = (name: string) =>
-  client.get(`user/hello?name=${name}`);
+  return data;
+};
 
-export const signUp = (params: SignUpParams) => {
-  const response = client.post('user/signup', params);
+export const userSignUp = async (params: UserModel) => {
+  const { data } = await client.post('user/signup', params);
 
-  return response;
+  return data;
+};
+
+export const userLogin = async (params: UserModel) => {
+  const { data } = await client.post('user/login', params);
+
+  return data;
 };

@@ -1,14 +1,16 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { signUp, helloUser, getUser } from '../api/user';
-import { SignUpParams } from '../models/user';
+import { userSignUp, helloUser, userLogin } from '../api/user';
+import { UserModel } from '../models/user';
 
 export const useHelloUser = (username: string) =>
   useQuery({ queryKey: ['user', 'hello'], queryFn: () => helloUser(username) });
 
-export const useCreateUser = () =>
+export const useUserSignUp = () =>
   useMutation({
-    mutationFn: (signUpParams: SignUpParams) => signUp(signUpParams),
+    mutationFn: (signUpParams: UserModel) => userSignUp(signUpParams),
   });
 
-export const useFetchUser = () =>
-  useQuery({ queryKey: ['user', 'fetchUser'], queryFn: () => getUser() });
+export const useUserLogin = () =>
+  useMutation({
+    mutationFn: (loginParams: UserModel) => userLogin(loginParams),
+  });

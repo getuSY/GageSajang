@@ -118,6 +118,7 @@ const BorderWrapper = styled.div`
 `;
 
 const BorderButton = styled.button`
+  cursor: pointer;
   position: absolute;
   font-size: inherit;
   left: 0;

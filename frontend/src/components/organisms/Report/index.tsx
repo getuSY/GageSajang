@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ReportTitle from '../../atoms/ReportTitle';
 import ReportSideBar from '../../molecules/ReportSideBar';
 import ReportContent from '../../atoms/ReportContent';
-import ReportItem from '../../molecules/ReportItem';
 
 const Report = () => {
   return (
@@ -32,7 +31,7 @@ const Wrapper = styled.div`
   flex-grow: 1;
   gap: 10px;
   display: flex;
-  padding-right: 10px;
+  padding: 0 10px;
   height: 100%;
 
   & .report-content {

@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReportTitle from '../../atoms/ReportTitle';
 import Report from '../../organisms/Report';
 
 const AnalysisResultPage = () => {
   return (
     <Wrapper>
-      {/* <ReportTitle>🏪 상권 현황</ReportTitle> */}
       <Report />
     </Wrapper>
   );

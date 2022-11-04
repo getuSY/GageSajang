@@ -2,7 +2,7 @@ export interface User {
   username: string;
 }
 
-export interface SignUpParams {
+export interface UserModel {
   accessToken: string;
   auth: string;
   email: string;

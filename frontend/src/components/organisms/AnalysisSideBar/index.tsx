@@ -9,14 +9,12 @@ import AnalysisSubButtons from '../../molecules/AnalysisSubButtons';
 import { useNavigate } from 'react-router-dom';
 
 interface AnalysisSideBarProps {
-  map: any;
   inputValue?: string;
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const AnalysisSideBar = ({
-  map,
   onChange,
   inputValue,
   clearValue,
@@ -63,6 +61,13 @@ const AnalysisSideBar = ({
     ],
     [mainCategory]
   );
+  const onClickAnlzButton = () => {
+    const jobCode = `CS${mainCategory}000${subCategory
+      .toString()
+      .padStart(2, '0')}`;
+    console.log(jobCode);
+    navigate(`/loading?nextTo=/analysis/result`);
+  };
 
   useEffect(() => {
     setIsOpen(inputValue ? true : false);
@@ -95,7 +100,7 @@ const AnalysisSideBar = ({
         type="blur"
         style={{ width: '100%', fontSize: '1.4rem', fontWeight: '900' }}
         disabled={!(mainCategory && subCategory && inputValue)}
-        onClick={() => navigate(`/loading?nextTo=/analysis/result`)}
+        onClick={onClickAnlzButton}
       >
         상권 분석하러 가기
       </Button>

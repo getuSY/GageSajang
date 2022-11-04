@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import UnsetLabelInput from '../../molecules/UnsetLabelInput';
 import Button from '../../atoms/Button/index';
 import { useNavigate } from 'react-router-dom';
-import { useCreateUser } from '../../../hooks/user';
-import { SignUpParams } from '../../../models/user';
+import { useUserSignUp } from '../../../hooks/user';
+import { UserModel } from '../../../models/user';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -14,24 +14,37 @@ const RegisterPage = () => {
   // const mutation = useMutation({
   //   mutationFn: (signUpParams: SignUpParams) => signUp(signUpParams),
   // });
-  const mutation = useCreateUser();
-  const [signUpInputs, setSignUpInputs] = useState<SignUpParams>({
-    accessToken: 'string',
-    auth: 'string',
+  const mutation = useUserSignUp();
+  const { isLoading, isSuccess, isError, error } = mutation;
+  const [signUpInputs, setSignUpInputs] = useState<UserModel>({
+    accessToken: 'string', // 고정
+    auth: 'user', // 고정
+    id: 0, // 고정
+    refreshToken: 'string', // 고정
+    state: 0, // 고정
+    type: 'local', // 고정
     email: 'string',
-    id: 0,
     nickName: 'string',
     pw: 'string',
-    refreshToken: 'string',
-    state: 0,
-    type: 'string',
   });
 
-  // useEffect(() => {
-  //   console.log('loading', mutation.isLoading);
-  //   console.log('error', mutation.isError);
-  //   console.log('success', mutation.isSuccess);
-  // }, [mutation]);
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSignUpInputs({
+      ...signUpInputs,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const onClickHandler = () => {
+    mutation.mutate(signUpInputs);
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      alert('회원가입 완료!');
+      navigate('/');
+    }
+  }, [isSuccess]);
 
   return (
     <Wrapper>
@@ -39,30 +52,32 @@ const RegisterPage = () => {
       <RegisterBox>
         <UnsetLabelInput
           type="email"
+          id="email"
           label="ID(E-mail)"
           placeholder="gagesajang@email.com"
+          onChange={onChangeHandler}
         />
         <UnsetLabelInput
           type="password"
+          id="pw"
           label="PASSWORD"
           placeholder="숫자, 영어, 특수문자 포함 9~15자"
+          onChange={onChangeHandler}
         />
         <UnsetLabelInput
           type="password"
+          id="pwconfirm"
           label="PASSWORD CONFIRM"
           placeholder="위에 입력한 비밀번호와 동일하게 입력"
         />
         <UnsetLabelInput
           type="text"
-          label="NAME"
+          id="nickName"
+          label="NICKNAME"
           placeholder="한글 2~10자, 영어 3~15자, 특수문자 불포함"
+          onChange={onChangeHandler}
         />
-        <Button
-          type="main"
-          onClick={() => {
-            mutation.mutate(signUpInputs);
-          }}
-        >
+        <Button type="main" onClick={onClickHandler}>
           회원가입
         </Button>
       </RegisterBox>
