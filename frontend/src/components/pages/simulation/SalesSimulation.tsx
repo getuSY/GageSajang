@@ -1,31 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import RoundBox from '../../atoms/RoundBox/index';
 import Button from '../../atoms/Button/index';
 import LineChart from '../../atoms/LineChart/index';
 
+// 시뮬레이션 페이지 안에 들어갈 시뮬레이션 그래프 컴포넌트입니다.
+// 임시로 시뮬레이션 pages 안에 만들어둠!!
+// 나중에 그래프 하나씩 채워넣고 나서 제자리에 이사시켜줄 예정!!
+
 interface SalesSimulationProps {}
 
 const SalesSimulation = ({}: SalesSimulationProps) => {
+  let [open, setOpen] = useState(false);
+  const showGraph = () => {
+    setOpen(true);
+  };
+  const hideGraph = () => {
+    setOpen(false);
+  };
   return (
     <Wrapper>
-      <RoundBox style={roundStyle}>
-        <TitleDiv>
-          <Button type="main">3개월 후 예측</Button>
-          <TitleMsg>
-            시뮬레이션 결과 : 3개월 후 2023년 2분기 매출 예측 결과는
-            2145만원입니다.
-          </TitleMsg>
-          <img
-            src="/assets/icons/quit.png"
-            alt="exit"
-            width="20px"
-            height="20px"
-            color="green"
-          />
-        </TitleDiv>
-        <LineChart data={graphData} style={graphStyle} />
-      </RoundBox>
+      {open === true && (
+        <RoundBox style={roundStyle}>
+          <TitleDiv>
+            <Button type="main">3개월 후 예측</Button>
+            <TitleMsg>
+              시뮬레이션 결과 : 3개월 후 2023년 2분기 매출 예측 결과는
+              2145만원입니다.
+            </TitleMsg>
+            <img
+              src="/assets/icons/quit.png"
+              alt="exit"
+              width="20px"
+              height="20px"
+              color="green"
+              onClick={hideGraph}
+            />
+          </TitleDiv>
+          <LineChart data={graphData} style={graphStyle} />
+        </RoundBox>
+      )}
+      {open === false && (
+        <RoundBox style={{ width: '1200px', height: '80px' }}>
+          <TitleDiv
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            접혀 있는 그래프 컴포넌트입니다
+            <OpenBtn onClick={showGraph}></OpenBtn>
+          </TitleDiv>
+        </RoundBox>
+      )}
     </Wrapper>
   );
 };
@@ -100,5 +128,13 @@ const graphStyle = {
   width: '1000px',
   height: '500px',
 };
+
+const OpenBtn = styled.div`
+  background-color: black;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+`;
 
 export default SalesSimulation;
