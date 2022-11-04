@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { userInfo } from 'os';
+import { number } from 'prop-types';
 import { User } from '../../models/user';
 
 interface UserState {
@@ -7,7 +9,17 @@ interface UserState {
 
 const initialState: UserState = {
   userInfo: {
-    username: 'Hong',
+    username: '',
+    userId: '',
+    password: '',
+    store: {
+      name: '',
+      address: '',
+      cs: '',
+      quarter: 0,
+      clerk: 0,
+      area: 0,
+    },
   },
 };
 
@@ -18,9 +30,10 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.userInfo = null;
     },
+    login: () => {},
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, login } = userSlice.actions;
 
 export default userSlice.reducer;

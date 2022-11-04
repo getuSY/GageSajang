@@ -7,6 +7,7 @@ import { LabelInputContent } from '../../../models/common';
 interface UnsetLabelInputProps extends LabelInputContent {
   type: 'text' | 'email' | 'password' | 'date' | 'number';
   style?: object;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const LinedBox = styled.div`
@@ -24,12 +25,13 @@ const UnsetLabelInput = ({
   label,
   placeholder,
   style,
+  onChange,
 }: UnsetLabelInputProps) => {
   return (
     <Wrapper>
       <LinedBox style={style}>
         <Label>{label}</Label>
-        <UnsetInput type={type} placeholder={placeholder} />
+        <UnsetInput type={type} placeholder={placeholder} onChange={onChange} />
       </LinedBox>
     </Wrapper>
   );

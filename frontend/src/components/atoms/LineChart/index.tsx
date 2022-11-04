@@ -8,11 +8,12 @@ Chart.register(...registerables);
 interface LineChartProps {
   //   options: ChartOptions<'line'>;
   data: ChartData<'line'>;
+  style?: object;
 }
 
-const LineChart = ({ data }: LineChartProps) => {
+const LineChart = ({ data, style }: LineChartProps) => {
   return (
-    <Wrapper>
+    <Wrapper style={style}>
       <Line data={data} />
     </Wrapper>
   );

@@ -6,15 +6,23 @@ export interface UnsetInputProps {
   style?: object;
   type?: 'text' | 'email' | 'password' | 'number' | 'date';
   readonly value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const UnsetInput = ({ type, placeholder, style, value }: UnsetInputProps) => {
+const UnsetInput = ({
+  type,
+  placeholder,
+  style,
+  value,
+  onChange,
+}: UnsetInputProps) => {
   return (
     <StyledInput
       type={type}
       placeholder={placeholder}
       style={style}
       value={value}
+      onChange={onChange}
     />
   );
 };

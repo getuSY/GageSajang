@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import UnsetLabelInput from '../../molecules/UnsetLabelInput/index';
 import Button from '../../atoms/Button/index';
@@ -7,16 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 interface LoginBoxProps {}
 
-const flexStyle: object = {
-  margin: '2rem',
-};
-
-const buttonStyle = {
-  width: '100px',
-  height: '40px',
-};
-
 const LoginBox = ({}: LoginBoxProps) => {
+  // let [ userId, setUserId ] = useState("")
+  // let [ password, setPassword ] = useState("")
   const navigate = useNavigate();
   const toRegister = () => {
     navigate('/user/register');
@@ -79,6 +72,15 @@ const ButtonBox = styled.div`
 
 const lineStyle = {
   width: '350px',
+};
+
+const flexStyle: object = {
+  margin: '2rem',
+};
+
+const buttonStyle = {
+  width: '100px',
+  height: '40px',
 };
 
 export default LoginBox;
