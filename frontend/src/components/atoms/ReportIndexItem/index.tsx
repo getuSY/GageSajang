@@ -10,24 +10,40 @@ interface ReportIndexProps {
   style?: object;
   icon?: IconDefinition;
   children?: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLLabelElement>;
+  active: boolean;
 }
 
-const ReportIndexItem = ({ icon, style, children }: ReportIndexProps) => {
+const ReportIndexItem = ({
+  icon,
+  style,
+  children,
+  onClick,
+  active,
+}: ReportIndexProps) => {
   return (
-    <Wrapper style={style}>
+    <Wrapper style={style} onClick={onClick} active={active}>
       <FontAwesomeIcon
         icon={icon ? icon : faCashRegister}
         className="index-icon"
       ></FontAwesomeIcon>
-      유동인구
+      {children}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+interface WrapperProps {
+  active: boolean;
+}
+
+const Wrapper = styled.label<WrapperProps>`
   font-size: 1.1rem;
   letter-spacing: 0.5px;
   font-family: 'Pretendard-Regular';
+  cursor: pointer;
+  color: ${({ active }) => (active ? 'white' : 'darkgray')};
+  background-color: ${({ active }) => (active ? '#001aa4' : '')};
+  border-radius: ${({ active }) => (active ? '5px' : '')};
   & .index-icon {
     margin-right: 10px;
   }

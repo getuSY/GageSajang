@@ -21,10 +21,12 @@ const ReportRegionLabel = ({ children, style }: ReportRegionLabelProps) => {
 };
 
 const Wrapper = styled.label`
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
   font-family: 'Pretendard-Regular';
   font-weight: 700;
-  width: 130px;
+  width: 14rem;
   & .region-icon {
     margin-right: 10px;
   }

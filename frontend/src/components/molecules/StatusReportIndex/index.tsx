@@ -7,37 +7,36 @@ interface StatusReportIndexProps {
   region?: string;
   content: any;
   category: string;
-  onClickLabelHandler: any;
   tab?: number;
 }
-
-const statusList = [
-  { name: 'main', content: '상권' },
-  { name: 'sub', content: '상권 배후지' },
-];
 
 const StatusReportIndex = ({
   region,
   content,
   category,
-  onClickLabelHandler,
   tab,
 }: StatusReportIndexProps) => {
   return (
     <Wrapper>
-      <ReportRegionLabel style={{}}>{region}</ReportRegionLabel>
+      <ReportRegionLabel>
+        <div className="region-label-div">
+          <span className="region-label">{region}</span>
+          <span className="label-category">
+            {category === 'sub' ? '상권 배후지' : '상권'}
+          </span>
+        </div>
+      </ReportRegionLabel>
       <div className="label-div">
-        {statusList.map((e, i) => (
+        {content.map((e: any, i: number) => (
           <ReportIndexItem
-            style={{ width: '50%' }}
-            onClick={() => onClickLabelHandler(e.name)}
-            active={e.name === category}
+            onClick={e.onClick}
+            active={tab === i + 1}
+            style={{ padding: '10px', marginRight: '0.5rem' }}
           >
-            {e.content}
+            {e.name}
           </ReportIndexItem>
         ))}
       </div>
-      <ReportIndexItem indexList={content}></ReportIndexItem>
     </Wrapper>
   );
 };
@@ -53,6 +52,24 @@ const Wrapper = styled.div`
   border-bottom: 1px solid darkgray;
   align-items: center;
   justify-content: space-between;
+
+  & .region-label-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    & .region-label {
+      color: #001aa4;
+      font-weight: 700;
+      text-justify: center;
+      width: 5rem;
+    }
+
+    & .label-category {
+      width: 7rem;
+    }
+  }
 `;
 
 export default StatusReportIndex;

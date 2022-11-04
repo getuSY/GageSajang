@@ -5,12 +5,25 @@ import StatusReportIndex from '../../molecules/StatusReportIndex';
 
 interface StatusReportProps {
   region?: string;
+  content: any;
+  category: string;
+  tab?: number;
 }
 
-const StatusReport = ({ region }: StatusReportProps) => {
+const StatusReport = ({
+  region,
+  content,
+  category,
+  tab,
+}: StatusReportProps) => {
   return (
     <ReportModal>
-      <StatusReportIndex region={region}></StatusReportIndex>
+      <StatusReportIndex
+        region={region}
+        content={content}
+        category={category}
+        tab={tab}
+      ></StatusReportIndex>
     </ReportModal>
   );
 };

@@ -59,7 +59,8 @@ const StatusPage = () => {
         <StatusReport
           region={region}
           content={contentList}
-          onClickLabelHandler={onClickLabelHandler}
+          category={category!}
+          tab={tab}
         ></StatusReport>
       </Wrapper>
     </Transitions>
