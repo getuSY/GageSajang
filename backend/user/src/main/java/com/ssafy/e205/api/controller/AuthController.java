@@ -1,5 +1,7 @@
 package com.ssafy.e205.api.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.ssafy.e205.api.dto.UserDto;
 import com.ssafy.e205.api.service.Auth.*;
 import com.ssafy.e205.config.JwtTokenProvider;
@@ -10,7 +12,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -53,45 +57,54 @@ public class  AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserDto userDto){
-        String error = "";
+    public ResponseEntity<String> login(@RequestBody UserDto userDto){
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+
         if(userService.findByEmail(userDto.getEmail()).isEmpty()){ // 회원 여부 확인
-            error = "Local Login Error : this email is not user";
+            jsonObject.addProperty("error","this email is not user");
         }
-        else if(!Objects.equals(userService.findByEmail(userDto.getEmail()).get().getType(), "local")){ //타 플랫폼 가입 확인
-            error = "Local Login Error : already sign in another platform";
+        else if(!"local".equals(userService.findByEmail(userDto.getEmail()).get().getType())){ //타 플랫폼 가입 확인
+            jsonObject.addProperty("error","already sign in another platform");
         }
         else{
-            int state = userService.findByEmailToState(userDto.getEmail());
-            String token = "token : ";
-            if(state == 1){ // 이미 로그인 한 경우라면
-                System.out.println("already login account");
-                error = "Local Login Error : already login";
-            }
-            else{
-                boolean result = userService.checkPassword(userDto.getPw(), userDto.getEmail()); //비밀번호 체크
-                if(result){
-                    try{
-                        token += jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList()); // JWT 토큰
-                        userDto.setState(1); // 로그인 상태 변환
-                        userService.updateState(1, userDto.getEmail()); // DB에서 로그인 상태 변환
+            boolean result = userService.checkPassword(userDto.getPw(), userDto.getEmail()); //비밀번호 체크
+            if(result){
+                int state = userService.findByEmailToState(userDto.getEmail());
+                if(state == 100) { // tmp code for dev
+//                if(state == 1){ // 이미 로그인 한 경우라면
+                    System.out.println("already login account");
+                    jsonObject.addProperty("error","already login");
+                }
+                else{
+                    String accessToken = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), true);
+                    String refreshToken = jwtTokenProvider.createToken(userDto.getRefreshToken(), userDto.getAuthList(), false);
+                    jsonObject.addProperty("token", accessToken);
+//                        jsonObject.addProperty("accessToken", accessToken); // JWT 토큰
+//                        jsonObject.addProperty("refreshToken", refreshToken); // JWT 토큰
+                    userDto.setState(1); // 로그인 상태 변환
+                    userDto.setAccessToken(accessToken);
+                    userDto.setRefreshToken(refreshToken);
+                    System.out.println("userDto : " + userDto);
+                    int updateResult = userService.updateUser(userDto);
+                    if(updateResult < 0){
+                        System.out.println("Login Failed");
+                        JsonObject jsonObjectFailed = new JsonObject();
+                        jsonObjectFailed.addProperty("error","change state failed");
+                        return new ResponseEntity<>(gson.toJson(jsonObjectFailed), HttpStatus.OK);
+                    }
+                    else{
                         System.out.println("Login Success");
-                        return token;
-                    }
-                    catch (Exception e){ // 로그인 과정에서 에러 발생시
-                        userDto.setState(0);
-                        userService.updateState(0, userDto.getEmail()); // DB에서 비 로그인 상태로 전환
-                        System.out.println("Login Error");
-                        error = "Local Login Error : change state failed";
+                        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
                     }
                 }
-                else{ // 비밀번호 불일치
-                    System.out.println("Login Failed");
-                    error = "Local Login Error : incorrect password";
-                }
+            }
+            else{ // 비밀번호 불일치
+                System.out.println("Login Failed");
+                jsonObject.addProperty("error","incorrect password");
             }
         }
-        return error;
+        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/logout")
@@ -114,11 +127,35 @@ public class  AuthController {
     }
 
     @PostMapping("/signup")
-    public void signup(@RequestBody UserDto userDto){
+    public ResponseEntity<String> signup(@RequestBody UserDto userDto){
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+
         System.out.println("SignUp : " + userDto);
         userDto.setAuth("user");
         userDto.setState(1);
         userService.save(userDto);
+
+        String accessToken = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), true);
+        String refreshToken = jwtTokenProvider.createToken(userDto.getRefreshToken(), userDto.getAuthList(), false);
+        jsonObject.addProperty("token", accessToken);
+//                        jsonObject.addProperty("accessToken", accessToken); // JWT 토큰
+//                        jsonObject.addProperty("refreshToken", refreshToken); // JWT 토큰
+        userDto.setState(1); // 로그인 상태 변환
+        userDto.setAccessToken(accessToken);
+        userDto.setRefreshToken(refreshToken);
+        System.out.println("userDto : " + userDto);
+        int updateResult = userService.updateUser(userDto);
+        if(updateResult < 0){
+            System.out.println("Login Failed");
+            JsonObject jsonObjectFailed = new JsonObject();
+            jsonObjectFailed.addProperty("error","change state failed");
+            return new ResponseEntity<>(gson.toJson(jsonObjectFailed), HttpStatus.OK);
+        }
+        else{
+            System.out.println("Login Success");
+            return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
+        }
     }
 
     @PostMapping("/secession")
@@ -127,53 +164,85 @@ public class  AuthController {
     }
 
     @GetMapping("/kakao")
-    public String kakaoLogin(@RequestParam String code){
+    public ResponseEntity<String> kakaoLogin(@RequestParam String code){
         //call by redirect link : https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=c2ca1f9972008ef39999c0eacbe58769&redirect_uri=http://localhost:8081/user/kakao
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+
         System.out.println(code);
         String error = "";
         String token = kakaoService.getKaKaoAccessToken(code);
         if(token.isEmpty()){
-            error = "KaKao Login Error : token is null";
+            error = "token is null";
         }
         else{
             System.out.println("kakao result : "+token);
             UserDto userDto = kakaoService.createKaKaoUser(token);
             if(userDto.getEmail().isEmpty()){
-                error = "Kakao Login Error : userInfo is null";
+                error = "userInfo is null";
             }
             else{
                 if(userService.findByEmail(userDto.getEmail()).isEmpty()){ //sign in
+                    String accessToken = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), true);
+                    String refreshToken = jwtTokenProvider.createToken(userDto.getRefreshToken(), userDto.getAuthList(), false);
+                    jsonObject.addProperty("token", accessToken);
+
+//                        jsonObject.addProperty("accessToken", accessToken); // JWT 토큰
+//                        jsonObject.addProperty("refreshToken", refreshToken); // JWT 토큰
+
+                    userDto.setState(1); // 로그인 상태 변환
+                    userDto.setAccessToken(accessToken);
+                    userDto.setRefreshToken(refreshToken);
                     userDto.setPw("kakaoPW"); //tmp data(trash data)
                     userDto.setAuth("user");
                     userDto.setType("kakao");
-                    userDto.setState(0);
                     userDto.setRefreshToken("kakaoRefreshToken"); // tmp data(trash data)
-                    userService.save(userDto);
+                    try{
+                        userService.updateUser(userDto);
+                        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
+                    }
+                    catch(Exception e){
+                        JsonObject jsonObjectFailed = new JsonObject();
+                        jsonObjectFailed.addProperty("error", "Server Error");
+                        return new ResponseEntity<>(gson.toJson(jsonObjectFailed), HttpStatus.BAD_GATEWAY);
+                    }
+
                 }
 
                 if(userService.findByEmailToState(userDto.getEmail()) == 1){
-                    error = "Kakao Login Error : already login";
+                    error = "already login";
                 }
                 else if(!Objects.equals(userService.findByEmail(userDto.getEmail()).get().getType(), "kakao")){
-                    error = "Kakao Login Error : already sign in another platform";
+                    error = "already sign in another platform";
                 }
                 else{
                     try{
-                        userService.updateState(1, userDto.getEmail());
+//                        userService.updateState(1, userDto.getEmail());
                         userDto.setAuth(userService.findByEmail(userDto.getEmail()).get().getAuth());
-                        token = "token : "+jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList());
-                        return token;
+                        String accessToken = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), true);
+                        String refreshToken = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), false);
+
+                        jsonObject.addProperty("token", accessToken);
+//                        jsonObject.addProperty("accessToken", accessToken); // JWT 토큰
+//                        jsonObject.addProperty("refreshToken", refreshToken); // JWT 토큰
+                        userDto.setState(1); // 로그인 상태 변환
+                        userDto.setAccessToken(accessToken);
+                        userDto.setRefreshToken(refreshToken);
+                        userService.save(userDto);
+
+                        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
                     }
                     catch (Exception e){
                         System.out.println("Kakao Login Error : " + e);
                         e.printStackTrace();
-                        error = "Kakao Login Error : update state failed";
+                        error = "update state failed";
                         userService.updateState(0, userDto.getEmail());
                     }
                 }
             }
         }
-        return error;
+        jsonObject.addProperty("error", error);
+        return new ResponseEntity<>(gson.toJson(jsonObject),HttpStatus.BAD_REQUEST);
     }
     @GetMapping("/kakao/expiration")
     //public void kakaoLogOut(HttpSession session){
@@ -199,8 +268,11 @@ public class  AuthController {
     }
 
     @GetMapping("/naver/login")
-    public String naverLogin(@RequestParam String code, @RequestParam String state){
+    public ResponseEntity<String> naverLogin(@RequestParam String code, @RequestParam String state){
         //call by redirect link : https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=zNPmRh99kzmjSsixo55d&state=STATE_STRING&redirect_uri=http://localhost:8081/user/naver/login
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+
         String[] tokens = naverService.getNaverToken(code, state).split(",");
         String error;
         if(tokens.length <= 0){
@@ -209,41 +281,70 @@ public class  AuthController {
         }
         else{
             UserDto userDto = naverService.getNaverUserInfo(tokens[0], tokens[1]); //accessToken, refreshToken
-            if(userDto.getEmail().isEmpty()){ // sign in
-                error = "Naver Login Error : userInfo is null";
+            if(userDto.getEmail().isEmpty()){ //null email data from naver
+                error = "userInfo is null";
                 System.out.println("Naver Login Error : userInfo is null");
             }
             else{
-                if(userService.findByEmail(userDto.getEmail()).isEmpty()){
+                if(userService.findByEmail(userDto.getEmail()).isEmpty()){ // sign in
+                    String accessToken = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), true);
+                    userDto.setAccessToken(accessToken);
+
                     userDto.setPw("naverPW");
                     userDto.setAuth("user");
-                    userDto.setState(0);
+                    userDto.setRefreshToken(tokens[1]);
+                    userDto.setState(1);
                     userDto.setType("naver");
-                    userService.save(userDto);
+                    try{
+                        userService.save(userDto);
+
+                        jsonObject.addProperty("token", accessToken);
+//                    jsonObject.addProperty("accessToken", accessToken);
+//                    jsonObject.addProperty("refreshToken", tokens[1]);
+
+                        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                        userService.updateState(0, userDto.getEmail());
+                        System.out.println("Naver Login Error : change state failed");
+                        jsonObject.addProperty("error", "change state failed");
+                        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
+                    }
                 }
-                if(userService.findByEmailToState(userDto.getEmail()) == 1){
-                    error = "Naver Login Error : already login";
+                if(!Objects.equals(userService.findByEmail(userDto.getEmail()).get().getType(), "naver")){
+                    error = "already sign in another platform";
                 }
-                else if(!Objects.equals(userService.findByEmail(userDto.getEmail()).get().getType(), "naver")){
-                    error = "Naver Login Error : already sign in another platform";
+                else if(userService.findByEmailToState(userDto.getEmail()) == 1){
+                    error = "already login";
                 }
                 else{
-                    String token = "token : ";
+                    String token = "";
                     try{
                         userDto.setAuth(userService.findByEmail(userDto.getEmail()).get().getAuth());
-                        token += jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList());
-                        userService.updateState(1, userDto.getEmail());
+                        token = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), true);
+
+                        userDto.setAccessToken(token);
+                        userDto.setRefreshToken(tokens[1]);
+                        userDto.setState(1);
+                        userService.updateUser(userDto);
+                        jsonObject.addProperty("token", token);
+//                        jsonObject.addProperty("accessToken", token);
+//                        jsonObject.addProperty("refreshToken", tokens[1]);
                         System.out.println("Naver Login Success");
+                        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
                     }
                     catch (Exception e){
                         userService.updateState(0, userDto.getEmail());
                         System.out.println("Naver Login Error : change state failed");
+                        error = "change state failed";
                     }
-                    return token;
+
                 }
             }
         }
-        return error;
+        jsonObject.addProperty("error", error);
+        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
     }
 
 }

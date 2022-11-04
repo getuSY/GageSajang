@@ -16,6 +16,7 @@ public interface UserService {
     void deleteByEmail(String email);
     void save(UserDto userDto);
     void updateState(int state, String email);
+    int updateUser(UserDto userDto);
 
     boolean checkPassword(String inputPassword, String email);
 }

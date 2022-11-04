@@ -72,6 +72,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         repository.updateState(state, email);
     }
 
+    @Override
+    public int updateUser(UserDto userDto) {
+        UserEntity userEntity = new UserEntity(userDto);
+        return repository.saveByEmail(userEntity.getState(), userEntity.getAccessToken(), userEntity.getRefreshToken(), userEntity.getEmail());
+    }
+
+
     @Transactional
     @Override
     public boolean checkPassword(String inputPassword, String email) {

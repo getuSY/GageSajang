@@ -19,9 +19,15 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     UserEntity findByAccessToken(String access_token);
     Optional<UserEntity> findByEmail(String email);
     List<UserEntity> findAll();
-    void save(UserDto userDto);
-    void deleteByEmail(String email);
 
+//    @Transactional
+//    int save(UserDto userDto);
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(value = "update user set state=:state, access_token=:accessToken, refresh_token=:refreshToken where email=:email", nativeQuery = true)
+    int saveByEmail(@Param("state")int state,@Param("accessToken") String accessToken, @Param("refreshToken")String refreshToken, @Param("email")String email);
+
+    void deleteByEmail(String email);
     @Query(value = "select state from user where email = :email", nativeQuery = true)
     int findByEmailToState(@Param("email") String email);
 
