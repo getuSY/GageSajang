@@ -12,7 +12,8 @@ export const greenTheme: DefaultTheme = {
   subColor: 'rgba(93, 217, 143, 0.56)',
   blurColor: 'linear-gradient(92.86deg, #01AD7C 0%, #FFF95B 100%)',
   gradColor: 'linear-gradient(90deg, #01AD7C 0%, #37E19D 43.89%, #FFF80B 100%)',
-  ...commonTheme,
+  lightColor: '#53C882',
+  darkColor: '#1CA37C',
 };
 
 export const purpleTheme: DefaultTheme = {
@@ -41,5 +42,6 @@ export const orangeTheme: DefaultTheme = {
     'linear-gradient(90deg, #FF300C 0%, #FF8648 49.48%, #FFEC3F 96.35%)',
   gradColor:
     'linear-gradient(90deg, #F1510C 0%, #FF8648 49.48%, #FFEC3F 96.35%)',
-  ...commonTheme,
+  darkColor: '#FB8F41',
+  lightColor: '#FFA05B',
 };
