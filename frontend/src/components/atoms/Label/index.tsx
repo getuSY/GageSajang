@@ -23,6 +23,7 @@ const Label = ({
 
 const Wrapper = styled.label`
   font-size: 1.3rem;
+  font-family: 'Pretendard-Regular';
   cursor: pointer;
 `;
 

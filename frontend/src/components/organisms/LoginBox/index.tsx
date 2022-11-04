@@ -9,16 +9,9 @@ import { useUserLogin } from '../../../hooks/user';
 
 interface LoginBoxProps {}
 
-const flexStyle: object = {
-  margin: '2rem',
-};
-
-const buttonStyle = {
-  width: '100px',
-  height: '40px',
-};
-
 const LoginBox = ({}: LoginBoxProps) => {
+  // let [ userId, setUserId ] = useState("")
+  // let [ password, setPassword ] = useState("")
   const navigate = useNavigate();
   const mutation = useUserLogin();
   const { isLoading, isSuccess, isError, error } = mutation;
@@ -116,6 +109,15 @@ const ButtonBox = styled.div`
 
 const lineStyle = {
   width: '350px',
+};
+
+const flexStyle: object = {
+  margin: '2rem',
+};
+
+const buttonStyle = {
+  width: '100px',
+  height: '40px',
 };
 
 export default LoginBox;
