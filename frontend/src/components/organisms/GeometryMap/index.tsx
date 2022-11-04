@@ -7,9 +7,14 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 type GeometryProps = {
   areas: Array<Gu>;
   isOpen: boolean;
+  onClickRegionHandler: any;
 };
 
-const GeometryMap = ({ areas, isOpen }: GeometryProps) => {
+const GeometryMap = ({
+  areas,
+  isOpen,
+  onClickRegionHandler,
+}: GeometryProps) => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const mapData = areas;
@@ -24,14 +29,15 @@ const GeometryMap = ({ areas, isOpen }: GeometryProps) => {
 
   const onClick = (d: any) => {
     // alert(`${d.properties.SIG_KOR_NM}`);
-    navigate(
-      `?category=${
-        params.get('category') ? params.get('category') : 'main'
-      }&tab=${params.get('tab') ? params.get('tab') : '1'}&region=${
-        d.properties.SIG_ENG_NM
-      }`,
-      { replace: true }
-    );
+    // navigate(
+    //   `?category=${
+    //     params.get('category') ? params.get('category') : 'main'
+    //   }&tab=${params.get('tab') ? params.get('tab') : '1'}&region=${
+    //     d.properties.SIG_ENG_NM
+    //   }`,
+    //   { replace: true }
+    // );
+    onClickRegionHandler(d.properties.SIG_KOR_NM);
   };
 
   const countries = mapData.map((d: any, i) => (
