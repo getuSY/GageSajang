@@ -217,7 +217,7 @@ public class ResultStoreHin {
             for(int i=0; i<6; i++){
                 sb.append("\"" + tmp[i] + "\",");
             }
-            sb.append("\"" + tmp[6] + "\"");
+            sb.append("\"" + (int)(Long.parseLong(tmp[6])/Integer.parseInt(tmp[3])) + "\"");
             sb.append("\n");
         }
 
