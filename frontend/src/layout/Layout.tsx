@@ -3,8 +3,6 @@ import Navbar from '../components/organisms/NavBar';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavItem } from '../models/common';
-import { useQuery } from '@tanstack/react-query';
-import { getUser } from '../api/user';
 import { AnimatePresence } from 'framer-motion';
 import HelpButton from '../components/atoms/HelpButton';
 
@@ -28,8 +26,10 @@ const navList: Array<NavItem> = [
 ];
 
 const Layout = () => {
-  const query = useQuery(['user'], getUser);
-  const userInfo = query.data;
+  // const query = useQuery(['user'], () => undefined);
+  // const userInfo = query.data;
+  // const { data: userInfo } = useFetchUser();
+  const userInfo = undefined;
 
   return (
     <>
@@ -47,7 +47,7 @@ const Layout = () => {
 };
 
 const Wrapper = styled.div`
-  padding-top: 80px;
+  padding-top: 65px;
 `;
 
 export default Layout;

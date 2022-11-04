@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import UnsetLabelInput from '../../molecules/UnsetLabelInput/index';
 import Button from '../../atoms/Button/index';
 import CheckLabelInput from '../../molecules/CheckLabelInput/index';
 import { useNavigate } from 'react-router-dom';
+import { UserModel } from '../../../models/user';
+import { useUserLogin } from '../../../hooks/user';
 
 interface LoginBoxProps {}
 
@@ -11,12 +13,43 @@ const LoginBox = ({}: LoginBoxProps) => {
   // let [ userId, setUserId ] = useState("")
   // let [ password, setPassword ] = useState("")
   const navigate = useNavigate();
+  const mutation = useUserLogin();
+  const { isLoading, isSuccess, isError, error } = mutation;
+
   const toRegister = () => {
     navigate('/user/register');
   };
   const toHome = () => {
     navigate('/');
   };
+  const [loginInputs, setLoginInputs] = useState<UserModel>({
+    accessToken: 'string', // 고정
+    auth: 'user', // 고정
+    id: 0, // 고정
+    refreshToken: 'string', // 고정
+    state: 0, // 고정
+    type: 'local', // 고정
+    nickName: 'string', // 고정
+    email: 'string',
+    pw: 'string',
+  });
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoginInputs({
+      ...loginInputs,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const onClickHandler = () => {
+    console.log('click');
+    mutation.mutate(loginInputs);
+  };
+
+  useEffect(() => {
+    console.log(mutation);
+  }, [mutation]);
+
   return (
     <Wrapper>
       <UnsetLabelInput
@@ -24,16 +57,20 @@ const LoginBox = ({}: LoginBoxProps) => {
         label="ID"
         placeholder="gagesajang@email.com"
         style={lineStyle}
+        id="email"
+        onChange={onChangeHandler}
       />
       <UnsetLabelInput
         type="password"
         label="PASSWORD"
         placeholder="숫자, 영어, 특수문자 포함 9~15자"
         style={lineStyle}
+        id="pw"
+        onChange={onChangeHandler}
       />
       <CheckLabelInput label="로그인 유지" />
       <ButtonBox>
-        <Button type="main" style={buttonStyle} onClick={toHome}>
+        <Button type="main" style={buttonStyle} onClick={onClickHandler}>
           로그인
         </Button>
         <Button type="border" style={buttonStyle} onClick={toRegister}>

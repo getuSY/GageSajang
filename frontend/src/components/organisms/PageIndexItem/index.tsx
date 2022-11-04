@@ -60,7 +60,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 100px;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 65px);
   gap: 30px;
 
   & .content {

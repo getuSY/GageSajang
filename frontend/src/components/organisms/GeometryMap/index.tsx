@@ -40,32 +40,52 @@ const GeometryMap = ({
     onClickRegionHandler(d.properties.SIG_KOR_NM);
   };
 
+  // const countries = mapData.map((d: any, i) => (
+  //   <>
+  //     <path
+  //       key={'path' + i}
+  //       d={pathGenerator(d)!}
+  //       className={`path-gu-1 path-gu-${d.properties.SIG_ENG_NM} color-${
+  //         i % 6
+  //       }`}
+  //       onClick={() => onClick(d)}
+  //     />
+  //     <text
+  //       key={`path${i}text`}
+  //       transform={`translate(${pathGenerator.centroid(d)})`}
+  //       style={{ textAnchor: 'middle', top: '10px' }}
+  //       y={d.properties.y_offset ? d.properties.y_offset : ''}
+  //       x={d.properties.x_offset ? d.properties.x_offset : ''}
+  //     >
+  //       {d.properties.SIG_KOR_NM}
+  //     </text>
+  //   </>
+  // ));
   const countries = mapData.map((d: any, i) => (
-    <>
-      <path
-        key={'path' + i}
-        d={pathGenerator(d)!}
-        className={`path-gu-1 path-gu-${d.properties.SIG_ENG_NM} color-${
-          i % 6
-        }`}
-        onClick={() => onClick(d)}
-      />
-      <text
-        key={`path${i}text`}
-        transform={`translate(${pathGenerator.centroid(d)})`}
-        style={{ textAnchor: 'middle', top: '10px' }}
-        y={d.properties.y_offset ? d.properties.y_offset : ''}
-        x={d.properties.x_offset ? d.properties.x_offset : ''}
-      >
-        {d.properties.SIG_KOR_NM}
-      </text>
-    </>
+    <path
+      key={'path' + i}
+      d={pathGenerator(d)!}
+      className={`path-gu-1 path-gu-${d.properties.SIG_ENG_NM} color-${i % 6}`}
+      onClick={() => onClick(d)}
+    />
+  ));
+  const countryTexts = mapData.map((d: any, i) => (
+    <text
+      key={`path${i}text`}
+      transform={`translate(${pathGenerator.centroid(d)})`}
+      style={{ textAnchor: 'middle', top: '10px' }}
+      y={d.properties.y_offset ? d.properties.y_offset : ''}
+      x={d.properties.x_offset ? d.properties.x_offset : ''}
+    >
+      {d.properties.SIG_KOR_NM}
+    </text>
   ));
 
   return (
     <Wrapper isOpen={isOpen}>
       <svg width={width} height={height}>
         {countries}
+        {countryTexts}
       </svg>
     </Wrapper>
   );
@@ -77,7 +97,7 @@ interface WrapperInterface {
 
 const Wrapper = styled.div<WrapperInterface>`
   margin-left: ${({ isOpen }) => (isOpen ? '30vw' : '')};
-  transition: margin-left 0.9s;
+  transition: margin-left 0.6s;
   & .path-gu-1 {
     fill: #d9d9d9; // 채우는 색
     stroke: darkgray;

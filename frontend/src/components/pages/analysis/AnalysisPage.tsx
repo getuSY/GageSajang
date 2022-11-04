@@ -67,7 +67,6 @@ const AnalysisPage = () => {
     <Transitions>
       <Wrapper>
         <AnalysisSideBar
-          map={map}
           onChange={onChange}
           inputValue={selectedDong}
           clearValue={clearValue}

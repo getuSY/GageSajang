@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   padding: 20px 0;
   flex-direction: column;
   min-height: 500px;
+  height: 600px;
 `;
 
 export default ReportItem;

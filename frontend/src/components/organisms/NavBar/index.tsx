@@ -60,7 +60,8 @@ const Wrapper = styled.div`
   height: 65px;
   background-color: #ffffff;
   /* background: ${({ theme }) => theme.gradColor}; */
-  padding: 0px 200px;
+  /* padding: 0 200px; */
+  padding: 0px max(80px, calc((100vw - 1500px) / 2));
   z-index: 9999;
   box-shadow: 0px 0.5px 4px rgba(0, 0, 0, 0.1);
 `;

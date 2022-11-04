@@ -5,6 +5,7 @@ export interface UnsetInputProps {
   placeholder?: string;
   style?: object;
   type?: 'text' | 'email' | 'password' | 'number' | 'date';
+  id?: string;
   readonly value?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
@@ -14,6 +15,7 @@ const UnsetInput = ({
   placeholder,
   style,
   value,
+  id,
   onChange,
 }: UnsetInputProps) => {
   return (
@@ -22,6 +24,7 @@ const UnsetInput = ({
       placeholder={placeholder}
       style={style}
       value={value}
+      id={id}
       onChange={onChange}
     />
   );
