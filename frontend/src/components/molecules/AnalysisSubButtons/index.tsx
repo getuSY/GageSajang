@@ -1,25 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 import { cs1, cs2, cs3 } from '../../../data/cs';
+import { useNavigate } from 'react-router-dom';
 
 interface AnalysisSubButtonsProps {
   tab: number;
-  setSubCategory: React.Dispatch<React.SetStateAction<number>>;
   subCategory: number;
 }
 
-const AnalysisSubButtons = ({
-  tab,
-  setSubCategory,
-  subCategory,
-}: AnalysisSubButtonsProps) => {
+const AnalysisSubButtons = ({ tab, subCategory }: AnalysisSubButtonsProps) => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       {tab === 1 &&
         cs1.map((e: string, i: number) => (
           <SubButton
             key={`cs1-${i + 1}`}
-            onClick={() => setSubCategory(i + 1 !== subCategory ? i + 1 : 0)}
+            onClick={() =>
+              navigate(`/analysis?mainCategory=1&subCategory=${i + 1}`, {
+                replace: true,
+              })
+            }
             active={subCategory === i + 1}
           >
             {e}
@@ -29,7 +31,11 @@ const AnalysisSubButtons = ({
         cs2.map((e: string, i: number) => (
           <SubButton
             key={`cs2-${i + 1}`}
-            onClick={() => setSubCategory(i + 1 !== subCategory ? i + 1 : 0)}
+            onClick={() =>
+              navigate(`/analysis?mainCategory=2&subCategory=${i + 1}`, {
+                replace: true,
+              })
+            }
             active={subCategory === i + 1}
           >
             {e}
@@ -39,7 +45,11 @@ const AnalysisSubButtons = ({
         cs3.map((e: string, i: number) => (
           <SubButton
             key={`cs3-${i + 1}`}
-            onClick={() => setSubCategory(i + 1 !== subCategory ? i + 1 : 0)}
+            onClick={() =>
+              navigate(`/analysis?mainCategory=3&subCategory=${i + 1}`, {
+                replace: true,
+              })
+            }
             active={subCategory === i + 1}
           >
             {e}
@@ -86,15 +96,15 @@ const SubButton = styled.button<SubButtonProps>`
   height: 2.5rem;
   font-size: 0.9rem;
   border-radius: 8px;
-  border: ${({ active }) =>
-    active ? '2px solid #001aa4' : '1px solid darkgray'};
-  color: ${({ active }) => (active ? '#001aa4' : '#000')};
+  border: ${({ active, theme }) =>
+    active ? `2px solid ${theme.darkColor}` : '1px solid darkgray'};
+  color: ${({ active, theme }) => (active ? theme.darkColor : '#000')};
   font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
   background: transparent;
   &:hover {
     cursor: pointer;
-    border: 2px solid #001aa4;
+    border: ${({ theme }) => `2px solid ${theme.darkColor}`};
   }
 `;
 

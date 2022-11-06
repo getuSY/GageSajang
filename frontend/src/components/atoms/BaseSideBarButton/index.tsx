@@ -30,9 +30,9 @@ const Wrapper = styled.button<WrapperProps>`
   height: 4.5rem;
   font-size: 16px;
   border-radius: 15px;
-  border: ${({ active }) =>
-    active ? '3px solid #001aa4' : '1px solid darkgray'};
-  color: ${({ active }) => (active ? '#001aa4' : '#000')};
+  border: ${({ active, theme }) =>
+    active ? `3px solid ${theme.darkColor}` : '1px solid darkgray'};
+  color: ${({ active, theme }) => (active ? theme.darkColor : '#000')};
   font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
   background: transparent;
@@ -40,7 +40,7 @@ const Wrapper = styled.button<WrapperProps>`
   &:hover {
     cursor: pointer;
     border-radius: 15px;
-    border: 3px solid #001aa4;
+    border: ${({ theme }) => `3px solid ${theme.darkColor}`};
   }
 `;
 

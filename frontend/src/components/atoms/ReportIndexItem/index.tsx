@@ -42,7 +42,7 @@ const Wrapper = styled.label<WrapperProps>`
   font-family: 'Pretendard-Regular';
   cursor: pointer;
   color: ${({ active }) => (active ? 'white' : 'darkgray')};
-  background-color: ${({ active }) => (active ? '#001aa4' : '')};
+  background-color: ${({ active, theme }) => (active ? theme.darkColor : '')};
   border-radius: ${({ active }) => (active ? '5px' : '')};
   & .index-icon {
     margin-right: 10px;

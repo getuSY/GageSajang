@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReportSidebarItem from '../../atoms/ReportSidebarItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faChartLine,
@@ -8,6 +9,8 @@ import {
   faCashRegister,
   faHouseCircleCheck,
   faPeopleGroup,
+  faLocationDot,
+  faStore,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -15,7 +18,9 @@ library.add(
   faHouseCircleCheck,
   faChartLine,
   faCashRegister,
-  faPeopleGroup
+  faPeopleGroup,
+  faLocationDot,
+  faStore
 );
 // <div className="icon-div"><FontAwesomeIcon icon={icon} /></div>
 const arr = [
@@ -46,6 +51,20 @@ const ReportSideBar = () => {
   return (
     <Wrapper>
       <div className="title">🏪 상권 분석</div>
+      <div className="info-div">
+        <div className="report-location">
+          <div className="sub-title-icon">
+            <FontAwesomeIcon icon="location-dot" />
+          </div>
+          중구 소곡동
+        </div>
+        <div className="report-category">
+          <div className="sub-title-icon">
+            <FontAwesomeIcon icon="store" />
+          </div>
+          한식음식점
+        </div>
+      </div>
       {arr.map((e, i) => (
         <ReportSidebarItem
           key={`report-sidebar-item-${i + 1}`}
@@ -60,7 +79,7 @@ const ReportSideBar = () => {
 
 const Wrapper = styled.div`
   height: 100%;
-  background: #0066ff;
+  background: ${({ theme }) => theme.lightColor};
   padding: 20px;
   font-size: 1.4rem;
   border-radius: 20px;
@@ -76,6 +95,21 @@ const Wrapper = styled.div`
     justify-content: center;
     & svg {
       margin-right: 9px;
+    }
+  }
+  & .info-div {
+    margin: 1.2rem 0;
+  }
+  & .report-location,
+  .report-category {
+    font-size: 1.1rem;
+    display: flex;
+    margin-bottom: 6px;
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 26px;
     }
   }
 `;

@@ -174,7 +174,7 @@ const Group = styled.div`
   }
 
   & .trend {
-    border: 2px solid #001aa4;
+    border: ${({ theme }) => `2px solid ${theme.darkColor}`};
     border-radius: 10px;
 
     & :hover {

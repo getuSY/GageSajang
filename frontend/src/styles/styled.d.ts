@@ -6,5 +6,7 @@ declare module 'styled-components' {
     subColor: string;
     blurColor: string;
     gradColor: string;
+    lightColor: string;
+    darkColor: string;
   }
 }

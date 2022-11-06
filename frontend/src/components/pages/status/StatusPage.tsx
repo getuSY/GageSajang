@@ -6,11 +6,25 @@ import BaseSideBar from '../../molecules/BaseSideBar';
 import StatusTrend from '../../molecules/StatusTrend';
 import StatusButtons from '../../molecules/StatusButtons';
 import Transitions from '../../atoms/Transition';
-import ReportModal from '../../atoms/ReportModal';
-import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReport from '../../organisms/StatusReport';
+import {
+  faPeopleGroup,
+  faHouse,
+  faShop,
+  faDoorOpen,
+  faDoorClosed,
+  faCashRegister,
+} from '@fortawesome/free-solid-svg-icons';
 
 const content = ['유동인구', '거주인구', '점포 수', '개업률', '폐업률', '매출'];
+const icons = [
+  faPeopleGroup,
+  faHouse,
+  faShop,
+  faDoorOpen,
+  faDoorClosed,
+  faCashRegister,
+];
 
 const StatusPage = () => {
   const [sideBarStatus, setSideBarStatus] = useState<boolean>(false);
@@ -57,6 +71,7 @@ const StatusPage = () => {
           onClickRegionHandler={onClickRegionHandler}
         />
         <StatusReport
+          icon={icons}
           region={region}
           content={contentList}
           category={category!}

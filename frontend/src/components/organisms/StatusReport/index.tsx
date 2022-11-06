@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ReportModal from '../../atoms/ReportModal';
 import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 interface StatusReportProps {
   region?: string;
   content: any;
   category: string;
-  tab?: number;
+  tab: number;
+  icon?: any;
 }
 
 const StatusReport = ({
@@ -16,7 +19,19 @@ const StatusReport = ({
   content,
   category,
   tab,
+  icon,
 }: StatusReportProps) => {
+  const [title, setTitle] = useState({
+    name: content[0].name,
+    icon: icon[0],
+  });
+  useEffect(() => {
+    console.log(tab, content[tab - 1].name, icon[tab - 1]);
+    setTitle({
+      name: content[tab - 1].name,
+      icon: icon[tab - 1],
+    });
+  }, [tab]);
   return (
     <ReportModal>
       <StatusReportIndex
@@ -24,8 +39,9 @@ const StatusReport = ({
         content={content}
         category={category}
         tab={tab}
+        icon={icon}
       ></StatusReportIndex>
-      <StatusReportTitle></StatusReportTitle>
+      <StatusReportTitle title={title} />
     </ReportModal>
   );
 };
