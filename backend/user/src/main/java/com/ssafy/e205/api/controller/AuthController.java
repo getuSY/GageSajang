@@ -2,6 +2,7 @@ package com.ssafy.e205.api.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.ssafy.e205.E205Application;
 import com.ssafy.e205.api.dto.UserDto;
 import com.ssafy.e205.api.service.Auth.*;
 import com.ssafy.e205.config.JwtTokenProvider;
@@ -31,6 +32,9 @@ public class  AuthController {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
+    private E205Application application;
+
+    @Autowired
     KakaoService kakaoService = new KakaoServiceImpl();
 
     @Autowired
@@ -53,7 +57,7 @@ public class  AuthController {
 
     @GetMapping("/test")
     public String test(){
-        return "hello?";
+        return "hello? this application port : "+application.portNum;
     }
 
     @PostMapping("/login")
