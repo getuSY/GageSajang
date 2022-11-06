@@ -4,8 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.boot.web.servlet.context.ServletWebServerInitializedEvent;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationListener;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 public class E205Application implements ApplicationListener<ServletWebServerInitializedEvent> {
 
