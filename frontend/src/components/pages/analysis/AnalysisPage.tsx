@@ -39,6 +39,9 @@ const AnalysisPage = () => {
   const [keyword, setKeyword] = useState(''); // 검색 input
   const [select, setSelect] = useState<number | null>(null); // 현재 선택한 동 index
   const [selectedDong, setSelectedDong] = useState(''); // 현재 선택한 동 이름
+  const [searchResult, setSearchResult] = useState<Array<string>>([]);
+  const [searchResultOpen, setSearchResultOpen] = useState<boolean>(false);
+  const searchResultRef = useRef<any>();
 
   const container = useRef<any>();
 
@@ -48,7 +51,12 @@ const AnalysisPage = () => {
   useEffect(() => {
     // 동 검색
     if (keyword) {
-      console.log(dongList.filter((e, i) => e.includes(keyword)));
+      const tmp = dongList.filter((e, i) => e.includes(keyword));
+      setSearchResult(tmp);
+      if (tmp.length > 0) {
+        setSearchResultOpen(true);
+      }
+      console.log(tmp);
     }
   }, [keyword]);
 
@@ -65,11 +73,22 @@ const AnalysisPage = () => {
 
   return (
     <Transitions>
-      <Wrapper>
+      <Wrapper
+        onClick={(e) => {
+          if (!searchResultRef.current.contains(e.target)) {
+            setSearchResultOpen(false);
+          }
+        }}
+      >
         <AnalysisSideBar
           onChange={onChange}
           inputValue={selectedDong}
           clearValue={clearValue}
+          searchResult={searchResult}
+          searchResultOpen={searchResultOpen}
+          setSearchResultOpen={setSearchResultOpen}
+          setSelectedDong={setSelectedDong}
+          searchResultRef={searchResultRef}
         />
         <KakaoMap
           map={map}

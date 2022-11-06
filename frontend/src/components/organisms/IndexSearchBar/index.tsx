@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button';
 import WordSlider from '../../molecules/WordSlider';
+import { useNavigate } from 'react-router-dom';
 
 const wordList = [
-  '치킨집',
-  '피자집',
-  '개발자',
-  '돈까스',
-  '꽃집',
-  '옷가게',
-  '우리집',
+  { name: '한식집', code: 'cs100001' },
+  { name: '중국집', code: 'cs100002' },
+  { name: '일식집', code: 'cs100003' },
+  { name: '제과점', code: 'cs100005' },
+  { name: '치킨집', code: 'cs100007' },
+  { name: '분식집', code: 'cs100008' },
+  { name: '술집', code: 'cs100009' },
+  { name: '카페', code: 'cs100010' },
 ];
 
 const IndexSearchBar = () => {
+  const navigate = useNavigate();
+  const [jobCode, setJobCode] = useState(wordList[0].code);
+
+  const onClickHandler = () => navigate(`/analysis/result?code=${jobCode}`);
+
   return (
     <Wrapper>
       <div className="search-bar-container">
         <div className="search-bar">
           <div>나</div>
-          <WordSlider wordList={wordList} />
+          <WordSlider wordList={wordList} setJobCode={setJobCode} />
 
           {'할 건데 어디에 차리지?'.split(' ').map((e, i) => (
             <div style={{ marginRight: '1.3rem' }} key={i}>
@@ -27,7 +34,9 @@ const IndexSearchBar = () => {
             </div>
           ))}
         </div>
-        <Button type="blur">보러 가기</Button>
+        <Button type="blur" onClick={onClickHandler}>
+          보러 가기
+        </Button>
       </div>
     </Wrapper>
   );
