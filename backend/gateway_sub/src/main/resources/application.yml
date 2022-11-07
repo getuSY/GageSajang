@@ -6,7 +6,7 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: BACKEND-USER
+        - id: backend-user
           uri: lb://BACKEND-USER
           predicates:
             - Path=/user/**

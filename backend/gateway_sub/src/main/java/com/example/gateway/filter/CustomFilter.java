@@ -25,31 +25,31 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
         // Custom Pre Filter
         return ((exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest(); // pre filter
-//            ServerHttpResponse response = exchange.getResponse(); // post filter
+            ServerHttpResponse response = exchange.getResponse(); // post filter
 
-            // Request Header 에 token 이 존재하지 않을 때
-            if(!request.getHeaders().containsKey("token")){
-                return handleUnAuthorized(exchange); // 401 Error
-            }
-
-            // Request Header 에서 token 문자열 받아오기
-            List<String> token = request.getHeaders().get("token");
-            String tokenString = Objects.requireNonNull(token).get(0);
-
-            // 토큰 검증
-            if(!tokenString.equals("A.B.C")) {
-                return handleUnAuthorized(exchange); // 토큰이 일치하지 않을 때
-            }
+//            // Request Header 에 token 이 존재하지 않을 때
+//            if(!request.getHeaders().containsKey("token")){
+//                return handleUnAuthorized(exchange); // 401 Error
+//            }
+//
+//            // Request Header 에서 token 문자열 받아오기
+//            List<String> token = request.getHeaders().get("token");
+//            String tokenString = Objects.requireNonNull(token).get(0);
+//
+//            // 토큰 검증
+//            if(!tokenString.equals("A.B.C")) {
+//                return handleUnAuthorized(exchange); // 토큰이 일치하지 않을 때
+//            }
 
 
             log.info("Cutsom Pre filter : request id => {}", request.getId());
             log.info("Cutsom Pre filter : request uri => {}", request.getURI());
 
-            // Custom Post Filter
-//            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-//                log.info("Custom Post filter : response code -> {}", response.getStatusCode());
-//            }));
-            return chain.filter(exchange);
+//          Custom Post Filter
+            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+                log.info("Custom Post filter : response code -> {}", response.getStatusCode());
+            }));
+//            return chain.filter(exchange);
         });
     }
 

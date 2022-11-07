@@ -21,4 +21,9 @@ public class controller {
 
         return String.format("First Service Port %s", env.getProperty("local.server.port"));
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "hello?";
+    }
 }
