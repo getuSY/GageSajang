@@ -1,0 +1,41 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: apigateway-sub-service
+  cloud:
+    gateway:
+      routes:
+        - id: BACKEND-USER
+          uri: lb://BACKEND-USER
+          predicates:
+            - Path=/user/**
+          filters:
+            - CustomFilter
+            - name: LoggingFilter
+              args:
+                baseMessage: Spring Cloud Gateway Logging Filter
+                preLogger: true
+                postLogger: true
+        - id: BACKEND-SIMUL
+          uri: lb://BACKEND-SIMUL
+          predicates:
+            - Path=/simul/**
+          filters:
+            - CustomFilter
+            - name: LoggingFilter
+              args:
+                baseMessage: Spring Cloud Gateway Logging Filter
+                preLogger: true
+                postLogger: true
+  main:
+    web-application-type: reactive
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
