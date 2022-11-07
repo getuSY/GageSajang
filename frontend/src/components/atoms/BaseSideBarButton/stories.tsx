@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import BaseSideBarButton from './';
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
-import { orangeTheme } from '../../../styles/theme';
+import { blueTheme } from '../../../styles/theme';
 
 export default {
   title: 'atoms/BaseSideBarButton',
@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof BaseSideBarButton> = (args) => (
 );
 
 export const blue: ComponentStory<typeof BaseSideBarButton> = () => (
-  <ThemeProvider theme={orangeTheme}>
+  <ThemeProvider theme={blueTheme}>
     <Wrapper>
       <BaseSideBarButton>border</BaseSideBarButton>
     </Wrapper>

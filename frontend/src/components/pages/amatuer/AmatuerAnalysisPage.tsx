@@ -34,7 +34,7 @@ const mouseoutOption = {
 
 const dongList = areas.map((area: DongItem, index) => area.name);
 
-const AnalysisPage = () => {
+const AmatuerAnalysisPage = () => {
   const [map, setMap] = useState<any>(); // map 객체
   const [keyword, setKeyword] = useState(''); // 검색 input
   const [select, setSelect] = useState<number | null>(null); // 현재 선택한 동 index
@@ -111,4 +111,4 @@ const Wrapper = styled.div`
   height: calc(100vh - 80px);
 `;
 
-export default AnalysisPage;
+export default AmatuerAnalysisPage;

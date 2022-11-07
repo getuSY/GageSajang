@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import BaseSideBar from '../../molecules/BaseSideBar';
-import LabelInput from '../../molecules/LabelInput';
+import LabelSearchInput from '../../molecules/LabelSearchInput';
 import ButtonInputs from '../../molecules/ButtonInputs';
 import Button from '../../atoms/Button';
 import Label from '../../atoms/Label';
@@ -13,12 +13,22 @@ interface AnalysisSideBarProps {
   inputValue?: string;
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  searchResult?: Array<string>;
+  searchResultOpen: boolean;
+  setSearchResultOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedDong: React.Dispatch<React.SetStateAction<string>>;
+  searchResultRef: React.MutableRefObject<any>;
 }
 
 const AnalysisSideBar = ({
   onChange,
   inputValue,
   clearValue,
+  searchResult,
+  searchResultOpen,
+  setSearchResultOpen,
+  setSelectedDong,
+  searchResultRef,
 }: AnalysisSideBarProps) => {
   const [params] = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -35,9 +45,9 @@ const AnalysisSideBar = ({
         name: '요식업',
         onClick: () => {
           if (mainCategory !== 1) {
-            navigate('/analysis?mainCategory=1', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=1', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
@@ -45,9 +55,9 @@ const AnalysisSideBar = ({
         name: '서비스업',
         onClick: () => {
           if (mainCategory !== 2) {
-            navigate('/analysis?mainCategory=2', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=2', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
@@ -55,9 +65,9 @@ const AnalysisSideBar = ({
         name: '도소매업',
         onClick: () => {
           if (mainCategory !== 3) {
-            navigate('/analysis?mainCategory=3', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=3', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
@@ -69,7 +79,7 @@ const AnalysisSideBar = ({
       .toString()
       .padStart(2, '0')}`;
     console.log(jobCode);
-    navigate(`/loading?nextTo=/analysis/result`);
+    navigate(`/loading?nextTo=/amatuer/result`);
   };
 
   useEffect(() => {
@@ -79,12 +89,17 @@ const AnalysisSideBar = ({
   return (
     <BaseSideBar title="🏪 상권 분석" open={isOpen}>
       <Wrapper>
-        <LabelInput
+        <LabelSearchInput
           label="📌 주소 입력"
           placeholder="주소를 입력하세요."
           onChange={onChange}
           inputValue={inputValue}
           clearValue={clearValue}
+          searchResult={searchResult}
+          searchResultOpen={searchResultOpen}
+          setSearchResultOpen={setSearchResultOpen}
+          setSelectedDong={setSelectedDong}
+          searchResultRef={searchResultRef}
         />
         <Label>🍴 업종 선택</Label>
         <ButtonInputs menuList={menuList} tab={mainCategory} />

@@ -11,10 +11,10 @@ const navList: Array<NavItem> = [
     content: '상권현황',
     linkTo: '/status',
   },
-  {
-    content: '상권분석',
-    linkTo: '/analysis',
-  },
+  // {
+  //   content: '상권분석',
+  //   linkTo: '/amatuer/analysis',
+  // },
   {
     content: '이미사장',
     linkTo: '/professional',

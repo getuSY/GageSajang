@@ -11,9 +11,6 @@ const RegisterPage = () => {
   const toHome = () => {
     navigate('/');
   };
-  // const mutation = useMutation({
-  //   mutationFn: (signUpParams: SignUpParams) => signUp(signUpParams),
-  // });
   const mutation = useUserSignUp();
   const { isLoading, isSuccess, isError, error } = mutation;
   const [signUpInputs, setSignUpInputs] = useState<UserModel>({

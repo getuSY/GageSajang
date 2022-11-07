@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface WordSliderProps {
-  wordList: Array<string>;
+  wordList: Array<{ name: string; code: string }>;
+  setJobCode: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const WordSlider = ({ wordList }: WordSliderProps) => {
+const WordSlider = ({ wordList, setJobCode }: WordSliderProps) => {
   const [active, setActive] = useState<number>(0);
 
   const getClassName = (idx: number) => {
@@ -31,6 +32,11 @@ const WordSlider = ({ wordList }: WordSliderProps) => {
       setActive((active) => (active + wordList.length - 1) % wordList.length);
     }
   };
+
+  useEffect(() => {
+    setJobCode(wordList[active].code);
+  }, [active]);
+
   return (
     <Wrapper>
       {wordList.map((e, i) => (
@@ -40,7 +46,7 @@ const WordSlider = ({ wordList }: WordSliderProps) => {
           onDragStart={(e) => e.preventDefault()}
           key={i}
         >
-          {e}
+          {e.name}
         </div>
       ))}
     </Wrapper>
