@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import RoundBox from '../../atoms/RoundBox/index';
 import Button from '../../atoms/Button/index';
 import LineChart from '../../atoms/LineChart/index';
+import DynamicChart from '../../atoms/DynamicChart/index';
+import SlideBar from '../../atoms/SlideBar';
 
 // 시뮬레이션 페이지 안에 들어갈 시뮬레이션 그래프 컴포넌트입니다.
 // 임시로 시뮬레이션 pages 안에 만들어둠!!
@@ -11,7 +13,8 @@ import LineChart from '../../atoms/LineChart/index';
 interface SalesSimulationProps {}
 
 const SalesSimulation = ({}: SalesSimulationProps) => {
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState(0);
   const showGraph = () => {
     setOpen(true);
   };
@@ -37,7 +40,9 @@ const SalesSimulation = ({}: SalesSimulationProps) => {
               onClick={hideGraph}
             />
           </TitleDiv>
-          <LineChart data={graphData} style={graphStyle} />
+          {/* <LineChart data={graphData} style={graphStyle} /> */}
+          <SlideBar deliver={setPos} />
+          <DynamicChart posi={pos}></DynamicChart>
         </RoundBox>
       )}
       {open === false && (
@@ -84,8 +89,8 @@ const TitleMsg = styled.div`
 
 const roundStyle = {
   display: 'flex',
-  'flex-direction': 'column',
-  'align-items': 'center',
+  flexDirection: 'column',
+  alignitems: 'center',
   width: '1200px',
   height: '800px',
 };

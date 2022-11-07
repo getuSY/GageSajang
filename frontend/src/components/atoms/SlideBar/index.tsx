@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Draggable from 'react-draggable';
 import { DraggableCore } from 'react-draggable';
@@ -34,6 +34,7 @@ interface DraggableProps {
   nodeRef?: React.Ref<typeof React.Component>;
   positionOffset?: { x: number | string; y: number | string };
   scale?: number;
+  deliver?: (params: number) => number | void;
 }
 
 interface SlideBarProps extends DraggableProps {}
@@ -57,9 +58,13 @@ const SlideBar = ({
   nodeRef,
   positionOffset,
   scale,
+  deliver,
 }: SlideBarProps) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [color, setColor] = useState('white');
+  useEffect(() => {
+    deliver?(position.x)
+  }, [position]);
   const trackPos = (data: ControlPosition) => {
     setPosition({ x: data.x, y: data.y });
     console.log({ x: data.x, y: data.y });
