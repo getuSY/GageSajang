@@ -19,17 +19,17 @@ const Label = ({
       style={style}
       onClick={onClickLabelHandler}
       htmlFor={htmlFor}
-      cursor={onClickLabelHandler !== undefined}
+      pointer={onClickLabelHandler !== undefined}
     >
       {children}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.label<{ cursor?: boolean }>`
+const Wrapper = styled.label<{ pointer?: boolean }>`
   font-size: 1.3rem;
   font-family: 'Pretendard-Regular';
-  cursor: ${({ cursor }) => (cursor ? 'pointer' : '')};
+  cursor: ${({ pointer }) => (pointer ? 'pointer' : '')};
 `;
 
 export default Label;

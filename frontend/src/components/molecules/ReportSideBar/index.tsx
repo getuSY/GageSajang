@@ -27,13 +27,15 @@ library.add(
 interface ReportSideBarProps {
   jobName: string;
   dongName?: string;
-  ReportMenuList: Array<any>;
+  reportMenuList: Array<{ name: string; icon: string }>;
+  contentRefs: React.MutableRefObject<HTMLDivElement[]>;
 }
 
 const ReportSideBar = ({
   jobName,
   dongName,
-  ReportMenuList,
+  reportMenuList,
+  contentRefs,
 }: ReportSideBarProps) => {
   const [tab, setTab] = useState<number>(0);
   return (
@@ -53,12 +55,16 @@ const ReportSideBar = ({
           {jobName}
         </div>
       </div>
-      {ReportMenuList.map((e, i) => (
+      {reportMenuList.map((e, i) => (
         <ReportSidebarItem
           key={`report-sidebar-item-${i + 1}`}
           content={e}
           select={i === tab}
-          onClick={() => setTab(i)}
+          onClick={() => {
+            setTab(i);
+            console.log(contentRefs);
+            contentRefs.current[i].scrollIntoView({ behavior: 'smooth' });
+          }}
         />
       ))}
     </Wrapper>
