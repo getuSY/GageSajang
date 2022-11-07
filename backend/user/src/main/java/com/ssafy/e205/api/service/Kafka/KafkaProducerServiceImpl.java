@@ -21,10 +21,4 @@ public class KafkaProducerServiceImpl implements KafkaProducerService{
         this.kafkaTemplate.send(topicName, message);
 
     }
-
-    @Override
-    public void sendMessageSub(String message) {
-        System.out.printf("Produce2 message : %s%n", message);
-        this.kafkaTemplate.send(topicNameSub, message);
-    }
 }

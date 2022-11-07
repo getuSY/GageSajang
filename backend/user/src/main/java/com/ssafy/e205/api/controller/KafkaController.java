@@ -23,10 +23,4 @@ public class KafkaController {
         this.producer.sendMessage(message);
         return "success";
     }
-
-    @PostMapping(value = "/messageSub")
-    public String sendMessageSub(@RequestParam("message") String message) {
-        this.producer.sendMessageSub(message);
-        return "success";
-    }
 }
