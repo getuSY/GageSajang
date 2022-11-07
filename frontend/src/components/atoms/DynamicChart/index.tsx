@@ -35,7 +35,7 @@ const datas = [
 ];
 type DynamicData = { x: number; y: number };
 
-const DynamicChart = ({ posi }) =>
+const DynamicChart = ({ posi, options }: DynamicChartProps) =>
   // { options }: DynamicChartProps
   {
     const [realData, setRealData] = useState(datas.slice(0, 1));
