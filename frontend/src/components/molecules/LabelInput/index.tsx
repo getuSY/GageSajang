@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Label from '../../atoms/Label';
 import Input from '../../atoms/Input';
-import { LabelInputContent } from '../../../models/common';
 
 interface LabelInputProps {
   label: string;

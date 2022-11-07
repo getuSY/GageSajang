@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Report from '../../organisms/Report';
 import { useSearchParams } from 'react-router-dom';
 
-const AnalysisResultPage = () => {
+const AmatuerAnalysisResultPage = () => {
   const [params] = useSearchParams();
   const admCd = params.get('admCd');
   const jobCd = params.get('jobCd');
@@ -25,4 +25,4 @@ const Wrapper = styled.div`
   height: calc(100vh - 75px);
 `;
 
-export default AnalysisResultPage;
+export default AmatuerAnalysisResultPage;

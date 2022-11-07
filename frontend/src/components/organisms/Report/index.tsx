@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReportTitle from '../../atoms/ReportTitle';
 import ReportSideBar from '../../molecules/ReportSideBar';
 import ReportContent from '../../atoms/ReportContent';
 
-const Report = () => {
+interface ReportProps {
+  admCd: string | null;
+  jobCd: string | null;
+}
+
+const Report = ({ admCd, jobCd }: ReportProps) => {
+  console.log(admCd, jobCd);
   return (
     <Wrapper>
       <ReportSideBar />
