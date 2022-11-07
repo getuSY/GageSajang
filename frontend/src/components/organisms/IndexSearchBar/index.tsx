@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button';
 import WordSlider from '../../molecules/WordSlider';
@@ -19,7 +19,7 @@ const IndexSearchBar = () => {
   const navigate = useNavigate();
   const [jobCode, setJobCode] = useState(wordList[0].code);
 
-  const onClickHandler = () => navigate(`/analysis/result?code=${jobCode}`);
+  const onClickHandler = () => navigate(`/amatuer/result?code=${jobCode}`);
 
   return (
     <Wrapper>

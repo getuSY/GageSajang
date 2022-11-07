@@ -18,9 +18,12 @@ const AnalysisSubButtons = ({ tab, subCategory }: AnalysisSubButtonsProps) => {
           <SubButton
             key={`cs1-${i + 1}`}
             onClick={() =>
-              navigate(`/analysis?mainCategory=1&subCategory=${i + 1}`, {
-                replace: true,
-              })
+              navigate(
+                `/amatuer/analysis?mainCategory=1&subCategory=${i + 1}`,
+                {
+                  replace: true,
+                }
+              )
             }
             active={subCategory === i + 1}
           >
@@ -32,9 +35,12 @@ const AnalysisSubButtons = ({ tab, subCategory }: AnalysisSubButtonsProps) => {
           <SubButton
             key={`cs2-${i + 1}`}
             onClick={() =>
-              navigate(`/analysis?mainCategory=2&subCategory=${i + 1}`, {
-                replace: true,
-              })
+              navigate(
+                `/amatuer/analysis?mainCategory=2&subCategory=${i + 1}`,
+                {
+                  replace: true,
+                }
+              )
             }
             active={subCategory === i + 1}
           >
@@ -46,9 +52,12 @@ const AnalysisSubButtons = ({ tab, subCategory }: AnalysisSubButtonsProps) => {
           <SubButton
             key={`cs3-${i + 1}`}
             onClick={() =>
-              navigate(`/analysis?mainCategory=3&subCategory=${i + 1}`, {
-                replace: true,
-              })
+              navigate(
+                `/amatuer/analysis?mainCategory=3&subCategory=${i + 1}`,
+                {
+                  replace: true,
+                }
+              )
             }
             active={subCategory === i + 1}
           >

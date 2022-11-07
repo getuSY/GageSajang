@@ -45,9 +45,9 @@ const AnalysisSideBar = ({
         name: '요식업',
         onClick: () => {
           if (mainCategory !== 1) {
-            navigate('/analysis?mainCategory=1', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=1', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
@@ -55,9 +55,9 @@ const AnalysisSideBar = ({
         name: '서비스업',
         onClick: () => {
           if (mainCategory !== 2) {
-            navigate('/analysis?mainCategory=2', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=2', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
@@ -65,9 +65,9 @@ const AnalysisSideBar = ({
         name: '도소매업',
         onClick: () => {
           if (mainCategory !== 3) {
-            navigate('/analysis?mainCategory=3', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=3', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
@@ -79,7 +79,7 @@ const AnalysisSideBar = ({
       .toString()
       .padStart(2, '0')}`;
     console.log(jobCode);
-    navigate(`/loading?nextTo=/analysis/result`);
+    navigate(`/loading?nextTo=/amatuer/result`);
   };
 
   useEffect(() => {

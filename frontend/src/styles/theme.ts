@@ -23,7 +23,8 @@ export const purpleTheme: DefaultTheme = {
     'linear-gradient(92.86deg, #0C0AA8 0%, #B10DAB 40.62%, #FF0099 100%)',
   gradColor:
     'linear-gradient(90deg, #29187C -10.69%, #D00CF0 40.09%, #E12C61 119.31%)',
-  ...commonTheme,
+  darkColor: '#A155B9',
+  lightColor: '#DFB2ED',
 };
 
 export const blueTheme: DefaultTheme = {
@@ -35,13 +36,13 @@ export const blueTheme: DefaultTheme = {
   ...commonTheme,
 };
 
-export const orangeTheme: DefaultTheme = {
-  mainColor: '#FF7714',
-  subColor: '#FFA05B',
-  blurColor:
-    'linear-gradient(90deg, #FF300C 0%, #FF8648 49.48%, #FFEC3F 96.35%)',
-  gradColor:
-    'linear-gradient(90deg, #F1510C 0%, #FF8648 49.48%, #FFEC3F 96.35%)',
-  darkColor: '#FB8F41',
-  lightColor: '#FFA05B',
-};
+// export const orangeTheme: DefaultTheme = {
+//   mainColor: '#FF7714',
+//   subColor: '#FFA05B',
+//   blurColor:
+//     'linear-gradient(90deg, #FF300C 0%, #FF8648 49.48%, #FFEC3F 96.35%)',
+//   gradColor:
+//     'linear-gradient(90deg, #F1510C 0%, #FF8648 49.48%, #FFEC3F 96.35%)',
+//   darkColor: '#FB8F41',
+//   lightColor: '#FFA05B',
+// };
