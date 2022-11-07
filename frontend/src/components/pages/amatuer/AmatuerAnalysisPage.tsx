@@ -1,19 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import AnalysisSideBar from '../../organisms/AnalysisSideBar';
 import { areas, DongItem } from '../../../data/areaDong';
 import Transitions from '../../atoms/Transition';
 import KakaoMap from '../../organisms/KakaoMap';
 import { useSearchParams } from 'react-router-dom';
-import getJobCode from '../../../utils/getJobCode';
 import { useNavigate } from 'react-router-dom';
 import getCenter from '../../../utils/getCenter';
 
 const AmatuerAnalysisPage = () => {
   const [map, setMap] = useState<any>(); // map 객체
   const [keyword, setKeyword] = useState(''); // 검색 input
-  const [select, setSelect] = useState<number | null>(null); // 현재 선택한 동 index
-  const [selectedDong, setSelectedDong] = useState(''); // 현재 선택한 동 이름
+  const [select, setSelect] = useState<DongItem | null>(null); // 현재 선택한 동 index
   const [searchResult, setSearchResult] = useState<Array<DongItem>>([]);
   const [searchResultOpen, setSearchResultOpen] = useState<boolean>(false);
   const searchResultRef = useRef<any>();
@@ -40,28 +38,30 @@ const AmatuerAnalysisPage = () => {
     }
   }, [keyword]);
 
-  const onChange = (e: any) => {
+  const onChange = useCallback((e: any) => {
     // 동 검색 onChange
     setKeyword(e.target.value);
-  };
+  }, []);
 
-  const clearValue = () => {
+  const clearValue = useCallback(() => {
     // 동 검색 x 버튼
-    setSelectedDong('');
     setSelect(null);
-  };
+  }, []);
   const onClickAnlzButton = () => {
-    const jobCode = getJobCode(mainCategory, subCategory);
-    navigate(`/amatuer/result?admCd=${0}&jobCode=${jobCode}`);
+    navigate(
+      `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
+    );
   };
 
-  const selectDong = (index: number, area: DongItem) => {
-    setSelect(index);
-    setSelectedDong(area.name);
-    setSearchResultOpen(false);
-    map.setCenter(new window.kakao.maps.LatLng(...getCenter(area.path)));
-    map.setLevel(5);
-  };
+  const selectDong = useCallback(
+    (area: DongItem) => {
+      setSelect(area);
+      setSearchResultOpen(false);
+      map.setCenter(new window.kakao.maps.LatLng(...getCenter(area.path)));
+      map.setLevel(5);
+    },
+    [map]
+  );
 
   return (
     <Transitions>
@@ -74,7 +74,7 @@ const AmatuerAnalysisPage = () => {
       >
         <AnalysisSideBar
           onChange={onChange}
-          inputValue={selectedDong}
+          inputValue={select?.name}
           clearValue={clearValue}
           searchResult={searchResult}
           searchResultOpen={searchResultOpen}

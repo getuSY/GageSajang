@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof BaseSideBar>;
 
 export const baseSideBar: ComponentStory<typeof BaseSideBar> = () => (
-  <BaseSideBar title="title" open={false}>
+  <BaseSideBar title="title" isOpen={false}>
     {'{children}'}
   </BaseSideBar>
 );

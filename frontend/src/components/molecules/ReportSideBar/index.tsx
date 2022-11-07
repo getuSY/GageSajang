@@ -23,30 +23,18 @@ library.add(
   faStore
 );
 // <div className="icon-div"><FontAwesomeIcon icon={icon} /></div>
-const arr = [
-  {
-    name: '매출 분석',
-    icon: 'chart-line',
-  },
-  {
-    name: '유동 인구',
-    icon: 'people-group',
-  },
-  {
-    name: '업종 분석',
-    icon: 'shop',
-  },
-  {
-    name: '점포 수',
-    icon: 'cash-register',
-  },
-  {
-    name: '부동산(임대료)',
-    icon: 'house-circle-check',
-  },
-];
 
-const ReportSideBar = () => {
+interface ReportSideBarProps {
+  jobName: string;
+  dongName?: string;
+  ReportMenuList: Array<any>;
+}
+
+const ReportSideBar = ({
+  jobName,
+  dongName,
+  ReportMenuList,
+}: ReportSideBarProps) => {
   const [tab, setTab] = useState<number>(0);
   return (
     <Wrapper>
@@ -56,16 +44,16 @@ const ReportSideBar = () => {
           <div className="sub-title-icon">
             <FontAwesomeIcon icon="location-dot" />
           </div>
-          중구 소곡동
+          {dongName}
         </div>
         <div className="report-category">
           <div className="sub-title-icon">
             <FontAwesomeIcon icon="store" />
           </div>
-          한식음식점
+          {jobName}
         </div>
       </div>
-      {arr.map((e, i) => (
+      {ReportMenuList.map((e, i) => (
         <ReportSidebarItem
           key={`report-sidebar-item-${i + 1}`}
           content={e}
@@ -78,9 +66,10 @@ const ReportSideBar = () => {
 };
 
 const Wrapper = styled.div`
-  height: 100%;
+  height: auto;
   background: ${({ theme }) => theme.lightColor};
   padding: 20px;
+  /* margin-bottom: 10px; */
   font-size: 1.4rem;
   border-radius: 20px;
   width: 230px;

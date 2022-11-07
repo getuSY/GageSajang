@@ -5,28 +5,29 @@ import WordSlider from '../../molecules/WordSlider';
 import { useNavigate } from 'react-router-dom';
 
 const wordList = [
-  { name: '한식집', code: 'cs100001' },
-  { name: '중국집', code: 'cs100002' },
-  { name: '일식집', code: 'cs100003' },
-  { name: '제과점', code: 'cs100005' },
-  { name: '치킨집', code: 'cs100007' },
-  { name: '분식집', code: 'cs100008' },
-  { name: '술집', code: 'cs100009' },
-  { name: '카페', code: 'cs100010' },
+  { name: '한식집', subCategory: 1 },
+  { name: '중국집', subCategory: 2 },
+  { name: '일식집', subCategory: 3 },
+  { name: '제과점', subCategory: 5 },
+  { name: '치킨집', subCategory: 7 },
+  { name: '분식집', subCategory: 8 },
+  { name: '술집', subCategory: 9 },
+  { name: '카페', subCategory: 10 },
 ];
 
 const IndexSearchBar = () => {
   const navigate = useNavigate();
-  const [jobCode, setJobCode] = useState(wordList[0].code);
+  const [subCategory, setSubCategory] = useState(wordList[0].subCategory);
 
-  const onClickHandler = () => navigate(`/amatuer/result?code=${jobCode}`);
+  const onClickHandler = () =>
+    navigate(`/amatuer/analysis?mainCategory=1&subCategory=${subCategory}`);
 
   return (
     <Wrapper>
       <div className="search-bar-container">
         <div className="search-bar">
           <div>나</div>
-          <WordSlider wordList={wordList} setJobCode={setJobCode} />
+          <WordSlider wordList={wordList} setSubCategory={setSubCategory} />
 
           {'할 건데 어디에 차리지?'.split(' ').map((e, i) => (
             <div style={{ marginRight: '1.3rem' }} key={i}>

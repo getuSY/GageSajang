@@ -1,32 +1,58 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ReportSideBar from '../../molecules/ReportSideBar';
 import ReportContent from '../../atoms/ReportContent';
+import Label from '../../atoms/Label';
 
 interface ReportProps {
-  admCd: string | null;
-  jobCd: string | null;
+  jobName: string;
+  dongName?: string;
 }
 
-const Report = ({ admCd, jobCd }: ReportProps) => {
-  console.log(admCd, jobCd);
+const ReportMenuList = [
+  {
+    name: '매출 분석',
+    icon: 'chart-line',
+  },
+  {
+    name: '유동 인구',
+    icon: 'people-group',
+  },
+  {
+    name: '업종 분석',
+    icon: 'shop',
+  },
+  {
+    name: '점포 수',
+    icon: 'cash-register',
+  },
+  {
+    name: '부동산(임대료)',
+    icon: 'house-circle-check',
+  },
+];
+
+const Report = ({ jobName, dongName }: ReportProps) => {
   return (
     <Wrapper>
-      <ReportSideBar />
+      <ReportSideBar
+        jobName={jobName}
+        dongName={dongName}
+        ReportMenuList={ReportMenuList}
+      />
       <div className="report-content">
         <ReportContent style={{ background: '#FEFFCA', alignItems: 'center' }}>
           ❗ 아래 분석 결과는 통계에 따른 추정 결과입니다. 향후 상황에 따라 다를
           수 있기 때문에, 판단 하에 참고하여 활용하시기 바랍니다.
         </ReportContent>
-        <ReportContent style={{ height: '600px' }}>
-          <div>💸 매출 분석</div>
-        </ReportContent>
-        <ReportContent style={{ height: '600px' }}>
-          <div>💸 매출 분석</div>
-        </ReportContent>
-        <ReportContent style={{ height: '600px' }}>
-          <div>💸 매출 분석</div>
-        </ReportContent>
+        {ReportMenuList.map((menu, i) => (
+          <ReportContent
+            key={`report-menu-list-${i}`}
+            style={{ height: '600px' }}
+          >
+            <Label>💸 {menu.name}</Label>
+          </ReportContent>
+        ))}
       </div>
     </Wrapper>
   );

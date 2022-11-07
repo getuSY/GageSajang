@@ -36,6 +36,17 @@ const AnalysisSideBar = ({
 }: AnalysisSideBarProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (mainCategory && subCategory) {
+      setIsOpen(true);
+    }
+  }, [mainCategory, subCategory]);
+  useEffect(() => {
+    if (inputValue) {
+      setIsOpen(true);
+    }
+  }, [inputValue]);
+
   const navigate = useNavigate();
   const menuList = useMemo(
     () => [
@@ -73,12 +84,8 @@ const AnalysisSideBar = ({
     [mainCategory, navigate]
   );
 
-  useEffect(() => {
-    setIsOpen(inputValue ? true : false);
-  }, [inputValue]);
-
   return (
-    <BaseSideBar title="🏪 상권 분석" open={isOpen}>
+    <BaseSideBar title="🏪 상권 분석" isOpen={isOpen} setIsOpen={setIsOpen}>
       <Wrapper>
         <LabelSearchInput
           label="📌 주소 입력"

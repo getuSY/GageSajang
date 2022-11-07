@@ -27,7 +27,7 @@ const icons = [
 ];
 
 const StatusPage = () => {
-  const [sideBarStatus, setSideBarStatus] = useState<boolean>(false);
+  const [sideBarStatus, setSideBarStatus] = useState<boolean>(true);
   const [category, setCategory] = useState<string>('main');
   const [tab, setTab] = useState<number>(1);
   const [region, setRegion] = useState<string>(''); // 현재 선택한 구 이름
@@ -52,9 +52,9 @@ const StatusPage = () => {
       <Wrapper>
         <BaseSideBar
           title="상권 현황"
-          open={true}
+          isOpen={sideBarStatus}
           statusmark={true}
-          setStatus={setSideBarStatus}
+          setIsOpen={setSideBarStatus}
         >
           <div>서울시 행정구 기준</div>
           <StatusTrend />

@@ -8,37 +8,26 @@ interface BaseSideBarProps {
   children?: React.ReactNode;
   title: string;
   style?: object;
-  open?: boolean;
+  isOpen?: boolean;
   statusmark?: boolean;
-  setStatus?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BaseSideBar = ({
   children,
   title,
   style,
-  open,
   statusmark,
-  setStatus,
+  isOpen,
+  setIsOpen,
 }: BaseSideBarProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (setStatus) {
-      setStatus(isOpen);
-    }
-  }, [isOpen, setStatus]);
-  useEffect(() => {
-    if (open) {
-      setIsOpen(true);
-    }
-  }, [open]);
-
   return (
     <Wrapper isOpen={isOpen} style={style}>
       <button
         className="toggle-btn"
-        onClick={() => setIsOpen((isOpen) => !isOpen)}
+        onClick={() =>
+          setIsOpen ? setIsOpen((isOpen: boolean) => !isOpen) : null
+        }
       >
         {isOpen ? '<' : '>'}
       </button>
@@ -71,7 +60,7 @@ const BaseSideBar = ({
 };
 
 interface WrapperProps {
-  isOpen: boolean;
+  isOpen?: boolean;
 }
 
 const Wrapper = styled.div<WrapperProps>`

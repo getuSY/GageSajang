@@ -38,14 +38,14 @@ const LabelSearchInput = ({
           clearValue={clearValue}
         />
         <InputSearchResult visible={searchResultOpen} ref={searchResultRef}>
-          {searchResult?.map((e, i) => (
+          {searchResult?.map((dong, i) => (
             <InputSearchResultItem
               key={`input-search-result-${i}`}
               onClick={() => {
-                selectDong(e.idx, e);
+                selectDong(dong);
               }}
             >
-              {e.name}
+              {dong.name}
             </InputSearchResultItem>
           ))}
         </InputSearchResult>

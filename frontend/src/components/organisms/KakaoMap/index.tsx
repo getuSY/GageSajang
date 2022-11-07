@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { areas, DongItem } from '../../../data/areaDong';
-import getCenter from '../../../utils/getCenter';
 
 const mapOptions = {
   //지도를 생성할 때 필요한 기본 옵션
@@ -32,7 +31,6 @@ const mouseoutOption = {
 interface KakaoMapProps {
   map: any;
   setMap: React.Dispatch<any>;
-
   mapRef: React.MutableRefObject<any>;
   select: any;
   selectDong: any;
@@ -41,22 +39,20 @@ interface KakaoMapProps {
 const KakaoMap = ({
   map,
   setMap,
-
   mapRef,
   select,
-
   selectDong, // 다각형 클릭 이벤트
 }: // select,
 KakaoMapProps) => {
   useEffect(() => {
     setMap(new window.kakao.maps.Map(mapRef.current, mapOptions)); //지도 생성 및 객체 리턴
-  }, [mapRef, mapOptions, setMap]);
+  }, [mapRef, setMap]);
 
   useEffect(() => {
     if (map) {
       const polygons = areas.map((area: DongItem, index) => {
         const polygon = new window.kakao.maps.Polygon(
-          polygonOption(area.path, index === select)
+          polygonOption(area.path, index === select?.idx)
         );
         polygon.setMap(map);
         // 다각형에 마우스오버 이벤트를 등록합니다
@@ -78,7 +74,7 @@ KakaoMapProps) => {
         // 다각형에 클릭 이벤트를 등록합니다
         window.kakao.maps.event.addListener(polygon, 'click', function () {
           if (select === null) {
-            selectDong(index, area);
+            selectDong(area);
           }
         });
         return polygon;
@@ -88,7 +84,7 @@ KakaoMapProps) => {
         polygons.map((polygon, idx) => polygon.setMap(null));
       };
     }
-  }, [map, select, mouseoutOption, mouseoverOption, polygonOption]);
+  }, [map, select, selectDong]);
 
   return (
     <div
