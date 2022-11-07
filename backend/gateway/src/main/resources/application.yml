@@ -6,10 +6,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: BACKEND-USER
-          uri: lb://BACKEND-USER
+        - id: backend-anlz
+          uri: lb://BACKEND-ANLZ
           predicates:
-            - Path=/user/**
+            - Path=/anlz/**
           filters:
             - CustomFilter
             - name: LoggingFilter
