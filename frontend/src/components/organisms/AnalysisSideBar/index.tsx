@@ -7,6 +7,7 @@ import Button from '../../atoms/Button';
 import Label from '../../atoms/Label';
 import AnalysisSubButtons from '../../molecules/AnalysisSubButtons';
 import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 interface AnalysisSideBarProps {
   inputValue?: string;
@@ -19,9 +20,14 @@ const AnalysisSideBar = ({
   inputValue,
   clearValue,
 }: AnalysisSideBarProps) => {
+  const [params] = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [mainCategory, setMainCategory] = useState<number>(0);
-  const [subCategory, setSubCategory] = useState<number>(0);
+  const mainCategory = params.get('mainCategory')
+    ? parseInt(params.get('mainCategory')!)
+    : 0;
+  const subCategory = params.get('subCategory')
+    ? parseInt(params.get('subCategory')!)
+    : 0;
   const navigate = useNavigate();
   const menuList = useMemo(
     () => [
@@ -29,37 +35,34 @@ const AnalysisSideBar = ({
         name: '요식업',
         onClick: () => {
           if (mainCategory !== 1) {
-            setMainCategory(1);
+            navigate('/analysis?mainCategory=1', { replace: true });
           } else {
-            setMainCategory(0);
+            navigate('/analysis', { replace: true });
           }
-          setSubCategory(0);
         },
       },
       {
         name: '서비스업',
         onClick: () => {
           if (mainCategory !== 2) {
-            setMainCategory(2);
+            navigate('/analysis?mainCategory=2', { replace: true });
           } else {
-            setMainCategory(0);
+            navigate('/analysis', { replace: true });
           }
-          setSubCategory(0);
         },
       },
       {
         name: '도소매업',
         onClick: () => {
           if (mainCategory !== 3) {
-            setMainCategory(3);
+            navigate('/analysis?mainCategory=3', { replace: true });
           } else {
-            setMainCategory(0);
+            navigate('/analysis', { replace: true });
           }
-          setSubCategory(0);
         },
       },
     ],
-    [mainCategory]
+    [mainCategory, navigate]
   );
   const onClickAnlzButton = () => {
     const jobCode = `CS${mainCategory}000${subCategory
@@ -88,11 +91,7 @@ const AnalysisSideBar = ({
         {mainCategory ? (
           <>
             <Label>🍴 상세 선택</Label>
-            <AnalysisSubButtons
-              tab={mainCategory}
-              setSubCategory={setSubCategory}
-              subCategory={subCategory}
-            />
+            <AnalysisSubButtons tab={mainCategory} subCategory={subCategory} />
           </>
         ) : null}
       </Wrapper>
