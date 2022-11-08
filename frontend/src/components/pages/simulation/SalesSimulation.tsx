@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import RoundBox from '../../atoms/RoundBox/index';
 import Button from '../../atoms/Button/index';
-import LineChart from '../../atoms/LineChart/index';
 import DynamicChart from '../../atoms/DynamicChart/index';
 import SlideBar from '../../atoms/SlideBar';
 import DynamicBarChart from '../../atoms/DynamicBarChart';
+import ReportChart from '../../atoms/ReportChart';
 
 // 시뮬레이션 페이지 안에 들어갈 시뮬레이션 그래프 컴포넌트입니다.
 // 임시로 시뮬레이션 pages 안에 만들어둠!!
@@ -61,6 +61,7 @@ const SalesSimulation = ({}: SalesSimulationProps) => {
           <SlideBar setPos={setPos} />
           <DynamicChart posi={pos} />
           <DynamicBarChart posi={pos} />
+          <ReportChart type="line" data={graphData} style={graphStyle} />
         </RoundBox>
       )}
       {open === false && (

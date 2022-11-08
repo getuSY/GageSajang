@@ -27,6 +27,7 @@
     "canvasjs": "^1.8.3",
     "canvasjs-react-charts": "^1.0.5",
     "chart.js": "^3.9.1",
+    "chartjs-plugin-datalabels": "^2.1.0",
     "csstype": "^3.1.1",
     "d3": "^7.6.1",
     "framer-motion": "^7.6.2",

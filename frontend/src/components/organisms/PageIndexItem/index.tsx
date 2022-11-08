@@ -20,6 +20,9 @@ const PageIndexItem = ({ type }: PageIndexItemProps) => {
   const toProStore = () => {
     navigate('/professional/store');
   };
+  const toAnalysis = () => {
+    navigate('/amatuer/analysis');
+  };
   return (
     <Wrapper>
       {type === 'pro' ? (
@@ -47,7 +50,9 @@ const PageIndexItem = ({ type }: PageIndexItemProps) => {
               <div>내 가게 진단을 위해 가게 정보가 필요합니다.</div>
               <div>정보를 입력해주세요.</div>
             </div>
-            <Button type="blur">내 가게 상상하기</Button>
+            <Button type="blur" onClick={toAnalysis}>
+              내 가게 상상하기
+            </Button>
           </div>
         </>
       )}
@@ -69,7 +74,6 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 30px;
-    font-family: 'Eoe_Zno_M';
     font-size: 1.3rem;
   }
   & .left {

@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import IndexItem from '../organisms/IndexItem';
-import {
-  greenTheme,
-  purpleTheme,
-  blueTheme,
-  orangeTheme,
-} from '../../styles/theme';
+import { greenTheme, purpleTheme, blueTheme } from '../../styles/theme';
 import { useNavigate } from 'react-router-dom';
 import IndexSearchBar from '../organisms/IndexSearchBar';
 import Footer from '../organisms/Footer';
@@ -18,15 +13,15 @@ const status: IndexContent = {
   description: '서울시의 상권 현황을 한 눈에!',
   imgSrc: 'assets/img/index_status.png',
   buttonContent: '상권 현황 보러 가기',
-  buttonColor: orangeTheme.gradColor,
-};
-const analysis: IndexContent = {
-  title: '상권 분석',
-  description: '구체적인 상권 분석 리포트',
-  imgSrc: 'assets/img/index_analysis.png',
-  buttonContent: '분석하러 가기',
   buttonColor: blueTheme.gradColor,
 };
+// const analysis: IndexContent = {
+//   title: '상권 분석',
+//   description: '구체적인 상권 분석 리포트',
+//   imgSrc: 'assets/img/index_analysis.png',
+//   buttonContent: '분석하러 가기',
+//   buttonColor: blueTheme.gradColor,
+// };
 
 const professional: IndexContent = {
   title: '이미 사장',
@@ -50,19 +45,20 @@ const IndexPage = () => {
       <Wrapper>
         <IndexSearchBar />
         <IndexItem content={status} onClick={() => navigate('/status')} />
-        <IndexItem
+        {/* <IndexItem
           content={analysis}
-          onClick={() => navigate('/analysis')}
+          onClick={() => navigate('/amatuer/analysis')}
           right
-        />
+        /> */}
         {/* <div style={{ height: '2000px' }}>asdas</div> */}
         <IndexItem
           content={professional}
           onClick={() => navigate('/professional')}
+          right
         />
         <IndexItem
           content={amatuer}
-          right
+          // right
           onClick={() => navigate('/amatuer')}
         />
         <Footer />

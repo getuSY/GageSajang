@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button';
 import WordSlider from '../../molecules/WordSlider';
+import { useNavigate } from 'react-router-dom';
 
 const wordList = [
-  '치킨집',
-  '피자집',
-  '개발자',
-  '돈까스',
-  '꽃집',
-  '옷가게',
-  '우리집',
+  { name: '한식집', subCategory: 1 },
+  { name: '중국집', subCategory: 2 },
+  { name: '일식집', subCategory: 3 },
+  { name: '제과점', subCategory: 5 },
+  { name: '치킨집', subCategory: 7 },
+  { name: '분식집', subCategory: 8 },
+  { name: '술집', subCategory: 9 },
+  { name: '카페', subCategory: 10 },
 ];
 
 const IndexSearchBar = () => {
+  const navigate = useNavigate();
+  const [subCategory, setSubCategory] = useState(wordList[0].subCategory);
+
+  const onClickHandler = () =>
+    navigate(`/amatuer/analysis?mainCategory=1&subCategory=${subCategory}`);
+
   return (
     <Wrapper>
       <div className="search-bar-container">
         <div className="search-bar">
           <div>나</div>
-          <WordSlider wordList={wordList} />
+          <WordSlider wordList={wordList} setSubCategory={setSubCategory} />
 
           {'할 건데 어디에 차리지?'.split(' ').map((e, i) => (
             <div style={{ marginRight: '1.3rem' }} key={i}>
@@ -27,7 +35,9 @@ const IndexSearchBar = () => {
             </div>
           ))}
         </div>
-        <Button type="blur">보러 가기</Button>
+        <Button type="blur" onClick={onClickHandler}>
+          보러 가기
+        </Button>
       </div>
     </Wrapper>
   );

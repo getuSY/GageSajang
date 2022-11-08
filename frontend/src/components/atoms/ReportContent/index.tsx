@@ -4,10 +4,15 @@ import styled from 'styled-components';
 interface ReportContentProps {
   children: React.ReactNode;
   style?: object;
+  propsRef?: any;
 }
 
-const ReportContent = ({ children, style }: ReportContentProps) => {
-  return <Wrapper style={style}>{children}</Wrapper>;
+const ReportContent = ({ children, style, propsRef }: ReportContentProps) => {
+  return (
+    <Wrapper style={style} ref={propsRef}>
+      {children}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`

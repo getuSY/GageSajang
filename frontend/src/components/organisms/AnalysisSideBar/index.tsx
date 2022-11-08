@@ -1,33 +1,52 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import BaseSideBar from '../../molecules/BaseSideBar';
-import LabelInput from '../../molecules/LabelInput';
+import LabelSearchInput from '../../molecules/LabelSearchInput';
 import ButtonInputs from '../../molecules/ButtonInputs';
 import Button from '../../atoms/Button';
 import Label from '../../atoms/Label';
 import AnalysisSubButtons from '../../molecules/AnalysisSubButtons';
 import { useNavigate } from 'react-router-dom';
-import { useSearchParams } from 'react-router-dom';
+import { DongItem } from '../../../data/areaDong';
 
 interface AnalysisSideBarProps {
   inputValue?: string;
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  searchResult?: Array<DongItem>;
+  searchResultOpen: boolean;
+  selectDong: any;
+  searchResultRef: React.MutableRefObject<any>;
+  mainCategory: number;
+  subCategory: number;
+  onClickAnlzButton: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const AnalysisSideBar = ({
   onChange,
   inputValue,
   clearValue,
+  searchResult,
+  searchResultOpen,
+  selectDong,
+  searchResultRef,
+  mainCategory,
+  subCategory,
+  onClickAnlzButton,
 }: AnalysisSideBarProps) => {
-  const [params] = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const mainCategory = params.get('mainCategory')
-    ? parseInt(params.get('mainCategory')!)
-    : 0;
-  const subCategory = params.get('subCategory')
-    ? parseInt(params.get('subCategory')!)
-    : 0;
+
+  useEffect(() => {
+    if (mainCategory && subCategory) {
+      setIsOpen(true);
+    }
+  }, [mainCategory, subCategory]);
+  useEffect(() => {
+    if (inputValue) {
+      setIsOpen(true);
+    }
+  }, [inputValue]);
+
   const navigate = useNavigate();
   const menuList = useMemo(
     () => [
@@ -35,9 +54,9 @@ const AnalysisSideBar = ({
         name: '요식업',
         onClick: () => {
           if (mainCategory !== 1) {
-            navigate('/analysis?mainCategory=1', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=1', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
@@ -45,9 +64,9 @@ const AnalysisSideBar = ({
         name: '서비스업',
         onClick: () => {
           if (mainCategory !== 2) {
-            navigate('/analysis?mainCategory=2', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=2', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
@@ -55,36 +74,29 @@ const AnalysisSideBar = ({
         name: '도소매업',
         onClick: () => {
           if (mainCategory !== 3) {
-            navigate('/analysis?mainCategory=3', { replace: true });
+            navigate('/amatuer/analysis?mainCategory=3', { replace: true });
           } else {
-            navigate('/analysis', { replace: true });
+            navigate('/amatuer/analysis', { replace: true });
           }
         },
       },
     ],
     [mainCategory, navigate]
   );
-  const onClickAnlzButton = () => {
-    const jobCode = `CS${mainCategory}000${subCategory
-      .toString()
-      .padStart(2, '0')}`;
-    console.log(jobCode);
-    navigate(`/loading?nextTo=/analysis/result`);
-  };
-
-  useEffect(() => {
-    setIsOpen(inputValue ? true : false);
-  }, [inputValue]);
 
   return (
-    <BaseSideBar title="🏪 상권 분석" open={isOpen}>
+    <BaseSideBar title="🏪 상권 분석" isOpen={isOpen} setIsOpen={setIsOpen}>
       <Wrapper>
-        <LabelInput
+        <LabelSearchInput
           label="📌 주소 입력"
           placeholder="주소를 입력하세요."
           onChange={onChange}
           inputValue={inputValue}
           clearValue={clearValue}
+          searchResult={searchResult}
+          searchResultOpen={searchResultOpen}
+          selectDong={selectDong}
+          searchResultRef={searchResultRef}
         />
         <Label>🍴 업종 선택</Label>
         <ButtonInputs menuList={menuList} tab={mainCategory} />

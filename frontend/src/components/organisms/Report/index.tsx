@@ -1,28 +1,57 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import ReportTitle from '../../atoms/ReportTitle';
 import ReportSideBar from '../../molecules/ReportSideBar';
-import ReportContent from '../../atoms/ReportContent';
+import ReportContentContainer from '../../molecules/ReportContentContainer';
 
-const Report = () => {
+interface ReportProps {
+  jobName: string;
+  dongName?: string;
+  amatuerResult: any;
+}
+
+const reportMenuList = [
+  {
+    name: '매출 분석',
+    icon: 'chart-line',
+  },
+  {
+    name: '유동 인구',
+    icon: 'people-group',
+  },
+  {
+    name: '업종 분석',
+    icon: 'shop',
+  },
+  {
+    name: '점포 수',
+    icon: 'cash-register',
+  },
+  {
+    name: '부동산(임대료)',
+    icon: 'house-circle-check',
+  },
+];
+
+const Report = ({ jobName, dongName, amatuerResult }: ReportProps) => {
+  const contentRefs = useRef<HTMLDivElement[]>([]);
+  const [tab, setTab] = useState<number>(0);
+
   return (
     <Wrapper>
-      <ReportSideBar />
-      <div className="report-content">
-        <ReportContent style={{ background: '#FEFFCA', alignItems: 'center' }}>
-          ❗ 아래 분석 결과는 통계에 따른 추정 결과입니다. 향후 상황에 따라 다를
-          수 있기 때문에, 판단 하에 참고하여 활용하시기 바랍니다.
-        </ReportContent>
-        <ReportContent style={{ height: '600px' }}>
-          <div>💸 매출 분석</div>
-        </ReportContent>
-        <ReportContent style={{ height: '600px' }}>
-          <div>💸 매출 분석</div>
-        </ReportContent>
-        <ReportContent style={{ height: '600px' }}>
-          <div>💸 매출 분석</div>
-        </ReportContent>
-      </div>
+      <ReportSideBar
+        jobName={jobName}
+        dongName={dongName}
+        reportMenuList={reportMenuList}
+        contentRefs={contentRefs}
+        tab={tab}
+        setTab={setTab}
+      />
+      <ReportContentContainer
+        reportMenuList={reportMenuList}
+        contentRefs={contentRefs}
+        setTab={setTab}
+        amatuerResult={amatuerResult}
+      />
     </Wrapper>
   );
 };
@@ -33,18 +62,6 @@ const Wrapper = styled.div`
   display: flex;
   padding: 0 10px;
   height: 100%;
-
-  & .report-content {
-    flex-grow: 1;
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* gap: 10px; */
-    overflow-y: scroll;
-
-    & div + div {
-      margin-top: 10px;
-    }
-  }
 `;
 
 export default Report;
