@@ -2,6 +2,7 @@ package com.ssafy.e205.config;
 
 import com.ssafy.e205.api.service.Auth.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserServiceImpl userService;
     private final JwtTokenProvider jwtTokenProvider;
+    private final CorsFilter corsFilter;
 
     @Bean
     @Override
@@ -42,13 +44,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().configurationSource(request -> {
-            var cors = new CorsConfiguration();
-            cors.setAllowedOrigins(List.of("*"));
-            cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
-            cors.setAllowedHeaders(List.of("*"));
-            return cors;
-        });
+//        http.cors().configurationSource(request -> {
+//            var cors = new CorsConfiguration();
+//            cors.setAllowedOrigins(List.of("*"));
+//            cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
+//            cors.setAllowedHeaders(List.of("*"));
+//            return cors;
+//        });
 
         http.authorizeRequests()
                 .antMatchers("/Auth/**").permitAll()
@@ -62,9 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().disable()
-                .cors().disable()
-                .csrf().disable();
+                .addFilter(corsFilter)
+                .formLogin().disable().cors();
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 //        http
