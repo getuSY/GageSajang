@@ -19,27 +19,27 @@ public class StoreEntity {
 
     @Column(name="email")
     private String email;
-    @Column(name="store_name")
+    @Column(name="industryCode")
     private String industryCode;
-    @Column(name="store_address_administrative")
+    @Column(name="industryName")
     private String industryName;
-    @Column(name="store_address_court")
+    @Column(name="order")
     private double order;
-    @Column(name="store_employ_count")
+    @Column(name="total")
     private double total;
-    @Column(name="store_area")
+    @Column(name="similar")
     private double similar;
-    @Column(name="store_type_code")
+    @Column(name="open")
     private double open;
-    @Column(name = "store_type_name")
+    @Column(name = "close")
     private double close;
-    @Column(name="store_num")
+    @Column(name="franchise")
     private double franchise;
-    @Column(name="store_num")
+    @Column(name="sales")
     private double sales;
-    @Column(name="store_num")
+    @Column(name="clerk")
     private int clerk;
-    @Column(name="store_num")
+    @Column(name="area")
     private int area;
 
     @Builder
