@@ -1,5 +1,6 @@
 package com.ssafy.e205.api.controller;
 
+import com.ssafy.e205.E205Application;
 import com.ssafy.e205.api.dto.SimulDto;
 import com.ssafy.e205.api.service.SimulService;
 import com.ssafy.e205.api.service.SimulServiceImpl;
@@ -28,6 +29,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/simul")
 public class SimulController {
+
+    @Autowired
+    E205Application application;
+
     @Autowired
     SimulService service;
 
@@ -42,6 +47,11 @@ public class SimulController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
+
+    @GetMapping("/test")
+    public String test(){
+        return "simual service port : " + application.portnum;
+    }
 
     /** @brief : 아마 사장의 매출 예측 시뮬레이션
      *  @date : 2022-11-02

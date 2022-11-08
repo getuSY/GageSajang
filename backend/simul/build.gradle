@@ -18,6 +18,10 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	set('springCloudVersion', "2021.0.4")
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -31,6 +35,8 @@ dependencies {
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	// for apache kafka
 	implementation 'org.springframework.kafka:spring-kafka'
+	// eurka client
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 	// for json
 //	implementation 'com.fasterxml.jackson.core:jackson-core:2.9.7'
@@ -46,6 +52,12 @@ dependencies {
 //	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 tasks.named('test') {
