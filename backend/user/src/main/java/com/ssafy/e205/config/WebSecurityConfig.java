@@ -13,7 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.CorsUtils;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
@@ -23,7 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserServiceImpl userService;
     private final JwtTokenProvider jwtTokenProvider;
-    private final CorsFilter corsFilter;
 
     @Bean
     @Override
@@ -44,14 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.cors().configurationSource(request -> {
-//            var cors = new CorsConfiguration();
-//            cors.setAllowedOrigins(List.of("*"));
-//            cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
-//            cors.setAllowedHeaders(List.of("*"));
-//            return cors;
-//        });
-
         http.authorizeRequests()
                 .antMatchers("/Auth/**").permitAll()
                 .antMatchers("/kafka/**").permitAll()
@@ -64,10 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(corsFilter)
-                .formLogin().disable().cors();
+                .formLogin().disable().cors().configurationSource(corsConfigurationSource());
 
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 //        http
 //                .authorizeRequests() // 6
 //                .antMatchers("/login", "/signup", "/user").permitAll() // 누구나 접근 허용
@@ -84,6 +76,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .invalidateHttpSession(true) // 세션 날리기
 //        ;
     }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
