@@ -106,3 +106,5 @@ export const cs3 = [
   '주유소',
   '전자상거래업',
 ];
+
+export default [cs1, cs2, cs3];

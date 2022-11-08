@@ -74,7 +74,6 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 30px;
-    font-family: 'Eoe_Zno_M';
     font-size: 1.3rem;
   }
   & .left {

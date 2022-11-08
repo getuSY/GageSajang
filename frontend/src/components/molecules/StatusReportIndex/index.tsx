@@ -68,6 +68,7 @@ const Wrapper = styled.div`
       font-weight: 700;
       text-justify: center;
       width: 5rem;
+      text-align: center;
     }
 
     & .label-category {

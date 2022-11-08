@@ -1,6 +1,6 @@
 import { Polygon } from 'geojson';
 
-interface Property {
+export interface Property {
   SIG_CD: string;
   SIG_ENG_NM: string;
   SIG_KOR_NM: string;

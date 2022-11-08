@@ -13,7 +13,6 @@ interface ReportTitleProps {
 }
 
 const ReportTitle = ({ style, icon, title }: ReportTitleProps) => {
-  console.log(title);
   return (
     <Wrapper style={style}>
       <FontAwesomeIcon
