@@ -57,9 +57,9 @@ const StatusPage = () => {
         <BaseSideBar
           // 왼쪽 사이드 바, 코드 패턴 수정 예정
           title="상권 현황"
-          open={true}
+          isOpen={sideBarStatus}
           statusmark={true}
-          setStatus={setSideBarStatus}
+          setIsOpen={setSideBarStatus}
         >
           <div>서울시 행정구 기준</div>
           <StatusTrend />

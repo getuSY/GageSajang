@@ -15,16 +15,21 @@ const Label = ({
   onClickLabelHandler,
 }: LabelProps) => {
   return (
-    <Wrapper style={style} onClick={onClickLabelHandler} htmlFor={htmlFor}>
+    <Wrapper
+      style={style}
+      onClick={onClickLabelHandler}
+      htmlFor={htmlFor}
+      pointer={onClickLabelHandler !== undefined}
+    >
       {children}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.label`
+const Wrapper = styled.label<{ pointer?: boolean }>`
   font-size: 1.3rem;
   font-family: 'Pretendard-Regular';
-  cursor: pointer;
+  cursor: ${({ pointer }) => (pointer ? 'pointer' : '')};
 `;
 
 export default Label;

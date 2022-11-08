@@ -7,17 +7,19 @@ import Button from '../../atoms/Button';
 import Label from '../../atoms/Label';
 import AnalysisSubButtons from '../../molecules/AnalysisSubButtons';
 import { useNavigate } from 'react-router-dom';
-import { useSearchParams } from 'react-router-dom';
+import { DongItem } from '../../../data/areaDong';
 
 interface AnalysisSideBarProps {
   inputValue?: string;
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  searchResult?: Array<string>;
+  searchResult?: Array<DongItem>;
   searchResultOpen: boolean;
-  setSearchResultOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedDong: React.Dispatch<React.SetStateAction<string>>;
+  selectDong: any;
   searchResultRef: React.MutableRefObject<any>;
+  mainCategory: number;
+  subCategory: number;
+  onClickAnlzButton: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const AnalysisSideBar = ({
@@ -26,18 +28,25 @@ const AnalysisSideBar = ({
   clearValue,
   searchResult,
   searchResultOpen,
-  setSearchResultOpen,
-  setSelectedDong,
+  selectDong,
   searchResultRef,
+  mainCategory,
+  subCategory,
+  onClickAnlzButton,
 }: AnalysisSideBarProps) => {
-  const [params] = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const mainCategory = params.get('mainCategory')
-    ? parseInt(params.get('mainCategory')!)
-    : 0;
-  const subCategory = params.get('subCategory')
-    ? parseInt(params.get('subCategory')!)
-    : 0;
+
+  useEffect(() => {
+    if (mainCategory && subCategory) {
+      setIsOpen(true);
+    }
+  }, [mainCategory, subCategory]);
+  useEffect(() => {
+    if (inputValue) {
+      setIsOpen(true);
+    }
+  }, [inputValue]);
+
   const navigate = useNavigate();
   const menuList = useMemo(
     () => [
@@ -74,20 +83,9 @@ const AnalysisSideBar = ({
     ],
     [mainCategory, navigate]
   );
-  const onClickAnlzButton = () => {
-    const jobCode = `CS${mainCategory}000${subCategory
-      .toString()
-      .padStart(2, '0')}`;
-    console.log(jobCode);
-    navigate(`/loading?nextTo=/amatuer/result`);
-  };
-
-  useEffect(() => {
-    setIsOpen(inputValue ? true : false);
-  }, [inputValue]);
 
   return (
-    <BaseSideBar title="🏪 상권 분석" open={isOpen}>
+    <BaseSideBar title="🏪 상권 분석" isOpen={isOpen} setIsOpen={setIsOpen}>
       <Wrapper>
         <LabelSearchInput
           label="📌 주소 입력"
@@ -97,8 +95,7 @@ const AnalysisSideBar = ({
           clearValue={clearValue}
           searchResult={searchResult}
           searchResultOpen={searchResultOpen}
-          setSearchResultOpen={setSearchResultOpen}
-          setSelectedDong={setSelectedDong}
+          selectDong={selectDong}
           searchResultRef={searchResultRef}
         />
         <Label>🍴 업종 선택</Label>

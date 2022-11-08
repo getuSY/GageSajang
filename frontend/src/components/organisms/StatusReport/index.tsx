@@ -69,7 +69,6 @@ const StatusReport = ({
     icon: icon[0],
   });
   useEffect(() => {
-    console.log(tab, content[tab - 1].name, icon[tab - 1]);
     setTitle({
       name: content[tab - 1].name,
       icon: icon[tab - 1],

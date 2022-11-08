@@ -42,13 +42,8 @@ const LoginBox = ({}: LoginBoxProps) => {
   };
 
   const onClickHandler = () => {
-    console.log('click');
     mutation.mutate(loginInputs);
   };
-
-  useEffect(() => {
-    console.log(mutation);
-  }, [mutation]);
 
   return (
     <Wrapper>

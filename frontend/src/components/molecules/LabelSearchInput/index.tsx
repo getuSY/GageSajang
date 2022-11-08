@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Label from '../../atoms/Label';
 import Input from '../../atoms/Input';
+import { DongItem } from '../../../data/areaDong';
 
 interface LabelSearchInputProps {
   label: string;
@@ -9,11 +10,10 @@ interface LabelSearchInputProps {
   inputValue?: string;
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  searchResult?: Array<string>;
+  searchResult?: Array<DongItem>;
   searchResultOpen: boolean;
-  setSearchResultOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedDong: React.Dispatch<React.SetStateAction<string>>;
   searchResultRef: React.MutableRefObject<any>;
+  selectDong: any;
 }
 
 const LabelSearchInput = ({
@@ -24,8 +24,7 @@ const LabelSearchInput = ({
   clearValue,
   searchResult,
   searchResultOpen,
-  setSearchResultOpen,
-  setSelectedDong,
+  selectDong,
   searchResultRef,
 }: LabelSearchInputProps) => {
   return (
@@ -39,15 +38,14 @@ const LabelSearchInput = ({
           clearValue={clearValue}
         />
         <InputSearchResult visible={searchResultOpen} ref={searchResultRef}>
-          {searchResult?.map((e, i) => (
+          {searchResult?.map((dong, i) => (
             <InputSearchResultItem
               key={`input-search-result-${i}`}
               onClick={() => {
-                setSearchResultOpen(false);
-                setSelectedDong(e);
+                selectDong(dong);
               }}
             >
-              {e}
+              {dong.name}
             </InputSearchResultItem>
           ))}
         </InputSearchResult>

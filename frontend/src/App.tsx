@@ -14,12 +14,6 @@ import SimulationPage from './components/pages/simulation/SimulationPage';
 
 const Home = lazy(() => import('./components/pages/IndexPage'));
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
-// const AnalysisPage = lazy(
-//   () => import('./components/pages/analysis/AnalysisPage')
-// );
-// const AnalysisResultPage = lazy(
-//   () => import('./components/pages/analysis/AnalysisResultPage')
-// );
 const ProfessionalPage = lazy(
   () => import('./components/pages/professional/ProfessionalPage')
 );
@@ -29,8 +23,8 @@ const AmatuerPage = lazy(
 const AmatuerAnalysisPage = lazy(
   () => import('./components/pages/amatuer/AmatuerAnalysisPage')
 );
-const AmatuerAnalysisResultPage = lazy(
-  () => import('./components/pages/amatuer/AmatuerAnalysisResultPage')
+const AmatuerResultPage = lazy(
+  () => import('./components/pages/amatuer/AmatuerResultPage')
 );
 // const LoginPage = lazy(() => import('./components/pages/user/LoginPage'));
 // const RegisterPage = lazy(() => import('./components/pages/user/RegisterPage'));
@@ -83,7 +77,7 @@ function App() {
           >
             <Route path="" element={<AmatuerPage />} />
             <Route path="analysis" element={<AmatuerAnalysisPage />} />
-            <Route path="result" element={<AmatuerAnalysisResultPage />} />
+            <Route path="result" element={<AmatuerResultPage />} />
           </Route>
         </Routes>
       </Router>
