@@ -28,6 +28,20 @@ spring:
                 baseMessage: Spring Cloud Gateway Logging Filter
                 preLogger: true
                 postLogger: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 'http://localhost:3000'
+            allow-credentials: true
+            allowedHeaders: '*'
+            allowedMethods:
+              - PUT
+              - GET
+              - POST
+              - DELETE
+              - OPTIONS
   main:
     web-application-type: reactive
 
