@@ -62,6 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                 .antMatchers("/admin").hasRole("admin")
                         .anyRequest().permitAll()
                         .and()
+                                .csrf().disable()
                                 .formLogin().disable();
 //                                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
 //                                        )
