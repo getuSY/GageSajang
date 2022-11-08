@@ -48,41 +48,17 @@ const AnalysisSideBar = ({
   }, [inputValue]);
 
   const navigate = useNavigate();
-  const menuList = useMemo(
-    () => [
-      {
-        name: '요식업',
-        onClick: () => {
-          if (mainCategory !== 1) {
-            navigate('/amatuer/analysis?mainCategory=1', { replace: true });
-          } else {
-            navigate('/amatuer/analysis', { replace: true });
-          }
-        },
-      },
-      {
-        name: '서비스업',
-        onClick: () => {
-          if (mainCategory !== 2) {
-            navigate('/amatuer/analysis?mainCategory=2', { replace: true });
-          } else {
-            navigate('/amatuer/analysis', { replace: true });
-          }
-        },
-      },
-      {
-        name: '도소매업',
-        onClick: () => {
-          if (mainCategory !== 3) {
-            navigate('/amatuer/analysis?mainCategory=3', { replace: true });
-          } else {
-            navigate('/amatuer/analysis', { replace: true });
-          }
-        },
-      },
-    ],
-    [mainCategory, navigate]
-  );
+  const test = ['요식업', '서비스업', '도소매업'];
+  const menuList = test.map((e, i) => ({
+    name: e,
+    onClick: () => {
+      if (mainCategory !== i + 1) {
+        navigate(`/amatuer/analysis?mainCategory=${i + 1}`, { replace: true });
+      } else {
+        navigate('/amatuer/analysis', { replace: true });
+      }
+    },
+  }));
 
   return (
     <BaseSideBar title="🏪 상권 분석" isOpen={isOpen} setIsOpen={setIsOpen}>

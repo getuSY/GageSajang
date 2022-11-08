@@ -8,13 +8,13 @@ export const helloUser = async (name: string) => {
 };
 
 export const userSignUp = async (params: UserModel) => {
-  const { data } = await client.post('user/signup', params);
+  const { data } = await client.post('user/auth/signup', params);
 
   return data;
 };
 
 export const userLogin = async (params: UserModel) => {
-  const { data } = await client.post('user/login', params);
+  const { data } = await client.post('user/auth/login', params);
 
   return data;
 };

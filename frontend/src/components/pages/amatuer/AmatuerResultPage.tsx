@@ -21,11 +21,6 @@ const AmatuerResultPage = () => {
   const jobCode = getJobCode(mainCategory, subCategory); // csX000XX
   const jobName = cs[mainCategory - 1][subCategory - 1];
   const { data: amatuerResult } = useAmatuerResult({ admCd, jobCode });
-  const { data, isError, isLoading, isSuccess } = useAmatuerResult({
-    admCd,
-    jobCode,
-  });
-  console.log(data, isError, isLoading, isSuccess);
 
   return (
     <Wrapper>
