@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import type { ChartData, ChartOptions } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Chart } from 'chart.js';
-Chart.register(ChartDataLabels);
+import { Chart, CategoryScale, LinearScale, BarElement } from 'chart.js';
+
+Chart.register(ChartDataLabels, CategoryScale, LinearScale, BarElement);
 
 interface BarChartProps {
   options?: ChartOptions<'bar'>;
