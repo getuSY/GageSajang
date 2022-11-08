@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import type { ChartData, ChartOptions } from 'chart.js';
 import BarChart from '../../atoms/BarChart';
 import ReportSubtitle from '../../atoms/ReportSubtitle';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 interface StatusReportBarChartProps {
   title: string;
-  data: any;
-  options: ChartOptions<'bar'>;
+  data: ChartData<'bar'>;
+  // options: ChartOptions<'bar'>;
+  options: any;
   style?: object;
 }
 const StatusReportBarChart = ({
@@ -22,11 +24,7 @@ const StatusReportBarChart = ({
         title={title}
         style={{ marginBottom: '1rem' }}
       ></ReportSubtitle>
-      <BarChart
-        data={data}
-        options={options}
-        style={{ width: '450px', height: '10px' }}
-      />
+      <BarChart data={data} options={options} style={{ width: '450px' }} />
     </Wrapper>
   );
 };

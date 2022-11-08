@@ -1,20 +1,20 @@
-import React from 'react';
 import styled from 'styled-components';
 import type { ChartData, ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart } from 'chart.js';
+Chart.register(ChartDataLabels);
 
 interface LineChartProps {
-  //   options: ChartOptions<'line'>;
+  options?: ChartOptions<'line'>;
   data: ChartData<'line'>;
   style?: object;
 }
 
-const LineChart = ({ data, style }: LineChartProps) => {
+const LineChart = ({ data, style, options }: LineChartProps) => {
   return (
     <Wrapper style={style}>
-      <Line data={data} />
+      <Line data={data} options={options} />
     </Wrapper>
   );
 };
