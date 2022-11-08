@@ -138,27 +138,37 @@ public class  AuthController {
         System.out.println("SignUp : " + userDto);
         userDto.setAuth("user");
         userDto.setState(1);
-        userService.save(userDto);
 
-        String accessToken = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), true);
-        String refreshToken = jwtTokenProvider.createToken(userDto.getRefreshToken(), userDto.getAuthList(), false);
-        jsonObject.addProperty("token", accessToken);
+        try{
+            userService.save(userDto);
+
+            String accessToken = jwtTokenProvider.createToken(userDto.getEmail(), userDto.getAuthList(), true);
+            String refreshToken = jwtTokenProvider.createToken(userDto.getRefreshToken(), userDto.getAuthList(), false);
+            jsonObject.addProperty("token", accessToken);
 //                        jsonObject.addProperty("accessToken", accessToken); // JWT 토큰
 //                        jsonObject.addProperty("refreshToken", refreshToken); // JWT 토큰
-        userDto.setState(1); // 로그인 상태 변환
-        userDto.setAccessToken(accessToken);
-        userDto.setRefreshToken(refreshToken);
-        System.out.println("userDto : " + userDto);
-        int updateResult = userService.updateUser(userDto);
-        if(updateResult < 0){
-            System.out.println("Login Failed");
-            JsonObject jsonObjectFailed = new JsonObject();
-            jsonObjectFailed.addProperty("error","change state failed");
-            return new ResponseEntity<>(gson.toJson(jsonObjectFailed), HttpStatus.OK);
+            userDto.setState(1); // 로그인 상태 변환
+            userDto.setAccessToken(accessToken);
+            userDto.setRefreshToken(refreshToken);
+            System.out.println("userDto : " + userDto);
+
+            int updateResult = userService.updateUser(userDto);
+            if(updateResult < 0){
+                System.out.println("SignUp Failed");
+                JsonObject jsonObjectFailed = new JsonObject();
+                jsonObjectFailed.addProperty("error","change state failed");
+                return new ResponseEntity<>(gson.toJson(jsonObjectFailed), HttpStatus.BAD_REQUEST);
+            }
+            else{
+                System.out.println("SignUp Success");
+                return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
+            }
         }
-        else{
-            System.out.println("Login Success");
-            return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
+        catch (Exception e){
+            System.out.println("SignUp Failed");
+            JsonObject jsonObjectFailed = new JsonObject();
+            jsonObjectFailed.addProperty("error","SignUp failed");
+            return new ResponseEntity<>(gson.toJson(jsonObjectFailed), HttpStatus.BAD_REQUEST);
         }
     }
 
