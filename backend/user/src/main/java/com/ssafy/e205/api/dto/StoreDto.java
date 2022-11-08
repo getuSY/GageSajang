@@ -15,6 +15,7 @@ import javax.persistence.Column;
 public class StoreDto {
     private Long id;
     private String email;
+    private String dongName;
     private String industryCode;
     private String industryName;
     private double order;
@@ -30,6 +31,7 @@ public class StoreDto {
     public StoreDto(StoreEntity entity){
         this.id = entity.getId();
         this.email = entity.getEmail();
+        this.dongName = entity.getDongName();
         this.industryCode = entity.getIndustryCode();
         this.industryName = entity.getIndustryName();
         this.order = entity.getOrder();
@@ -46,6 +48,7 @@ public class StoreDto {
     public StoreEntity toEntity(StoreDto dto){
         return StoreEntity.builder()
                 .email(dto.email)
+                .dongName(dto.dongName)
                 .industryCode(dto.industryCode)
                 .industryName(dto.industryName)
                 .area(dto.area)

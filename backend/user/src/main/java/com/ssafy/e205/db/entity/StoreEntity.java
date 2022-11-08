@@ -19,9 +19,11 @@ public class StoreEntity {
 
     @Column(name="email")
     private String email;
-    @Column(name="industryCode")
+    @Column(name = "dong_name")
+    private String dongName;
+    @Column(name="industry_code")
     private String industryCode;
-    @Column(name="industryName")
+    @Column(name="industry_name")
     private String industryName;
     @Column(name="order")
     private double order;
@@ -43,8 +45,9 @@ public class StoreEntity {
     private int area;
 
     @Builder
-    public StoreEntity(String email, String industryCode, String industryName, double order, double total, double similar, double open, double close, double franchise, double sales, int clerk, int area){
+    public StoreEntity(String email, String dongName, String industryCode, String industryName, double order, double total, double similar, double open, double close, double franchise, double sales, int clerk, int area){
         this.email = email;
+        this.dongName = dongName;
         this.industryCode = industryCode;
         this.industryName = industryName;
         this.order = order;
