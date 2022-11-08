@@ -38,26 +38,46 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**","/js/**","/img/**")
                 .antMatchers("/v2/api-docs/**", "/v3/api-docs/**", "/configuration/ui",
                 "/swagger-resources", "/configuration/security",
-                "/swagger-ui.html", "/webjars/**","/swagger/**");
+                "/swagger-ui.html", "/webjars/**","/swagger/**","/user/**");
     }
 
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/Auth/**").permitAll()
-                .antMatchers("/kafka/**").permitAll()
-                .antMatchers("/user/kakao/**").permitAll()
-                .antMatchers("/user/**").permitAll()
-                .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/").hasRole("user")
-                .antMatchers("/admin").hasRole("admin")
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().disable().cors().configurationSource(corsConfigurationSource());
+        http
+                .httpBasic().disable()
+                        .cors().configurationSource(corsConfigurationSource())
+                        .and()
+                                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .and()
+                                .authorizeRequests()
+                                .antMatchers("/Auth/**").permitAll()
+                                .antMatchers("/kafka/**").permitAll()
+                                .antMatchers("/user/kakao/**").permitAll()
+                                .antMatchers("/user/**").permitAll()
+                                .antMatchers("/swagger-ui/**").permitAll()
+                                .antMatchers("/swagger-resources/**").permitAll()
+                                .antMatchers("/").hasRole("user")
+                                .antMatchers("/admin").hasRole("admin")
+                        .anyRequest().permitAll()
+                        .and()
+                                .formLogin().disable();
+//                                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+//                                        )
+//        http.authorizeRequests()
+//                .antMatchers("/Auth/**").permitAll()
+//                .antMatchers("/kafka/**").permitAll()
+//                .antMatchers("/user/kakao/**").permitAll()
+//                .antMatchers("/user/**").permitAll()
+//                .antMatchers("/swagger-ui/**").permitAll()
+//                .antMatchers("/swagger-resources/**").permitAll()
+//                .antMatchers("/").hasRole("user")
+//                .antMatchers("/admin").hasRole("admin")
+//                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin().disable().cors().configurationSource(corsConfigurationSource());
 
 //        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 //        http
