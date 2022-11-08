@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LineChart from '../../atoms/LineChart';
+import ReportChart from '../../atoms/ReportChart';
 import ReportSubtitle from '../../atoms/ReportSubtitle';
 
 interface StatusReportLineChartProps {
@@ -24,7 +24,12 @@ const StatusReportLineChart = ({
         title={title}
         style={{ marginBottom: '1rem' }}
       ></ReportSubtitle>
-      <LineChart data={data} options={options} style={{ width: '450px' }} />
+      <ReportChart
+        type="line"
+        data={data}
+        options={options}
+        style={{ width: '450px' }}
+      />
     </Wrapper>
   );
 };

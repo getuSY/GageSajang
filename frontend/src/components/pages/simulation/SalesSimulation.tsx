@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import RoundBox from '../../atoms/RoundBox/index';
 import Button from '../../atoms/Button/index';
-import LineChart from '../../atoms/LineChart/index';
+import ReportChart from '../../atoms/ReportChart';
 
 // 시뮬레이션 페이지 안에 들어갈 시뮬레이션 그래프 컴포넌트입니다.
 // 임시로 시뮬레이션 pages 안에 만들어둠!!
@@ -37,7 +37,7 @@ const SalesSimulation = ({}: SalesSimulationProps) => {
               onClick={hideGraph}
             />
           </TitleDiv>
-          <LineChart data={graphData} style={graphStyle} />
+          <ReportChart type="line" data={graphData} style={graphStyle} />
         </RoundBox>
       )}
       {open === false && (

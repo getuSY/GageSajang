@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { ChartData, ChartOptions } from 'chart.js';
-import BarChart from '../../atoms/BarChart';
+import ReportChart from '../../atoms/ReportChart';
 import ReportSubtitle from '../../atoms/ReportSubtitle';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
@@ -24,7 +24,12 @@ const StatusReportBarChart = ({
         title={title}
         style={{ marginBottom: '1rem' }}
       ></ReportSubtitle>
-      <BarChart data={data} options={options} style={{ width: '450px' }} />
+      <ReportChart
+        type="bar"
+        data={data}
+        options={options}
+        style={{ width: '450px' }}
+      />
     </Wrapper>
   );
 };

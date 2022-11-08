@@ -56,7 +56,8 @@ const AmatuerAnalysisPage = () => {
     (area: DongItem) => {
       setSelect(area);
       setSearchResultOpen(false);
-      map.setCenter(new window.kakao.maps.LatLng(...getCenter(area.path)));
+      const center = getCenter(area.path);
+      map.setCenter(new window.kakao.maps.LatLng(center[0], center[1]));
       map.setLevel(5);
     },
     [map]
