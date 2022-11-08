@@ -34,10 +34,11 @@ interface DraggableProps {
   nodeRef?: React.Ref<typeof React.Component>;
   positionOffset?: { x: number | string; y: number | string };
   scale?: number;
-  deliver?: (params: number) => number | void;
 }
 
-interface SlideBarProps extends DraggableProps {}
+interface SlideBarProps extends DraggableProps {
+  setPos: (params: number) => number | void;
+}
 
 const SlideBar = ({
   allowAnyClick,
@@ -58,15 +59,13 @@ const SlideBar = ({
   nodeRef,
   positionOffset,
   scale,
-  deliver,
+  setPos,
 }: SlideBarProps) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [color, setColor] = useState('white');
-  useEffect(() => {
-    deliver?(position.x)
-  }, [position]);
   const trackPos = (data: ControlPosition) => {
     setPosition({ x: data.x, y: data.y });
+    setPos(data.x);
     console.log({ x: data.x, y: data.y });
   };
   const lightenColor = () => {
@@ -93,9 +92,6 @@ const SlideBar = ({
         >
           <SliderBody className="box" style={{ backgroundColor: `${color}` }}>
             <div>Handle</div>
-            {/* <div>
-              x: {position.x.toFixed(0)}, y: {position.y.toFixed(0)}
-            </div> */}
           </SliderBody>
         </Draggable>
       </Wrapper>

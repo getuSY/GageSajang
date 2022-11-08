@@ -35,59 +35,38 @@ const datas = [
 ];
 type DynamicData = { x: number; y: number };
 
-const DynamicChart = ({ posi, options }: DynamicChartProps) =>
-  // { options }: DynamicChartProps
-  {
-    const [realData, setRealData] = useState(datas.slice(0, 1));
-    const [pos, setPos] = useState(0);
-    // const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    //   const newValue = e.target.value;
-    //   console.log(newValue);
-    //   const newData = datas.slice(0, Number(newValue) + 1);
-    //   setRealData(newData);
-    //   console.log(realData);
-    // };
-    // useEffect(() => {
-    //   const chart = chartRef.current;
-    //   console.log(chart);
-    //   // chartRef.update();
-    // }, [realData]);
-    // let chartRef = useRef();
-    // console.log(chart);
-    const trckPos = () => {
-      const newPos = posi / 50;
-      const newData = datas.slice(0, Number(newPos) + 1);
-      setRealData(newData);
-      console.log(realData);
-    };
-    const chartOptions = {
-      title: {
-        text: '매출액 예측',
-      },
-      data: [
-        {
-          type: 'line',
-          dataPoints: realData,
-        },
-      ],
-    };
-    return (
-      <Wrapper>
-        <CanvasJSChart
-          options={chartOptions}
-          containerProps={{ width: '100%', height: '300px' }}
-          // pos={(posi: number) => setPos(posi)}
-        />
-        {/* <input
-          type="number"
-          onChange={onChange}
-          min="0"
-          max="10"
-          defaultValue="0"
-        /> */}
-      </Wrapper>
-    );
+const DynamicChart = ({ posi, options }: DynamicChartProps) => {
+  const [realData, setRealData] = useState(datas.slice(0, 1));
+  useEffect(() => {
+    trckPos();
+    // console.log('차트 내부 posi 인식', posi);
+  }, [posi]);
+  const trckPos = () => {
+    const newPos = posi / 50;
+    const newData = datas.slice(0, Number(newPos) + 1);
+    setRealData(newData);
+    console.log(realData);
   };
+  const chartOptions = {
+    title: {
+      text: '매출액 예측',
+    },
+    data: [
+      {
+        type: 'line',
+        dataPoints: realData,
+      },
+    ],
+  };
+  return (
+    <Wrapper>
+      <CanvasJSChart
+        options={chartOptions}
+        containerProps={{ width: '100%', height: '300px' }}
+      />
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   width: 800px;

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import RoundBox from '../../atoms/RoundBox/index';
 import Button from '../../atoms/Button/index';
 import LineChart from '../../atoms/LineChart/index';
 import DynamicChart from '../../atoms/DynamicChart/index';
 import SlideBar from '../../atoms/SlideBar';
+import DynamicBarChart from '../../atoms/DynamicBarChart';
 
 // 시뮬레이션 페이지 안에 들어갈 시뮬레이션 그래프 컴포넌트입니다.
 // 임시로 시뮬레이션 pages 안에 만들어둠!!
@@ -21,6 +22,22 @@ const SalesSimulation = ({}: SalesSimulationProps) => {
   const hideGraph = () => {
     setOpen(false);
   };
+  useEffect(() => {
+    console.log('api 통신 받아오기');
+  }, []);
+  // api통해 매출 예측값 받아오기
+  // data 설정한 후 props로 차트들에 data로 내려주기
+
+  // type Position = { x: number; y: number };
+  // let rate: Array<Position> = [{ x: 2013, y: 0 }];
+  // let i: number = 1;
+  // while (i <= 11) {
+  //   const newY: number = (given[i].x - given[i - 1].x) / given[i - 1].x;
+  //   const newX: number = given[0].x + i;
+  //   rate.push({ x: newX, y: newY });
+  //   i += 1;
+  // }
+
   return (
     <Wrapper>
       {open === true && (
@@ -41,8 +58,9 @@ const SalesSimulation = ({}: SalesSimulationProps) => {
             />
           </TitleDiv>
           {/* <LineChart data={graphData} style={graphStyle} /> */}
-          <SlideBar deliver={setPos} />
-          <DynamicChart posi={pos}></DynamicChart>
+          <SlideBar setPos={setPos} />
+          <DynamicChart posi={pos} />
+          <DynamicBarChart posi={pos} />
         </RoundBox>
       )}
       {open === false && (
