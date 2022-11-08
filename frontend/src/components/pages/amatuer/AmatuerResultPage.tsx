@@ -20,12 +20,15 @@ const AmatuerResultPage = () => {
   const dongName = getDongName(admCd);
   const jobCode = getJobCode(mainCategory, subCategory); // csX000XX
   const jobName = cs[mainCategory - 1][subCategory - 1];
-  const amatuerResult = useAmatuerResult({ admCd, jobCode });
-  console.log(amatuerResult.data);
+  const { data: amatuerResult } = useAmatuerResult({ admCd, jobCode });
 
   return (
     <Wrapper>
-      <Report jobName={jobName} dongName={dongName} />
+      <Report
+        jobName={jobName}
+        dongName={dongName}
+        amatuerResult={amatuerResult}
+      />
     </Wrapper>
   );
 };

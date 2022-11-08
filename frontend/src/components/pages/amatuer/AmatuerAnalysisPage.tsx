@@ -34,7 +34,6 @@ const AmatuerAnalysisPage = () => {
       if (tmp.length > 0) {
         setSearchResultOpen(true);
       }
-      console.log(tmp);
     }
   }, [keyword]);
 

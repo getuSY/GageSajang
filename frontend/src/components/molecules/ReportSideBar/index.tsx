@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ReportSidebarItem from '../../atoms/ReportSidebarItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,13 +22,14 @@ library.add(
   faLocationDot,
   faStore
 );
-// <div className="icon-div"><FontAwesomeIcon icon={icon} /></div>
 
 interface ReportSideBarProps {
   jobName: string;
   dongName?: string;
   reportMenuList: Array<{ name: string; icon: string }>;
   contentRefs: React.MutableRefObject<HTMLDivElement[]>;
+  tab: number;
+  setTab: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const ReportSideBar = ({
@@ -36,8 +37,9 @@ const ReportSideBar = ({
   dongName,
   reportMenuList,
   contentRefs,
+  tab,
+  setTab,
 }: ReportSideBarProps) => {
-  const [tab, setTab] = useState<number>(0);
   return (
     <Wrapper>
       <div className="title">🏪 상권 분석</div>
@@ -62,7 +64,6 @@ const ReportSideBar = ({
           select={i === tab}
           onClick={() => {
             setTab(i);
-            console.log(contentRefs);
             contentRefs.current[i].scrollIntoView({ behavior: 'smooth' });
           }}
         />

@@ -28,8 +28,6 @@ const MyPage = ({ page, style, children }: MyPageProps) => {
     navigate('/user/myarea');
   };
 
-  console.log(page);
-
   return (
     <Wrapper>
       <SideIndex>

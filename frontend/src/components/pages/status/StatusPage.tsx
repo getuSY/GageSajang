@@ -44,7 +44,6 @@ const StatusPage = () => {
 
   const onClickRegionHandler = (region: string) => {
     setRegion(region);
-    console.log(region);
   };
 
   return (

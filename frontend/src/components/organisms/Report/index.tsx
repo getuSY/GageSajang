@@ -1,13 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import ReportSideBar from '../../molecules/ReportSideBar';
-import ReportContent from '../../atoms/ReportContent';
-import Label from '../../atoms/Label';
 import ReportContentContainer from '../../molecules/ReportContentContainer';
 
 interface ReportProps {
   jobName: string;
   dongName?: string;
+  amatuerResult: any;
 }
 
 const reportMenuList = [
@@ -33,10 +32,10 @@ const reportMenuList = [
   },
 ];
 
-const Report = ({ jobName, dongName }: ReportProps) => {
+const Report = ({ jobName, dongName, amatuerResult }: ReportProps) => {
   const contentRefs = useRef<HTMLDivElement[]>([]);
+  const [tab, setTab] = useState<number>(0);
 
-  useEffect(() => console.log(contentRefs), [contentRefs]);
   return (
     <Wrapper>
       <ReportSideBar
@@ -44,10 +43,14 @@ const Report = ({ jobName, dongName }: ReportProps) => {
         dongName={dongName}
         reportMenuList={reportMenuList}
         contentRefs={contentRefs}
+        tab={tab}
+        setTab={setTab}
       />
       <ReportContentContainer
         reportMenuList={reportMenuList}
         contentRefs={contentRefs}
+        setTab={setTab}
+        amatuerResult={amatuerResult}
       />
     </Wrapper>
   );
