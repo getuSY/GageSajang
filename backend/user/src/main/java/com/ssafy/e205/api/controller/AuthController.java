@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user/auth")
 @CrossOrigin("*")
 public class  AuthController {
 

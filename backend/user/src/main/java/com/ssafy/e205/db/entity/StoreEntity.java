@@ -20,32 +20,41 @@ public class StoreEntity {
     @Column(name="email")
     private String email;
     @Column(name="store_name")
-    private String storeName;
+    private String industryCode;
     @Column(name="store_address_administrative")
-    private String storeAddressAdministrative;
+    private String industryName;
     @Column(name="store_address_court")
-    private String storeAddressCourt;
+    private double order;
     @Column(name="store_employ_count")
-    private int storeEmployCount;
+    private double total;
     @Column(name="store_area")
-    private int storeArea;
+    private double similar;
     @Column(name="store_type_code")
-    private String storeTypeCode;
+    private double open;
     @Column(name = "store_type_name")
-    private String storeTypeName;
+    private double close;
     @Column(name="store_num")
-    private String storeNum;
+    private double franchise;
+    @Column(name="store_num")
+    private double sales;
+    @Column(name="store_num")
+    private int clerk;
+    @Column(name="store_num")
+    private int area;
 
     @Builder
-    public StoreEntity(String email, String storeName, String storeAddressAdministrative, String storeAddressCourt,int storeEmployCount, int storeArea, String storeTypeName, String storeTypeCode,String storeNum){
+    public StoreEntity(String email, String industryCode, String industryName, double order, double total, double similar, double open, double close, double franchise, double sales, int clerk, int area){
         this.email = email;
-        this.storeName = storeName;
-        this.storeAddressAdministrative = storeAddressAdministrative;
-        this.storeAddressCourt = storeAddressCourt;
-        this.storeEmployCount = storeEmployCount;
-        this.storeArea = storeArea;
-        this.storeTypeName = storeTypeName;
-        this.storeTypeCode = storeTypeCode;
-        this.storeNum = storeNum;
+        this.industryCode = industryCode;
+        this.industryName = industryName;
+        this.order = order;
+        this.total = total;
+        this.similar = similar;
+        this.open = open;
+        this.close = close;
+        this.franchise = franchise;
+        this.sales = sales;
+        this.clerk = clerk;
+        this.area = area;
     }
 }

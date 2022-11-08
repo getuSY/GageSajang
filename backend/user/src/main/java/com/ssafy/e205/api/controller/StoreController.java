@@ -17,7 +17,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user/store")
 @CrossOrigin("*")
 public class StoreController {
 
@@ -31,6 +31,7 @@ public class StoreController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
+
     @GetMapping("/getAllStore")
     public ResponseEntity<List<StoreEntity>> getAllStoreEntity(){
         return new ResponseEntity<List<StoreEntity>>(storeService.getStoreEntityAll(), HttpStatus.OK);
