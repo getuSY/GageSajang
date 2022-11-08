@@ -1,29 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { ChartData } from 'chart.js';
-import ReportChart from '../../atoms/ReportChart';
 import ReportSubtitle from '../../atoms/ReportSubtitle';
+import ReportChart from '../../atoms/ReportChart';
 
-interface StatusReportBarChartProps {
+interface StatusReportDnChartProps {
   title: string;
-  data: ChartData<'bar'>;
+  data: ChartData<'doughnut'>;
   options: any;
   style?: object;
 }
-const StatusReportBarChart = ({
+
+const StatusReportDnChart = ({
   title,
   data,
   options,
   style,
-}: StatusReportBarChartProps) => {
+}: StatusReportDnChartProps) => {
   return (
     <Wrapper>
       <ReportSubtitle title={title} style={{ marginBottom: '1rem' }} />
-      <ReportChart type="bar" data={data} options={options} style={style} />
+      <ReportChart
+        type="doughnut"
+        data={data}
+        options={options}
+        style={style}
+      />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div``;
 
-export default StatusReportBarChart;
+export default StatusReportDnChart;

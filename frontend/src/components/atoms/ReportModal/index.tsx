@@ -24,7 +24,7 @@ const ReportModal = ({
         icon={faXmark}
         className="close-icon"
         onClick={() => (setIsOpen ? setIsOpen(false) : null)}
-      ></FontAwesomeIcon>
+      />
       {children}
     </Wrapper>
   );

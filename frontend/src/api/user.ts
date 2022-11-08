@@ -14,7 +14,7 @@ export const userSignUp = async (params: UserModel) => {
 };
 
 export const userLogin = async (params: UserModel) => {
-  const { data } = await client.post('user/login', params);
+  const { data } = await client.post('user/auth/login', params);
 
   return data;
 };

@@ -1,8 +1,10 @@
-import { faBlackTie } from '@fortawesome/free-brands-svg-icons';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ReportModal from '../../atoms/ReportModal';
 import StatusReportBarChart from '../../molecules/StatusReportBarChart';
+import StatusReportDnChart from '../../molecules/StatusReportDnChart';
+import StatusReportCharts from '../../molecules/StatusReportCharts';
+
 import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 
@@ -32,13 +34,13 @@ const data = {
       data: [12, 2, 9, 5, 10, 8, 5],
 
       backgroundColor: [
-        '#92D7E0',
-        '#88CEDF',
-        '#80C4DD',
-        '#79BADB',
+        '#799ECF',
+        '#76A7D5',
         '#74B1D9',
-        '#72A7D5',
-        '#719ECF',
+        '#79BADB',
+        '#80C4DD',
+        '#88CEDF',
+        '#93D7E9',
       ],
     },
   ],
@@ -49,9 +51,12 @@ const options = {
     legend: {
       display: false,
     },
-  },
-  tooltips: {
-    enabled: true,
+    datalabels: {
+      font: {
+        weight: 'bold',
+      },
+      color: 'green',
+    },
   },
 };
 
@@ -75,33 +80,61 @@ const StatusReport = ({
     });
   }, [tab]);
   return (
-    <ReportModal
-      // 상세 페이지, 모달 + close 버튼
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-    >
-      <StatusReportIndex
-        // 상세페이지 상단 버튼들
-        region={region}
-        content={content}
-        category={category}
-        tab={tab}
-        icon={icon}
-      ></StatusReportIndex>
-      <StatusReportTitle
-        // 상세 페이지 내용
-        title={title}
-      />
-      <StatusReportBarChart
-        title={'분기별 요일 평균'}
-        data={data}
-        options={options}
-        style={{ margin: '3rem 0rem 0rem 1rem' }}
-      ></StatusReportBarChart>
-    </ReportModal>
+    <Wrapper>
+      <ReportModal
+        // 상세 페이지, 모달 + close 버튼 //
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      >
+        <StatusReportIndex
+          // 상세페이지 상단 버튼들 //
+          region={region}
+          content={content}
+          category={category}
+          tab={tab}
+          icon={icon}
+        />
+        <div className="status-report-content">
+          <StatusReportTitle
+            // 상세 페이지 내용 //
+            title={title}
+          />
+          <div className="report-top-div">
+            <StatusReportCharts
+              type="bar"
+              title={'요일별 평균 유동인구 (분기)'}
+              data={data}
+              options={options}
+            />
+            <StatusReportCharts
+              type="doughnut"
+              title={'요일별 평균 유동인구'}
+              data={data}
+              options={options}
+            />
+          </div>
+        </div>
+      </ReportModal>
+    </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  & .report-top-div {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    & > div {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  & .status-report-content {
+    height: 3000px;
+    overflow-y: scroll;
+  }
+`;
 
 export default StatusReport;
