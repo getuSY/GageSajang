@@ -12,8 +12,9 @@ const ReportSummary = ({ style, children }: ReportSummaryProps) => {
 
 const Wrapper = styled.div`
   background-color: #f4f4f4;
-  padding: 30px 0px 30px 20px;
+  padding: 20px 0px 20px 30px;
   border-left: ${({ theme }) => `3px solid ${theme.darkColor}`};
+  /* width: 700px; */
 `;
 
 export default ReportSummary;

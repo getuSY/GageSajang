@@ -2,25 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import type { ChartData, ChartOptions } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart } from 'chart.js';
+Chart.register(ChartDataLabels);
 
 interface BarChartProps {
-  //   options: ChartOptions<'line'>;
+  options?: ChartOptions<'bar'>;
   data: ChartData<'bar'>;
+  style?: object;
 }
 
-const BarChart = ({ data }: BarChartProps) => {
+const BarChart = ({ data, options, style }: BarChartProps) => {
   return (
-    <Wrapper>
-      <Bar data={data} />
+    <Wrapper style={style}>
+      <Bar data={data} options={options} />
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  width: 400px;
-  height: 400px;
-`;
+const Wrapper = styled.div``;
 
 export default BarChart;
