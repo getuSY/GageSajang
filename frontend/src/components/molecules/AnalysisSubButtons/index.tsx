@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { cs1, cs2, cs3 } from '../../../data/cs';
+import cs from '../../../data/cs';
 import { useNavigate } from 'react-router-dom';
 
 interface AnalysisSubButtonsProps {
@@ -13,57 +13,22 @@ const AnalysisSubButtons = ({ tab, subCategory }: AnalysisSubButtonsProps) => {
 
   return (
     <Wrapper>
-      {tab === 1 &&
-        cs1.map((e: string, i: number) => (
-          <SubButton
-            key={`cs1-${i + 1}`}
-            onClick={() =>
-              navigate(
-                `/amatuer/analysis?mainCategory=1&subCategory=${i + 1}`,
-                {
-                  replace: true,
-                }
-              )
-            }
-            active={subCategory === i + 1}
-          >
-            {e}
-          </SubButton>
-        ))}
-      {tab === 2 &&
-        cs2.map((e: string, i: number) => (
-          <SubButton
-            key={`cs2-${i + 1}`}
-            onClick={() =>
-              navigate(
-                `/amatuer/analysis?mainCategory=2&subCategory=${i + 1}`,
-                {
-                  replace: true,
-                }
-              )
-            }
-            active={subCategory === i + 1}
-          >
-            {e}
-          </SubButton>
-        ))}
-      {tab === 3 &&
-        cs3.map((e: string, i: number) => (
-          <SubButton
-            key={`cs3-${i + 1}`}
-            onClick={() =>
-              navigate(
-                `/amatuer/analysis?mainCategory=3&subCategory=${i + 1}`,
-                {
-                  replace: true,
-                }
-              )
-            }
-            active={subCategory === i + 1}
-          >
-            {e}
-          </SubButton>
-        ))}
+      {cs[tab - 1].map((e: string, i: number) => (
+        <SubButton
+          key={`cs${tab}-${i + 1}`}
+          onClick={() =>
+            navigate(
+              `/amatuer/analysis?mainCategory=${tab}&subCategory=${i + 1}`,
+              {
+                replace: true,
+              }
+            )
+          }
+          active={subCategory === i + 1}
+        >
+          {e}
+        </SubButton>
+      ))}
     </Wrapper>
   );
 };

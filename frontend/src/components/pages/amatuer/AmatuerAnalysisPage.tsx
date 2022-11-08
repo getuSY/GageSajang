@@ -26,8 +26,8 @@ const AmatuerAnalysisPage = () => {
     ? parseInt(params.get('subCategory')!)
     : 0;
 
+  // 동 검색
   useEffect(() => {
-    // 동 검색
     if (keyword) {
       const tmp = areas.filter((e: DongItem, i) => e.name.includes(keyword));
       setSearchResult(tmp);
@@ -37,15 +37,16 @@ const AmatuerAnalysisPage = () => {
     }
   }, [keyword]);
 
+  // 동 검색 onChange
   const onChange = useCallback((e: any) => {
-    // 동 검색 onChange
     setKeyword(e.target.value);
   }, []);
 
+  // 동 검색 x 버튼
   const clearValue = useCallback(() => {
-    // 동 검색 x 버튼
     setSelect(null);
   }, []);
+
   const onClickAnlzButton = () => {
     navigate(
       `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`

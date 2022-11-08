@@ -1,8 +1,6 @@
-import { faBlackTie } from '@fortawesome/free-brands-svg-icons';
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import ReportModal from '../../atoms/ReportModal';
-import StatusReportBarChart from '../../molecules/StatusReportBarChart';
+import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 
@@ -87,21 +85,20 @@ const StatusReport = ({
         category={category}
         tab={tab}
         icon={icon}
-      ></StatusReportIndex>
+      />
       <StatusReportTitle
         // 상세 페이지 내용
         title={title}
       />
-      <StatusReportBarChart
+      <StatusReportChart
+        type="bar"
         title={'분기별 요일 평균'}
         data={data}
         options={options}
         style={{ margin: '3rem 0rem 0rem 1rem' }}
-      ></StatusReportBarChart>
+      />
     </ReportModal>
   );
 };
-
-const Wrapper = styled.div``;
 
 export default StatusReport;

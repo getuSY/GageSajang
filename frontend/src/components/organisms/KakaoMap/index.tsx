@@ -14,7 +14,6 @@ const polygonOption = (paths: any, isSelected: boolean) => ({
   strokeWeight: isSelected ? 3 : 0, // 선의 두께입니다
   strokeColor: '#A155B9', // 선의 색깔입니다
   strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-  // strokeStyle: 'longdash', // 선의 스타일입니다
   fillColor: '#DFB2ED', // 채우기 색깔입니다
   fillOpacity: isSelected ? 0.6 : 0.01, // 채우기 불투명도 입니다
 });
@@ -98,7 +97,7 @@ KakaoMapProps) => {
         top: 0,
       }}
       ref={mapRef}
-    ></div>
+    />
   );
 };
 

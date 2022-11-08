@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ButtonInputs from '../ButtonInputs';
-import BaseSideBarLabel from '../../atoms/BaseSideBarLabel';
 
 interface StatusButtonsProps {
   content: any;
@@ -25,14 +24,14 @@ const StatusButtons = ({
     <Wrapper>
       <div className="label-div">
         {statusList.map((e, i) => (
-          <BaseSideBarLabel
+          <StatusSideBarLabel
             style={{ width: '50%' }}
             onClick={() => onClickLabelHandler(e.name)}
             active={e.name === category}
             key={`base-sidebar-label-${i + 1}`}
           >
             {e.content}
-          </BaseSideBarLabel>
+          </StatusSideBarLabel>
         ))}
       </div>
       <ButtonInputs menuList={content} tab={tab} />
@@ -50,6 +49,28 @@ const Wrapper = styled.div`
     align-items: center;
     cursor: pointer;
     margin-bottom: 1rem;
+  }
+`;
+
+interface StatusSideBarLabelProps {
+  active: boolean;
+}
+
+const StatusSideBarLabel = styled.label<StatusSideBarLabelProps>`
+  font-family: 'Pretendard-Regular';
+  font-weight: 700;
+  font-size: 1.3rem;
+  padding: 0rem 0rem 1.2rem 0rem;
+  width: 100px;
+  color: ${({ active, theme }) => (active ? theme.darkColor : 'darkgray')};
+  border-bottom: ${({ active, theme }) =>
+    active ? `3px solid ${theme.darkColor}` : '3px solid darkgray'};
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.darkColor};
+    border-bottom: ${({ theme }) => `3px solid ${theme.darkColor}`};
   }
 `;
 
