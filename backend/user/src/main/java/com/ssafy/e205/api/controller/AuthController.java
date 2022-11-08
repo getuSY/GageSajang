@@ -55,6 +55,11 @@ public class  AuthController {
         return ResponseEntity.ok("hello " + name);
     }
 
+    @PostMapping("/corsTest")
+    public void corstest(@RequestBody UserDto userDto){
+        System.out.println("corsTest : " + userDto.toString());
+    }
+
     @GetMapping("/test")
     public String test(){
         return "hello? this application port : "+application.portNum;
