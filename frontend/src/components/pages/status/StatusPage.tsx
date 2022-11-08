@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import areas from '../../../data/areaGu.json';
 import GeometryMap from '../../organisms/GeometryMap';
-import BaseSideBar from '../../molecules/BaseSideBar';
-import StatusTrend from '../../molecules/StatusTrend';
-import StatusButtons from '../../molecules/StatusButtons';
+import StatusSideBar from '../../organisms/StatusSideBar';
 import Transitions from '../../atoms/Transition';
 import StatusReport from '../../organisms/StatusReport';
 import {
@@ -27,7 +25,7 @@ const icons = [
 ];
 
 const StatusPage = () => {
-  const [sideBarStatus, setSideBarStatus] = useState<boolean>(false);
+  const [sideBarStatus, setSideBarStatus] = useState<boolean>(true);
   const [reportModal, setReportModal] = useState<boolean>(false); // 분석 상세 모달 열고 닫기
   const [category, setCategory] = useState<string>('main'); // 카테고리 : 상권 / 상권 배후지
   const [tab, setTab] = useState<number>(1); // category별 버튼, 순서 : content
@@ -46,30 +44,19 @@ const StatusPage = () => {
   const onClickRegionHandler = (region: string) => {
     setRegion(region);
     setReportModal(true);
-    console.log(region);
-    console.log(category);
-    console.log(tab + 1);
   };
 
   return (
     <Transitions>
       <Wrapper>
-        <BaseSideBar
-          // 왼쪽 사이드 바, 코드 패턴 수정 예정
-          title="상권 현황"
-          isOpen={sideBarStatus}
-          statusmark={true}
-          setIsOpen={setSideBarStatus}
-        >
-          <div>서울시 행정구 기준</div>
-          <StatusTrend />
-          <StatusButtons
-            content={contentList}
-            category={category!}
-            onClickLabelHandler={onClickLabelHandler}
-            tab={tab}
-          />
-        </BaseSideBar>
+        <StatusSideBar
+          sideBarStatus={sideBarStatus}
+          setSideBarStatus={setSideBarStatus}
+          contentList={contentList}
+          category={category!}
+          onClickLabelHandler={onClickLabelHandler}
+          tab={tab}
+        />
         <GeometryMap
           areas={areas.features}
           isOpen={sideBarStatus}
@@ -77,7 +64,6 @@ const StatusPage = () => {
         />
         <StatusReport
           // 상세 페이지, 모달 + close 버튼
-          // isOpen={false}
           icon={icons}
           region={region}
           content={contentList}
@@ -85,7 +71,7 @@ const StatusPage = () => {
           tab={tab}
           isOpen={reportModal}
           setIsOpen={setReportModal}
-        ></StatusReport>
+        />
       </Wrapper>
     </Transitions>
   );

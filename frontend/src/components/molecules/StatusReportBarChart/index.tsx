@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { ChartData, ChartOptions } from 'chart.js';
+import type { ChartData } from 'chart.js';
 import ReportChart from '../../atoms/ReportChart';
 import ReportSubtitle from '../../atoms/ReportSubtitle';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 interface StatusReportBarChartProps {
   title: string;
@@ -20,10 +19,7 @@ const StatusReportBarChart = ({
 }: StatusReportBarChartProps) => {
   return (
     <Wrapper style={style}>
-      <ReportSubtitle
-        title={title}
-        style={{ marginBottom: '1rem' }}
-      ></ReportSubtitle>
+      <ReportSubtitle title={title} style={{ marginBottom: '1rem' }} />
       <ReportChart
         type="bar"
         data={data}
