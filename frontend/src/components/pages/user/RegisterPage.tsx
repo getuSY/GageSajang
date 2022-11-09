@@ -33,6 +33,7 @@ const RegisterPage = () => {
   };
 
   const onClickHandler = () => {
+    // console.log(signUpInputs);
     mutation.mutate(signUpInputs);
   };
 
