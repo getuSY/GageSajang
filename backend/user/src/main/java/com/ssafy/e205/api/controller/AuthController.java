@@ -125,9 +125,19 @@ public class  AuthController {
     }
 
     @GetMapping("/overlap/{email}")
-    public boolean overlapCheck(@PathVariable  String email){
+    public ResponseEntity<String> overlapCheck(@PathVariable  String email){
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+
         Optional<UserEntity> userEntity = userService.findByEmail(email);
-        return userEntity.isPresent();
+        if(userEntity.isPresent()){
+            jsonObject.addProperty("result", "false");
+        }
+        else{
+            jsonObject.addProperty("result", "true");
+        }
+
+        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
     }
 
     @PostMapping("/signup")
