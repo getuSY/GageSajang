@@ -15,6 +15,13 @@ const client = axios.create({
 client.interceptors.request.use(
   function (config) {
     // 요청이 전달되기 전에 작업 수행
+    const token = sessionStorage.getItem('token')
+      ? sessionStorage.getItem('token')
+      : null;
+    if (token) {
+      config.headers!.Authorization = token;
+    }
+
     return config;
   },
   function (error) {

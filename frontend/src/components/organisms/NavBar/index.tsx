@@ -5,24 +5,25 @@ import NavUserInfo from '../../molecules/NavUserInfo';
 import { Link } from 'react-router-dom';
 import Button from '../../atoms/Button';
 import { useNavigate } from 'react-router-dom';
-import { User } from '../../../models/user';
 import { NavItem } from '../../../models/common';
+import { useUserInfo } from '../../../hooks/user';
 
 interface NavbarProps {
-  userInfo: User | undefined;
   navList: Array<NavItem>;
 }
 
 const navButtonStyle = { width: '120px', height: '44px', fontSize: '1rem' };
 
-const Navbar = ({ userInfo, navList }: NavbarProps) => {
+const Navbar = ({ navList }: NavbarProps) => {
   const navigate = useNavigate();
+  const { data: userInfo, isLoading } = useUserInfo();
   const toLogin = () => {
     navigate('/user/login');
   };
   const toRegister = () => {
     navigate('/user/register');
   };
+
   return (
     <Wrapper>
       {/* NavBar Logo */}
@@ -33,8 +34,7 @@ const Navbar = ({ userInfo, navList }: NavbarProps) => {
       </NavLogo>
       {/* NavBar Menu Items */}
       <NavItems items={navList} />
-      {!userInfo ? (
-        // Login 안되어 있을 시
+      {!userInfo && !isLoading && (
         <NavButtons>
           <Button style={navButtonStyle} onClick={toRegister} type="grad">
             회원가입
@@ -43,10 +43,8 @@ const Navbar = ({ userInfo, navList }: NavbarProps) => {
             로그인
           </Button>
         </NavButtons>
-      ) : (
-        // 로그인 되어 있을 시
-        <NavUserInfo userInfo={userInfo} />
       )}
+      {userInfo && !isLoading && <NavUserInfo userInfo={userInfo} />}
     </Wrapper>
   );
 };

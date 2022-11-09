@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button';
-import { User } from '../../../models/user';
+import { UserInfo } from '../../../models/user';
 import { useNavigate } from 'react-router-dom';
+import { useUserLogout } from '../../../hooks/user';
 
 interface NavUserInfoProps {
-  userInfo: User;
+  userInfo: UserInfo;
 }
 
 const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
@@ -19,27 +20,28 @@ const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
   const toMyArea = () => {
     navigate('/user/myarea');
   };
-  const toLogin = () => {
-    navigate('/user/login');
-  };
+
+  const logout = useUserLogout();
   return (
     <Wrapper>
       <img
-        src="https://intermusicakorea.com/common/img/default_profile.png"
+        src="assets/img/default_profile.png"
         alt=""
         className="profile-img"
       />
       <div className="username">
-        {userInfo.username}
+        {userInfo.nickname}
         <ul>
           <MyPageList onClick={toMyPage}>회원 정보 수정</MyPageList>
           <MyPageList onClick={toMyStore}>내 가게 정보</MyPageList>
           <MyPageList onClick={toMyArea}>내 관심 상권</MyPageList>
         </ul>
       </div>
-
       <Button
-        onClick={toLogin}
+        onClick={() => {
+          logout();
+          navigate('/');
+        }}
         style={{
           fontSize: '16px',
           width: '90px',

@@ -5,23 +5,18 @@ import Button from '../../atoms/Button/index';
 import CheckLabelInput from '../../molecules/CheckLabelInput/index';
 import { useNavigate } from 'react-router-dom';
 import { UserModel } from '../../../models/user';
-import { useUserLogin } from '../../../hooks/user';
+import { useUserLogin, useUserInfo } from '../../../hooks/user';
 
-interface LoginBoxProps {}
-
-const LoginBox = ({}: LoginBoxProps) => {
-  // let [ userId, setUserId ] = useState("")
-  // let [ password, setPassword ] = useState("")
+const LoginBox = () => {
   const navigate = useNavigate();
   const mutation = useUserLogin();
   const { data, isLoading, isSuccess, isError, error } = mutation;
+  const { data: userInfo } = useUserInfo();
 
   const toRegister = () => {
     navigate('/user/register');
   };
-  const toHome = () => {
-    navigate('/');
-  };
+
   const [loginInputs, setLoginInputs] = useState<UserModel>({
     accessToken: 'string', // 고정
     auth: 'user', // 고정
@@ -42,18 +37,15 @@ const LoginBox = ({}: LoginBoxProps) => {
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      alert('로그인 성공!');
-      // console.log(data);
-      navigate('/');
-    }
     if (isError) {
       alert('로그인 실패!');
     }
   }, [isSuccess, isError]);
+  useEffect(() => {
+    if (userInfo) navigate('/');
+  }, [userInfo]);
 
   const onClickHandler = () => {
-    // console.log(loginInputs);
     mutation.mutate(loginInputs);
   };
 

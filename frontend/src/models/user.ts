@@ -1,3 +1,7 @@
+export interface UserInfo {
+  nickname: string;
+}
+
 export interface User {
   username: string;
   userId: string;

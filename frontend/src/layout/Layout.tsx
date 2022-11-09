@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { NavItem } from '../models/common';
 import { AnimatePresence } from 'framer-motion';
 import HelpButton from '../components/atoms/HelpButton';
-
 const navList: Array<NavItem> = [
   {
     content: '상권현황',
@@ -22,14 +21,9 @@ const navList: Array<NavItem> = [
 ];
 
 const Layout = () => {
-  // const query = useQuery(['user'], () => undefined);
-  // const userInfo = query.data;
-  // const { data: userInfo } = useFetchUser();
-  const userInfo = undefined;
-
   return (
     <>
-      <Navbar userInfo={userInfo} navList={navList} />
+      <Navbar navList={navList} />
       <AnimatePresence mode="wait">
         <Wrapper>
           <Suspense fallback={<div />}>
