@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaConsumerServiceImpl implements KafkaConsumerService{
-
-    private final static String topicName = "TOPICNAME_User"; //TOPICNAME will change
+    private final static String topicName = "TOPICNAME_Simul"; //TOPICNAME will change
 
     @KafkaListener(topics = topicName, groupId = ConsumerConfig.GROUP_ID_CONFIG)
     @Override
