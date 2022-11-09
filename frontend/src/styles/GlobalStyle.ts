@@ -43,7 +43,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-style: normal;
 }
-  @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
   body {
     margin: 0;
     /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

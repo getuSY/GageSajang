@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import ShadowBox from '../../atoms/ShadowBox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartArea } from '@fortawesome/free-solid-svg-icons';
 
@@ -31,19 +30,7 @@ const BaseSideBar = ({
       >
         {isOpen ? '<' : '>'}
       </button>
-      <ShadowBox
-        style={{
-          width: '100%',
-          height: 'calc(100% - 1px)',
-          position: 'absolute',
-          top: '0',
-          zIndex: '999',
-          background: '#ffffff',
-          padding: '30px',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+      <ShadowBox>
         {statusmark ? (
           <div className="title-div">
             <FontAwesomeIcon icon={faChartArea} className="title-icon" />
@@ -114,6 +101,21 @@ const Wrapper = styled.div<WrapperProps>`
     display: flex;
     flex-direction: column;
   }
+`;
+
+const ShadowBox = styled.div`
+  width: 100px;
+  height: 100px;
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: calc(100% - 1px);
+  position: absolute;
+  top: 0;
+  z-index: 999;
+  background: #ffffff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default BaseSideBar;

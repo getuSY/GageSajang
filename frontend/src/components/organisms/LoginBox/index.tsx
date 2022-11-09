@@ -14,7 +14,7 @@ const LoginBox = ({}: LoginBoxProps) => {
   // let [ password, setPassword ] = useState("")
   const navigate = useNavigate();
   const mutation = useUserLogin();
-  const { isLoading, isSuccess, isError, error } = mutation;
+  const { data, isLoading, isSuccess, isError, error } = mutation;
 
   const toRegister = () => {
     navigate('/user/register');
@@ -41,7 +41,19 @@ const LoginBox = ({}: LoginBoxProps) => {
     });
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      alert('로그인 성공!');
+      // console.log(data);
+      navigate('/');
+    }
+    if (isError) {
+      alert('로그인 실패!');
+    }
+  }, [isSuccess, isError]);
+
   const onClickHandler = () => {
+    // console.log(loginInputs);
     mutation.mutate(loginInputs);
   };
 

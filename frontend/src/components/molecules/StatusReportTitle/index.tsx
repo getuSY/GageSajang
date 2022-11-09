@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReportSummary from '../../atoms/ReportSummary';
 import ReportTitle from '../../atoms/ReportTitle';
 
 interface StatusReportTitleProps {
@@ -44,6 +43,13 @@ const Wrapper = styled.div`
     color: red;
     font-weight: 700;
   }
+`;
+
+const ReportSummary = styled.div`
+  background-color: #f4f4f4;
+  padding: 20px 0px 20px 30px;
+  border-left: ${({ theme }) => `3px solid ${theme.darkColor}`};
+  /* width: 700px; */
 `;
 
 export default StatusReportTitle;

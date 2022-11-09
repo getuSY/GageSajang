@@ -6,18 +6,21 @@ import Layout from './layout/Layout';
 import LoadingPage from './components/pages/LoadingPage';
 import { DefaultTheme } from 'styled-components';
 
-import LoginPage from './components/pages/user/LoginPage';
-import RegisterPage from './components/pages/user/RegisterPage';
-import MyPage from '../src/components/pages/user/MyPage';
-import ProfessionalStorePage from './components/pages/professional/ProfessionalStorePage';
-// import SimulationPage from './components/pages/simulation/SimulationPage';
-import ProfessionalResultPage from './components/pages/professional/ProfessionalResultPage';
-
+// Home
 const Home = lazy(() => import('./components/pages/IndexPage'));
+// Status
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
+// Professional
 const ProfessionalPage = lazy(
   () => import('./components/pages/professional/ProfessionalPage')
 );
+const ProfessionalStorePage = lazy(
+  () => import('./components/pages/professional/ProfessionalStorePage')
+);
+const SimulationPage = lazy(
+  () => import('./components/pages/simulation/SimulationPage')
+);
+// Amatuer
 const AmatuerPage = lazy(
   () => import('./components/pages/amatuer/AmatuerPage')
 );
@@ -27,8 +30,10 @@ const AmatuerAnalysisPage = lazy(
 const AmatuerResultPage = lazy(
   () => import('./components/pages/amatuer/AmatuerResultPage')
 );
-// const LoginPage = lazy(() => import('./components/pages/user/LoginPage'));
-// const RegisterPage = lazy(() => import('./components/pages/user/RegisterPage'));
+// User
+const LoginPage = lazy(() => import('./components/pages/user/LoginPage'));
+const RegisterPage = lazy(() => import('./components/pages/user/RegisterPage'));
+const MyPage = lazy(() => import('../src/components/pages/user/MyPage'));
 
 function App() {
   return (
@@ -55,14 +60,6 @@ function App() {
           >
             <Route path="" element={<StatusPage />} />
           </Route>
-          {/* 상권 분석 */}
-          {/* <Route
-            path="analysis"
-            element={<CustomThemeProvider theme={blueTheme} />}
-          >
-            <Route path="" element={<AnalysisPage />} />
-            <Route path="result" element={<AnalysisResultPage />} />
-          </Route> */}
           {/* 이미 사장 */}
           <Route
             path="professional"

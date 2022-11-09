@@ -11,10 +11,6 @@ const navList: Array<NavItem> = [
     content: '상권현황',
     linkTo: '/status',
   },
-  // {
-  //   content: '상권분석',
-  //   linkTo: '/amatuer/analysis',
-  // },
   {
     content: '이미사장',
     linkTo: '/professional',
@@ -34,7 +30,7 @@ const Layout = () => {
   return (
     <>
       <Navbar userInfo={userInfo} navList={navList} />
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <Wrapper>
           <Suspense fallback={<div />}>
             <Outlet />
