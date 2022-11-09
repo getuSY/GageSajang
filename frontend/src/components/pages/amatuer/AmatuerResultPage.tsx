@@ -9,23 +9,17 @@ import { useAmatuerResult } from '../../../hooks/amatuer';
 
 const AmatuerResultPage = () => {
   const [params] = useSearchParams();
-
   const mainCategory = params.get('mainCategory')
     ? parseInt(params.get('mainCategory')!)
     : 0;
   const subCategory = params.get('subCategory')
     ? parseInt(params.get('subCategory')!)
     : 0;
-  const admCd = params.get('admCd') ? params.get('admCd')! : '';
-  const dongName = getDongName(admCd);
-  const jobCode = getJobCode(mainCategory, subCategory); // csX000XX
-  const jobName = cs[mainCategory - 1][subCategory - 1];
+  const admCd = params.get('admCd') ? params.get('admCd')! : ''; // 행정동 코드
+  const dongName = getDongName(admCd); // 동 이름
+  const jobCode = getJobCode(mainCategory, subCategory); // 업종 코드 : csX000XX
+  const jobName = cs[mainCategory - 1][subCategory - 1]; // 업종명
   const { data: amatuerResult } = useAmatuerResult({ admCd, jobCode });
-  const { data, isError, isLoading, isSuccess } = useAmatuerResult({
-    admCd,
-    jobCode,
-  });
-  console.log(data, isError, isLoading, isSuccess);
 
   return (
     <Wrapper>

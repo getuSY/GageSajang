@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReportIndexItem from '../../atoms/ReportIndexItem';
-import ReportRegionLabel from '../../atoms/ReportRegionLabel';
+// import ReportRegionLabel from '../../atoms/ReportRegionLabel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 interface StatusReportIndexProps {
   region?: string;
@@ -23,6 +23,7 @@ const StatusReportIndex = ({
   return (
     <Wrapper>
       <ReportRegionLabel>
+        <FontAwesomeIcon icon={faLocationDot} className="region-icon" />
         <div className="region-label-div">
           <span className="region-label">{region}</span>
           <span className="label-category">
@@ -34,6 +35,7 @@ const StatusReportIndex = ({
         {content.map((e: any, i: number) => {
           return (
             <ReportIndexItem
+              key={`status-report-index-item-${i}`}
               onClick={e.onClick}
               active={tab === i + 1}
               style={{ padding: '10px', marginRight: '0.5rem' }}
@@ -74,6 +76,18 @@ const Wrapper = styled.div`
     & .label-category {
       width: 7rem;
     }
+  }
+`;
+
+const ReportRegionLabel = styled.label`
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-family: 'Pretendard-Regular';
+  font-weight: 700;
+  width: 14rem;
+  & .region-icon {
+    margin-right: 10px;
   }
 `;
 

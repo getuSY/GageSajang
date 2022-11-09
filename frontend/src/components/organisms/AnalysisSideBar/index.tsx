@@ -9,6 +9,8 @@ import AnalysisSubButtons from '../../molecules/AnalysisSubButtons';
 import { useNavigate } from 'react-router-dom';
 import { DongItem } from '../../../data/areaDong';
 
+const menus = ['요식업', '서비스업', '도소매업'];
+
 interface AnalysisSideBarProps {
   inputValue?: string;
   clearValue?: any;
@@ -36,11 +38,14 @@ const AnalysisSideBar = ({
 }: AnalysisSideBarProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  // 메인 -> 분석 페이지 시 사이드바 오픈
   useEffect(() => {
     if (mainCategory && subCategory) {
       setIsOpen(true);
     }
   }, [mainCategory, subCategory]);
+
+  // 동 선택 됐을 때 사이드바 오픈
   useEffect(() => {
     if (inputValue) {
       setIsOpen(true);
@@ -48,40 +53,22 @@ const AnalysisSideBar = ({
   }, [inputValue]);
 
   const navigate = useNavigate();
+
   const menuList = useMemo(
-    () => [
-      {
-        name: '요식업',
+    () =>
+      menus.map((e, i) => ({
+        name: e,
         onClick: () => {
-          if (mainCategory !== 1) {
-            navigate('/amatuer/analysis?mainCategory=1', { replace: true });
+          if (mainCategory !== i + 1) {
+            navigate(`/amatuer/analysis?mainCategory=${i + 1}`, {
+              replace: true,
+            });
           } else {
             navigate('/amatuer/analysis', { replace: true });
           }
         },
-      },
-      {
-        name: '서비스업',
-        onClick: () => {
-          if (mainCategory !== 2) {
-            navigate('/amatuer/analysis?mainCategory=2', { replace: true });
-          } else {
-            navigate('/amatuer/analysis', { replace: true });
-          }
-        },
-      },
-      {
-        name: '도소매업',
-        onClick: () => {
-          if (mainCategory !== 3) {
-            navigate('/amatuer/analysis?mainCategory=3', { replace: true });
-          } else {
-            navigate('/amatuer/analysis', { replace: true });
-          }
-        },
-      },
-    ],
-    [mainCategory, navigate]
+      })),
+    [navigate, mainCategory]
   );
 
   return (

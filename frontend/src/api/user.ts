@@ -8,7 +8,7 @@ export const helloUser = async (name: string) => {
 };
 
 export const userSignUp = async (params: UserModel) => {
-  const { data } = await client.post('user/signup', params);
+  const { data } = await client.post('user/auth/signup', params);
 
   return data;
 };

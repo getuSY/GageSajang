@@ -26,7 +26,7 @@ const ReportIndexItem = ({
       <FontAwesomeIcon
         icon={icon ? icon : faCashRegister}
         className="index-icon"
-      ></FontAwesomeIcon>
+      />
       {children}
     </Wrapper>
   );

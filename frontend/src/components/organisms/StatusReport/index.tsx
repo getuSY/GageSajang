@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import ReportModal from '../../atoms/ReportModal';
-import StatusReportBarChart from '../../molecules/StatusReportBarChart';
-import StatusReportDnChart from '../../molecules/StatusReportDnChart';
-import StatusReportCharts from '../../molecules/StatusReportCharts';
-
+import styled from 'styled-components';
+import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 
@@ -100,13 +97,13 @@ const StatusReport = ({
             title={title}
           />
           <div className="report-top-div">
-            <StatusReportCharts
+            <StatusReportChart
               type="bar"
               title={'요일별 평균 유동인구 (분기)'}
               data={data}
               options={options}
             />
-            <StatusReportCharts
+            <StatusReportChart
               type="doughnut"
               title={'요일별 평균 유동인구'}
               data={data}

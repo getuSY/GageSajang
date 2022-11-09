@@ -32,11 +32,8 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   padding: 8px 8px;
   border-radius: 5px;
-
   margin: 4px 0;
-  /* height: 73px; */
-  /* justify-content: center; */
-  /* font-weight: ${({ select }) => (select ? 900 : 500)}; */
+
   cursor: ${({ select }) => (select ? '' : 'pointer')};
   &:hover {
     background: ${({ theme }) => theme.darkColor};
@@ -44,9 +41,6 @@ const Wrapper = styled.div<WrapperProps>`
   font-size: 1.3rem;
   background: ${({ select, theme }) =>
     select ? theme.darkColor : 'transparent'};
-
-  /* border-bottom: ${({ select }) =>
-    select ? '3px solid #7579E7' : '1px solid #797979'}; */
 `;
 
 export default ReportSidebarItem;
