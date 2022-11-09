@@ -1,341 +1,375 @@
-import React from 'react';
-import styled from 'styled-components';
-import SalesSimulation from './SalesSimulation';
+import client from './client';
+import { SimulationParams } from '../models/simultaion';
 
-const values = [
+// 서버에 파이썬 올라오기 전까지 임시로 쓸 sales simul data
+
+const proDummyData = [
   {
     year: 2013,
     quarter: 1,
-    value: 53471436,
+    value: 451,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2013,
     quarter: 2,
-    value: 56827529,
+    value: 491,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2013,
     quarter: 3,
-    value: 53974196,
+    value: 496,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2013,
     quarter: 4,
-    value: 56068101,
+    value: 493,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2014,
     quarter: 1,
-    value: 56198368,
+    value: 466,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2014,
     quarter: 2,
-    value: 59522619,
+    value: 511,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2014,
     quarter: 3,
-    value: 56645538,
+    value: 509,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2014,
     quarter: 4,
-    value: 58797010,
+    value: 506,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2015,
     quarter: 1,
-    value: 44054566,
+    value: 351,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2015,
     quarter: 2,
-    value: 45817652,
+    value: 383,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2015,
     quarter: 3,
-    value: 44691487,
+    value: 381,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2015,
     quarter: 4,
-    value: 46477482,
+    value: 380,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2016,
     quarter: 1,
-    value: 48019351,
+    value: 394,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2016,
     quarter: 2,
-    value: 49722267,
+    value: 435,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2016,
     quarter: 3,
-    value: 48584875,
+    value: 427,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2016,
     quarter: 4,
-    value: 50498264,
+    value: 426,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2017,
     quarter: 1,
-    value: 47752113,
+    value: 428,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2017,
     quarter: 2,
-    value: 50474363,
+    value: 420,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2017,
     quarter: 3,
-    value: 49878688,
+    value: 397,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2017,
     quarter: 4,
-    value: 48007407,
+    value: 408,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2018,
     quarter: 1,
-    value: 43753800,
+    value: 406,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2018,
     quarter: 2,
-    value: 49758876,
+    value: 358,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2018,
     quarter: 3,
-    value: 44889386,
+    value: 351,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2018,
     quarter: 4,
-    value: 46840316,
+    value: 355,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2019,
     quarter: 1,
-    value: 45754916,
+    value: 330,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2019,
     quarter: 2,
-    value: 54295263,
+    value: 323,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2019,
     quarter: 3,
-    value: 55481501,
+    value: 328,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2019,
     quarter: 4,
-    value: 51541796,
+    value: 278,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2020,
     quarter: 1,
-    value: 46648502,
+    value: 273,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2020,
     quarter: 2,
-    value: 48049542,
+    value: 279,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2020,
     quarter: 3,
-    value: 48151582,
+    value: 283,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2020,
     quarter: 4,
-    value: 46221775,
+    value: 291,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2021,
     quarter: 1,
-    value: 38375197,
+    value: 277,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2021,
     quarter: 2,
-    value: 48108637,
+    value: 275,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2021,
     quarter: 3,
-    value: 46633496,
+    value: 285,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2021,
     quarter: 4,
-    value: 48463198,
+    value: 290,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2022,
     quarter: 1,
-    value: 48794482,
+    value: 374,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2022,
     quarter: 2,
-    value: 61268662,
+    value: 368,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2022,
     quarter: 3,
-    value: 59704997,
+    value: 376,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2022,
     quarter: 4,
-    value: 60000330,
+    value: 377,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2023,
     quarter: 1,
-    value: 65273089,
+    value: 478,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2023,
     quarter: 2,
-    value: 81314495,
+    value: 467,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2023,
     quarter: 3,
-    value: 79634885,
+    value: 473,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
   {
     year: 2023,
     quarter: 4,
-    value: 82338601,
+    value: 479,
     dongName: '개포2동',
     industryName: '한식음식점',
   },
 ];
 
-const SimulationPage = () => {
-  return (
-    <Wrapper>
-      <TempSide></TempSide>
-      <DataBox>
-        <h1>SimulationPage</h1>
-        {/* <SalesSimulation values={values}></SalesSimulation> */}
-      </DataBox>
-    </Wrapper>
+export const ProSimulationResult = async (params: SimulationParams) =>
+  proDummyData;
+
+const amaDummyData = [
+  {
+    year: 2022,
+    quarter: 4,
+    value: 63430330,
+    dongName: '개포2동',
+    industryName: '한식음식점',
+  },
+  {
+    year: 2022,
+    quarter: 1,
+    value: 65058084,
+    dongName: '개포2동',
+    industryName: '한식음식점',
+  },
+  {
+    year: 2022,
+    quarter: 2,
+    value: 81318825,
+    dongName: '개포2동',
+    industryName: '한식음식점',
+  },
+  {
+    year: 2022,
+    quarter: 3,
+    value: 80213764,
+    dongName: '개포2동',
+    industryName: '한식음식점',
+  },
+  {
+    year: 2022,
+    quarter: 0,
+    value: 83230328,
+    dongName: '개포2동',
+    industryName: '한식음식점',
+  },
+];
+
+export const AmaSimulationResult = async (params: SimulationParams) =>
+  amaDummyData;
+
+// 아래가 실사용
+
+export const AmaSalesSimulation = async (params: SimulationParams) => {
+  const { data } = await client.get(
+    `simul/sales/maybe/${params.dongName}/${params.industryName}`
   );
+
+  return data;
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+export const ProSalesSimulation = async (params: SimulationParams) => {
+  const { data } = await client.post('simul/sales/already', params);
 
-const TempSide = styled.div`
-  background-color: green;
-  width: 500px;
-  height: 100%;
-`;
-
-const DataBox = styled.div``;
-
-export default SimulationPage;
+  return data;
+};

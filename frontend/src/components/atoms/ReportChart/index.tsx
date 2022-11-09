@@ -39,7 +39,7 @@ Chart.register(
   ...registerables
 );
 
-interface ReportChartProps {
+export interface ReportChartProps {
   type: 'bar' | 'bubble' | 'doughnut' | 'line' | 'pie' | 'polarArea' | 'radar';
   options?: any;
   data: any;

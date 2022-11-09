@@ -1,21 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import RoundBox from '../../atoms/RoundBox/index';
-import Button from '../../atoms/Button/index';
-import DynamicChart from '../../atoms/DynamicChart/index';
+import RoundBox from '../../atoms/RoundBox';
+import Button from '../../atoms/Button';
+import DynamicChart from '../../atoms/DynamicChart';
 import SlideBar from '../../atoms/SlideBar';
-import DynamicBarChart from '../../atoms/DynamicBarChart';
+import DynamicRateChart from '../../atoms/DynamicRateChart';
 import ReportChart from '../../atoms/ReportChart';
+import DynamicTopChartProps from '../../atoms/DynamicTopChart';
 
 // 시뮬레이션 페이지 안에 들어갈 시뮬레이션 그래프 컴포넌트입니다.
 // 임시로 시뮬레이션 pages 안에 만들어둠!!
 // 나중에 그래프 하나씩 채워넣고 나서 제자리에 이사시켜줄 예정!!
 
-interface SalesSimulationProps {}
+interface SalesSimulationProps {
+  values: Array<SimulInfo>;
+}
 
-const SalesSimulation = ({}: SalesSimulationProps) => {
+export type SimulInfo = {
+  year: number;
+  quarter: number;
+  value: number;
+  dongName: string;
+  industryName: string;
+};
+
+const SalesSimulation = ({ values }: SalesSimulationProps) => {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState(0);
+  const [data, setData] = useState([
+    {
+      year: 2013,
+      quarter: 1,
+      value: 0,
+      dongName: '',
+      industryName: '',
+    },
+  ]);
   const showGraph = () => {
     setOpen(true);
   };
@@ -23,18 +43,42 @@ const SalesSimulation = ({}: SalesSimulationProps) => {
     setOpen(false);
   };
   useEffect(() => {
-    console.log('api 통신 받아오기');
+    let perPos = pos / 50;
+    let newData: Array<SimulInfo> = values.slice(0, (Number(perPos) + 1) * 4);
+    setData(newData);
+    const yearLabel: Array<string> = data.map((a) => {
+      const yr = a.year;
+      const quart = a.quarter;
+      return yr + '년 ' + quart + '분기';
+    });
+    const salesValues = data.map((a) => a.value);
+    console.log(yearLabel);
+    console.log(salesValues);
   }, []);
+
+  useEffect(() => {
+    let perPos = pos / 50;
+    let newData: Array<SimulInfo> = values.slice(0, (Number(perPos) + 1) * 4);
+    setData(newData);
+    const yearLabel: Array<string> = data.map((a) => {
+      const yr = a.year;
+      const quart = a.quarter;
+      return yr + '년 ' + quart + '분기';
+    });
+    const salesValues = data.map((a) => a.value);
+    console.log(yearLabel);
+    console.log(salesValues);
+  }, [pos]);
+
   // api통해 매출 예측값 받아오기
   // data 설정한 후 props로 차트들에 data로 내려주기
 
   // type Position = { x: number; y: number };
-  // let rate: Array<Position> = [{ x: 2013, y: 0 }];
+  // let rate: Array<Position> = [0];
   // let i: number = 1;
   // while (i <= 11) {
   //   const newY: number = (given[i].x - given[i - 1].x) / given[i - 1].x;
-  //   const newX: number = given[0].x + i;
-  //   rate.push({ x: newX, y: newY });
+  //   rate.push(newY*100);
   //   i += 1;
   // }
 
@@ -58,10 +102,14 @@ const SalesSimulation = ({}: SalesSimulationProps) => {
             />
           </TitleDiv>
           {/* <LineChart data={graphData} style={graphStyle} /> */}
+
           <SlideBar setPos={setPos} />
+          <DynamicTopChartProps posi={pos} />
           <DynamicChart posi={pos} />
-          <DynamicBarChart posi={pos} />
-          <ReportChart type="line" data={graphData} style={graphStyle} />
+          <DynamicRateChart posi={pos} />
+
+          {/* <ReportChart posi={pos} /> */}
+          {/* <ReportChart type="line" data={graphData} style={graphStyle} /> */}
         </RoundBox>
       )}
       {open === false && (
@@ -111,7 +159,7 @@ const roundStyle = {
   flexDirection: 'column',
   alignitems: 'center',
   width: '1200px',
-  height: '800px',
+  // height: '800px',
 };
 
 const ChartDiv = styled.div`

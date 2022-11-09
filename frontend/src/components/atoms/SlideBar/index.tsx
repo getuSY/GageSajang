@@ -103,7 +103,7 @@ const SlideBar = ({
 const Wrapper = styled.div`
   width: 575px;
   height: 40px;
-  background-color: ${({ theme }) => theme.subColor};
+  background-color: black;
   border-radius: 100px;
   display: flex;
   flex-direction: row;
@@ -111,6 +111,7 @@ const Wrapper = styled.div`
   position: 'relative';
   overflow: 'auto';
   padding-left: 20px;
+  color: black;
 `;
 
 const WrapperLabel = styled.div`
