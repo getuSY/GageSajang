@@ -39,5 +39,5 @@ export default {
 } as ComponentMeta<typeof PracticeLineChart>;
 
 export const lineChart: ComponentStory<typeof PracticeLineChart> = () => (
-  <PracticeLineChart data={data} />
+  <PracticeLineChart />
 );

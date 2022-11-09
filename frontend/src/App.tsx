@@ -10,7 +10,8 @@ import LoginPage from './components/pages/user/LoginPage';
 import RegisterPage from './components/pages/user/RegisterPage';
 import MyPage from '../src/components/pages/user/MyPage';
 import ProfessionalStorePage from './components/pages/professional/ProfessionalStorePage';
-import SimulationPage from './components/pages/simulation/SimulationPage';
+// import SimulationPage from './components/pages/simulation/SimulationPage';
+import ProfessionalResultPage from './components/pages/professional/ProfessionalResultPage';
 
 const Home = lazy(() => import('./components/pages/IndexPage'));
 const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
@@ -68,7 +69,8 @@ function App() {
             element={<CustomThemeProvider theme={greenTheme} />}
           >
             <Route path="" element={<ProfessionalPage />} />
-            <Route path="store" element={<SimulationPage />} />
+            <Route path="store" element={<ProfessionalStorePage />} />
+            <Route path="result" element={<ProfessionalResultPage />} />
           </Route>
           {/* 아마 사장 */}
           <Route
