@@ -6,14 +6,15 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Assesment")
+@Document(collection = "Assessment")
 @Getter
 @Setter
 @Builder
 public class Assesment {
         @Id
         String _id;
-
+        private String dongName;
+        private String industryName;
         private int clerk; // 평균 직원수
         private int area; // 평균 면적
         private float similar; // 평균 유사업종 수

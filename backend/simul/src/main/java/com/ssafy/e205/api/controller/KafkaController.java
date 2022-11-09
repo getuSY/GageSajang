@@ -16,7 +16,6 @@ public class KafkaController {
     @Autowired
     private KafkaProducerService producer = new KafkaProducerServiceImpl();
 
-
     @PostMapping(value = "/messageToUser")
     public String sendMessageToUser(@RequestParam("message") String message) {
         this.producer.producerToUser(message);
