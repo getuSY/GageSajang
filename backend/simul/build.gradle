@@ -37,7 +37,9 @@ dependencies {
 	implementation 'org.springframework.kafka:spring-kafka'
 	// eurka client
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
+	// mongodb
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+//	implementation group: 'org.springframework.data', name: 'spring-data-mongodb', version: '3.4.3'
 	// for json
 //	implementation 'com.fasterxml.jackson.core:jackson-core:2.9.7'
 //	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
