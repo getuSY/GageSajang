@@ -63,13 +63,13 @@ const StatusPage = () => {
           onClickRegionHandler={onClickRegionHandler}
         />
         <StatusReport
-          // 상세 페이지, 모달 + close 버튼
           icon={icons}
           region={region}
           content={contentList}
           category={category!}
           tab={tab}
-          isOpen={reportModal}
+          // 상세 페이지, 모달 + close 버튼
+          isOpen={reportModal} 
           setIsOpen={setReportModal}
         />
       </Wrapper>
