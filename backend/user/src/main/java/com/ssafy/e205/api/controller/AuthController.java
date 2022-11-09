@@ -55,11 +55,6 @@ public class  AuthController {
         return ResponseEntity.ok("hello " + name);
     }
 
-    @PostMapping("/corsTest")
-    public void corstest(@RequestBody UserDto userDto){
-        System.out.println("corsTest : " + userDto.toString());
-    }
-
     @GetMapping("/test")
     public String test(){
         return "hello? this application port : "+application.portNum;
@@ -366,4 +361,60 @@ public class  AuthController {
         return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
     }
 
+    @GetMapping("/getUserInfo")
+    public ResponseEntity<String> getUserInfoOnlyNickname(@RequestHeader("Authorization") String accessToken){
+        String userInfo;
+        HttpStatus httpStatus;
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+
+        System.out.println("AccessToken : " + accessToken);
+
+        boolean validate = jwtTokenProvider.validateToken(accessToken); //  move to filter this feature(token validate check)
+        if(validate){
+            String email = jwtTokenProvider.getUserPk(accessToken);
+            System.out.println("email from getUserInfo : " + email);
+            Optional<UserEntity> entity = userService.findByEmail(email);
+            System.out.println("entity from getUserInfo : " + entity);
+            if(entity.isEmpty()){
+                jsonObject.addProperty("error","User Info isn't existed");
+                httpStatus = HttpStatus.BAD_REQUEST;
+            }
+            else{
+                UserDto dto = new UserDto(entity.get());
+                jsonObject.addProperty("nickname",dto.getNickName());
+                httpStatus = HttpStatus.OK;
+            }
+        }
+        else{
+            jsonObject.addProperty("error", "token validate is expired");
+            httpStatus = HttpStatus.BAD_REQUEST;
+        }
+
+        userInfo = gson.toJson(jsonObject);
+        return new ResponseEntity<>(userInfo, httpStatus);
+    }
+    @GetMapping("/refreshToken")
+    public ResponseEntity<String> refreshAccessToken(@RequestHeader("RefreshToken") String refreshToken){
+        String newAccessToken;
+        HttpStatus httpStatus;
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+
+        boolean validate = jwtTokenProvider.validateToken(refreshToken);
+        if (validate){
+            String email = jwtTokenProvider.getUserPk(refreshToken);
+            Optional<UserEntity> entity = userService.findByEmail(email);
+            UserDto dto = new UserDto(entity.get());
+            String newToken = jwtTokenProvider.createToken(dto.getEmail(),dto.getAuthList(),true);
+            jsonObject.addProperty("accessToken", newToken);
+            httpStatus = HttpStatus.OK;
+        }
+        else{
+            jsonObject.addProperty("error", "token validate is expired");
+            httpStatus = HttpStatus.BAD_REQUEST;
+        }
+        newAccessToken = gson.toJson(jsonObject);
+        return new ResponseEntity<>(newAccessToken, httpStatus);
+    }
 }

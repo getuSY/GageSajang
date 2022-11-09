@@ -23,8 +23,8 @@ public class JwtTokenProvider {
     private String secretKey = "ssafyE2053rdProjectPrivateSecretKey";
 
     // 토큰 유효시간 30분
-    private final static long accessTokenValidTime = 30 * 60 * 1000L;
-    private final static long refreshTokenValidTime = 60 * 60 * 1000L;
+    private final static long accessTokenValidTime = 10 * 3600 * 60 * 1000L; // 10일
+    private final static long refreshTokenValidTime = 10 * 3600 * 60 * 1000L; // 10일
 
     private final UserDetailsService userDetailsService;
 

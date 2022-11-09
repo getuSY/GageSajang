@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     @QueryHints({@QueryHint(name="javax.persistence.lock.timeout", value = "10000")}) //mariaDB 에선 작동안함
 
     UserEntity findById(Long id);
-    UserEntity findByAccessToken(String access_token);
+    UserEntity findByAccessToken(String accessToken);
     Optional<UserEntity> findByEmail(String email);
     List<UserEntity> findAll();
 
