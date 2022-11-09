@@ -66,7 +66,8 @@ function App() {
             element={<CustomThemeProvider theme={greenTheme} />}
           >
             <Route path="" element={<ProfessionalPage />} />
-            <Route path="store" element={<SimulationPage />} />
+            <Route path="store" element={<ProfessionalStorePage />} />
+            <Route path="result" element={<ProfessionalResultPage />} />
           </Route>
           {/* 아마 사장 */}
           <Route
