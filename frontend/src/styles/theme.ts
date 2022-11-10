@@ -28,8 +28,8 @@ export const purpleTheme: DefaultTheme = {
     // 'linear-gradient(90deg, #29187C -10.69%, #D00CF0 40.09%, #E12C61 119.31%)',
     'linear-gradient(90deg, #545BF9 0%, #B85DE9 100%)',
 
-  darkColor: '#5B0E98',
-  lightColor: '#8B3BCA',
+  darkColor: '#8F32C1',
+  lightColor: '#B85DE9',
 };
 
 export const blueTheme: DefaultTheme = {

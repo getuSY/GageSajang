@@ -44,12 +44,19 @@ interface ReportChartProps {
   options?: any;
   data: any;
   style?: object;
+  chartRef?: any;
 }
 
-const ReportChart = ({ type, data, options, style }: ReportChartProps) => {
+const ReportChart = ({
+  type,
+  data,
+  options,
+  style,
+  chartRef,
+}: ReportChartProps) => {
   return (
     <Wrapper style={style}>
-      {type === 'bar' && <Bar data={data} options={options} />}
+      {type === 'bar' && <Bar data={data} options={options} ref={chartRef} />}
       {type === 'bubble' && <Bubble data={data} options={options} />}
       {type === 'doughnut' && <Doughnut data={data} options={options} />}
       {type === 'line' && <Line data={data} options={options} />}

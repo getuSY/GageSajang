@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import ReportContent from '../../atoms/ReportContent';
 import Label from '../../atoms/Label';
 import { throttle } from 'lodash';
 import ReportChart from '../../atoms/ReportChart';
 import { greenTheme } from '../../../styles/theme';
+import createGradient from '../../../utils/createGradient';
+import { Chart as ChartJS } from 'chart.js';
 
 type indexProps = {
   reportMenuList: Array<{ name: string; icon: string }>;
@@ -20,7 +22,6 @@ const ReportContentContainer = ({
   amatuerResult,
 }: indexProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-
   const onScroll = throttle(() => {
     // 스크롤 이벤트
     let i = contentRefs.current.length - 1;
@@ -38,6 +39,34 @@ const ReportContentContainer = ({
     console.log(amatuerResult);
   }, [amatuerResult]);
 
+  const chartRef = useRef<ChartJS>(null);
+  const [chartData, setChartData] = useState<any>({
+    labels: ['10대', '20대', '30대', '40대', '50대', '60대'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: amatuerResult?.store.age,
+        backgroundColor: [
+          greenTheme.mainColor,
+          greenTheme.subColor,
+          greenTheme.subColor,
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          greenTheme.mainColor,
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  });
+
   const people = {
     data: {
       labels: ['10대', '20대', '30대', '40대', '50대', '60대'],
@@ -48,7 +77,7 @@ const ReportContentContainer = ({
           backgroundColor: [
             greenTheme.mainColor,
             greenTheme.subColor,
-            greenTheme.gradColor,
+            greenTheme.subColor,
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
             'rgba(255, 159, 64, 0.2)',
@@ -70,6 +99,29 @@ const ReportContentContainer = ({
     },
   };
 
+  useEffect(() => {
+    const chart = chartRef.current;
+    if (!chart) {
+      return;
+    }
+    const newChartData = {
+      ...chartData,
+      datasets: [
+        {
+          ...chartData.datasets[0],
+          backgroundColor: createGradient(
+            chart.ctx,
+            chart.chartArea,
+            '#ff0001',
+            '#00ff00',
+            '#0000ff'
+          ),
+        },
+      ],
+    };
+    setChartData(newChartData);
+  }, [chartRef, chartRef.current]);
+
   return (
     <Wrapper onScroll={onScroll} ref={containerRef}>
       <ReportContent
@@ -88,8 +140,9 @@ const ReportContentContainer = ({
             <Label>💸 {menu.name}</Label>
             <ReportChart
               type="bar"
-              data={people.data}
+              data={chartData}
               options={people.options}
+              chartRef={chartRef}
             />
           </ReportContent>
         ))}

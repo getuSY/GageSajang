@@ -35,12 +35,13 @@ const Wrapper = styled.div<WrapperProps>`
   margin: 4px 0;
 
   cursor: ${({ select }) => (select ? '' : 'pointer')};
-  &:hover {
-    background: ${({ theme }) => theme.darkColor};
-  }
   font-size: 1.3rem;
+  &:hover {
+    /* background: ${({ theme }) => theme.darkColor}; */
+    background: rgba(255, 255, 255, 0.3);
+  }
   background: ${({ select, theme }) =>
-    select ? theme.darkColor : 'transparent'};
+    select ? 'rgba(255, 255, 255, 0.3)' : 'transparent'};
 `;
 
 export default ReportSidebarItem;

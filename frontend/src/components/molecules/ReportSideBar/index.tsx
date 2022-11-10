@@ -74,7 +74,9 @@ const ReportSideBar = ({
 
 const Wrapper = styled.div`
   height: auto;
-  background: ${({ theme }) => theme.lightColor};
+  /* background: ${({ theme }) => theme.lightColor}; */
+  /* background: linear-gradient(180deg, #545bf9 0%, #b85de9 100%); */
+  background: linear-gradient(180deg, #545bf9 0%, #845cf1 36.98%, #b85de9 100%);
   padding: 20px;
   /* margin-bottom: 10px; */
   font-size: 1.4rem;

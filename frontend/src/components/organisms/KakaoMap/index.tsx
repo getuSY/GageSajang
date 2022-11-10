@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { areas, DongItem } from '../../../data/areaDong';
+import { purpleTheme as theme } from '../../../styles/theme';
 
 const mapOptions = {
   //지도를 생성할 때 필요한 기본 옵션
@@ -11,16 +12,18 @@ const polygonOption = (paths: any, isSelected: boolean) => ({
   path: paths.map(
     (p: any, i: number) => new window.kakao.maps.LatLng(p[0], p[1])
   ), // 그려질 다각형의 좌표 배열입니다
-  strokeWeight: isSelected ? 3 : 0, // 선의 두께입니다
-  strokeColor: '#A155B9', // 선의 색깔입니다
+  strokeWeight: isSelected ? 2 : 0, // 선의 두께입니다
+  // strokeColor: '#A155B9', // 선의 색깔입니다
+  strokeColor: theme.lightColor,
   strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-  fillColor: '#DFB2ED', // 채우기 색깔입니다
-  fillOpacity: isSelected ? 0.6 : 0.01, // 채우기 불투명도 입니다
+  // fillColor: '#DFB2ED', // 채우기 색깔입니다
+  fillColor: theme.lightColor,
+  fillOpacity: isSelected ? 0.2 : 0.01, // 채우기 불투명도 입니다
 });
 
 const mouseoverOption = {
-  fillOpacity: 0.6, // 채우기 불투명도 입니다
-  strokeWeight: 3,
+  fillOpacity: 0.2, // 채우기 불투명도 입니다
+  strokeWeight: 2,
 };
 
 // 다각형에 마우스아웃 이벤트가 발생했을 때 변경할 채우기 옵션입니다

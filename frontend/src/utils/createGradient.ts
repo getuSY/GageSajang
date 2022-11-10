@@ -7,6 +7,7 @@ export default function createGradient(
   colorMid: string,
   colorEnd: string
 ) {
+  console.log(area.bottom, area.top);
   const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
 
   gradient.addColorStop(0, colorStart);
