@@ -15,7 +15,7 @@ const ProfessionalPage = lazy(
   () => import('./components/pages/professional/ProfessionalPage')
 );
 const ProfessionalStorePage = lazy(
-  () => import('./components/pages/professional/ProfessionalStorePage')
+  () => import('./components/pages/professional/ProfessionalInfoPage')
 );
 const ProfessionalResultPage = lazy(
   () => import('./components/pages/professional/ProfessionalResultPage')
