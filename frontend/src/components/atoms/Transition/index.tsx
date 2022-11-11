@@ -5,12 +5,6 @@ interface TransitionsProps {
   children?: React.ReactNode;
 }
 
-const animationConfiguration = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-};
-
 const Transitions = ({ children }: TransitionsProps) => {
   return (
     <motion.div

@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userInfo } from 'os';
-import { number } from 'prop-types';
 import { User } from '../../models/user';
 
 interface UserState {

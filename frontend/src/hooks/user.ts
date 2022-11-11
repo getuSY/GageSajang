@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { userSignUp, helloUser, userLogin, userInfo } from '../api/user';
-import { UserModel, UserInfo } from '../models/user';
-import { useNavigate } from 'react-router-dom';
+import { UserModel } from '../models/user';
 
 export const useHelloUser = (username: string) =>
   useQuery({ queryKey: ['user', 'hello'], queryFn: () => helloUser(username) });

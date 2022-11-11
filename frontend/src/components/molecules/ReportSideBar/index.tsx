@@ -74,16 +74,14 @@ const ReportSideBar = ({
 
 const Wrapper = styled.div`
   height: auto;
-  background: ${({ theme }) => theme.lightColor};
+  background: #ffffff;
   padding: 20px;
-  /* margin-bottom: 10px; */
-  font-size: 1.4rem;
-  border-radius: 20px;
   width: 230px;
-  color: white;
+  color: #3e4b5b;
   & .title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin-bottom: 10px;
+    font-weight: 700;
   }
   & .icon-div {
     width: 30px;
@@ -98,7 +96,7 @@ const Wrapper = styled.div`
   }
   & .report-location,
   .report-category {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     display: flex;
     margin-bottom: 6px;
     & > div {

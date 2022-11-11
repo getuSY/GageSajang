@@ -8,11 +8,9 @@ import { UserModel } from '../../../models/user';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const toHome = () => {
-    navigate('/');
-  };
+
   const mutation = useUserSignUp();
-  const { isLoading, isSuccess, isError, error } = mutation;
+  const { isSuccess } = mutation;
   const [signUpInputs, setSignUpInputs] = useState<UserModel>({
     accessToken: 'string', // 고정
     auth: 'user', // 고정
@@ -33,7 +31,6 @@ const RegisterPage = () => {
   };
 
   const onClickHandler = () => {
-    // console.log(signUpInputs);
     mutation.mutate(signUpInputs);
   };
 
@@ -42,7 +39,7 @@ const RegisterPage = () => {
       alert('회원가입 완료!');
       navigate('/');
     }
-  }, [isSuccess]);
+  }, [isSuccess, navigate]);
 
   return (
     <Wrapper>

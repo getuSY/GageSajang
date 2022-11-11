@@ -15,8 +15,6 @@ const GeometryMap = ({
   isOpen,
   onClickRegionHandler,
 }: GeometryProps) => {
-  const navigate = useNavigate();
-  const [params] = useSearchParams();
   const mapData = areas;
   const width = 1000;
   const height = 850;

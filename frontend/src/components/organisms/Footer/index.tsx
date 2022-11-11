@@ -9,9 +9,7 @@ import {
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 
-interface FooterProps {}
-
-const Footer = ({}: FooterProps) => {
+const Footer = () => {
   return (
     <Wrapper>
       <FontAwesomeIcon icon={faPaperPlane} className="footer_logo" />
