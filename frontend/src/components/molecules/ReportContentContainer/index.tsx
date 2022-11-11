@@ -36,6 +36,7 @@ const ReportContentContainer = ({
   }, 100);
 
   useEffect(() => {
+    console.log('amatuerResult');
     console.log(amatuerResult);
   }, [amatuerResult]);
 
@@ -44,64 +45,20 @@ const ReportContentContainer = ({
     labels: ['10대', '20대', '30대', '40대', '50대', '60대'],
     datasets: [
       {
-        label: '# of Votes',
-        data: amatuerResult?.store.age,
-        backgroundColor: [
-          greenTheme.mainColor,
-          greenTheme.subColor,
-          greenTheme.subColor,
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          greenTheme.mainColor,
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
+        label: '유동 인구',
+        data: amatuerResult.store.age,
+        barThickness: 30,
+        datalabels: {
+          // 데이터라벨 숨김
+          color: 'transparent',
+        },
       },
     ],
   });
 
-  const people = {
-    data: {
-      labels: ['10대', '20대', '30대', '40대', '50대', '60대'],
-      datasets: [
-        {
-          label: '# of Votes',
-          data: amatuerResult?.store.age,
-          backgroundColor: [
-            greenTheme.mainColor,
-            greenTheme.subColor,
-            greenTheme.subColor,
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            greenTheme.mainColor,
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      aspectRatio: 5 / 4,
-    },
-  };
-
   useEffect(() => {
     const chart = chartRef.current;
-    if (!chart) {
+    if (!chart || !amatuerResult) {
       return;
     }
     const newChartData = {
@@ -109,18 +66,16 @@ const ReportContentContainer = ({
       datasets: [
         {
           ...chartData.datasets[0],
-          backgroundColor: createGradient(
-            chart.ctx,
-            chart.chartArea,
-            '#ff0001',
-            '#00ff00',
-            '#0000ff'
-          ),
+          backgroundColor: createGradient(chart.ctx, chart.chartArea, [
+            [0, '#A82BEC'],
+            [0.4, '#714BF4'],
+            [1, '#545BF9'],
+          ]),
         },
       ],
     };
     setChartData(newChartData);
-  }, [chartRef, chartRef.current]);
+  }, []);
 
   return (
     <Wrapper onScroll={onScroll} ref={containerRef}>
@@ -130,20 +85,15 @@ const ReportContentContainer = ({
         ❗ 아래 분석 결과는 통계에 따른 추정 결과입니다. 향후 상황에 따라 다를
         수 있기 때문에, 판단 하에 참고하여 활용하시기 바랍니다.
       </ReportContent>
+
       <div className="content-div">
         {reportMenuList.map((menu, i) => (
           <ReportContent
             key={`report-menu-list-${i}`}
-            style={{ height: '600px' }}
             propsRef={(e: any) => (contentRefs.current[i] = e)}
           >
             <Label>💸 {menu.name}</Label>
-            <ReportChart
-              type="bar"
-              data={chartData}
-              options={people.options}
-              chartRef={chartRef}
-            />
+            <ReportChart type="bar" data={chartData} chartRef={chartRef} />
           </ReportContent>
         ))}
       </div>
@@ -156,8 +106,9 @@ const Wrapper = styled.div`
   flex-grow: 1;
   overflow-y: scroll;
   & .content-div > div {
-    margin-top: 10px;
+    margin-top: 12px;
   }
+  padding: 12px;
 `;
 
 export default ReportContentContainer;

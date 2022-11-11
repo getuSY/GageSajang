@@ -19,7 +19,7 @@ const ReportSidebarItem = ({
       <div className="icon-div">
         <FontAwesomeIcon icon={icon} />
       </div>
-      {name}
+      <div>{name}</div>
     </Wrapper>
   );
 };
@@ -33,15 +33,32 @@ const Wrapper = styled.div<WrapperProps>`
   padding: 8px 8px;
   border-radius: 5px;
   margin: 4px 0;
+  /* color: #3e4b5b; */
 
   cursor: ${({ select }) => (select ? '' : 'pointer')};
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   &:hover {
-    /* background: ${({ theme }) => theme.darkColor}; */
-    background: rgba(255, 255, 255, 0.3);
+    color: #b66dff;
+    font-weight: 700;
   }
-  background: ${({ select, theme }) =>
-    select ? 'rgba(255, 255, 255, 0.3)' : 'transparent'};
+  /* background: ${({ select, theme }) =>
+    // select ? 'rgba(255, 255, 255, 0.3)' : 'transparent'};
+    select ? '#ede5f4' : 'transparent'}; */
+  color: ${({ select, theme }) =>
+    // select ? 'rgba(255, 255, 255, 0.3)' : 'transparent'};
+    select ? '#B66DFF' : ''};
+  font-weight: ${({ select, theme }) => (select ? '700' : '')};
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    background-color: ${({ select }) => (select ? '#b66dff' : '')};
+  }
 `;
 
 export default ReportSidebarItem;

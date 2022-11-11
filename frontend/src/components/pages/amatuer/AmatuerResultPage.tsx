@@ -19,7 +19,10 @@ const AmatuerResultPage = () => {
   const dongName = getDongName(admCd); // 동 이름
   const jobCode = getJobCode(mainCategory, subCategory); // 업종 코드 : csX000XX
   const jobName = cs[mainCategory - 1][subCategory - 1]; // 업종명
-  const { data: amatuerResult } = useAmatuerResult({ admCd, jobCode });
+  const { data: amatuerResult, isLoading } = useAmatuerResult({
+    admCd,
+    jobCode,
+  });
 
   return (
     <Wrapper>
@@ -27,6 +30,7 @@ const AmatuerResultPage = () => {
         jobName={jobName}
         dongName={dongName}
         amatuerResult={amatuerResult}
+        isLoading={isLoading}
       />
     </Wrapper>
   );
@@ -35,11 +39,12 @@ const AmatuerResultPage = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background: #eaeaea;
+  /* gap: 10px; */
+  /* background: #eaeaea; */
+  background: #f2edf3;
   width: 100%;
   justify-content: center;
-  padding-top: 10px;
+  padding-top: 1px;
   height: calc(100vh - 75px);
 `;
 

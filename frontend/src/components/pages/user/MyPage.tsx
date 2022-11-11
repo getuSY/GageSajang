@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import LeftLineTitle from '../../atoms/LeftLineTitle/index';
+// import LeftLineTitle from '../../atoms/LeftLineTitle/index';
 import RoundBox from '../../atoms/RoundBox/index';
 import WhiteLabelInput from '../../molecules/WhiteLabelInput/index';
 import Button from '../../atoms/Button/index';
 import { useNavigate } from 'react-router-dom';
-// import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 interface MyPageProps {
   style?: object;
@@ -47,7 +45,7 @@ const MyPage = ({ page, style, children }: MyPageProps) => {
       {/* <RoundBox style={leftBoxStyle} /> */}
       {page === 'mypage' && (
         <RightBox>
-          <LeftLineTitle style={indexStyle}>회원 정보 수정</LeftLineTitle>
+          <LeftLineTitle>회원 정보 수정</LeftLineTitle>
           <RoundBox>
             <InsideBox>
               <WhiteLabelInput
@@ -78,7 +76,7 @@ const MyPage = ({ page, style, children }: MyPageProps) => {
       )}
       {page === 'mystore' && (
         <RightBox>
-          <LeftLineTitle style={indexStyle}>내 가게 정보</LeftLineTitle>
+          <LeftLineTitle>내 가게 정보</LeftLineTitle>
           <RoundBox>
             <InsideBox>
               <WhiteLabelInput
@@ -118,7 +116,7 @@ const MyPage = ({ page, style, children }: MyPageProps) => {
       )}
       {page === 'myarea' && (
         <RightBox>
-          <LeftLineTitle style={indexStyle}>내 관심 상권</LeftLineTitle>
+          <LeftLineTitle>내 관심 상권</LeftLineTitle>
           <RoundBox>
             <InsideBox>
               <WhiteLabelInput
@@ -143,11 +141,6 @@ const Wrapper = styled.div`
   gap: 3rem;
   margin-top: 2rem;
 `;
-
-const indexStyle = {
-  'font-size': '30px',
-  'font-weight': 'bold',
-};
 
 const RightBox = styled.div`
   display: flex;
@@ -183,6 +176,17 @@ const SideIndexItem = styled.li`
   margin: 3rem 0;
   text-align: center;
   cursor: pointer;
+`;
+
+const LeftLineTitle = styled.div`
+  margin: 2rem 0rem;
+  padding: 1rem 0rem 1rem 1rem;
+  border-width: 0px 0px 0px 8px;
+  border-color: #66d291;
+  border-style: none none none solid;
+  width: 400px;
+  font-size: 30px;
+  font-weight: bold;
 `;
 
 export default MyPage;

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { ChartData, ChartOptions } from 'chart.js';
 import {
   Bar,
   Bubble,
@@ -54,22 +53,28 @@ const ReportChart = ({
   style,
   chartRef,
 }: ReportChartProps) => {
+  const chartOptions = {
+    ...options,
+    maintainAspectRatio: false,
+  };
   return (
     <Wrapper style={style}>
-      {type === 'bar' && <Bar data={data} options={options} ref={chartRef} />}
-      {type === 'bubble' && <Bubble data={data} options={options} />}
-      {type === 'doughnut' && <Doughnut data={data} options={options} />}
-      {type === 'line' && <Line data={data} options={options} />}
-      {type === 'pie' && <Pie data={data} options={options} />}
-      {type === 'polarArea' && <PolarArea data={data} options={options} />}
-      {type === 'radar' && <Radar data={data} options={options} />}
+      {type === 'bar' && (
+        <Bar data={data} options={chartOptions} ref={chartRef} />
+      )}
+      {type === 'bubble' && <Bubble data={data} options={chartOptions} />}
+      {type === 'doughnut' && <Doughnut data={data} options={chartOptions} />}
+      {type === 'line' && <Line data={data} options={chartOptions} />}
+      {type === 'pie' && <Pie data={data} options={chartOptions} />}
+      {type === 'polarArea' && <PolarArea data={data} options={chartOptions} />}
+      {type === 'radar' && <Radar data={data} options={chartOptions} />}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   width: 400px;
-  height: 400px;
+  height: 300px;
 `;
 
 export default ReportChart;
