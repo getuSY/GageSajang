@@ -1,17 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import {
-  Bar,
-  Bubble,
-  Doughnut,
-  Line,
-  Pie,
-  PolarArea,
-  Radar,
-} from 'react-chartjs-2';
+import { Chart } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
-  Chart,
+  Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
@@ -23,8 +15,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import createGradient from '../../../utils/createGradient';
 
-Chart.register(
+ChartJS.register(
   ChartDataLabels,
   CategoryScale,
   LinearScale,
@@ -43,7 +36,8 @@ export interface ReportChartProps {
   options?: any;
   data: any;
   style?: object;
-  chartRef?: any;
+  grad?: any;
+  canvasStyle?: object;
 }
 
 const ReportChart = ({
@@ -51,23 +45,42 @@ const ReportChart = ({
   data,
   options,
   style,
-  chartRef,
+  grad,
+  canvasStyle,
 }: ReportChartProps) => {
   const chartOptions = {
     ...options,
     maintainAspectRatio: false,
   };
+
+  const [chartData, setChartData] = useState<any>(data);
+  const chartRef = useRef<ChartJS>(null);
+  useEffect(() => {
+    if (!chartRef) return;
+    const chart = chartRef.current;
+    if (!chart || !data || !grad) {
+      return;
+    }
+    const newChartData = {
+      ...chartData,
+      datasets: [
+        {
+          ...chartData.datasets[0],
+          backgroundColor: createGradient(chart.ctx, chart.chartArea, grad),
+        },
+      ],
+    };
+    setChartData(newChartData);
+  }, []);
   return (
     <Wrapper style={style}>
-      {type === 'bar' && (
-        <Bar data={data} options={chartOptions} ref={chartRef} />
-      )}
-      {type === 'bubble' && <Bubble data={data} options={chartOptions} />}
-      {type === 'doughnut' && <Doughnut data={data} options={chartOptions} />}
-      {type === 'line' && <Line data={data} options={chartOptions} />}
-      {type === 'pie' && <Pie data={data} options={chartOptions} />}
-      {type === 'polarArea' && <PolarArea data={data} options={chartOptions} />}
-      {type === 'radar' && <Radar data={data} options={chartOptions} />}
+      <Chart
+        data={chartData}
+        type={type}
+        options={chartOptions}
+        ref={chartRef}
+        style={canvasStyle}
+      />
     </Wrapper>
   );
 };

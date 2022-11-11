@@ -1,9 +1,101 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
-import { Chart as ChartJS } from 'chart.js';
-import type { ChartData, ChartArea } from 'chart.js';
+
+const chartData = {
+  labels: [
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+    '일요일',
+  ],
+  datasets: [
+    {
+      data: [12, 2, 9, 5, 10, 8, 5],
+      backgroundColor: [
+        '#76A7D5',
+        '#76A7D5',
+        '#74B1D9',
+        '#79BADB',
+        '#80C4DD',
+        '#88CEDF',
+        '#93D7E9',
+      ],
+    },
+  ],
+};
+
+const genderRateData = {
+  labels: ['여성', '남성'],
+  datasets: [
+    {
+      data: [67, 33],
+      hoverOffset: 4,
+      backgroundColor: ['#799ECF80', '#93D7E980'],
+    },
+  ],
+};
+
+const data = {
+  labels: [
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+    '일요일',
+  ],
+  datasets: [
+    {
+      data: [12, 2, 9, 5, 10, 8, 5],
+      backgroundColor: [
+        '#76A7D5',
+        '#76A7D5',
+        '#74B1D9',
+        '#79BADB',
+        '#80C4DD',
+        '#88CEDF',
+        '#93D7E9',
+      ],
+    },
+  ],
+};
+
+const genderRateOptions = {
+  plugins: {
+    legend: {
+      display: false,
+    },
+    datalabels: {
+      font: {
+        weight: 'bold',
+      },
+      color: 'white',
+      padding: 6,
+      backgroundColor: '#79797930',
+      borderRadius: 4,
+    },
+  },
+};
+
+const options = {
+  plugins: {
+    legend: {
+      display: false,
+    },
+    datalabels: {
+      font: {
+        weight: 'bold',
+      },
+      color: 'green',
+    },
+  },
+};
 
 interface StatusReportFPProps {
   region?: string;
@@ -11,135 +103,12 @@ interface StatusReportFPProps {
   tab: number;
   title?: any;
 }
-
-const createGradient = (ctx: CanvasRenderingContext2D, area: ChartArea) => {
-  const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
-  gradient.addColorStop(0, '#1406B4');
-  gradient.addColorStop(0.362, '#0855F9');
-  gradient.addColorStop(1, '#00D9FF');
-
-  return gradient;
-};
-
 const StatusReportFP = ({
   region,
   category,
   tab,
   title,
 }: StatusReportFPProps) => {
-  const chartRef = useRef<ChartJS>();
-  const [chartData, setChartData] = useState<ChartData<'bar'>>({
-    labels: [
-      '월요일',
-      '화요일',
-      '수요일',
-      '목요일',
-      '금요일',
-      '토요일',
-      '일요일',
-    ],
-    datasets: [
-      {
-        data: [12, 2, 9, 5, 10, 8, 5],
-        backgroundColor: [
-          '#76A7D5',
-          '#76A7D5',
-          '#74B1D9',
-          '#79BADB',
-          '#80C4DD',
-          '#88CEDF',
-          '#93D7E9',
-        ],
-      },
-    ],
-  });
-
-  const genderRateData = {
-    labels: ['여성', '남성'],
-    datasets: [
-      {
-        data: [67, 33],
-        hoverOffset: 4,
-        backgroundColor: ['#799ECF', '#93D7E9'],
-      },
-    ],
-  };
-
-  const data = {
-    labels: [
-      '월요일',
-      '화요일',
-      '수요일',
-      '목요일',
-      '금요일',
-      '토요일',
-      '일요일',
-    ],
-    datasets: [
-      {
-        data: [12, 2, 9, 5, 10, 8, 5],
-
-        backgroundColor: [
-          '#76A7D5',
-          '#76A7D5',
-          '#74B1D9',
-          '#79BADB',
-          '#80C4DD',
-          '#88CEDF',
-          '#93D7E9',
-        ],
-      },
-    ],
-  };
-
-  const genderRateOptions = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-      datalabels: {
-        font: {
-          weight: 'bold',
-        },
-        color: 'green',
-      },
-    },
-  };
-
-  const options = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-      datalabels: {
-        font: {
-          weight: 'bold',
-        },
-        color: 'green',
-      },
-    },
-  };
-
-  useEffect(() => {
-    const chart = chartRef.current;
-
-    if (!chart) {
-      return;
-    }
-
-    const newChartData = {
-      ...chartData,
-      datasets: chartData.datasets.map((dataset) => ({
-        ...dataset,
-        backgroundColor: [
-          createGradient(chart.ctx, chart.chartArea),
-          '#76A7D5',
-        ],
-      })),
-    };
-    setChartData(newChartData);
-  }, [chartRef]);
-
   return (
     <Wrapper>
       <StatusReportTitle
@@ -164,13 +133,21 @@ const StatusReportFP = ({
           title={'유동인구 평균 성별 비(분기 기준)'}
           data={genderRateData}
           options={genderRateOptions}
+          style={{
+            background: 'linear-gradient(90deg, #54BEF9 0%, #715DE9 100%)',
+            padding: '20px',
+          }}
+          canvasStyle={
+            {
+              // opacity: 0.5,
+            }
+          }
         />
         <StatusReportChart
           type="bar"
           title={'분기별 평균 유동인구'}
           data={chartData}
           options={options}
-          chartRef={chartRef}
         />
       </div>
       <div className="report-middle-div">

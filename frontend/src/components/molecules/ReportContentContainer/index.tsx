@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ReportContent from '../../atoms/ReportContent';
 import Label from '../../atoms/Label';
@@ -40,8 +40,7 @@ const ReportContentContainer = ({
     console.log(amatuerResult);
   }, [amatuerResult]);
 
-  const chartRef = useRef<ChartJS>(null);
-  const [chartData, setChartData] = useState<any>({
+  const barData = {
     labels: ['10대', '20대', '30대', '40대', '50대', '60대'],
     datasets: [
       {
@@ -54,28 +53,7 @@ const ReportContentContainer = ({
         },
       },
     ],
-  });
-
-  useEffect(() => {
-    const chart = chartRef.current;
-    if (!chart || !amatuerResult) {
-      return;
-    }
-    const newChartData = {
-      ...chartData,
-      datasets: [
-        {
-          ...chartData.datasets[0],
-          backgroundColor: createGradient(chart.ctx, chart.chartArea, [
-            [0, '#A82BEC'],
-            [0.4, '#714BF4'],
-            [1, '#545BF9'],
-          ]),
-        },
-      ],
-    };
-    setChartData(newChartData);
-  }, []);
+  };
 
   return (
     <Wrapper onScroll={onScroll} ref={containerRef}>
@@ -93,7 +71,16 @@ const ReportContentContainer = ({
             propsRef={(e: any) => (contentRefs.current[i] = e)}
           >
             <Label>💸 {menu.name}</Label>
-            <ReportChart type="bar" data={chartData} chartRef={chartRef} />
+            <ReportChart
+              type="bar"
+              data={barData}
+              grad={[
+                [0, '#A82BEC'],
+                [0.4, '#714BF4'],
+                [1, '#545BF9'],
+              ]}
+              // chartRef={chartRef}
+            />
           </ReportContent>
         ))}
       </div>
