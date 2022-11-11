@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import ReportSideBar from '../../molecules/ReportSideBar';
-import ReportContentContainer from '../../molecules/ReportContentContainer';
+import ReportContentContainer from '../ReportContentContainer';
 
 interface ReportProps {
   jobName: string;

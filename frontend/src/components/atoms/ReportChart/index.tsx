@@ -38,6 +38,7 @@ export interface ReportChartProps {
   style?: object;
   grad?: any;
   canvasStyle?: object;
+  isVert?: boolean;
 }
 
 const ReportChart = ({
@@ -47,6 +48,7 @@ const ReportChart = ({
   style,
   grad,
   canvasStyle,
+  isVert,
 }: ReportChartProps) => {
   const chartOptions = {
     ...options,
@@ -66,7 +68,23 @@ const ReportChart = ({
       datasets: [
         {
           ...chartData.datasets[0],
-          backgroundColor: createGradient(chart.ctx, chart.chartArea, grad),
+          backgroundColor: [
+            ...grad.map((gradArr: any) =>
+              createGradient(chart.ctx, chart.chartArea, gradArr, isVert)
+            ),
+            // createGradient(chart.ctx, chart.chartArea, grad, isVert),
+            // createGradient(
+            //   chart.ctx,
+            //   chart.chartArea,
+            //   [
+            //     [0, '#2bec2e'],
+            //     [0.5, '#e0f954'],
+            //   ],
+            //   isVert
+            // ),
+            // '#ff0000',
+            // '#00FF00',
+          ],
         },
       ],
     };
