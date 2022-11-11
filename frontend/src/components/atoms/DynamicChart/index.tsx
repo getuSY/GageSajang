@@ -70,7 +70,7 @@ const DynamicChart = ({ posi, options }: DynamicChartProps) => {
 
 const Wrapper = styled.div`
   width: 800px;
-  height: 800px;
+  height: auto;
 `;
 
 const Btn = styled.div`

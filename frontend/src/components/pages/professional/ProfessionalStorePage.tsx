@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Transitions from '../../atoms/Transition';
 import RoundBox from '../../atoms/RoundBox/index';
-import UnsetLabelInput from '../../molecules/UnsetLabelInput';
 import Button from '../../atoms/Button/index';
 import { useNavigate } from 'react-router-dom';
 import DoubledBox from '../../molecules/DoubledBox/index';

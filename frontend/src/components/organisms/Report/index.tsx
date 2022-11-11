@@ -7,6 +7,7 @@ interface ReportProps {
   jobName: string;
   dongName?: string;
   amatuerResult: any;
+  isLoading: boolean;
 }
 
 const reportMenuList = [
@@ -32,7 +33,12 @@ const reportMenuList = [
   },
 ];
 
-const Report = ({ jobName, dongName, amatuerResult }: ReportProps) => {
+const Report = ({
+  jobName,
+  dongName,
+  amatuerResult,
+  isLoading,
+}: ReportProps) => {
   const contentRefs = useRef<HTMLDivElement[]>([]);
   const [tab, setTab] = useState<number>(0);
 
@@ -46,21 +52,23 @@ const Report = ({ jobName, dongName, amatuerResult }: ReportProps) => {
         tab={tab}
         setTab={setTab}
       />
-      <ReportContentContainer
-        reportMenuList={reportMenuList}
-        contentRefs={contentRefs}
-        setTab={setTab}
-        amatuerResult={amatuerResult}
-      />
+      {!isLoading && (
+        <ReportContentContainer
+          reportMenuList={reportMenuList}
+          contentRefs={contentRefs}
+          setTab={setTab}
+          amatuerResult={amatuerResult}
+        />
+      )}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   flex-grow: 1;
-  gap: 10px;
+  gap: 2px;
   display: flex;
-  padding: 0 10px;
+  padding: 0 0px;
   height: 100%;
 `;
 

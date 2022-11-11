@@ -1,5 +1,5 @@
 import client from './client';
-import { User, UserModel } from '../models/user';
+import { UserModel } from '../models/user';
 
 export const helloUser = async (name: string) => {
   const { data } = await client.get(`user/hello?name=${name}`);

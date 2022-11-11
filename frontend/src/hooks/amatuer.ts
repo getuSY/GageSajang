@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { amatuerResult } from '../api/amatuer';
 import { AmatuerResultParams } from '../models/amatuer';
 

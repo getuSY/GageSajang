@@ -107,4 +107,6 @@ export const cs3 = [
   '전자상거래업',
 ];
 
-export default [cs1, cs2, cs3];
+const cs = [cs1, cs2, cs3];
+
+export default cs;

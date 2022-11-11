@@ -12,7 +12,7 @@ const RoundBox = ({ style, children }: RoundBoxProps) => {
 
 const Wrapper = styled.div`
   width: 1000px;
-  height: 600px;
+  /* height: 600px; */
   background: #ffffff;
   box-shadow: 0px 4px 20px 5px rgba(0, 0, 0, 0.25);
   border-radius: 45px;
