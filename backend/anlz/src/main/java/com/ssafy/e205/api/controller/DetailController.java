@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/store")
+@RequestMapping("/anlz/store")
 @CrossOrigin(origins = "*")
 public class DetailController {
 

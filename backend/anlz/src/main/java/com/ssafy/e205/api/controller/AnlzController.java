@@ -29,7 +29,7 @@ public class AnlzController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
-    @GetMapping("/anlz/{dongCode}/{csCode}")
+    @GetMapping("/anlz/dongCS/{dongCode}/{csCode}")
     public ResponseEntity<AnlzDto> findByDongCodeAndCsCode(@PathVariable String dongCode, @PathVariable String csCode){
         AnlzDto result = new AnlzDto();
         try {

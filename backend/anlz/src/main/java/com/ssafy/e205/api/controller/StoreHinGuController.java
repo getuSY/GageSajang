@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/storeHinGu")
+@RequestMapping("/anlz/storeHinGu")
 @CrossOrigin(origins = "*")
 public class StoreHinGuController {
 
