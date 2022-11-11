@@ -1,349 +1,209 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProfessionalSideBar from '../../molecules/ProfessionalSideBar/index';
-import SalesSimulation from '../simulation/SalesSimulation';
-import {
-  useProSalesSimulation,
-  useProSimulationResult,
-} from '../../../hooks/simulation';
-import { SimulationParams } from '../../../models/simultaion';
-import { useProfessionalResult } from '../../../hooks/professional';
-import { ProfessionalResultParams } from '../../../models/professional';
+import ReportChart from '../../atoms/ReportChart';
 
 interface ProfessionalResultProps {}
 
-const values = [
-  {
-    year: 2013,
-    quarter: 1,
-    value: 451,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2013,
-    quarter: 2,
-    value: 491,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2013,
-    quarter: 3,
-    value: 496,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2013,
-    quarter: 4,
-    value: 493,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2014,
-    quarter: 1,
-    value: 466,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2014,
-    quarter: 2,
-    value: 511,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2014,
-    quarter: 3,
-    value: 509,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2014,
-    quarter: 4,
-    value: 506,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2015,
-    quarter: 1,
-    value: 351,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2015,
-    quarter: 2,
-    value: 383,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2015,
-    quarter: 3,
-    value: 381,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2015,
-    quarter: 4,
-    value: 380,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2016,
-    quarter: 1,
-    value: 394,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2016,
-    quarter: 2,
-    value: 435,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2016,
-    quarter: 3,
-    value: 427,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2016,
-    quarter: 4,
-    value: 426,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2017,
-    quarter: 1,
-    value: 428,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2017,
-    quarter: 2,
-    value: 420,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2017,
-    quarter: 3,
-    value: 397,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2017,
-    quarter: 4,
-    value: 408,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2018,
-    quarter: 1,
-    value: 406,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2018,
-    quarter: 2,
-    value: 358,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2018,
-    quarter: 3,
-    value: 351,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2018,
-    quarter: 4,
-    value: 355,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2019,
-    quarter: 1,
-    value: 330,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2019,
-    quarter: 2,
-    value: 323,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2019,
-    quarter: 3,
-    value: 328,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2019,
-    quarter: 4,
-    value: 278,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2020,
-    quarter: 1,
-    value: 273,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2020,
-    quarter: 2,
-    value: 279,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2020,
-    quarter: 3,
-    value: 283,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2020,
-    quarter: 4,
-    value: 291,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2021,
-    quarter: 1,
-    value: 277,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2021,
-    quarter: 2,
-    value: 275,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2021,
-    quarter: 3,
-    value: 285,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2021,
-    quarter: 4,
-    value: 290,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2022,
-    quarter: 1,
-    value: 374,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2022,
-    quarter: 2,
-    value: 368,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2022,
-    quarter: 3,
-    value: 376,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2022,
-    quarter: 4,
-    value: 377,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2023,
-    quarter: 1,
-    value: 478,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2023,
-    quarter: 2,
-    value: 467,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2023,
-    quarter: 3,
-    value: 473,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-  {
-    year: 2023,
-    quarter: 4,
-    value: 479,
-    dongName: '개포2동',
-    industryName: '한식음식점',
-  },
-];
+const datas = {
+  labels: [1, 2, 3, 4, 5],
+  datasets: [
+    {
+      label: '매출액 TOP 5',
+      data: [10, 20, 30, 25, 15],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+        'pink',
+        'purple',
+      ],
+      hoverOffset: 4,
+    },
+  ],
+};
 
 const professionalResultPage = ({}: ProfessionalResultProps) => {
   return (
     <Wrapper>
-      <ProfessionalSideBar></ProfessionalSideBar>
-      <Result>
-        <SalesSimulation values={values}></SalesSimulation>
-      </Result>
+      <Summary>
+        <SummaryCard>
+          <div>
+            <div className="cardTitle">매출 비교</div>
+            <div className="cardBody">평균 20% 더 벌고 있어요!</div>
+          </div>
+          {/* <div>분석 보기</div> */}
+        </SummaryCard>
+        <SummaryCard>
+          <div>
+            <div className="cardTitle">개폐업률</div>
+            <div className="cardBody">
+              0 / 1 <br></br>(개업 / 폐업)
+            </div>
+          </div>
+          {/* <div>분석 보기</div> */}
+        </SummaryCard>
+        <SummaryCard>
+          <div>
+            <div className="cardTitle">직원 수 비교</div>
+            <div className="cardBody">평균보다 더 많이 고용하고 있어요!</div>
+          </div>
+          {/* <div>분석 보기</div> */}
+        </SummaryCard>
+        <SummaryCard>
+          <div>
+            <div className="cardTitle">가게 면적 비교</div>
+            <div className="cardBody">평균 대비 40% 더 넓어요!</div>
+          </div>
+          {/* <div>분석 보기</div> */}
+        </SummaryCard>
+      </Summary>
+      <ProRepoDetail>
+        <p style={{ fontSize: '40px', margin: '8rem auto', fontWeight: '600' }}>
+          " oo동 ㅁㅁ업종 "의 평균값을 토대로 보여드릴게요!
+        </p>
+
+        <ReportDetails>
+          <DetailCards>
+            <DetailCardHeader>평균 월 매출</DetailCardHeader>
+            <ReportChart
+              type="doughnut"
+              data={datas}
+              style={{ width: '200px', height: '200px' }}
+            ></ReportChart>
+          </DetailCards>
+          <DetailCards>
+            <DetailCardHeader>평균 매출 건수</DetailCardHeader>
+            <ReportChart
+              type="doughnut"
+              data={datas}
+              style={{ width: '200px', height: '200px' }}
+            ></ReportChart>
+          </DetailCards>
+          <DetailCards>
+            <DetailCardHeader>평균 직원 수</DetailCardHeader>
+            <ReportChart
+              type="doughnut"
+              data={datas}
+              style={{ width: '200px', height: '200px' }}
+            ></ReportChart>
+          </DetailCards>
+          <DetailCards>
+            <DetailCardHeader>평균 가게 면적</DetailCardHeader>
+            <ReportChart
+              type="doughnut"
+              data={datas}
+              style={{ width: '200px', height: '200px' }}
+            ></ReportChart>
+          </DetailCards>
+          <DetailCards>
+            <DetailCardHeader>개폐업 점포 수</DetailCardHeader>
+            <ReportChart
+              type="doughnut"
+              data={datas}
+              style={{ width: '200px', height: '200px' }}
+            ></ReportChart>
+          </DetailCards>
+          <DetailCards>
+            <DetailCardHeader>프랜차이즈 점포 수</DetailCardHeader>
+            <ReportChart
+              type="doughnut"
+              data={datas}
+              style={{ width: '200px', height: '200px' }}
+            ></ReportChart>
+          </DetailCards>
+        </ReportDetails>
+      </ProRepoDetail>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 `;
 
-const Result = styled.div`
+const Summary = styled.div`
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+
+  & .div:hover {
+    background: green;
+  }
+
+  & .div:hover .cardTitle,
+  div:hover .cardBody {
+    color: white;
+  }
+`;
+
+const SummaryCard = styled.div`
+  position: relative;
+  background: white;
+  padding: 30px;
+  min-height: 150px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  /* gap: 1rem; */
+  cursor: pointer;
+
+  & div .cardTitle {
+    position: relative;
+    font-size: 36px;
+    font-weight: 600;
+    color: green;
+    margin-bottom: 20px;
+    /* font-style: bold; */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  }
+
+  & div .cardBody {
+    color: black;
+    font-size: 30px;
+    font-weight: 300;
+  }
+`;
+
+const ProRepoDetail = styled.div`
+  position: relative;
+  width: 100%;
+  text-align: center;
+`;
+
+const ReportDetails = styled.div`
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  grid-row-gap: 30px;
+  /* margin-top: 10px; */
+`;
+
+const DetailCards = styled.div`
+  position: relative;
+  display: grid;
+  min-height: 300px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+`;
+
+const DetailCardHeader = styled.p`
+  /* text-align: start; */
+  font-weight: 600;
+  color: green;
+  font-size: 40px;
 `;
 
 export default professionalResultPage;

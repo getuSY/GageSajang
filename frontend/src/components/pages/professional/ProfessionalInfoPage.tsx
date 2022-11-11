@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LabelInput from '../../molecules/LabelInput';
-import ReportChart from '../../atoms/ReportChart';
-import SalesSimulation from '../simulation/SalesSimulation';
 import ProfessionalResultPage from './ProfessionalResultPage';
+import { useProfessionalResult } from '../../../hooks/professional';
+import { ProfessionalResultParams } from '../../../models/professional';
+import Button from '../../atoms/Button';
+import SimulationPage from '../simulation/SimulationPage';
+import { useProSalesSimulation } from '../../../hooks/simulation';
+import Spinner from '../../atoms/Spinner';
 
 const ProfessionalInfoPage = () => {
-  const [storeName, setStoreName] = useState();
-  const [sigungu, setSigungu] = useState();
-  const [dongName, setDongName] = useState();
-  const [employee, setEmployee] = useState(0);
-  const [storeArea, setStoreArea] = useState(0);
-  const [sales, setSales] = useState(0);
-  const [business, setBusiness] = useState(0);
   const [storeInfo, setStoreInfo] = useState({
     email: 'string',
     storeName: 'string',
@@ -23,6 +20,12 @@ const ProfessionalInfoPage = () => {
     storeTypeCode: 'string',
     sales: 'string',
   });
+  const values = useProSalesSimulation();
+  const mutation = useProfessionalResult();
+  // const { data, isLoading, isSuccess, isError, error } = mutation;
+  // const store = data.store;
+  // // const sales = data.sales;
+  // const status = data.status;
 
   // const changeStoreName = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setStoreInfo({
@@ -67,32 +70,21 @@ const ProfessionalInfoPage = () => {
   //   });
   // };
 
-  const data = {
-    labels: [1, 2, 3, 4],
-    datasets: [
-      {
-        label: '매출액 TOP 5',
-        data: [10, 20, 30, 25, 15],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-          'pink',
-          'purple',
-        ],
-        hoverOffset: 4,
-        // borderColor: 'black',
-        // borderWidth: 1,
-        // tension: 0.8,
-        // hidden: true,
-      },
-    ],
-  };
-
   return (
     <Wrapper>
       <ProSide>
         <ProList>
+          <ProListItem>
+            <p
+              style={{
+                fontSize: '40px',
+                color: 'white',
+                fontWeight: '500',
+              }}
+            >
+              🏪 내 가게 정보
+            </p>
+          </ProListItem>
           <ProListItem>
             <LabelInput
               label="가게 이름"
@@ -141,121 +133,55 @@ const ProfessionalInfoPage = () => {
             ></LabelInput>
           </ProListItem>
         </ProList>
+        <Button
+          type="blur"
+          style={{ position: 'absolute', top: '85%', marginLeft: '70px' }}
+        >
+          내 가게 분석하기
+        </Button>
       </ProSide>
-      // main
-      <Summary>
-        <SummaryCard>
-          <div>
-            <div className="cardTtile">매출 비교</div>
-            <div className="cardBody">fdsdf</div>
-          </div>
-          <div>분석 보기</div>
-        </SummaryCard>
-        <SummaryCard>
-          <div>
-            <div className="cardTtile">개폐업률</div>
-            <div className="cardBody">0 / 1</div>
-          </div>
-          <div>분석 보기</div>
-        </SummaryCard>
-        <SummaryCard>
-          <div>
-            <div className="cardTtile">직원 수 비교</div>
-            <div className="cardBody">dfsffds</div>
-          </div>
-          <div>분석 보기</div>
-        </SummaryCard>
-        <SummaryCard>
-          <div>
-            <div className="cardTtile">가게 면적 비교</div>
-            <div className="cardBody">dfdsfsds</div>
-          </div>
-          <div>분석 보기</div>
-        </SummaryCard>
-      </Summary>
-      <ProRepoDetail>
-        oo동 ㅁㅁ업종의 평균값을 토대로 보여드릴게요!
-        <ReportDetails>
-          <DetailCards>
-            <DetailCardHeader>평균 월 매출</DetailCardHeader>
-            <ReportChart
-              type="doughnut"
-              data={data}
-              style={{ width: '200px', height: '200px' }}
-            ></ReportChart>
-          </DetailCards>
-          <DetailCards>
-            <DetailCardHeader>평균 매출 건수</DetailCardHeader>
-            <ReportChart
-              type="doughnut"
-              data={data}
-              style={{ width: '200px', height: '200px' }}
-            ></ReportChart>
-          </DetailCards>
-          <DetailCards>
-            <DetailCardHeader>평균 직원 수</DetailCardHeader>
-            <ReportChart
-              type="doughnut"
-              data={data}
-              style={{ width: '200px', height: '200px' }}
-            ></ReportChart>
-          </DetailCards>
-          <DetailCards>
-            <DetailCardHeader>평균 가게 면적</DetailCardHeader>
-            <ReportChart
-              type="doughnut"
-              data={data}
-              style={{ width: '200px', height: '200px' }}
-            ></ReportChart>
-          </DetailCards>
-          <DetailCards>
-            <DetailCardHeader>개폐업 점포 수</DetailCardHeader>
-            <ReportChart
-              type="doughnut"
-              data={data}
-              style={{ width: '200px', height: '200px' }}
-            ></ReportChart>
-          </DetailCards>
-          <DetailCards>
-            <DetailCardHeader>프랜차이즈 점포 수</DetailCardHeader>
-            <ReportChart
-              type="doughnut"
-              data={data}
-              style={{ width: '200px', height: '200px' }}
-            ></ReportChart>
-          </DetailCards>
-        </ReportDetails>
-      </ProRepoDetail>
-      {/* <ProfessionalResultPage></ProfessionalResultPage>
-      <ProfessionalResultPage></ProfessionalResultPage>
-      <ProfessionalResultPage></ProfessionalResultPage> */}
+      {mutation ? (
+        <div>
+          내 가게 경영 환경을 진단 중입니다...<br></br>
+          <Spinner />
+        </div>
+      ) : (
+        <div>나중에 api 연결 후 이 아랫부분을 여기에 넣어줄 예정..</div>
+      )}
+      <ProReport>
+        <ProfessionalResultPage />
+        {values ? <Spinner /> : <SimulationPage></SimulationPage>}
+      </ProReport>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   // min-height: 100vh;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   position: relative;
   width: 100%;
 `;
 
 const ProSide = styled.div`
   position: fixed;
-  width: 300px;
+  width: 400px;
   height: 100%;
   background: green;
   border-left: 10px solid green;
   transition: 0.5s;
   overflow: hidden;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ProList = styled.ul`
   position: absolute;
   top: 0px;
   left: 0;
-  width: 100%;
+  width: 350px;
+  padding-left: 20px;
+  margin: 0;
 
   & li:nth-child(1) {
     margin-bottom: 40px;
@@ -263,101 +189,31 @@ const ProList = styled.ul`
   }
 
   & li:hover {
-    background: green;
+    background: white;
+    color: black;
   }
 `;
 
 const ProListItem = styled.li`
   position: relative;
-  width: 200%;
+  width: 100%;
   list-style: none;
-
-  & a {
-  }
+  color: white;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  margin-bottom: 10px;
 `;
 
-const ProRport = styled.div`
+const ProReport = styled.div`
   position: absolute;
-  width: calc(100% - 300%);
-  left: 300px;
+  width: calc(100% - 500px);
+  left: 450px;
   min-height: 100vh;
   background: white;
   transition: 0.5s;
-`;
-
-const Summary = styled.div`
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
-
-  & .div:hover {
-    background: green;
-  }
-
-  & .div:hover .cardTitle,
-  div:hover .cardBody {
-    color: white;
-  }
-`;
-
-const SummaryCard = styled.div`
-  position: relative;
-  background: white;
-  padding: 30px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
   display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-
-  & .cardTitle {
-    position: relative;
-    font-size: 2.5em;
-    font-weight: 500;
-    color: green;
-  }
-
-  & .cardBody {
-    color: black;
-    font-size: 1.1em;
-    margin-top: 5em;
-  }
-`;
-
-const ProRepoDetail = styled.div`
-  position: relative;
-  width: 100%;
-  text-align: center;
-`;
-
-const ReportDetails = styled.div`
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 30px;
-  grid-row-gap: 30px;
-  margin-top: 10px;
-`;
-
-const DetailCards = styled.div`
-  position: relative;
-  display: grid;
-  min-height: 300px;
-  background: white;
-  padding: 20px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-`;
-
-const DetailCardHeader = styled.p`
-  /* display: flex;
-  justify-content: flex-start;
-  align-items: flex-start; */
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default ProfessionalInfoPage;

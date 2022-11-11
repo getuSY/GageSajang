@@ -316,18 +316,19 @@ const values = [
 const SimulationPage = () => {
   return (
     <Wrapper>
-      <TempSide></TempSide>
-      <DataBox>
-        <h1>SimulationPage</h1>
-        {/* <SalesSimulation values={values}></SalesSimulation> */}
-      </DataBox>
+      {/* <TempSide></TempSide> */}
+      <h1>SimulationPage</h1>
+      <SalesSimulation values={values}></SalesSimulation>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+  width: 100%;
 `;
 
 const TempSide = styled.div`
