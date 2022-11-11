@@ -9,6 +9,7 @@ interface LabelInputProps {
   inputValue?: string;
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  style?: object;
 }
 
 const LabelInput = ({
@@ -17,6 +18,7 @@ const LabelInput = ({
   onChange,
   inputValue,
   clearValue,
+  style,
 }: LabelInputProps) => {
   return (
     <Wrapper>
@@ -26,6 +28,7 @@ const LabelInput = ({
         onChange={onChange}
         inputValue={inputValue}
         clearValue={clearValue}
+        style={style}
       />
     </Wrapper>
   );
