@@ -1,6 +1,6 @@
 import client from './client';
 import {
-  FloadtingPopulationMap,
+  FloatingPopulationMap,
   ResidentPopulationMap,
   NumberOfStoresMap,
   OpeningRateMap,
@@ -9,7 +9,7 @@ import {
 } from '../models/status';
 
 export const getFloadtingPopulationMap = async (
-  params: FloadtingPopulationMap
+  params: FloatingPopulationMap
 ) => {
   const { data } = await client.get(`user/hello?name=${name}`);
 
