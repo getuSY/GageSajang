@@ -46,10 +46,10 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
             log.info("Cutsom Pre filter : request uri => {}", request.getURI());
 
 //          Custom Post Filter
-            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                log.info("Custom Post filter : response code -> {}", response.getStatusCode());
-            }));
-//            return chain.filter(exchange);
+//            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+//                log.info("Custom Post filter : response code -> {}", response.getStatusCode());
+//            }));
+            return chain.filter(exchange);
         });
     }
 
