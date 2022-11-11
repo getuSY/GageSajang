@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ReportModal from '../../atoms/ReportModal';
 import styled from 'styled-components';
-import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportIndex from '../../molecules/StatusReportIndex';
-import StatusReportTitle from '../../molecules/StatusReportTitle';
+import StatusReportFP from '../../molecules/StatusReportFP';
+import StatusReportRP from '../../molecules/StatusReportRP';
+import StatusReportSales from '../../molecules/StatusReportSales';
+import StatusReportOpen from '../../molecules/StatusReportOpen';
+import StatusReportClose from '../../molecules/StatusReportClose';
+import StatusReportStores from '../../molecules/StatusReportStores';
 
 interface StatusReportProps {
   region?: string;
@@ -12,6 +16,7 @@ interface StatusReportProps {
   tab: number;
   icon?: any;
   isOpen?: boolean;
+  title?: any;
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -91,26 +96,54 @@ const StatusReport = ({
           tab={tab}
           icon={icon}
         />
-        <div className="status-report-content">
-          <StatusReportTitle
-            // 상세 페이지 내용 //
+        {tab === 1 && (
+          <StatusReportFP
             title={title}
+            region={region}
+            category={category!}
+            tab={tab}
           />
-          <div className="report-top-div">
-            <StatusReportChart
-              type="bar"
-              title={'요일별 평균 유동인구 (분기)'}
-              data={data}
-              options={options}
-            />
-            <StatusReportChart
-              type="doughnut"
-              title={'요일별 평균 유동인구'}
-              data={data}
-              options={options}
-            />
-          </div>
-        </div>
+        )}
+        {tab === 2 && (
+          <StatusReportRP
+            title={title}
+            region={region}
+            category={category!}
+            tab={tab}
+          />
+        )}
+        {tab === 3 && (
+          <StatusReportStores
+            title={title}
+            region={region}
+            category={category!}
+            tab={tab}
+          />
+        )}
+        {tab === 4 && (
+          <StatusReportOpen
+            title={title}
+            region={region}
+            category={category!}
+            tab={tab}
+          />
+        )}
+        {tab === 5 && (
+          <StatusReportClose
+            title={title}
+            region={region}
+            category={category!}
+            tab={tab}
+          />
+        )}
+        {tab === 6 && (
+          <StatusReportSales
+            title={title}
+            region={region}
+            category={category!}
+            tab={tab}
+          />
+        )}
       </ReportModal>
     </Wrapper>
   );

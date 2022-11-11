@@ -1,4 +1,4 @@
-export interface FloadtingPopulationMap {
+export interface FloatingPopulationMap {
   guName: string;
   living: number;
   level: number;

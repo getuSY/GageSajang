@@ -69,7 +69,7 @@ const StatusPage = () => {
           category={category!}
           tab={tab}
           // 상세 페이지, 모달 + close 버튼
-          isOpen={reportModal} 
+          isOpen={reportModal}
           setIsOpen={setReportModal}
         />
       </Wrapper>

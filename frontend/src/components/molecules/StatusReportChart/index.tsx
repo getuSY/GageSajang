@@ -8,6 +8,7 @@ interface StatusReportChartProps {
   data: any;
   options: any;
   style?: object;
+  chartRef?: any;
 }
 const StatusReportChart = ({
   type,
@@ -15,6 +16,7 @@ const StatusReportChart = ({
   data,
   options,
   style,
+  chartRef,
 }: StatusReportChartProps) => {
   return (
     <Wrapper style={style}>
@@ -24,6 +26,7 @@ const StatusReportChart = ({
         data={data}
         options={options}
         style={{ width: '450px' }}
+        chartRef={chartRef}
       />
     </Wrapper>
   );
@@ -36,10 +39,10 @@ const ReportSubTitle = styled.div`
   font-size: 1.5rem;
   font-family: 'GmarketSansMedium';
   font-weight: 700;
-  background: ${({ theme }) => theme.gradColor};
+  /* background: ${({ theme }) => theme.gradColor}; */
   width: fit-content;
-  color: transparent;
-  -webkit-background-clip: text;
+  /* color: transparent; */
+  /* -webkit-background-clip: text; */
 `;
 
 export default StatusReportChart;
