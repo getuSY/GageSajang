@@ -28,7 +28,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("simul/asset")
+@RequestMapping("/simul/asset")
 public class AssetController {
 
     @Autowired
