@@ -28,7 +28,7 @@ const reportMenuList = [
     icon: 'cash-register',
   },
   {
-    name: '부동산(임대료)',
+    name: '상권 배후지',
     icon: 'house-circle-check',
   },
 ];

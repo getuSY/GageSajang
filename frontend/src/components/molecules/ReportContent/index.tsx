@@ -17,7 +17,7 @@ const ReportContent = ({
 }: ReportContentProps) => {
   return (
     <Wrapper style={style} ref={propsRef}>
-      <Label style={{ marginBottom: '1.25rem' }}>{title}</Label>
+      {title && <Label style={{ marginBottom: '1.25rem' }}>{title}</Label>}
       {children}
     </Wrapper>
   );

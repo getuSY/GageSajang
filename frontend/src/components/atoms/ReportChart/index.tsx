@@ -68,23 +68,9 @@ const ReportChart = ({
       datasets: [
         {
           ...chartData.datasets[0],
-          backgroundColor: [
-            ...grad.map((gradArr: any) =>
-              createGradient(chart.ctx, chart.chartArea, gradArr, isVert)
-            ),
-            // createGradient(chart.ctx, chart.chartArea, grad, isVert),
-            // createGradient(
-            //   chart.ctx,
-            //   chart.chartArea,
-            //   [
-            //     [0, '#2bec2e'],
-            //     [0.5, '#e0f954'],
-            //   ],
-            //   isVert
-            // ),
-            // '#ff0000',
-            // '#00FF00',
-          ],
+          backgroundColor: grad.map((gradArr: any) =>
+            createGradient(chart.ctx, chart.chartArea, gradArr, isVert)
+          ),
         },
       ],
     };
@@ -108,4 +94,4 @@ const Wrapper = styled.div`
   height: 300px;
 `;
 
-export default ReportChart;
+export default React.memo(ReportChart);
