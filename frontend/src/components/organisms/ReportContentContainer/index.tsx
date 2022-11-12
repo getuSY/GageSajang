@@ -4,6 +4,13 @@ import ReportContent from '../../molecules/ReportContent';
 import Label from '../../atoms/Label';
 import { throttle } from 'lodash';
 import ReportChart from '../../atoms/ReportChart';
+import {
+  useHinterlandData,
+  useLivingData,
+  useSalesData,
+  useStoreCntData,
+  useStoreData,
+} from '../../../hooks/amatuer';
 
 type indexProps = {
   reportMenuList: Array<{ name: string; icon: string }>;
@@ -11,6 +18,19 @@ type indexProps = {
   setTab: React.Dispatch<React.SetStateAction<number>>;
   amatuerResult: any;
 };
+
+const timeLabels = [
+  '0~6시',
+  '6~11시',
+  '11~14시',
+  '14~17시',
+  '17~21시',
+  '21~24시',
+];
+const weekLabels = ['월', '화', '수', '목', '금', '토', '일'];
+const genderLabels = ['남', '여'];
+const ageLabels = ['10대', '20대', '30대', '40대', '50대', '60대'];
+const yearLabels = [2017, 2018, 2019, 2020, 2021];
 
 const ReportContentContainer = ({
   reportMenuList,
@@ -32,546 +52,31 @@ const ReportContentContainer = ({
     setTab(Math.max(i, 0));
   }, 100);
 
-  // 업종 분석
-  const storeCntData = useMemo(
-    () => ({
-      data: {
-        labels: ['2021년', '2022년'],
-        datasets: [
-          {
-            label: '해당 업종 점포수',
-            data: [amatuerResult.store.yearAgo, amatuerResult.store.total],
-            barThickness: 50,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
+  const { storeCntData, storeGenderData, storeAgeData } =
+    useStoreData(amatuerResult); // 업종 분석
+  const {
+    salesTotalData,
+    salesAreaTop3Data,
+    salesWeekData,
+    salesTimeData,
+    salesAgeData,
+    salesGenderData,
+  } = useSalesData(amatuerResult); // 매출 분석
 
-  const storeAgeData = useMemo(
-    () => ({
-      data: {
-        labels: ['10대', '20대', '30대', '40대', '50대', '60대'],
-        datasets: [
-          {
-            label: '유동 인구',
-            data: amatuerResult.store.age,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
+  const {
+    livingTotalData,
+    livingAreaTop3Data,
+    livingWeekData,
+    livingTimeData,
+    livingAgeData,
+    livingGenderData,
+  } = useLivingData(amatuerResult); // 유동 인구
 
-  const storeGenderData = useMemo(
-    () => ({
-      data: {
-        labels: ['남', '여'],
-        datasets: [
-          {
-            label: '매출',
-            barThickness: 70,
-            data: amatuerResult.store.gender,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'white',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0.5, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-        [
-          [0.5, '#2bec4b'],
-          [1, '#54a1f9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
+  const { storeCntOpenData, storeCntCloseData } =
+    useStoreCntData(amatuerResult); // 점포 수
 
-  const storeOpenData = useMemo(
-    () => ({
-      data: {
-        labels: ['1', '2'],
-        datasets: [
-          {
-            label: 'storeOpenData',
-            barThickness: 70,
-            data: amatuerResult.open,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'white',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const storeCloseData = useMemo(
-    () => ({
-      data: {
-        labels: ['1', '2'],
-        datasets: [
-          {
-            label: 'storeOpenData',
-            barThickness: 70,
-            data: amatuerResult.close,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'white',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  // 매출 분석
-  const salesTotalData = useMemo(
-    () => ({
-      data: {
-        labels: [2018, 2019, 2020, 2021, 2022],
-        datasets: [
-          {
-            label: '해당 업종 동 매출',
-            data: amatuerResult.sales.total,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const salesAreaTop3Data = useMemo(
-    () => ({
-      data: {
-        labels: [2018, 2019, 2020, 2021, 2022],
-        datasets: [
-          {
-            label: '해당 업종 동 매출',
-            data: amatuerResult.sales.total,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const salesWeekData = useMemo(
-    () => ({
-      data: {
-        labels: ['월', '화', '수', '목', '금', '토', '일'],
-        datasets: [
-          {
-            label: '요일별 매출',
-            data: amatuerResult.sales.week,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-  const salesTimeData = useMemo(
-    () => ({
-      data: {
-        labels: [
-          '시간대1',
-          '시간대2',
-          '시간대3',
-          '시간대4',
-          '시간대5',
-          '시간대6',
-        ],
-        datasets: [
-          {
-            label: '시간대별 매출',
-            data: amatuerResult.sales.time,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const salesAgeData = useMemo(
-    () => ({
-      data: {
-        labels: [
-          '시간대1',
-          '시간대2',
-          '시간대3',
-          '시간대4',
-          '시간대5',
-          '시간대6',
-        ],
-        datasets: [
-          {
-            label: '연령대별 매출',
-            data: amatuerResult.sales.age,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const salesGenderData = useMemo(
-    () => ({
-      data: {
-        labels: ['남', '여'],
-        datasets: [
-          {
-            label: '매출',
-            barThickness: 70,
-            data: amatuerResult.sales.gender,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'white',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0.5, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-        [
-          [0.5, '#2bec4b'],
-          [1, '#54a1f9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  // 유동 인구 => 데이터 수정 필요
-  const livingTotalData = useMemo(
-    () => ({
-      data: {
-        labels: [2018, 2019, 2020, 2021, 2022],
-        datasets: [
-          {
-            label: '해당 업종 동 매출',
-            data: amatuerResult.living.total,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const livingAreaTop3Data = useMemo(
-    () => ({
-      data: {
-        labels: [2018, 2019, 2020, 2021, 2022],
-        datasets: [
-          {
-            label: '해당 업종 동 매출',
-            data: amatuerResult.living.areaTop3,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const livingWeekData = useMemo(
-    () => ({
-      data: {
-        labels: ['월', '화', '수', '목', '금', '토', '일'],
-        datasets: [
-          {
-            label: '요일별 매출',
-            data: amatuerResult.living.week,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-  const livingTimeData = useMemo(
-    () => ({
-      data: {
-        labels: [
-          '시간대1',
-          '시간대2',
-          '시간대3',
-          '시간대4',
-          '시간대5',
-          '시간대6',
-        ],
-        datasets: [
-          {
-            label: '시간대별 매출',
-            data: amatuerResult.living.time,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const livingAgeData = useMemo(
-    () => ({
-      data: {
-        labels: ['10대', '20대', '30대', '40대', '50대', '60대'],
-        datasets: [
-          {
-            label: '연령대별 매출',
-            data: amatuerResult.living.age,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const livingGenderData = useMemo(
-    () => ({
-      data: {
-        labels: ['남', '여'],
-        datasets: [
-          {
-            label: '매출',
-            barThickness: 70,
-            data: amatuerResult.living.gender,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'white',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0.5, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-        [
-          [0.5, '#2bec4b'],
-          [1, '#54a1f9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  // 상권 배후지 =>
-  const hinterlandAgeData = useMemo(
-    () => ({
-      data: {
-        labels: [
-          '시간대1',
-          '시간대2',
-          '시간대3',
-          '시간대4',
-          '시간대5',
-          '시간대6',
-        ],
-        datasets: [
-          {
-            label: '연령대별 매출',
-            data: amatuerResult.hinterland.age,
-            barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const hinterlandGenderData = useMemo(
-    () => ({
-      data: {
-        labels: ['남', '여'],
-        datasets: [
-          {
-            label: '매출',
-            barThickness: 70,
-            data: amatuerResult.hinterland.gender,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'white',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0.5, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-        [
-          [0.5, '#2bec4b'],
-          [1, '#54a1f9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
+  const { hinterlandPeopleData, hinterlandAgeData, hinterlandGenderData } =
+    useHinterlandData(amatuerResult); // 상권 배후지
 
   return (
     <Wrapper onScroll={onScroll} ref={containerRef}>
@@ -583,9 +88,40 @@ const ReportContentContainer = ({
         className="content-div"
         ref={(e: any) => (contentRefs.current[0] = e)}
       > */}
-      {/* 매출 분석 */}
+
+      {/* 업종 분석 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[0] = e)}>
         <ReportContent>
+          <Label>💸 업종 분석</Label>
+        </ReportContent>
+        <div className="chart-div">
+          <ReportContent title="연도별 점포 수" style={{ flexGrow: 1 }}>
+            <ReportChart
+              type="bar"
+              data={storeCntData.data}
+              grad={storeCntData.grad}
+            />
+          </ReportContent>
+          <ReportContent title="성별 매출" style={{ flexGrow: 1 }}>
+            <ReportChart
+              type="pie"
+              data={storeGenderData.data}
+              grad={storeGenderData.grad}
+            />
+          </ReportContent>
+        </div>
+        <ReportContent title="해당 업종 연령별 매출" style={{ flexGrow: 1 }}>
+          <ReportChart
+            type="pie"
+            data={storeAgeData.data}
+            grad={storeAgeData.grad}
+          />
+        </ReportContent>
+      </ReportCategory>
+
+      {/* 매출 분석 */}
+      <ReportCategory ref={(e: any) => (contentRefs.current[2] = e)}>
+        <ReportContent style={{ marginTop: '3rem' }}>
           <Label>💸 매출 분석</Label>
         </ReportContent>
         <div className="chart-div">
@@ -630,36 +166,6 @@ const ReportContentContainer = ({
             type="line"
             data={livingTimeData.data}
             grad={livingTimeData.grad}
-          />
-        </ReportContent>
-      </ReportCategory>
-
-      {/* 업종 분석 */}
-      <ReportCategory ref={(e: any) => (contentRefs.current[2] = e)}>
-        <ReportContent style={{ marginTop: '3rem' }}>
-          <Label>💸 업종 분석</Label>
-        </ReportContent>
-        <div className="chart-div">
-          <ReportContent title="연령대별 매출" style={{ flexGrow: 1 }}>
-            <ReportChart
-              type="bar"
-              data={storeCntData.data}
-              grad={storeCntData.grad}
-            />
-          </ReportContent>
-          <ReportContent title="성별 매출" style={{ flexGrow: 1 }}>
-            <ReportChart
-              type="pie"
-              data={storeGenderData.data}
-              grad={storeGenderData.grad}
-            />
-          </ReportContent>
-        </div>
-        <ReportContent title="해당 업종 동 매출" style={{ flexGrow: 1 }}>
-          <ReportChart
-            type="bar"
-            data={storeAgeData.data}
-            grad={storeAgeData.grad}
           />
         </ReportContent>
       </ReportCategory>

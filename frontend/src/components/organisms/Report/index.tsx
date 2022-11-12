@@ -12,16 +12,17 @@ interface ReportProps {
 
 const reportMenuList = [
   {
+    name: '업종 분석',
+    icon: 'shop',
+  },
+
+  {
     name: '매출 분석',
     icon: 'chart-line',
   },
   {
     name: '유동 인구',
     icon: 'people-group',
-  },
-  {
-    name: '업종 분석',
-    icon: 'shop',
   },
   {
     name: '점포 수',
