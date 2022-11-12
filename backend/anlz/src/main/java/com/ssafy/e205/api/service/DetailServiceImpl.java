@@ -33,7 +33,7 @@ public class DetailServiceImpl implements DetailService{
     @Autowired
     StoreOpenCloseTop3Repository openCloseTop3;
 
-    @Cacheable(value = "detail",key="#guName")
+    //@Cacheable(value = "detail",key="#guName")
     @Override
     public DetailDto detailFindByName(String guName) {
         System.out.println(guName);

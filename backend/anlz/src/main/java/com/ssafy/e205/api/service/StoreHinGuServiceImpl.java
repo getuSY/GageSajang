@@ -18,7 +18,7 @@ public class StoreHinGuServiceImpl implements StoreHinGuService{
     @Autowired
     StoreHinGuRepository repository;
 
-    @Cacheable(value = "guLivingHin")
+    //@Cacheable(value = "guLivingHin")
     @Override
     public List<StoreGuLivingDto> findAllLiving() {
         List<StoreHinGu> list = repository.findAll();
@@ -43,7 +43,7 @@ public class StoreHinGuServiceImpl implements StoreHinGuService{
         return result;
     }
 
-    @Cacheable(value = "guResidentHin")
+    //@Cacheable(value = "guResidentHin")
     @Override
     public List<StoreGuResidentDto> findAllResident() {
         List<StoreHinGu> list = repository.findAll();
@@ -68,7 +68,7 @@ public class StoreHinGuServiceImpl implements StoreHinGuService{
         return result;
     }
 
-    @Cacheable(value = "guStoreHin")
+    //@Cacheable(value = "guStoreHin")
     @Override
     public List<StoreGuStoreDto> findAllStore() {
         List<StoreHinGu> list = repository.findAll();
@@ -93,7 +93,7 @@ public class StoreHinGuServiceImpl implements StoreHinGuService{
         return result;
     }
 
-    @Cacheable(value = "guOpenHin")
+    //@Cacheable(value = "guOpenHin")
     @Override
     public List<StoreGuOpenDto> findAllOpen() {
         List<StoreHinGu> list = repository.findAll();
@@ -118,7 +118,7 @@ public class StoreHinGuServiceImpl implements StoreHinGuService{
         return result;
     }
 
-    @Cacheable(value = "guCloseHin")
+    //@Cacheable(value = "guCloseHin")
     @Override
     public List<StoreGuCloseDto> findAllClose() {
         List<StoreHinGu> list = repository.findAll();
@@ -143,7 +143,7 @@ public class StoreHinGuServiceImpl implements StoreHinGuService{
         return result;
     }
 
-    @Cacheable(value = "guSalesHin")
+    //@Cacheable(value = "guSalesHin")
     @Override
     public List<StoreHinGuSalesDto> findAllSales() {
         List<StoreHinGu> list = repository.findAll();

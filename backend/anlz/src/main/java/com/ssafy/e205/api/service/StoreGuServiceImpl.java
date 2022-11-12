@@ -16,7 +16,7 @@ public class StoreGuServiceImpl implements StoreGuService{
     @Autowired
     StoreGuRepository repository;
 
-    @Cacheable(value = "guLiving")
+    //@Cacheable(value = "guLiving")
     @Override
     public List<StoreGuLivingDto> findAllLiving() {
         List<StoreGu> list = repository.findAll();
@@ -41,7 +41,7 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guResident")
+    //@Cacheable(value = "guResident")
     @Override
     public List<StoreGuResidentDto> findAllResident() {
         List<StoreGu> list = repository.findAll();
@@ -66,7 +66,7 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guStore")
+    //@Cacheable(value = "guStore")
     @Override
     public List<StoreGuStoreDto> findAllStore() {
         List<StoreGu> list = repository.findAll();
@@ -91,7 +91,7 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guOpen")
+    //@Cacheable(value = "guOpen")
     @Override
     public List<StoreGuOpenDto> findAllOpen() {
         List<StoreGu> list = repository.findAll();
@@ -116,7 +116,7 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guClose")
+    //@Cacheable(value = "guClose")
     @Override
     public List<StoreGuCloseDto> findAllClose() {
         List<StoreGu> list = repository.findAll();
@@ -141,7 +141,7 @@ public class StoreGuServiceImpl implements StoreGuService{
         return result;
     }
 
-    @Cacheable(value = "guSales")
+    //@Cacheable(value = "guSales")
     @Override
     public List<StoreGuSalesDto> findAllSales() {
         List<StoreGu> list = repository.findAll();
