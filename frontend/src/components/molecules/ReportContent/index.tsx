@@ -1,15 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import Label from '../../atoms/Label';
 
 interface ReportContentProps {
   children: React.ReactNode;
   style?: object;
   propsRef?: any;
+  title?: string;
 }
 
-const ReportContent = ({ children, style, propsRef }: ReportContentProps) => {
+const ReportContent = ({
+  children,
+  style,
+  propsRef,
+  title,
+}: ReportContentProps) => {
   return (
     <Wrapper style={style} ref={propsRef}>
+      {title && <Label style={{ marginBottom: '1.25rem' }}>{title}</Label>}
       {children}
     </Wrapper>
   );
@@ -17,7 +25,7 @@ const ReportContent = ({ children, style, propsRef }: ReportContentProps) => {
 
 const Wrapper = styled.div`
   background: #ffffff;
-  /* min-height: 60px; */
+  /* height: 500px; */
   display: flex;
   flex-direction: column;
 

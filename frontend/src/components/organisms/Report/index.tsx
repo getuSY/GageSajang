@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import ReportSideBar from '../../molecules/ReportSideBar';
-import ReportContentContainer from '../../molecules/ReportContentContainer';
+import ReportContentContainer from '../ReportContentContainer';
 
 interface ReportProps {
   jobName: string;
@@ -28,7 +28,7 @@ const reportMenuList = [
     icon: 'cash-register',
   },
   {
-    name: '부동산(임대료)',
+    name: '상권 배후지',
     icon: 'house-circle-check',
   },
 ];
