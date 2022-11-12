@@ -7,18 +7,20 @@ interface InputProps {
   style?: object;
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onClick?: any;
 }
 
 const Input = ({
   placeholder,
   style,
   onChange,
+  onClick,
   inputValue,
   clearValue,
 }: InputProps) => {
   return (
     <>
-      {inputValue ? (
+      {inputValue !== undefined && (
         <>
           <Wrapper>
             <StyledInput
@@ -26,13 +28,17 @@ const Input = ({
               style={style}
               value={inputValue}
               onChange={onChange}
+              onClick={onClick}
+              readOnly={onClick !== undefined}
             />
             <div className="clear-btn" onClick={clearValue}>
               x
             </div>
           </Wrapper>
         </>
-      ) : (
+      )}
+
+      {inputValue === undefined && (
         <Wrapper>
           <StyledInput
             placeholder={placeholder}
