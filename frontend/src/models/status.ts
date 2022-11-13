@@ -1,3 +1,6 @@
+// 상권현황 지도
+
+// 상권현황 상세 지도
 export interface FloatingPopulationMap {
   guName: string;
   living: number;
@@ -33,3 +36,16 @@ export interface SalesMap {
   sales: number;
   level: number;
 }
+
+// const aaa: Array<SalesMap>
+
+// // 상권현황 상세 조회 전체 목록
+// export interface StatusDetail {
+//   living: FloatingPopulationMap;
+//   residnet: ResidentPopulationMap;
+//   store: NumberOfStoresMap;
+//   open: OpeningRateMap;
+//   close: ClosureRateMap;
+//   change: string;
+//   sales: SalesMap;
+// }

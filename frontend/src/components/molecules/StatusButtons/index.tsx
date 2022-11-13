@@ -28,7 +28,7 @@ const StatusButtons = ({
             style={{ width: '50%' }}
             onClick={() => onClickLabelHandler(e.name)}
             active={e.name === category}
-            key={`base-sidebar-label-${i + 1}`}
+            key={`base-sidebar-label-${i}`}
           >
             {e.content}
           </StatusSideBarLabel>
