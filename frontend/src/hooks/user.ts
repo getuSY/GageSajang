@@ -30,6 +30,7 @@ export const useUserLogout = () => {
   const queryClient = useQueryClient();
   return () => {
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('email');
     queryClient.invalidateQueries({ queryKey: ['user', 'info'] });
   };
 };
