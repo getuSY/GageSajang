@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SalesSimulation from './SalesSimulation';
+import { SimulationParams } from '../../../models/simultaion';
+import {
+  useProSalesSimulation,
+  useProSimulInfo,
+} from '../../../hooks/simulation';
 
 const values = [
   {
@@ -314,6 +319,19 @@ const values = [
 ];
 
 const SimulationPage = () => {
+  const userEmail = sessionStorage.getItem('email');
+  console.log('이메일', userEmail);
+  const mutation = useProSalesSimulation();
+  const { data } = mutation;
+  const [simulInputs, setSimulInputs] = useState<SimulationParams>({
+    email: userEmail,
+    year: 2022,
+    quarter: 4,
+    value: 0,
+    dongName: '',
+    industryName: '',
+  });
+
   return (
     <Wrapper>
       {/* <TempSide></TempSide> */}
