@@ -246,6 +246,7 @@ const ReportContentContainer = ({
     }),
     [amatuerResult]
   );
+
   const salesTimeData = useMemo(
     () => ({
       data: {

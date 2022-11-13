@@ -66,7 +66,7 @@ const Wrapper = styled.div`
     width: 100%;
 
     & .region-label {
-      color: ${({ theme }) => theme.darkColor};
+      color: ${({ theme }) => theme.mainColor};
       font-weight: 700;
       text-justify: center;
       width: 5rem;
