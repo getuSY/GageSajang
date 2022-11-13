@@ -18,15 +18,27 @@ spring:
     gateway:
       routes:
         - id: openapi
-          uri: http://${spring.application.name}:${server.port}
+          uri: lb://${spring.application.name}
           predicates:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+#        - id: openapi/first-service-test
+#          uri: lb://FIRST-SERVICE
+#          predicates:
+#            - Path=/openapi/first-service/**, /first-service/**
+#          filters:
+#            - RewritePath=/openapi/first-service/(?<path>.*), /$\{path}
+#            - CustomFilter
+#            - name: LoggingFilter
+#              args:
+#                baseMessage: Spring Cloud Gateway Logging Filter
+#                preLogger: true
+#                postLogger: true
         - id: backend-user-service
           uri: lb://BACKEND-USER
           predicates:
-            - Path=/user/**, /backend-user/user/**
+            - Path=/backend-user/user/**, /user/**
           filters:
             - RewritePath=/backend-user/user/(?<path>.*), /$\{path}
             - CustomFilter
