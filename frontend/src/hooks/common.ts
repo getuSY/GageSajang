@@ -10,7 +10,7 @@ export const usePostCode = (
 
   const handleComplete = (data: any) => {
     if (data.addressType === 'R') {
-      if (data.sido == '서울' && data.sigungu !== '' && data.bname !== '') {
+      if (data.sido === '서울' && data.sigungu !== '' && data.bname !== '') {
         setState(`${data.sigungu} ${data.bname}`);
       }
     }

@@ -50,6 +50,7 @@ export const useStoreData = (amatuerResult: any) => {
   // 해당 동 점포 수 (2021.4분기, 2020.4분기)
   const storeCntData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: ['2020년', '2021년'],
         datasets: [
@@ -66,6 +67,10 @@ export const useStoreData = (amatuerResult: any) => {
       },
       grad: [
         [
+          [0, '#A82BECc1'],
+          [1, '#545BF9c1'],
+        ],
+        [
           [0, '#A82BEC'],
           [1, '#545BF9'],
         ],
@@ -77,6 +82,7 @@ export const useStoreData = (amatuerResult: any) => {
   // 해당 동 업종별 고객 성비(2021.4분기)
   const storeGenderData = useMemo(
     () => ({
+      type: 'pie',
       data: {
         labels: genderLabels,
         datasets: [
@@ -100,6 +106,7 @@ export const useStoreData = (amatuerResult: any) => {
   // 해당동 업종 대분류별 고객 연령대 비율(2021.4분기)
   const storeAgeData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: ageLabels,
         datasets: [
@@ -133,6 +140,7 @@ export const useSalesData = (amatuerResult: any) => {
   // 5년 총 매출 추이
   const salesTotalData = useMemo(
     () => ({
+      type: 'line',
       data: {
         labels: yearLabels,
         datasets: [
@@ -166,6 +174,7 @@ export const useSalesData = (amatuerResult: any) => {
   // 일별 매출
   const salesWeekData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: weekLabels,
         datasets: [
@@ -193,6 +202,7 @@ export const useSalesData = (amatuerResult: any) => {
   // 시간대별 매출
   const salesTimeData = useMemo(
     () => ({
+      type: 'line',
       data: {
         labels: timeLabels,
         datasets: [
@@ -220,6 +230,7 @@ export const useSalesData = (amatuerResult: any) => {
   // 연령별 매출
   const salesAgeData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: ageLabels,
         datasets: [
@@ -247,6 +258,7 @@ export const useSalesData = (amatuerResult: any) => {
   // 성별 매출
   const salesGenderData = useMemo(
     () => ({
+      type: 'pie',
       data: {
         labels: genderLabels,
         datasets: [
@@ -281,6 +293,7 @@ export const useLivingData = (amatuerResult: any) => {
   // 동 기준 5년 총 유동인구 추이
   const livingTotalData = useMemo(
     () => ({
+      type: 'line',
       data: {
         labels: yearLabels,
         datasets: [
@@ -314,6 +327,7 @@ export const useLivingData = (amatuerResult: any) => {
   // 동 기준 일별 유동인구
   const livingWeekData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: weekLabels,
         datasets: [
@@ -341,6 +355,7 @@ export const useLivingData = (amatuerResult: any) => {
   // 동 기준 시간대별 유동인구
   const livingTimeData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: timeLabels,
         datasets: [
@@ -368,6 +383,7 @@ export const useLivingData = (amatuerResult: any) => {
   // 동 기준 연령대별 유동인구
   const livingAgeData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: ageLabels,
         datasets: [
@@ -395,6 +411,7 @@ export const useLivingData = (amatuerResult: any) => {
   // 동 기준 성별 유동인구
   const livingGenderData = useMemo(
     () => ({
+      type: 'pie',
       data: {
         labels: genderLabels,
         datasets: [
@@ -428,39 +445,13 @@ export const useLivingData = (amatuerResult: any) => {
 export const useStoreCntData = (amatuerResult: any) => {
   const storeCntOpenData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: storeCntLabels,
         datasets: [
           {
             label: 'storeOpenData',
-            barThickness: 70,
             data: amatuerResult.open.open,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'white',
-            },
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const storeCntCloseData = useMemo(
-    () => ({
-      data: {
-        labels: storeCntLabels,
-        datasets: [
-          {
-            label: 'storeOpenData',
-            barThickness: 70,
-            data: amatuerResult.close.close,
             datalabels: {
               // 데이터라벨 숨김
               color: 'white',
@@ -480,13 +471,79 @@ export const useStoreCntData = (amatuerResult: any) => {
 
   const storeCntOpenRateData = useMemo(
     () => ({
+      type: 'line',
       data: {
         labels: storeCntLabels,
         datasets: [
           {
             label: 'storeOpenData',
-            barThickness: 70,
             data: amatuerResult.open.rate,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'white',
+            },
+          },
+        ],
+      },
+      grad: [
+        [
+          [0, '#A82BEC'],
+          [1, '#545BF9'],
+        ],
+      ],
+    }),
+    [amatuerResult]
+  );
+
+  const storeCntOpenMultiData = useMemo(
+    () => ({
+      data: {
+        labels: storeCntLabels,
+        datasets: [
+          {
+            type: 'bar' as const,
+
+            label: 'storeOpenData',
+            data: amatuerResult.open.open,
+            borderColor: 'rgb(255, 99, 32)',
+            // backgroundColor: 'rgb(255, 99, 32)',
+            datalabels: {
+              color: 'white',
+            },
+            yAxisId: 'y1',
+          },
+          {
+            type: 'line' as const,
+            yAxisId: 'storeOpenRate',
+            label: 'storeOpenRate',
+            data: amatuerResult.open.rate,
+            borderColor: 'rgb(255, 99, 32)',
+            datalabels: {
+              color: 'white',
+            },
+            yAxisID: 'y2',
+          },
+        ],
+      },
+      grad: [
+        [
+          [0, '#A82BEC'],
+          [1, '#545BF9'],
+        ],
+      ],
+    }),
+    [amatuerResult]
+  );
+
+  const storeCntCloseData = useMemo(
+    () => ({
+      type: 'bar',
+      data: {
+        labels: storeCntLabels,
+        datasets: [
+          {
+            label: 'storeOpenData',
+            data: amatuerResult.close.close,
             datalabels: {
               // 데이터라벨 숨김
               color: 'white',
@@ -506,6 +563,7 @@ export const useStoreCntData = (amatuerResult: any) => {
 
   const storeCntCloseRateData = useMemo(
     () => ({
+      type: 'line',
       data: {
         labels: storeCntLabels,
         datasets: [
@@ -535,6 +593,7 @@ export const useStoreCntData = (amatuerResult: any) => {
     storeCntCloseData,
     storeCntOpenRateData,
     storeCntCloseRateData,
+    storeCntOpenMultiData,
   };
 };
 
@@ -542,6 +601,7 @@ export const useStoreCntData = (amatuerResult: any) => {
 export const useHinterlandData = (amatuerResult: any) => {
   const hinterlandPeopleData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: ['유동 인구', '직장 인구', '거주 인구'],
         datasets: [
@@ -572,6 +632,7 @@ export const useHinterlandData = (amatuerResult: any) => {
 
   const hinterlandAgeData = useMemo(
     () => ({
+      type: 'bar',
       data: {
         labels: ageLabels,
         datasets: [
@@ -598,6 +659,7 @@ export const useHinterlandData = (amatuerResult: any) => {
 
   const hinterlandGenderData = useMemo(
     () => ({
+      type: 'pie',
       data: {
         labels: genderLabels,
         datasets: [
