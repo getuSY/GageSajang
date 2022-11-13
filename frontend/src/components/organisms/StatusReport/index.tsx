@@ -149,22 +149,6 @@ const StatusReport = ({
   );
 };
 
-const Wrapper = styled.div`
-  & .report-top-div {
-    display: flex;
-    gap: 2rem;
-    width: 100%;
-    & > div {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  & .status-report-content {
-    height: 3000px;
-    overflow-y: scroll;
-  }
-`;
+const Wrapper = styled.div``;
 
 export default StatusReport;
