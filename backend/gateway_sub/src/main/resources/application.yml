@@ -1,5 +1,16 @@
 server:
   port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "gateway"
+  endpoint:
+    gateway:
+      enabled: true
+
 spring:
   application:
     name: apigateway-sub-service
