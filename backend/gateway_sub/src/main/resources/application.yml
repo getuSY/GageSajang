@@ -6,22 +6,30 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: backend-user
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+        - id: backend-user-service
           uri: lb://BACKEND-USER
           predicates:
-            - Path=/user/**
+            - Path=/user/**, /backend-user/user/**
           filters:
+            - RewritePath=/backend-user/user/(?<path>.*), /$\{path}
             - CustomFilter
             - name: LoggingFilter
               args:
                 baseMessage: Spring Cloud Gateway Logging Filter
                 preLogger: true
                 postLogger: true
-        - id: BACKEND-SIMUL
+        - id: backend-simul-service
           uri: lb://BACKEND-SIMUL
           predicates:
-            - Path=/simul/**
+            - Path=/simul/**, /backend-simul/simul/**
           filters:
+            - RewritePath=/backend-simul/simul/(?<path>.*), /$\{path}
             - CustomFilter
             - name: LoggingFilter
               args:
