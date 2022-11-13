@@ -118,5 +118,10 @@ const dummyData = {
   riskRate: 60.16782685,
 };
 
-export const getAmatuerResult = async (params: AmatuerResultParams) =>
-  dummyData;
+export const getAmatuerResult = async (params: AmatuerResultParams) => {
+  // return dummyData;
+  const { admCd, jobCode } = params;
+  const { data } = await client.get(`/anlz/dongCS/${admCd}/${jobCode}`);
+
+  return data;
+};

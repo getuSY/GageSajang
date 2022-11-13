@@ -23,6 +23,27 @@ const weekLabels = ['월', '화', '수', '목', '금', '토', '일'];
 const genderLabels = ['남', '여'];
 const ageLabels = ['10대', '20대', '30대', '40대', '50대', '60대'];
 const yearLabels = [2017, 2018, 2019, 2020, 2021];
+const storeCntLabels = [
+  '2020년 1분기',
+  '2020년 2분기',
+  '2020년 3분기',
+  '2020년 4분기',
+  '2021년 1분기',
+  '2021년 2분기',
+  '2021년 3분기',
+  '2021년 4분기',
+];
+
+const genderGrad = [
+  [
+    [0, '#B6ACF1'],
+    [1, '#27CFFB'],
+  ],
+  [
+    [0, '#F3B79B'],
+    [1, '#F872D4'],
+  ],
+];
 
 /* 업종 분석 */
 export const useStoreData = (amatuerResult: any) => {
@@ -70,7 +91,8 @@ export const useStoreData = (amatuerResult: any) => {
           },
         ],
       },
-      grad: [[[0, '#78BFE9']], [[0, '#ED7996']]],
+      // grad: [[[0, '#78BFE9']], [[0, '#ED7996']]],
+      grad: genderGrad,
     }),
     [amatuerResult]
   );
@@ -137,7 +159,7 @@ export const useSalesData = (amatuerResult: any) => {
 
   // 매출 Top3 상권
   const salesAreaTop3Data = useMemo(
-    () => amatuerResult.sales.total,
+    () => amatuerResult.sales.top3,
     [amatuerResult]
   );
 
@@ -239,16 +261,7 @@ export const useSalesData = (amatuerResult: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0.5, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-        [
-          [0.5, '#2bec4b'],
-          [1, '#54a1f9'],
-        ],
-      ],
+      grad: genderGrad,
     }),
     [amatuerResult]
   );
@@ -396,16 +409,7 @@ export const useLivingData = (amatuerResult: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0.5, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-        [
-          [0.5, '#2bec4b'],
-          [1, '#54a1f9'],
-        ],
-      ],
+      grad: genderGrad,
     }),
     [amatuerResult]
   );
@@ -425,7 +429,7 @@ export const useStoreCntData = (amatuerResult: any) => {
   const storeCntOpenData = useMemo(
     () => ({
       data: {
-        labels: ['1', '2'],
+        labels: storeCntLabels,
         datasets: [
           {
             label: 'storeOpenData',
@@ -451,7 +455,7 @@ export const useStoreCntData = (amatuerResult: any) => {
   const storeCntCloseData = useMemo(
     () => ({
       data: {
-        labels: ['1', '2'],
+        labels: storeCntLabels,
         datasets: [
           {
             label: 'storeOpenData',
@@ -474,7 +478,64 @@ export const useStoreCntData = (amatuerResult: any) => {
     [amatuerResult]
   );
 
-  return { storeCntOpenData, storeCntCloseData };
+  const storeCntOpenRateData = useMemo(
+    () => ({
+      data: {
+        labels: storeCntLabels,
+        datasets: [
+          {
+            label: 'storeOpenData',
+            barThickness: 70,
+            data: amatuerResult.open.rate,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'white',
+            },
+          },
+        ],
+      },
+      grad: [
+        [
+          [0, '#A82BEC'],
+          [1, '#545BF9'],
+        ],
+      ],
+    }),
+    [amatuerResult]
+  );
+
+  const storeCntCloseRateData = useMemo(
+    () => ({
+      data: {
+        labels: storeCntLabels,
+        datasets: [
+          {
+            label: 'storeOpenData',
+            barThickness: 70,
+            data: amatuerResult.close.rate,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'white',
+            },
+          },
+        ],
+      },
+      grad: [
+        [
+          [0, '#A82BEC'],
+          [1, '#545BF9'],
+        ],
+      ],
+    }),
+    [amatuerResult]
+  );
+
+  return {
+    storeCntOpenData,
+    storeCntCloseData,
+    storeCntOpenRateData,
+    storeCntCloseRateData,
+  };
 };
 
 /* 상권 배후지 */
@@ -551,19 +612,19 @@ export const useHinterlandData = (amatuerResult: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0.5, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-        [
-          [0.5, '#2bec4b'],
-          [1, '#54a1f9'],
-        ],
-      ],
+      grad: genderGrad,
     }),
     [amatuerResult]
   );
 
   return { hinterlandPeopleData, hinterlandAgeData, hinterlandGenderData };
+};
+
+export const useRiskData = (amatuerResult: any) => {
+  const riskData = useMemo(
+    () => [amatuerResult.risk, amatuerResult.riskRate],
+    [amatuerResult]
+  );
+
+  return { riskData };
 };

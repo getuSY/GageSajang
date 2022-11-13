@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Label from '../../atoms/Label';
 
 interface ReportContentProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   style?: object;
   propsRef?: any;
   title?: string;
