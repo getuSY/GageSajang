@@ -71,6 +71,7 @@ function App() {
             <Route path="" element={<ProfessionalPage />} />
             <Route path="store" element={<ProfessionalStorePage />} />
             <Route path="result" element={<ProfessionalResultPage />} />
+            <Route path="simul" element={<SimulationPage />} />
           </Route>
           {/* 아마 사장 */}
           <Route

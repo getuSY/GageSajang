@@ -8,24 +8,32 @@ import Button from '../../atoms/Button';
 import SimulationPage from '../simulation/SimulationPage';
 import { useProSalesSimulation } from '../../../hooks/simulation';
 import Spinner from '../../atoms/Spinner';
+import { usePostCode } from '../../../hooks/common';
 
 const ProfessionalInfoPage = () => {
-  const [storeInfo, setStoreInfo] = useState({
-    email: 'string',
-    storeName: 'string',
-    sigungu: 'string', //행정동
-    dongName: 'string', //법정동
-    employee: 0, //직원수
-    storeArea: 0, //면적
-    storeTypeCode: 'string',
-    sales: 'string',
+  const userEmail = sessionStorage.getItem('email');
+  const [storeInfo, setStoreInfo] = useState<ProfessionalResultParams>({
+    email: userEmail,
+    sales: 0,
+    clerk: 0, //직원수
+    area: 0, //면적
+    dongName: '개포2동', //법정동
+    industryName: '한식음식점',
   });
   const values = useProSalesSimulation();
   const mutation = useProfessionalResult();
-  // const { data, isLoading, isSuccess, isError, error } = mutation;
+  const { data } = mutation;
   // const store = data.store;
-  // // const sales = data.sales;
+  // const sales = data.sales;
   // const status = data.status;
+  console.log(data);
+
+  const onClickHandler = () => {
+    mutation.mutate(storeInfo);
+  };
+  const [guDong, setGuDong] = useState('');
+  const postCode = usePostCode(setGuDong);
+  console.log(guDong);
 
   // const changeStoreName = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setStoreInfo({
@@ -87,55 +95,51 @@ const ProfessionalInfoPage = () => {
           </ProListItem>
           <ProListItem>
             <LabelInput
-              label="가게 이름"
-              placeholder="가게 이름을 입력해주세요."
-              // onChange={changeStoreName}
-            ></LabelInput>
-          </ProListItem>
-          <ProListItem>
-            <LabelInput
-              label="가게 시군구"
-              placeholder="시군구를 입력해주세요."
-              // onChange={changeSigungu}
-            ></LabelInput>
-            <LabelInput
-              label="가게 행정동"
+              label="가게 주소"
               placeholder="행정동을 입력해주세요."
+              inputValue={guDong}
+              onClick={postCode}
               // onChange={changeDongName}
-            ></LabelInput>
+            />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="업종"
               placeholder="가게 업종을 입력해주세요."
               // onChange={changeBusiness}
-            ></LabelInput>
+            />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="직원 수"
               placeholder="직원 수를 입력해주세요."
               // onChange={changeEmployee}
-            ></LabelInput>
+            />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="가게 면적"
               placeholder="가게 면적을 입력해주세요."
               // onChange={changeStoreArea}
-            ></LabelInput>
+            />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="평균 월 매출"
               placeholder="평균 월 매출을 입력해주세요."
               // onChange={changeSales}
-            ></LabelInput>
+            />
           </ProListItem>
         </ProList>
         <Button
-          type="blur"
-          style={{ position: 'absolute', top: '85%', marginLeft: '70px' }}
+          type="border"
+          style={{
+            position: 'absolute',
+            top: '85%',
+            marginLeft: '70px',
+            width: '260px',
+          }}
+          onClick={onClickHandler}
         >
           내 가게 분석하기
         </Button>
@@ -167,8 +171,8 @@ const ProSide = styled.div`
   position: fixed;
   width: 400px;
   height: 100%;
-  background: green;
-  border-left: 10px solid green;
+  background: ${({ theme }) => theme.lightColor};
+  border-left: 10px solid ${({ theme }) => theme.lightColor};
   transition: 0.5s;
   overflow: hidden;
   display: flex;
@@ -188,10 +192,10 @@ const ProList = styled.ul`
     pointer-events: none;
   }
 
-  & li:hover {
+  /* & li:hover {
     background: white;
     color: black;
-  }
+  } */
 `;
 
 const ProListItem = styled.li`

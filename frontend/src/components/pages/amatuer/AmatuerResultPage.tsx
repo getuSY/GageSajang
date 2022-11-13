@@ -17,9 +17,14 @@ const AmatuerResultPage = () => {
     : 0;
   const admCd = params.get('admCd') ? params.get('admCd')! : ''; // 행정동 코드
   const dongName = getDongName(admCd); // 동 이름
-  const jobCode = getJobCode(mainCategory, subCategory); // 업종 코드 : csX000XX
+  const jobCode = getJobCode(mainCategory, subCategory); // 업종 코드 : CSX000XX
   const jobName = cs[mainCategory - 1][subCategory - 1]; // 업종명
-  const { data: amatuerResult, isLoading } = useAmatuerResult({
+  const {
+    data: amatuerResult,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useAmatuerResult({
     admCd,
     jobCode,
   });
@@ -31,6 +36,8 @@ const AmatuerResultPage = () => {
         dongName={dongName}
         amatuerResult={amatuerResult}
         isLoading={isLoading}
+        isSuccess={isSuccess}
+        isError={isError}
       />
     </Wrapper>
   );

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import Spinner from '../../atoms/Spinner';
 import ReportSideBar from '../../molecules/ReportSideBar';
 import ReportContentContainer from '../ReportContentContainer';
 
@@ -8,9 +9,16 @@ interface ReportProps {
   dongName?: string;
   amatuerResult: any;
   isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
 }
 
 const reportMenuList = [
+  {
+    name: '업종 분석',
+    icon: 'shop',
+  },
+
   {
     name: '매출 분석',
     icon: 'chart-line',
@@ -18,10 +26,6 @@ const reportMenuList = [
   {
     name: '유동 인구',
     icon: 'people-group',
-  },
-  {
-    name: '업종 분석',
-    icon: 'shop',
   },
   {
     name: '점포 수',
@@ -38,6 +42,8 @@ const Report = ({
   dongName,
   amatuerResult,
   isLoading,
+  isSuccess,
+  isError,
 }: ReportProps) => {
   const contentRefs = useRef<HTMLDivElement[]>([]);
   const [tab, setTab] = useState<number>(0);
@@ -52,13 +58,23 @@ const Report = ({
         tab={tab}
         setTab={setTab}
       />
-      {!isLoading && (
+      {isLoading && (
+        <LodingErrorWrapper>
+          <Spinner />
+        </LodingErrorWrapper>
+      )}
+      {!isLoading && isSuccess && (
         <ReportContentContainer
           reportMenuList={reportMenuList}
           contentRefs={contentRefs}
           setTab={setTab}
           amatuerResult={amatuerResult}
         />
+      )}
+      {!isLoading && isError && (
+        <LodingErrorWrapper>
+          <h1>서버가 아파요,,,</h1>
+        </LodingErrorWrapper>
       )}
     </Wrapper>
   );
@@ -68,8 +84,17 @@ const Wrapper = styled.div`
   flex-grow: 1;
   gap: 2px;
   display: flex;
+
   padding: 0 0px;
   height: 100%;
+`;
+
+const LodingErrorWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default Report;
