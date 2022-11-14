@@ -50,18 +50,21 @@ const Navbar = ({ navList }: NavbarProps) => {
 };
 
 const Wrapper = styled.div`
+  @media screen and (min-width: 800px) {
+    padding: 0px max(80px, calc((100vw - 1500px) / 2));
+    align-items: center;
+  }
+  @media screen and (max-width: 799px) {
+    flex-direction: column;
+  }
   position: fixed;
   left: 0;
   right: 0;
   display: flex;
-  align-items: center;
   height: 65px;
   background-color: #ffffff;
-  /* background: ${({ theme }) => theme.gradColor}; */
-  /* padding: 0 200px; */
-  padding: 0px max(80px, calc((100vw - 1500px) / 2));
-  z-index: 9999;
   box-shadow: 0px 0.5px 4px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
 `;
 
 const NavLogo = styled.div`
