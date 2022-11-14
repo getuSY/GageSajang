@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useQueries } from '@tanstack/react-query';
+import { useQuery, useQueries } from '@tanstack/react-query';
 import {
   getStatusGuFPMap,
   getStatusGuRPMap,
@@ -13,6 +13,7 @@ import {
   getStatusHinGuOpeningMap,
   getStatusHinGuClosureMap,
   getStatusHinGuSalesMap,
+  getStatusTrend,
 } from '../api/status';
 
 // 상권 Map API
@@ -96,4 +97,17 @@ export const useStatusHinGuMap = () => {
   );
 
   return { hinGuData, isHinGuSuccess, isHinGuLoading, isHinGuError };
+};
+
+// 상권 현황 Top10 API
+export const useStatusTrend = () => {
+  const trendData = useQuery({
+    queryKey: ['status', 'trend'],
+    queryFn: () => getStatusTrend(),
+  });
+  const isTrendSuccess = useMemo(() => trendData.isSuccess, [trendData]);
+  const isTrendLoading = useMemo(() => trendData.isLoading, [trendData]);
+  const isTrendError = useMemo(() => trendData.isError, [trendData]);
+
+  return { trendData, isTrendSuccess, isTrendLoading, isTrendError };
 };

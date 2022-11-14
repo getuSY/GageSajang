@@ -61,3 +61,9 @@ export const getStatusHinGuSalesMap = async () => {
   const { data } = await client.get('/anlz/storeHinGu/sales');
   return data;
 };
+
+// 상권 Top10 API
+export const getStatusTrend = async () => {
+  const { data } = await client.get('/anlz/store/top10');
+  return data;
+};
