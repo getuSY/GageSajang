@@ -108,7 +108,7 @@ const DynamicRateChart = ({ posi }: DynamicRateChartProps) => {
         type="line"
         data={data}
         options={options}
-        style={{ width: '800px', height: 'auto' }}
+        style={{ width: '800px', height: '400px' }}
       />
     </Wrapper>
   );
