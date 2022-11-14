@@ -1,12 +1,4 @@
-import client from './client';
-// import {
-//   FloatingPopulationMap,
-//   ResidentPopulationMap,
-//   NumberOfStoresMap,
-//   OpeningRateMap,
-//   ClosureRateMap,
-//   SalesMap,
-// } from '../models/status';
+import { client } from './client';
 
 export const getStatusFPMap = async () => {
   const { data } = await client.get('/anlz/storeGu/living');
