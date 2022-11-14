@@ -1,4 +1,4 @@
-import client from './client';
+import { client1 as client } from './client';
 import { SimulationParams } from '../models/simultaion';
 
 export const AmaSalesSimulation = async (params: SimulationParams) => {

@@ -47,7 +47,7 @@ const PageIndexItem = ({ type }: PageIndexItemProps) => {
           </div>
           <div className="content right">
             <div>
-              <div>내 가게 진단을 위해 가게 정보가 필요합니다.</div>
+              <div>상권 분석을 위해 업종, 주소가 필요합니다.</div>
               <div>정보를 입력해주세요.</div>
             </div>
             <Button type="blur" onClick={toAnalysis}>
