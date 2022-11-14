@@ -15,7 +15,7 @@ const ButtonInputs = ({ style, menuList, tab }: ButtonInputsProps) => {
           <BaseSideBarButton
             key={idx}
             onClick={menu.onClick}
-            active={tab === idx + 1}
+            active={tab === idx}
           >
             {menu.name}
           </BaseSideBarButton>

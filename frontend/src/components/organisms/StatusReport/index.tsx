@@ -77,8 +77,8 @@ const StatusReport = ({
   });
   useEffect(() => {
     setTitle({
-      name: content[tab - 1].name,
-      icon: icon[tab - 1],
+      name: content[tab].name,
+      icon: icon[tab],
     });
   }, [tab]);
   return (
@@ -96,7 +96,7 @@ const StatusReport = ({
           tab={tab}
           icon={icon}
         />
-        {tab === 1 && (
+        {tab === 0 && (
           <StatusReportFP
             title={title}
             region={region}
@@ -104,7 +104,7 @@ const StatusReport = ({
             tab={tab}
           />
         )}
-        {tab === 2 && (
+        {tab === 1 && (
           <StatusReportRP
             title={title}
             region={region}
@@ -112,7 +112,7 @@ const StatusReport = ({
             tab={tab}
           />
         )}
-        {tab === 3 && (
+        {tab === 2 && (
           <StatusReportStores
             title={title}
             region={region}
@@ -120,7 +120,7 @@ const StatusReport = ({
             tab={tab}
           />
         )}
-        {tab === 4 && (
+        {tab === 3 && (
           <StatusReportOpen
             title={title}
             region={region}
@@ -128,7 +128,7 @@ const StatusReport = ({
             tab={tab}
           />
         )}
-        {tab === 5 && (
+        {tab === 4 && (
           <StatusReportClose
             title={title}
             region={region}
@@ -136,7 +136,7 @@ const StatusReport = ({
             tab={tab}
           />
         )}
-        {tab === 6 && (
+        {tab === 5 && (
           <StatusReportSales
             title={title}
             region={region}
