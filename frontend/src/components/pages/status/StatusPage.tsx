@@ -60,22 +60,27 @@ const StatusPage = () => {
           onClickLabelHandler={onClickLabelHandler}
           tab={tab}
         />
-        <GeometryMap
-          areas={areas.features}
-          isOpen={sideBarStatus}
-          onClickRegionHandler={onClickRegionHandler}
-          tab={tab}
-        />
-        <StatusReport
-          icon={icons}
-          region={region}
-          content={contentList}
-          category={category!}
-          tab={tab}
-          // 상세 페이지, 모달 + close 버튼
-          isOpen={reportModal}
-          setIsOpen={setReportModal}
-        />
+        {isSuccess && (
+          <>
+            <GeometryMap
+              areas={areas.features}
+              isOpen={sideBarStatus}
+              onClickRegionHandler={onClickRegionHandler}
+              tab={tab}
+              data={data}
+            />
+            <StatusReport
+              icon={icons}
+              region={region}
+              content={contentList}
+              category={category!}
+              tab={tab}
+              // 상세 페이지, 모달 + close 버튼
+              isOpen={reportModal}
+              setIsOpen={setReportModal}
+            />
+          </>
+        )}
       </Wrapper>
     </Transitions>
   );

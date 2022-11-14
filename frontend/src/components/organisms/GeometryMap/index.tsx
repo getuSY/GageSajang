@@ -9,6 +9,7 @@ type GeometryProps = {
   isOpen: boolean;
   onClickRegionHandler: any;
   tab: number;
+  data: any;
 };
 
 const GeometryMap = ({
@@ -16,6 +17,7 @@ const GeometryMap = ({
   isOpen,
   onClickRegionHandler,
   tab,
+  data,
 }: GeometryProps) => {
   const mapData = areas;
   const width = 1000;
@@ -44,10 +46,17 @@ const GeometryMap = ({
     <path
       key={'path' + i}
       d={pathGenerator(d)!}
-      className={`path-gu-${tab} path-gu-${
-        d.properties.SIG_ENG_NM
-      } color-${tab}-${i % 6}`}
       onClick={() => onClick(d)}
+      className="path-gu"
+      style={{
+        fill: mapColor[tab][
+          data[tab].data.find(
+            (guItem: any) => guItem.guName === d.properties.SIG_KOR_NM
+          ).level - 1
+        ],
+        stroke: 'white',
+        strokeWidth: '1px',
+      }}
     />
   ));
   const countryTexts = mapData.map((d: any, i) => (
@@ -63,7 +72,7 @@ const GeometryMap = ({
   ));
 
   return (
-    <Wrapper isOpen={isOpen} mapColor={mapColor}>
+    <Wrapper isOpen={isOpen}>
       <svg width={width} height={height}>
         {countries}
         {countryTexts}
@@ -74,19 +83,17 @@ const GeometryMap = ({
 
 interface WrapperInterface {
   isOpen: boolean;
-  mapColor: any;
 }
 
 const Wrapper = styled.div<WrapperInterface>`
   margin-left: ${({ isOpen }) => (isOpen ? '30vw' : '')};
   transition: margin-left 0.6s;
-  & .path-gu-0 {
-    fill: #d9d9d9; // 채우는 색
-    stroke: darkgray;
-    stroke-width: 1px;
+
+  & .path-gu {
     cursor: pointer;
+
     &:hover {
-      fill: ${({ theme }) => theme.mainColor};
+      opacity: 0.5;
     }
   }
 `;
