@@ -214,19 +214,24 @@ export const useSalesData = (amatuerResult: any) => {
           {
             label: '시간대별 매출',
             data: amatuerResult.sales.time,
-            barThickness: 30,
             borderColor: '#545BF9',
+            borderWidth: 1,
+            // fill: true,
+            // borderColor: '#545BF9',
+            // backgroundColor: 'rgba(255, 0, 0, 0.1)',
+            fill: true,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            tension: 0.5,
           },
         ],
       },
       grad: [
         [
-          // [0, '#A82BEC'],
-          [0.8, '#545BF9'],
+          [0, '#A82BECa0'],
+          [1, '#545BF9'],
         ],
       ],
     }),
@@ -343,12 +348,7 @@ export const useLivingData = (amatuerResult: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
+      grad: weekGrad,
     }),
     [amatuerResult]
   );
