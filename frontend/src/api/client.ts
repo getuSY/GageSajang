@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 export const client = axios.create({
-  baseURL: 'http://k7e205.p.ssafy.io:8081/',
+  // baseURL: 'http://k7e205.p.ssafy.io:8081/',
+  baseURL: 'https://k7e205.p.ssafy.io/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -21,7 +22,8 @@ client.interceptors.request.use(function (config) {
 });
 
 export const client1 = axios.create({
-  baseURL: 'http://k7e2051.p.ssafy.io:8081/',
+  // baseURL: 'http://k7e2051.p.ssafy.io:8081/',
+  baseURL: 'https://k7e2051.p.ssafy.io/',
   headers: {
     'Content-Type': 'application/json',
   },
