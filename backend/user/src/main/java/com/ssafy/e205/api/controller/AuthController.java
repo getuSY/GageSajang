@@ -124,20 +124,26 @@ public class  AuthController {
         }
     }
 
-    @GetMapping("/overlap/{email}")
-    public ResponseEntity<String> overlapCheck(@PathVariable  String email){
+    @GetMapping("/overlap")
+    public ResponseEntity<String> overlapCheck(@RequestHeader("Authorization") String accessToken){
         Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
+        boolean tokenValidate = jwtTokenProvider.validateToken(accessToken);
+        if(tokenValidate){
+            UserDto dto = userService.findByAccessToken(accessToken);
+            if(dto == null){
+                jsonObject.addProperty("result", "false");
+            }
+            else{
+                jsonObject.addProperty("result", "true");
+            }
 
-        Optional<UserEntity> userEntity = userService.findByEmail(email);
-        if(userEntity.isPresent()){
-            jsonObject.addProperty("result", "false");
+            return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
         }
         else{
-            jsonObject.addProperty("result", "true");
+            jsonObject.addProperty("error","false");
+            return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
     }
 
     @PostMapping("/signup")
