@@ -1,7 +1,7 @@
 import { faBlackTie } from '@fortawesome/free-brands-svg-icons';
 import { url } from 'inspector';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import ReportChart from '../../atoms/ReportChart';
 
 interface ProfessionalResultProps {}
@@ -62,11 +62,11 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
     datasets: [
       {
         label: ['내 가게 월 매출'],
-        data: [6000000, result.sales],
+        data: [6000000, result.sales / 3],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-        tension: 0.5,
-        borderWidth: 5,
-        borderColor: 'rgb(255, 99, 125)',
+        borderRadius: 300,
+        // borderWidth: 5,
+        // borderColor: 'rgb(255, 99, 125)',
       },
     ],
   };
@@ -84,11 +84,11 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
   };
   const clerkOptions = {};
   const frData = {
-    labels: ['총 점포 수', '프랜차이즈 점포 수'],
+    labels: ['총 점포 수', '프랜차이즈 수'],
     datasets: [
       {
         data: [Math.ceil(result.total), result.franchise],
-        backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+        backgroundColor: ['#edf3f1', 'rgb(255, 205, 86)'],
         hoverOffset: 5,
       },
     ],
@@ -109,11 +109,7 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
     datasets: [
       {
         data: [Math.ceil(result.total), result.open, result.close],
-        backgroundColor: [
-          'rgb(255, 99, 242)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-        ],
+        backgroundColor: ['#edf3f1', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         hoverOffset: 5,
       },
     ],
@@ -131,21 +127,29 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
   };
   return (
     <Wrapper>
+      <Notice>
+        ❗ 아래 보고서는 통계 자료에 따른 분석 결과입니다. 보고서를 참고하여
+        가게 경영을 한 경우 모든 책임은 사장님께 있습니다.
+      </Notice>
       <Summary>
         <SummaryCard>
           <div>
             <div className="cardTitle">매출 비교</div>
             {salesRate > 100 && (
               <div className="cardBody">
-                평균 {Math.round(salesRate - 100)}% 더 벌고 있어요!
+                평균 <Highlight>{Math.round(salesRate - 100)}%</Highlight> 더
+                벌고 있어요!
               </div>
             )}
             {salesRate === 100 && (
-              <div className="cardBody">평균 월 매출 수준으로 벌고 있어요!</div>
+              <div className="cardBody">
+                평균 월 매출과 <Highlight>비슷하게</Highlight> 벌고 있어요!
+              </div>
             )}
             {salesRate < 100 && (
               <div className="cardBody">
-                평균 {Math.round(100 - salesRate)}% 적게 벌고 있어요!
+                평균 <Highlight>{Math.round(100 - salesRate)}%</Highlight> 적게
+                벌고 있어요!
               </div>
             )}
           </div>
@@ -154,7 +158,9 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
           <div>
             <div className="cardTitle">개폐업률</div>
             <div className="cardBody">
-              {openRate} % / {closeRate} % <br></br>(개업 / 폐업)
+              <Highlight>{openRate} %</Highlight> /
+              <Highlight> {closeRate} %</Highlight>
+              <br></br>(개업 / 폐업)
             </div>
           </div>
         </SummaryCard>
@@ -163,15 +169,19 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
             <div className="cardTitle">직원 수 비교</div>
             {clerkRate > 1 && (
               <div className="cardBody">
-                평균보다 {clerkRate} 배 더 많이 고용하고 있어요!
+                평균보다 <Highlight>{clerkRate} 배</Highlight> 더 많이 고용하고
+                있어요!
               </div>
             )}
             {clerkRate === 1 && (
-              <div className="cardBody">평균만큼 고용하고 있어요!</div>
+              <div className="cardBody">
+                <Highlight>평균만큼</Highlight> 고용하고 있어요!
+              </div>
             )}
             {clerkRate < 1 && (
               <div className="cardBody">
-                평균보다 {clerkRate} 배 더 적게 고용하고 있어요!
+                평균보다 <Highlight>{clerkRate}배</Highlight> 더 적게 고용하고
+                있어요!
               </div>
             )}
           </div>
@@ -181,15 +191,17 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
             <div className="cardTitle">가게 면적 비교</div>
             {areaRate > 100 && (
               <div className="cardBody">
-                평균 대비 {areaRate - 100} % 더 넓어요!
+                평균 대비 <Highlight>{areaRate - 100}%</Highlight> 더 넓어요!
               </div>
             )}
             {areaRate === 100 && (
-              <div className="cardBody">평균 면적과 거의 비슷해요!</div>
+              <div className="cardBody">
+                평균 면적과 거의 <Highlight>비슷해요!</Highlight>
+              </div>
             )}
             {areaRate < 100 && (
               <div className="cardBody">
-                평균 대비 {100 - areaRate} % 더 좁아요!
+                평균 대비 <Highlight>{100 - areaRate}%</Highlight> 더 좁아요!
               </div>
             )}
           </div>
@@ -197,23 +209,62 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
       </Summary>
       <ProRepoDetail>
         <p style={{ fontSize: '40px', margin: '8rem auto', fontWeight: '600' }}>
-          " oo동 ㅁㅁ업종 "의 평균값을 토대로 보여드릴게요!
+          " {result.dongName} {result.industryName} "의 평균값을 토대로
+          보여드릴게요!
         </p>
         <ReportDetails>
           <DetailCards>
             <DetailCardHeader>평균 월 매출</DetailCardHeader>
             <ReportChart
-              type="line"
+              type="bar"
               data={salesData}
               style={{ width: '400px', height: '300px' }}
+              grad={[
+                [
+                  [0, '#49D0A8'],
+                  [0.8, '#F9F254'],
+                ],
+                [[0, '#ebdd4a']],
+              ]}
             ></ReportChart>
-            <DetailCardScript>
-              평균 월 매출보다 적게 벌고 있습니다.{' '}
-            </DetailCardScript>
+            {salesRate > 100 ? (
+              <DetailCardScript>
+                평균 월 매출보다 많이 벌고 있습니다.<br></br>
+                순이익을 높이고 싶다면 부대비용에 집중해보세요.
+              </DetailCardScript>
+            ) : salesRate < 100 ? (
+              <DetailCardScript>
+                평균 월 매출보다 적게 벌고 있습니다.<br></br>월 매출이 높은
+                가게를 분석해보면 어떨까요?
+              </DetailCardScript>
+            ) : (
+              <DetailCardScript>
+                평균 월 매출과 비슷하게 벌고 있습니다.<br></br>
+              </DetailCardScript>
+            )}
           </DetailCards>
           <DetailCards>
             <DetailCardHeader>평균 매출 건수</DetailCardHeader>
-            <img src="/assets/img/shopping-cart.png" alt="" />
+            <img
+              src="/assets/img/shopping-cart.png"
+              alt="sales_number"
+              width="200px"
+            />
+            <div
+              style={{
+                fontSize: '30px',
+                fontWeight: '600',
+                color: 'green',
+                marginTop: '20px',
+              }}
+            >
+              {result.order} 건
+            </div>
+            <DetailCardScript>
+              월 평균 매출 건수는 {result.order} 건입니다. <br></br> 평균 매출
+              건수가 이보다 낮지 않은지 생각해보세요. <br></br> 매출 건수가
+              낮다면 경영 환경 개선이 필요합니다.
+            </DetailCardScript>
           </DetailCards>
           <DetailCards>
             <DetailCardHeader>평균 직원 수</DetailCardHeader>
@@ -221,11 +272,33 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               type="bar"
               data={clerkData}
               style={{ width: '400px', height: '300px' }}
+              grad={[
+                [
+                  [0, '#49D0A8'],
+                  [0.8, '#F9F254'],
+                ],
+                [[0, '#ebdd4a']],
+              ]}
             ></ReportChart>
             <DetailCardScript>
-              평균 직원 수보다 많이 고용하고 있습니다. <br></br> 인건비 재조정이
-              필요하지는 않을까요?
+              <br></br>
             </DetailCardScript>
+            {clerkRate > 1 ? (
+              <DetailCardScript>
+                평균 직원 수보다 많이 고용하고 있습니다. <br></br>
+                인건비 재조정이 필요하지는 않은지 고려해보세요.
+              </DetailCardScript>
+            ) : clerkRate < 1 ? (
+              <DetailCardScript>
+                평균 직원 수보다 적게 고용하고 있습니다.<br></br>때론 인건비
+                감축보다 <br></br>인력 충원이 이익이 될 수 있음을 기억하세요.
+              </DetailCardScript>
+            ) : (
+              <DetailCardScript>
+                평균 직원 수와 비슷하게 고용하고 있습니다.<br></br>그래도
+                순이익이 적다면, <br></br>직원 외 다른 부분을 살펴보면 어떨까요?
+              </DetailCardScript>
+            )}
           </DetailCards>
           <DetailCards>
             <DetailCardHeader>평균 가게 면적</DetailCardHeader>
@@ -234,7 +307,34 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               data={areaData}
               style={{ width: '400px', height: '300px', margin: '20px' }}
               options={areaOptions}
+              grad={[
+                [
+                  [0, '#49D0A8'],
+                  [0.8, '#F9F254'],
+                ],
+                [[0, '#ebdd4a']],
+              ]}
+              isVert={false}
             ></ReportChart>
+            {areaRate > 100 ? (
+              <DetailCardScript>
+                {result.dongName} {result.industryName} 평균 가게 면적보다
+                넓습니다.<br></br>
+                가게 면적을 제대로 활용하고 있는지 체크해보세요.
+              </DetailCardScript>
+            ) : areaRate < 100 ? (
+              <DetailCardScript>
+                {result.dongName} {result.industryName} 평균 가게 면적보다
+                좁습니다.<br></br> 상황에 따라 확장이전을 고려하거나 <br></br>{' '}
+                배치를 바꿔보면 도움이 될 것 같습니다.
+              </DetailCardScript>
+            ) : (
+              <DetailCardScript>
+                {result.dongName} {result.industryName} 평균 가게 면적과
+                비슷합니다.<br></br>순이익이 낮다면 다른 지출 항목을 살펴보면
+                어떨까요?
+              </DetailCardScript>
+            )}
           </DetailCards>
           <DetailCards>
             <DetailCardHeader>개폐업 점포 수</DetailCardHeader>
@@ -243,7 +343,30 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               data={ocData}
               style={{ width: '400px', height: '300px', margin: '20px' }}
               options={ocOptions}
+              grad={[[[0, '#edf3f1']], [[0, '#49D0A8']], [[0.8, '#F9F254']]]}
             ></ReportChart>
+            {result.open > result.close ? (
+              <DetailCardScript>
+                {result.dongName}에 새로 개업한 {result.industryName} 수는{' '}
+                {result.open} 곳, <br></br> 폐업한 {result.industryName} 수는{' '}
+                {result.close} 곳입니다. <br></br>
+                동종업종이 늘고 있는 추세라고 할 수 있습니다.
+              </DetailCardScript>
+            ) : result.open < result.close ? (
+              <DetailCardScript>
+                {result.dongName}에 새로 개업한 {result.industryName} 수는{' '}
+                {result.open} 곳, <br></br> 폐업한 {result.industryName} 수는{' '}
+                {result.close} 곳입니다. <br></br>
+                동종업종 성장률이 하락하고 있는 추세라고 할 수 있습니다.
+              </DetailCardScript>
+            ) : (
+              <DetailCardScript>
+                {result.dongName}에 새로 개업한 {result.industryName} 수는{' '}
+                {result.open} 곳, <br></br> 폐업한 {result.industryName} 수는{' '}
+                {result.close} 곳입니다. <br></br>
+                동종업계 성장률은 정체되어 있다고 할 수 있습니다.
+              </DetailCardScript>
+            )}
           </DetailCards>
           <DetailCards>
             <DetailCardHeader>프랜차이즈 점포 수</DetailCardHeader>
@@ -252,7 +375,22 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               data={frData}
               style={{ width: '400px', height: '300px', margin: '20px' }}
               options={frcOptions}
+              grad={[
+                [[0, '#edf3f1']],
+                [
+                  [1, '#49D0A8'],
+                  [0.7, '#F9F254'],
+                ],
+              ]}
             ></ReportChart>
+            <DetailCardScript>
+              {result.dongName}의 {result.industryName} 프랜차이즈 점포 수는{' '}
+              {''}
+              {result.franchise}곳입니다.
+              <br></br> 프랜차이즈 점포가 많다면 <br></br>내 가게만의 특별함을
+              만들어보면 좋을 것 같아요.
+            </DetailCardScript>
+            <DetailCardScript></DetailCardScript>
           </DetailCards>
         </ReportDetails>
       </ProRepoDetail>
@@ -269,9 +407,6 @@ const Summary = styled.div`
   padding: 20px;
   display: flex;
   gap: 30px;
-  /* display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px; */
 `;
 
 const SummaryCard = styled.div`
@@ -338,8 +473,23 @@ const DetailCardScript = styled.p`
   margin: 2rem;
 `;
 
-const salesImage = styled.div`
-  background-image: url('assets\img\shopping-cart.png');
+const Highlight = styled.span`
+  color: red;
+  font-size: 22px;
+  font-weight: 600;
+`;
+
+const Notice = styled.div`
+  background-color: lightyellow;
+  border-radius: 20px;
+  /* width: 100%; */
+  height: 60px;
+  margin: 2rem 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: start;
+  padding: 0 30px;
 `;
 
 export default professionalResultPage;
