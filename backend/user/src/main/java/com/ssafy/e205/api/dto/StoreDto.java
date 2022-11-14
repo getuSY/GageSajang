@@ -17,13 +17,6 @@ public class StoreDto {
     private String email;
     private String dongName;
     private String industryCode;
-    private String industryName;
-    private double order;
-    private double total;
-    private double similar;
-    private double open;
-    private double close;
-    private double franchise;
     private double sales;
     private int clerk;
     private int area;
@@ -33,13 +26,6 @@ public class StoreDto {
         this.email = entity.getEmail();
         this.dongName = entity.getDongName();
         this.industryCode = entity.getIndustryCode();
-        this.industryName = entity.getIndustryName();
-        this.order = entity.getOrder();
-        this.total = entity.getTotal();
-        this.similar = entity.getSimilar();
-        this.open = entity.getOpen();
-        this.close = entity.getClose();
-        this.franchise = entity.getFranchise();
         this.sales = entity.getSales();
         this.clerk = entity.getClerk();
         this.area = entity.getArea();
@@ -50,17 +36,9 @@ public class StoreDto {
                 .email(dto.email)
                 .dongName(dto.dongName)
                 .industryCode(dto.industryCode)
-                .industryName(dto.industryName)
                 .area(dto.area)
                 .clerk(dto.clerk)
-                .close(dto.close)
-                .franchise(dto.franchise)
-                .open(dto.open)
-                .order(dto.order)
                 .sales(dto.sales)
-                .similar(dto.similar)
-                .total(dto.total)
-                .order(dto.order)
                 .build();
     }
 }
