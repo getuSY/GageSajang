@@ -20,11 +20,11 @@ const StatusTrend = ({ trendData }: StatusTrendProps) => {
   ];
 
   const trendContent = [
-    trendData.commercial,
-    trendData.sectors,
-    trendData.close,
-    trendData.salesDong,
-    trendData.salesCS,
+    trendData.data.commercial,
+    trendData.data.sectors,
+    trendData.data.close,
+    trendData.data.salesDong,
+    trendData.data.salesCS,
   ];
 
   useEffect(() => {
@@ -151,7 +151,6 @@ const Group = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    /* padding-left: 10px; */
     white-space: nowrap;
     overflow: hidden;
   }

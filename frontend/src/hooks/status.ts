@@ -14,6 +14,7 @@ import {
   getStatusHinGuClosureMap,
   getStatusHinGuSalesMap,
   getStatusTrend,
+  getStatusDetail,
 } from '../api/status';
 
 // 상권 Map API
@@ -100,14 +101,16 @@ export const useStatusHinGuMap = () => {
 };
 
 // 상권 현황 Top10 API
-export const useStatusTrend = () => {
-  const trendData = useQuery({
+export const useStatusTrend = () =>
+  useQuery({
     queryKey: ['status', 'trend'],
     queryFn: () => getStatusTrend(),
   });
-  const isTrendSuccess = useMemo(() => trendData.isSuccess, [trendData]);
-  const isTrendLoading = useMemo(() => trendData.isLoading, [trendData]);
-  const isTrendError = useMemo(() => trendData.isError, [trendData]);
 
-  return { trendData, isTrendSuccess, isTrendLoading, isTrendError };
+// 상권 현황 상세 API
+export const useStatusDetail = (params: string) => {
+  useQuery({
+    queryKey: ['status', 'detail', params],
+    queryFn: () => getStatusDetail(params),
+  });
 };
