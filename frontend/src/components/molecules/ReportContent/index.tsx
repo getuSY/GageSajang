@@ -9,6 +9,7 @@ interface ReportContentProps {
   propsRef?: any;
   title?: string;
   chartData?: any;
+  isVert?: boolean;
 }
 
 const ReportContent = ({
@@ -17,6 +18,7 @@ const ReportContent = ({
   propsRef,
   title,
   chartData,
+  isVert,
 }: ReportContentProps) => {
   return (
     <Wrapper style={style} ref={propsRef}>
@@ -26,6 +28,7 @@ const ReportContent = ({
           type={chartData.type}
           data={chartData.data}
           grad={chartData.grad}
+          isVert={isVert}
         />
       )}
       {children}

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import BaseSideBar from '../../molecules/BaseSideBar';
 import LabelSearchInput from '../../molecules/LabelSearchInput';
-import ButtonInputs from '../../molecules/ButtonInputs';
+import AnalysisMainButtons from '../../molecules/AnalysisMainButtons';
 import Button from '../../atoms/Button';
 import Label from '../../atoms/Label';
 import AnalysisSubButtons from '../../molecules/AnalysisSubButtons';
@@ -86,7 +86,7 @@ const AnalysisSideBar = ({
           searchResultRef={searchResultRef}
         />
         <Label>🍴 업종 선택</Label>
-        <ButtonInputs menuList={menuList} tab={mainCategory} />
+        <AnalysisMainButtons menuList={menuList} tab={mainCategory} />
         {mainCategory ? (
           <>
             <Label>🍴 상세 선택</Label>

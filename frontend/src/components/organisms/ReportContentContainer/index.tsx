@@ -102,7 +102,15 @@ const ReportContentContainer = ({
             <ReportComment>
               <span className="dongName">{dongName}</span>의{' '}
               <span className="jobName">{jobName}</span>은 작년에 비해 점포수가{' '}
-              <span className="emphasis">증가</span>하는 추세입니다.
+              <span className="emphasis">
+                {storeGenderData.data.datasets[0].data[0] <
+                  storeGenderData.data.datasets[0].data[1] && '증가'}
+                {storeGenderData.data.datasets[0].data[0] ==
+                  storeGenderData.data.datasets[0].data[1] && '유지'}
+                {storeGenderData.data.datasets[0].data[0] >
+                  storeGenderData.data.datasets[0].data[1] && '감소'}
+              </span>
+              하는 추세입니다.
             </ReportComment>
           </ReportContent>
           <ReportContent title="성별 매출" chartData={storeGenderData}>
@@ -175,6 +183,7 @@ const ReportContentContainer = ({
             title="해당 동 요일별 매출"
             style={{ flexGrow: 1 }}
             chartData={salesWeekData}
+            isVert={false}
           ></ReportContent>
         </div>
       </ReportCategory>

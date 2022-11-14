@@ -45,6 +45,16 @@ const genderGrad = [
   ],
 ];
 
+const weekGrad = [
+  [
+    [0, '#23CFFA'],
+    [0.25, '#A9B6F6'],
+    [0.5, '#C2A0EB'],
+    [0.75, '#D98CE1'],
+    [1, '#FC6DD1'],
+  ],
+];
+
 /* 업종 분석 */
 export const useStoreData = (amatuerResult: any) => {
   // 해당 동 점포 수 (2021.4분기, 2020.4분기)
@@ -147,7 +157,7 @@ export const useSalesData = (amatuerResult: any) => {
           {
             label: '총 매출(단위: 원)',
             data: amatuerResult.sales.total,
-            barThickness: 30,
+            borderColor: '#A82BEC',
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
@@ -158,7 +168,7 @@ export const useSalesData = (amatuerResult: any) => {
       grad: [
         [
           [0, '#A82BEC'],
-          [0.8, '#545BF9'],
+          // [0.8, '#545BF9'],
         ],
       ],
     }),
@@ -189,12 +199,7 @@ export const useSalesData = (amatuerResult: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
+      grad: weekGrad,
     }),
     [amatuerResult]
   );
@@ -210,6 +215,7 @@ export const useSalesData = (amatuerResult: any) => {
             label: '시간대별 매출',
             data: amatuerResult.sales.time,
             barThickness: 30,
+            borderColor: '#545BF9',
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
@@ -219,7 +225,7 @@ export const useSalesData = (amatuerResult: any) => {
       },
       grad: [
         [
-          [0, '#A82BEC'],
+          // [0, '#A82BEC'],
           [0.8, '#545BF9'],
         ],
       ],
@@ -298,9 +304,9 @@ export const useLivingData = (amatuerResult: any) => {
         labels: yearLabels,
         datasets: [
           {
-            label: '해당 업종 동 매출',
+            label: '총 유동인구 추이',
             data: amatuerResult.living.total,
-            barThickness: 30,
+            borderColor: '#A82BEC',
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
@@ -308,12 +314,7 @@ export const useLivingData = (amatuerResult: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
+      grad: [[[0, '#A82BEC']]],
     }),
     [amatuerResult]
   );
@@ -454,7 +455,7 @@ export const useStoreCntData = (amatuerResult: any) => {
             data: amatuerResult.open.open,
             datalabels: {
               // 데이터라벨 숨김
-              color: 'white',
+              color: 'transparent',
             },
           },
         ],
@@ -480,7 +481,7 @@ export const useStoreCntData = (amatuerResult: any) => {
             data: amatuerResult.open.rate,
             datalabels: {
               // 데이터라벨 숨김
-              color: 'white',
+              color: 'transparent',
             },
           },
         ],
@@ -508,7 +509,7 @@ export const useStoreCntData = (amatuerResult: any) => {
             borderColor: 'rgb(255, 99, 32)',
             // backgroundColor: 'rgb(255, 99, 32)',
             datalabels: {
-              color: 'white',
+              color: 'transparent',
             },
             yAxisId: 'y1',
           },
@@ -546,7 +547,7 @@ export const useStoreCntData = (amatuerResult: any) => {
             data: amatuerResult.close.close,
             datalabels: {
               // 데이터라벨 숨김
-              color: 'white',
+              color: 'transparent',
             },
           },
         ],
@@ -573,7 +574,7 @@ export const useStoreCntData = (amatuerResult: any) => {
             data: amatuerResult.close.rate,
             datalabels: {
               // 데이터라벨 숨김
-              color: 'white',
+              color: 'transparent',
             },
           },
         ],
