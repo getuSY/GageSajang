@@ -1,7 +1,7 @@
-import client from './client';
+import { client1 as client } from './client';
 import { ProfessionalResultParams } from '../models/professional';
 
 export const ProfessionalResult = async (params: ProfessionalResultParams) => {
-  const { data } = await client.post('asset/already', params);
+  const { data } = await client.post('simul/asset/already', params);
   return data;
 };

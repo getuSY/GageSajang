@@ -10,6 +10,7 @@ interface StatusSideBarProps {
   category: any;
   onClickLabelHandler: any;
   tab: any;
+  trendData: any;
 }
 
 const StatusSideBar = ({
@@ -19,6 +20,7 @@ const StatusSideBar = ({
   category,
   onClickLabelHandler,
   tab,
+  trendData,
 }: StatusSideBarProps) => {
   return (
     <BaseSideBar
@@ -28,7 +30,7 @@ const StatusSideBar = ({
       setIsOpen={setSideBarStatus}
     >
       <div>서울시 행정구 기준</div>
-      <StatusTrend />
+      <StatusTrend trendData={trendData} />
       <StatusButtons
         content={contentList}
         category={category!}

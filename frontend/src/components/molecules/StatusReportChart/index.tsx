@@ -9,6 +9,7 @@ interface StatusReportChartProps {
   options: any;
   style?: object;
   canvasStyle?: object;
+  grad?: any;
 }
 const StatusReportChart = ({
   type,
@@ -17,6 +18,7 @@ const StatusReportChart = ({
   options,
   style,
   canvasStyle,
+  grad,
 }: StatusReportChartProps) => {
   return (
     <Wrapper style={style}>
@@ -27,6 +29,7 @@ const StatusReportChart = ({
         options={options}
         style={{ width: '450px' }}
         canvasStyle={canvasStyle}
+        grad={grad}
       />
     </Wrapper>
   );

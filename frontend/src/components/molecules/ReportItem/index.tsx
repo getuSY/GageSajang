@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReportContent from '../../atoms/ReportContent';
+import ReportContent from '../ReportContent';
 
 const ReportItem = () => {
   return (

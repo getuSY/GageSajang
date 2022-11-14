@@ -33,7 +33,6 @@ const Wrapper = styled.div<WrapperProps>`
   padding: 8px 8px;
   border-radius: 5px;
   margin: 4px 0;
-  /* color: #3e4b5b; */
 
   cursor: ${({ select }) => (select ? '' : 'pointer')};
   font-size: 1.1rem;
@@ -41,13 +40,9 @@ const Wrapper = styled.div<WrapperProps>`
     color: #b66dff;
     font-weight: 700;
   }
-  /* background: ${({ select, theme }) =>
-    // select ? 'rgba(255, 255, 255, 0.3)' : 'transparent'};
-    select ? '#ede5f4' : 'transparent'}; */
-  color: ${({ select, theme }) =>
-    // select ? 'rgba(255, 255, 255, 0.3)' : 'transparent'};
-    select ? '#B66DFF' : ''};
-  font-weight: ${({ select, theme }) => (select ? '700' : '')};
+
+  color: ${({ select }) => (select ? '#B66DFF' : '')};
+  font-weight: ${({ select }) => (select ? '700' : '')};
   position: relative;
   &::before {
     content: '';

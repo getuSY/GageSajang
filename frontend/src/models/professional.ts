@@ -1,5 +1,5 @@
 export interface ProfessionalResultParams {
-  email: string;
+  email: string | null;
   sales: number;
   clerk: number;
   area: number;

@@ -15,7 +15,7 @@ const ProfessionalPage = lazy(
   () => import('./components/pages/professional/ProfessionalPage')
 );
 const ProfessionalStorePage = lazy(
-  () => import('./components/pages/professional/ProfessionalInfoPage')
+  () => import('./components/pages/professional/ProfessionalStorePage')
 );
 const ProfessionalResultPage = lazy(
   () => import('./components/pages/professional/ProfessionalResultPage')
@@ -71,6 +71,7 @@ function App() {
             <Route path="" element={<ProfessionalPage />} />
             <Route path="store" element={<ProfessionalStorePage />} />
             <Route path="result" element={<ProfessionalResultPage />} />
+            <Route path="simul" element={<SimulationPage />} />
           </Route>
           {/* 아마 사장 */}
           <Route

@@ -36,7 +36,8 @@ interface WrapperProps {
 
 const Wrapper = styled.div<WrapperProps>`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
-  background: #ffffff;
+  /* background: #f4f4f4; */
+  background-color: white;
   flex-direction: column;
   width: 1000px;
   height: calc(100% - 100px);

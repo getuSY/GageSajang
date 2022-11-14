@@ -37,8 +37,7 @@ const Wrapper = styled.div`
 const ReportSummary = styled.div`
   background-color: #f4f4f4;
   padding: 20px 0px 20px 30px;
-  border-left: ${({ theme }) => `3px solid ${theme.darkColor}`};
-  /* width: 700px; */
+  border-left: ${({ theme }) => `3px solid ${theme.mainColor}`};
 `;
 
 export default StatusReportTitle;

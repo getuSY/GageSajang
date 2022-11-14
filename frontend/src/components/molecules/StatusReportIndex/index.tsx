@@ -37,7 +37,7 @@ const StatusReportIndex = ({
             <ReportIndexItem
               key={`status-report-index-item-${i}`}
               onClick={e.onClick}
-              active={tab === i + 1}
+              active={tab === i}
               style={{ padding: '10px', marginRight: '0.5rem' }}
               icon={icon[i]}
             >
@@ -66,7 +66,7 @@ const Wrapper = styled.div`
     width: 100%;
 
     & .region-label {
-      color: ${({ theme }) => theme.darkColor};
+      color: ${({ theme }) => theme.mainColor};
       font-weight: 700;
       text-justify: center;
       width: 5rem;

@@ -29,7 +29,7 @@ const Layout = () => {
           <Suspense fallback={<div />}>
             <Outlet />
           </Suspense>
-          <HelpButton />
+          {/* <HelpButton /> */}
         </Wrapper>
       </AnimatePresence>
     </>

@@ -40,6 +40,9 @@ const LoginBox = () => {
     if (isError) {
       alert('로그인 실패!');
     }
+    if (isSuccess) {
+      sessionStorage.setItem('email', loginInputs.email);
+    }
   }, [isSuccess, isError]);
   useEffect(() => {
     if (userInfo) navigate('/');

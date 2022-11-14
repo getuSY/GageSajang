@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface ButtonInputsProps {
+interface AnalysisMainButtonsProps {
   style?: object;
   menuList: Array<any>;
   tab?: number;
 }
 
-const ButtonInputs = ({ style, menuList, tab }: ButtonInputsProps) => {
+const AnalysisMainButtons = ({
+  style,
+  menuList,
+  tab,
+}: AnalysisMainButtonsProps) => {
   return (
     <Wrapper style={style}>
       <div className="menu-container">
@@ -15,7 +19,7 @@ const ButtonInputs = ({ style, menuList, tab }: ButtonInputsProps) => {
           <BaseSideBarButton
             key={idx}
             onClick={menu.onClick}
-            active={tab === idx}
+            active={tab === idx + 1}
           >
             {menu.name}
           </BaseSideBarButton>
@@ -63,4 +67,4 @@ const BaseSideBarButton = styled.button<BaseSideBarButtonProps>`
   }
 `;
 
-export default ButtonInputs;
+export default AnalysisMainButtons;
