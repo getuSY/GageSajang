@@ -14,7 +14,7 @@ public class AnlzServiceImpl implements AnlzService{
     StoreAnlzRepository repository;
 
     @Override
-    //@Cacheable(value = "anlz",key="#dongCode+#csCode")
+    @Cacheable(value = "anlz",key="#dongCode+#csCode")
     public AnlzDto findByDongCodeAndCsCode(String dongCode, String csCode) {
         AnlzDto result;
         StoreAnlz storeAnlz = repository.findByDongCodeAndCsCode(dongCode, csCode);
