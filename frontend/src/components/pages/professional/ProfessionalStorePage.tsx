@@ -9,6 +9,8 @@ import SimulationPage from '../simulation/SimulationPage';
 import { useProSalesSimulation } from '../../../hooks/simulation';
 import Spinner from '../../atoms/Spinner';
 import { usePostCode } from '../../../hooks/common';
+import { cs1, cs2, cs3 } from '../../../data/cs';
+import Label from '../../atoms/Label';
 
 const ProfessionalInfoPage = () => {
   const userEmail = sessionStorage.getItem('email');
@@ -41,7 +43,9 @@ const ProfessionalInfoPage = () => {
   //     [e.target.storeName]: e.target.value,
   //   });
   // };
-
+  const business = [...cs1, ...cs2, ...cs3];
+  console.log(business);
+  const csList = business.map((name, index) => <option value={name}></option>);
   return (
     <Wrapper>
       <ProSide>
@@ -68,30 +72,33 @@ const ProfessionalInfoPage = () => {
             />
           </ProListItem>
           <ProListItem>
-            <LabelInput
-              label="업종"
-              placeholder="가게 업종을 입력해주세요."
-              // onChange={changeBusiness}
-            />
+            <div style={{ position: 'relative', width: '100%' }}>
+              <Label>업종</Label>
+              <CsInput
+                placeholder="가게 업종을 입력해주세요."
+                list="business"
+              />
+              <datalist id="business">{csList}</datalist>
+            </div>
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="직원 수"
-              placeholder="직원 수를 입력해주세요."
+              placeholder="직원 수를 입력해주세요. (숫자만)"
               // onChange={changeEmployee}
             />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="가게 면적"
-              placeholder="가게 면적을 입력해주세요."
+              placeholder="가게 면적을 입력해주세요. (숫자만)"
               // onChange={changeStoreArea}
             />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="평균 월 매출"
-              placeholder="평균 월 매출을 입력해주세요."
+              placeholder="평균 월 매출을 입력해주세요. (숫자만)"
               // onChange={changeSales}
             />
           </ProListItem>
@@ -101,6 +108,7 @@ const ProfessionalInfoPage = () => {
           style={{
             width: '260px',
             alignSelf: 'center',
+            margin: '10rem 0 0 0',
           }}
           onClick={onClickHandler}
         >
@@ -150,11 +158,26 @@ const ProReport = styled.div`
   height: 100%;
   overflow-y: scroll;
   left: 450px;
+  /* background: #edf3f0; */
   background: white;
   transition: 0.5s;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const CsInput = styled.input`
+  max-width: 320px;
+  width: 100%;
+  height: 45px;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 0 20px;
+  background: #eaeaea;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  margin-top: 1.3rem;
 `;
 
 export default ProfessionalInfoPage;

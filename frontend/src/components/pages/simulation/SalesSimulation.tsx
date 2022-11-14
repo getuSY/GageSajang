@@ -36,6 +36,8 @@ const SalesSimulation = ({ values }: SalesSimulationProps) => {
       industryName: '',
     },
   ]);
+  const [yearLabel, setYearLabel] = useState(['2013년 1분기']);
+  const [salesValues, setSalesValues] = useState([0]);
   const showGraph = () => {
     setOpen(true);
   };
@@ -46,29 +48,31 @@ const SalesSimulation = ({ values }: SalesSimulationProps) => {
     let perPos = pos / 50;
     let newData: Array<SimulInfo> = values.slice(0, (Number(perPos) + 1) * 4);
     setData(newData);
-    const yearLabel: Array<string> = data.map((a) => {
+    const quarters: Array<string> = data.map((a) => {
       const yr = a.year;
       const quart = a.quarter;
       return yr + '년 ' + quart + '분기';
     });
-    const salesValues = data.map((a) => a.value);
-    console.log(yearLabel);
-    console.log(salesValues);
-  }, []);
-
-  useEffect(() => {
-    let perPos = pos / 50;
-    let newData: Array<SimulInfo> = values.slice(0, (Number(perPos) + 1) * 4);
-    setData(newData);
-    const yearLabel: Array<string> = data.map((a) => {
-      const yr = a.year;
-      const quart = a.quarter;
-      return yr + '년 ' + quart + '분기';
-    });
-    const salesValues = data.map((a) => a.value);
-    console.log(yearLabel);
-    console.log(salesValues);
+    const sales: Array<number> = data.map((a) => a.value);
+    setYearLabel(quarters);
+    setSalesValues(sales);
+    console.log('simulpage', yearLabel);
+    console.log('simulpage', salesValues);
   }, [pos]);
+  console.log('바깥 값 체크', yearLabel, salesValues);
+
+  // useEffect(() => {
+  //   let perPos = pos / 50;
+  //   let newData: Array<SimulInfo> = values.slice(0, (Number(perPos) + 1) * 4);
+  //   setData(newData);
+  //   const yearLabel: Array<string> = data.map((a) => {
+  //     const val = a.value;
+  //     // return ;
+  //   });
+  //   const salesValues = data.map((a) => a.value);
+  //   console.log(yearLabel);
+  //   console.log(salesValues);
+  // }, [pos]);
 
   // api통해 매출 예측값 받아오기
   // data 설정한 후 props로 차트들에 data로 내려주기
@@ -106,7 +110,11 @@ const SalesSimulation = ({ values }: SalesSimulationProps) => {
           <SlideBar setPos={setPos} />
           <DynamicTopChartProps posi={pos} />
           <DynamicChart posi={pos} />
-          <DynamicRateChart posi={pos} />
+          <DynamicRateChart
+            posi={pos}
+            values={salesValues}
+            labels={yearLabel}
+          />
 
           {/* <ReportChart posi={pos} /> */}
           {/* <ReportChart type="line" data={graphData} style={graphStyle} /> */}
@@ -131,6 +139,8 @@ const SalesSimulation = ({ values }: SalesSimulationProps) => {
 };
 
 const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -155,10 +165,11 @@ const TitleMsg = styled.div`
 `;
 
 const roundStyle = {
+  position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   alignitems: 'center',
-  width: '1200px',
+  width: '100%',
   // height: '800px',
 };
 
