@@ -124,21 +124,21 @@ const ProfessionalInfoPage = () => {
           <ProListItem>
             <LabelInput
               label="직원 수"
-              placeholder="직원 수를 입력해주세요."
+              placeholder="직원 수를 입력해주세요. (숫자만)"
               // onChange={changeEmployee}
             />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="가게 면적"
-              placeholder="가게 면적을 입력해주세요."
+              placeholder="가게 면적을 입력해주세요. (숫자만)"
               // onChange={changeStoreArea}
             />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="평균 월 매출"
-              placeholder="평균 월 매출을 입력해주세요."
+              placeholder="평균 월 매출을 입력해주세요. (숫자만)"
               // onChange={changeSales}
             />
           </ProListItem>
@@ -148,6 +148,7 @@ const ProfessionalInfoPage = () => {
           style={{
             width: '260px',
             alignSelf: 'center',
+            margin: '10rem 0 0 0',
           }}
           onClick={onClickHandler}
         >
@@ -197,11 +198,26 @@ const ProReport = styled.div`
   height: 100%;
   overflow-y: scroll;
   left: 450px;
+  /* background: #edf3f0; */
   background: white;
   transition: 0.5s;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const CsInput = styled.input`
+  max-width: 320px;
+  width: 100%;
+  height: 45px;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 0 20px;
+  background: #eaeaea;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  margin-top: 1.3rem;
 `;
 
 export default ProfessionalInfoPage;
