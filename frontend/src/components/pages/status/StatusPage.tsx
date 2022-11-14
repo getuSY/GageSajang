@@ -58,8 +58,8 @@ const StatusPage = () => {
 
   const trendData = useStatusTrend();
 
-  // const detailData = useStatusDetail(region);
-  // console.log('detailData', region, detailData);
+  const detailData = useStatusDetail(region);
+  console.log('detailData', region, detailData);
 
   return (
     <Transitions>
