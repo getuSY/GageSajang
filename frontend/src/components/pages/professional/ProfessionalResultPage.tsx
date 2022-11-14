@@ -214,11 +214,6 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
           <DetailCards>
             <DetailCardHeader>평균 매출 건수</DetailCardHeader>
             <img src="/assets/img/shopping-cart.png" alt="" />
-            {/* <img
-              src="public\assets\img\shopping-cart.png"
-              alt="shop_order"
-              // width="300px"
-            /> */}
           </DetailCards>
           <DetailCards>
             <DetailCardHeader>평균 직원 수</DetailCardHeader>
@@ -266,42 +261,29 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
 };
 
 const Wrapper = styled.div`
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; */
+  width: 100%;
 `;
 
 const Summary = styled.div`
-  position: relative;
-  width: 100%;
+  /* width: 100%; */
   padding: 20px;
-  display: grid;
+  display: flex;
+  gap: 30px;
+  /* display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
-
-  & .div:hover {
-    background: green;
-  }
-
-  /* & .div:hover .cardTitle,
-  div:hover .cardBody {
-    color: white;
-  } */
+  grid-gap: 30px; */
 `;
 
 const SummaryCard = styled.div`
-  position: relative;
   background: white;
   padding: 30px;
-  min-height: 150px;
+  height: 150px;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* gap: 1rem; */
-  /* cursor: pointer; */
+  width: 25%;
 
   & div .cardTitle {
     position: relative;
@@ -309,43 +291,37 @@ const SummaryCard = styled.div`
     font-weight: 600;
     color: green;
     margin-bottom: 20px;
-    /* font-style: bold; */
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   }
 
   & div .cardBody {
     color: black;
-    font-size: 30px;
+    font-size: 22px;
     font-weight: 300;
   }
 `;
 
 const ProRepoDetail = styled.div`
-  position: relative;
   width: 100%;
   text-align: center;
 `;
 
 const ReportDetails = styled.div`
-  position: relative;
-  width: 100%;
+  /* width: 100%; */
   padding: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 2fr);
   grid-gap: 30px;
   grid-row-gap: 30px;
-  /* margin-top: 10px; */
 `;
 
 const DetailCards = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   min-height: 300px;
   background: white;
-  padding: 20px;
+  /* padding: 20px; */
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 `;

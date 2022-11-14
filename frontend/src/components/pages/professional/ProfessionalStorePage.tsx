@@ -1,144 +1,160 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Transitions from '../../atoms/Transition';
-import RoundBox from '../../atoms/RoundBox/index';
-import Button from '../../atoms/Button/index';
-import { useNavigate } from 'react-router-dom';
-import DoubledBox from '../../molecules/DoubledBox/index';
-import Input from '../../atoms/Input/index';
+import LabelInput from '../../molecules/LabelInput';
+import ProfessionalResultPage from './ProfessionalResultPage';
+import { useProfessionalResult } from '../../../hooks/professional';
+import { ProfessionalResultParams } from '../../../models/professional';
+import Button from '../../atoms/Button';
+import SimulationPage from '../simulation/SimulationPage';
+import { useProSalesSimulation } from '../../../hooks/simulation';
+import Spinner from '../../atoms/Spinner';
+import { usePostCode } from '../../../hooks/common';
 
-interface ProfessionalStorePageProps {}
+const ProfessionalInfoPage = () => {
+  const userEmail = sessionStorage.getItem('email');
+  const [storeInfo, setStoreInfo] = useState<ProfessionalResultParams>({
+    email: userEmail,
+    sales: 0,
+    clerk: 0, //직원수
+    area: 0, //면적
+    dongName: '개포2동', //법정동
+    industryName: '한식음식점',
+  });
+  const values = useProSalesSimulation();
+  const mutation = useProfessionalResult();
+  const { data } = mutation;
+  // const store = data.store;
+  // const sales = data.sales;
+  // const status = data.status;
+  console.log(data);
 
-const ProfessionalStorePage = ({}: ProfessionalStorePageProps) => {
-  const navigate = useNavigate();
-  const toProRes = () => {
-    navigate('/professional/result');
+  const onClickHandler = () => {
+    mutation.mutate(storeInfo);
   };
-  // const year = new Date().getFullYear();
-  // const years = Array.from(new Array(20), (val, index) => index + year);
+  const [guDong, setGuDong] = useState('');
+  const postCode = usePostCode(setGuDong);
+  console.log(guDong);
+
+  // const changeStoreInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setStoreInfo({
+  //     ...storeInfo,
+  //     [e.target.storeName]: e.target.value,
+  //   });
+  // };
+
   return (
-    <Transitions>
-      <Wrapper>
-        {/* <span>이미 사장 가게 정보 입력 페이지입니다.</span> */}
-        <BoxRow>
-          {/* <RoundBox style={leftBoxStyle}>
-            <InnerBox>
-              <UnsetLabelInput
-                label="가게 이름"
-                type="text"
-                placeholder="가게 이름을 입력해주세요."
-                style={{ width: '300px' }}
-              ></UnsetLabelInput>
-              <UnsetLabelInput
-                label="가게 개업 날짜"
-                type="date"
-                placeholder="가게 개업일을 입력해주세요."
-                style={{ width: '300px' }}
-              ></UnsetLabelInput>
-            </InnerBox>
-          </RoundBox> */}
-          <InnerBox>
-            <Input placeholder="가게 이름을 입력해주세요"></Input>
-            <SelectBox>
-              <option value="none">구 선택</option>
-              <option value="관악구">관악구</option>
-              <option value="동작구">동작구</option>
-              <option value="성북구">성북구 </option>
-            </SelectBox>
-          </InnerBox>
-          <RoundBox style={rightBoxStyle}>
-            <InfoBox>
-              <InfoList></InfoList>
-              <DoubledBox
-                title="가게 정보 입력"
-                style={{ 'background-color': 'green' }}
-              />
-            </InfoBox>
-          </RoundBox>
-        </BoxRow>
-        <Button type="blur" onClick={toProRes}>
+    <Wrapper>
+      <ProSide>
+        <ProList>
+          <ProListItem>
+            <div
+              style={{
+                fontSize: '40px',
+                color: 'white',
+                fontWeight: '500',
+                margin: '10px 0 30px 0',
+              }}
+            >
+              🏪 내 가게 정보
+            </div>
+          </ProListItem>
+          <ProListItem>
+            <LabelInput
+              label="가게 주소"
+              placeholder="행정동을 입력해주세요."
+              inputValue={guDong}
+              onClick={postCode}
+              // onChange={changeDongName}
+            />
+          </ProListItem>
+          <ProListItem>
+            <LabelInput
+              label="업종"
+              placeholder="가게 업종을 입력해주세요."
+              // onChange={changeBusiness}
+            />
+          </ProListItem>
+          <ProListItem>
+            <LabelInput
+              label="직원 수"
+              placeholder="직원 수를 입력해주세요."
+              // onChange={changeEmployee}
+            />
+          </ProListItem>
+          <ProListItem>
+            <LabelInput
+              label="가게 면적"
+              placeholder="가게 면적을 입력해주세요."
+              // onChange={changeStoreArea}
+            />
+          </ProListItem>
+          <ProListItem>
+            <LabelInput
+              label="평균 월 매출"
+              placeholder="평균 월 매출을 입력해주세요."
+              // onChange={changeSales}
+            />
+          </ProListItem>
+        </ProList>
+        <Button
+          type="border"
+          style={{
+            width: '260px',
+            alignSelf: 'center',
+          }}
+          onClick={onClickHandler}
+        >
           내 가게 분석하기
         </Button>
-      </Wrapper>
-    </Transitions>
+      </ProSide>
+      <ProReport>
+        {/* <h1>ProReport</h1> */}
+        <ProfessionalResultPage />
+        {values ? <Spinner /> : <SimulationPage></SimulationPage>}
+      </ProReport>
+    </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
+  // min-height: 100vh;
+  /* overflow-x: hidden; */
+  /* position: relative; */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* background-color: #f6fff7; */
-  background-color: #e4fae6;
-  background-size: cover;
   width: 100%;
-  height: auto !important;
-  min-height: 100%;
-  & body {
-    background-color: #e4fae6;
-  }
+  height: calc(100vh - 65px);
 `;
 
-const BoxRow = styled.div`
+const ProSide = styled.div`
+  /* position: fixed; */
+  width: 400px;
+  height: 100%;
+  background: ${({ theme }) => theme.lightColor};
+  overflow: hidden;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 5rem;
-  align-items: center;
-  margin: 5rem auto;
+  flex-direction: column;
 `;
 
-const leftBoxStyle = {
-  width: '400px',
-  height: '600px',
-};
+const ProList = styled.div`
+  padding: 20px;
+`;
 
-const rightBoxStyle = {
-  display: 'flex',
-  'flex-direction': 'row',
-  'justify-content': 'start',
-  'align-items': 'center',
-  width: '1000px',
-  height: '600px',
-};
+const ProListItem = styled.div`
+  width: 100%;
+  color: white;
+  margin-bottom: 10px;
+`;
 
-const InnerBox = styled.div`
+const ProReport = styled.div`
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: scroll;
+  left: 450px;
+  background: white;
+  transition: 0.5s;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  padding: 3rem;
-  gap: 2.5rem;
-  margin: 1rem;
 `;
 
-const InfoList = styled.ul`
-  margin: 1rem auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const InfoListItem = styled.li`
-  font-size: 28px;
-  font-weight: bold;
-`;
-
-const InfoBox = styled.div`
-  width: 200px;
-  height: 500px;
-  border: 2px solid;
-`;
-
-const SelectBox = styled.select`
-  height: 60px;
-  width: 200px;
-  background-color: ${({ theme }) => theme.subColor};
-  border: none;
-  border-radius: 20px;
-  padding: 1rem;
-  box-shadow: 0px 0px 20px 5px #ebebeb;
-`;
-
-export default ProfessionalStorePage;
+export default ProfessionalInfoPage;

@@ -8,6 +8,7 @@ interface InputProps {
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onClick?: any;
+  list?: string;
 }
 
 const Input = ({
@@ -17,6 +18,7 @@ const Input = ({
   onClick,
   inputValue,
   clearValue,
+  list,
 }: InputProps) => {
   return (
     <>
@@ -30,6 +32,7 @@ const Input = ({
               onChange={onChange}
               onClick={onClick}
               readOnly={onClick !== undefined}
+              list={list}
             />
             <div className="clear-btn" onClick={clearValue}>
               x
