@@ -56,6 +56,7 @@ const BaseSideBarButton = styled.button<BaseSideBarButtonProps>`
   border: ${({ active, theme }) =>
     active ? `3px solid ${theme.darkColor}` : '1px solid darkgray'};
   color: ${({ active, theme }) => (active ? theme.darkColor : '#000')};
+  font-weight: ${({ active }) => (active ? '700' : '')};
   font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
   background: transparent;

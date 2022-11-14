@@ -11,7 +11,7 @@ export const useAmatuerResult = (params: AmatuerResultParams) =>
 
 // 이미사장 데이터
 
-const timeLabels = [
+export const timeLabels = [
   '0~6시',
   '6~11시',
   '11~14시',
@@ -19,7 +19,7 @@ const timeLabels = [
   '17~21시',
   '21~24시',
 ];
-const weekLabels = ['월', '화', '수', '목', '금', '토', '일'];
+export const weekLabels = ['월', '화', '수', '목', '금', '토', '일'];
 const genderLabels = ['남', '여'];
 const ageLabels = ['10대', '20대', '30대', '40대', '50대', '60대'];
 const yearLabels = [2017, 2018, 2019, 2020, 2021];
@@ -55,6 +55,13 @@ const weekGrad = [
   ],
 ];
 
+const timeGrad = [
+  [
+    [0, '#B29AF860'],
+    [1, '#B29AF8d9'],
+  ],
+];
+
 /* 업종 분석 */
 export const useStoreData = (amatuerResult: any) => {
   // 해당 동 점포 수 (2021.4분기, 2020.4분기)
@@ -72,6 +79,7 @@ export const useStoreData = (amatuerResult: any) => {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            // responsive: true,
           },
         ],
       },
@@ -214,26 +222,18 @@ export const useSalesData = (amatuerResult: any) => {
           {
             label: '시간대별 매출',
             data: amatuerResult.sales.time,
-            borderColor: '#545BF9',
-            borderWidth: 1,
-            // fill: true,
-            // borderColor: '#545BF9',
-            // backgroundColor: 'rgba(255, 0, 0, 0.1)',
+            borderColor: '#B29AF8',
+            backgroundColor: '#B29AF8',
+            borderWidth: 2,
             fill: true,
             datalabels: {
-              // 데이터라벨 숨김
               color: 'transparent',
             },
             tension: 0.5,
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BECa0'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: timeGrad,
     }),
     [amatuerResult]
   );
@@ -356,27 +356,25 @@ export const useLivingData = (amatuerResult: any) => {
   // 동 기준 시간대별 유동인구
   const livingTimeData = useMemo(
     () => ({
-      type: 'bar',
+      type: 'line',
       data: {
         labels: timeLabels,
         datasets: [
           {
             label: '시간대별 매출',
             data: amatuerResult.living.time,
-            barThickness: 30,
+            borderColor: '#B29AF8',
+            backgroundColor: '#B29AF8',
+            borderWidth: 2,
+            fill: true,
             datalabels: {
-              // 데이터라벨 숨김
               color: 'transparent',
             },
+            tension: 0.5,
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#545BF9'],
-        ],
-      ],
+      grad: timeGrad,
     }),
     [amatuerResult]
   );
@@ -451,7 +449,7 @@ export const useStoreCntData = (amatuerResult: any) => {
         labels: storeCntLabels,
         datasets: [
           {
-            label: 'storeOpenData',
+            label: '개업 현황',
             data: amatuerResult.open.open,
             datalabels: {
               // 데이터라벨 숨김
@@ -462,10 +460,15 @@ export const useStoreCntData = (amatuerResult: any) => {
       },
       grad: [
         [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
+          [0, '#B6ACF1'],
+          [1, '#27CFFB'],
         ],
       ],
+      options: {
+        legend: {
+          display: false,
+        },
+      },
     }),
     [amatuerResult]
   );
@@ -477,61 +480,17 @@ export const useStoreCntData = (amatuerResult: any) => {
         labels: storeCntLabels,
         datasets: [
           {
-            label: 'storeOpenData',
+            label: '개업률(단위: %)',
             data: amatuerResult.open.rate,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            backgroundColor: '#27CFFB',
+            borderColor: '#27CFFB',
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-      ],
-    }),
-    [amatuerResult]
-  );
-
-  const storeCntOpenMultiData = useMemo(
-    () => ({
-      data: {
-        labels: storeCntLabels,
-        datasets: [
-          {
-            type: 'bar' as const,
-
-            label: 'storeOpenData',
-            data: amatuerResult.open.open,
-            borderColor: 'rgb(255, 99, 32)',
-            // backgroundColor: 'rgb(255, 99, 32)',
-            datalabels: {
-              color: 'transparent',
-            },
-            yAxisId: 'y1',
-          },
-          {
-            type: 'line' as const,
-            yAxisId: 'storeOpenRate',
-            label: 'storeOpenRate',
-            data: amatuerResult.open.rate,
-            borderColor: 'rgb(255, 99, 32)',
-            datalabels: {
-              color: 'white',
-            },
-            yAxisID: 'y2',
-          },
-        ],
-      },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-      ],
     }),
     [amatuerResult]
   );
@@ -543,7 +502,7 @@ export const useStoreCntData = (amatuerResult: any) => {
         labels: storeCntLabels,
         datasets: [
           {
-            label: 'storeOpenData',
+            label: '폐업 현황',
             data: amatuerResult.close.close,
             datalabels: {
               // 데이터라벨 숨김
@@ -554,8 +513,8 @@ export const useStoreCntData = (amatuerResult: any) => {
       },
       grad: [
         [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
+          [0, '#ECA6DD'],
+          [1, '#FE5D84'],
         ],
       ],
     }),
@@ -569,22 +528,18 @@ export const useStoreCntData = (amatuerResult: any) => {
         labels: storeCntLabels,
         datasets: [
           {
-            label: 'storeOpenData',
+            label: '폐업률(단위: %)',
             barThickness: 70,
             data: amatuerResult.close.rate,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            backgroundColor: '#FE5D84',
+            borderColor: '#FE5D84',
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
-        ],
-      ],
     }),
     [amatuerResult]
   );
@@ -594,7 +549,6 @@ export const useStoreCntData = (amatuerResult: any) => {
     storeCntCloseData,
     storeCntOpenRateData,
     storeCntCloseRateData,
-    storeCntOpenMultiData,
   };
 };
 
