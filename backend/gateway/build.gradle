@@ -29,6 +29,8 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	//swagger openapi
+	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.12'
 }
 dependencyManagement {
 	imports {

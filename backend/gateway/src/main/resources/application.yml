@@ -1,16 +1,34 @@
 server:
   port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "gateway"
+  endpoint:
+    gateway:
+      enabled: true
+
 spring:
   application:
     name: apigateway-service
   cloud:
     gateway:
       routes:
-        - id: backend-anlz
+        - id: openapi
+          uri: lb://${spring.application.name}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+        - id: backend/anlz-service
           uri: lb://BACKEND-ANLZ
           predicates:
-            - Path=/anlz/**
+            - Path=/backend/anlz/**, /anlz/**
           filters:
+            - RewritePath=/backend/anlz/(?<path>.*), /$\{path}
             - CustomFilter
             - name: LoggingFilter
               args:
