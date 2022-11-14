@@ -11,6 +11,8 @@ interface BarChartProps {
 
 interface DynamicRateChartProps extends BarChartProps {
   posi: number;
+  values?: Array<number>;
+  labels?: Array<string>;
 }
 
 const given = [
@@ -27,14 +29,23 @@ const given = [
   { x: 2023, y: 1789 },
 ];
 
-type Position = { x: number; y: number };
+type Position = { x: string; y: number };
 
-const DynamicRateChart = ({ posi }: DynamicRateChartProps) => {
-  const [realData, setRealData] = useState([{ x: 2013, y: 0 }]);
+const DynamicRateChart = ({ posi, values, labels }: DynamicRateChartProps) => {
+  // const [realData, setRealData] = useState([{ x: '2013년 1분기', y: 0 }]);
+  const [realData, setRealData] = useState([0]);
+  const [realLabel, setRealLabel] = useState(['2013년 1분기']);
   const trackPosi = () => {
     const newPos = posi / 50;
-    const newData: Array<Position> = given.slice(0, Number(newPos) + 1);
-    setRealData(newData);
+    // const newData: Array<Position> = values.slice(0, (Number(newPos) + 1) * 4);
+    // const newData: Array<number> = values?.slice(0, (Number(newPos) + 1) * 4);
+    // const newLabels: Array<string> = labels?.slice(0, (Number(newPos) + 1) * 4);
+    // setRealLabel(labels);
+    // setRealData(values);
+    // const newData: Position = labels.reduce((acc, curr, idx) => {
+    //   acc[curr] = values[idx];
+    //   return acc;
+    // });
     console.log(realData);
   };
   const years = [
@@ -42,11 +53,11 @@ const DynamicRateChart = ({ posi }: DynamicRateChartProps) => {
   ];
 
   const data = {
-    // labels: yearLabel,
+    labels: labels,
     datasets: [
       {
         label: '연매출액',
-        data: realData,
+        data: values,
         backgroundColor: '#eeeeee',
         borderColor: 'black',
         borderWidth: 1,
@@ -75,9 +86,9 @@ const DynamicRateChart = ({ posi }: DynamicRateChartProps) => {
     },
     scales: {
       x: {
-        type: 'linear',
+        // type: 'linear',
         axis: 'x',
-        min: 2013,
+        // min: 2013,
         // max: realData[realData.length - 1].y,
         title: {
           display: 'true',
@@ -99,8 +110,8 @@ const DynamicRateChart = ({ posi }: DynamicRateChartProps) => {
 
   useEffect(() => {
     trackPosi();
-    console.log('매출 증감 비율 확인', realData);
-  }, [posi]);
+    console.log('매출 증감 비율 확인', values, labels);
+  }, [values]);
   return (
     <Wrapper>
       {/* <Bar data={data} /> */}
