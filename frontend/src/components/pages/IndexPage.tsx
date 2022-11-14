@@ -15,13 +15,6 @@ const status: IndexContent = {
   buttonContent: '상권 현황 보러 가기',
   buttonColor: blueTheme.gradColor,
 };
-// const analysis: IndexContent = {
-//   title: '상권 분석',
-//   description: '구체적인 상권 분석 리포트',
-//   imgSrc: 'assets/img/index_analysis.png',
-//   buttonContent: '분석하러 가기',
-//   buttonColor: blueTheme.gradColor,
-// };
 
 const professional: IndexContent = {
   title: '이미 사장',
@@ -45,22 +38,12 @@ const IndexPage = () => {
       <Wrapper>
         <IndexSearchBar />
         <IndexItem content={status} onClick={() => navigate('/status')} />
-        {/* <IndexItem
-          content={analysis}
-          onClick={() => navigate('/amatuer/analysis')}
-          right
-        /> */}
-        {/* <div style={{ height: '2000px' }}>asdas</div> */}
         <IndexItem
           content={professional}
           onClick={() => navigate('/professional')}
           right
         />
-        <IndexItem
-          content={amatuer}
-          // right
-          onClick={() => navigate('/amatuer')}
-        />
+        <IndexItem content={amatuer} onClick={() => navigate('/amatuer')} />
         <Footer />
       </Wrapper>
     </Transitions>

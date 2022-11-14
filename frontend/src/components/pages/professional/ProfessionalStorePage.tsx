@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import LabelInput from '../../molecules/LabelInput';
 import ProfessionalResultPage from './ProfessionalResultPage';
@@ -10,7 +10,7 @@ import { useProSalesSimulation } from '../../../hooks/simulation';
 import Spinner from '../../atoms/Spinner';
 import { usePostCode } from '../../../hooks/common';
 import { cs1, cs2, cs3 } from '../../../data/cs';
-import Label from '../../atoms/Label';
+import JobSearchInput from '../../molecules/JobSearchInput';
 
 const ProfessionalInfoPage = () => {
   const userEmail = sessionStorage.getItem('email');
@@ -28,14 +28,12 @@ const ProfessionalInfoPage = () => {
   // const store = data.store;
   // const sales = data.sales;
   // const status = data.status;
-  console.log(data);
 
   const onClickHandler = () => {
     mutation.mutate(storeInfo);
   };
   const [guDong, setGuDong] = useState('');
   const postCode = usePostCode(setGuDong);
-  console.log(guDong);
 
   // const changeStoreInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setStoreInfo({
@@ -43,11 +41,45 @@ const ProfessionalInfoPage = () => {
   //     [e.target.storeName]: e.target.value,
   //   });
   // };
-  const business = [...cs1, ...cs2, ...cs3];
-  console.log(business);
-  const csList = business.map((name, index) => <option value={name}></option>);
+
+  // 업종 검색창
+  const jobList = [...cs1, ...cs2, ...cs3];
+  const [keyword, setKeyword] = useState(''); // 검색 input
+  const [isSearchResultOpen, setIsSearchResultOpen] = useState<boolean>(false);
+  const [searchResult, setSearchResult] = useState<string[]>([]);
+  const searchResultRef = useRef<any>();
+  // API 요청에 보낼 데이터
+  const [selectedSearch, setSelectedSearch] =
+    useState<string | undefined>(undefined); // 검색 결과 => 직업 이름
+
+  useEffect(() => {
+    if (keyword) {
+      const tmp = jobList.filter((e: any, i) => e.includes(keyword));
+      setSearchResult(tmp);
+      if (tmp.length > 0) {
+        setIsSearchResultOpen(true);
+      }
+    }
+  }, [keyword]);
+
+  const onChange = useCallback((e: any) => {
+    setKeyword(e.target.value);
+  }, []);
+
+  const selectItem = useCallback((item: any) => {
+    setSelectedSearch(item);
+    setIsSearchResultOpen(false);
+  }, []);
+  const clearItem = useCallback(() => setSelectedSearch(undefined), []);
+
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={(e) => {
+        if (!searchResultRef.current.contains(e.target)) {
+          setIsSearchResultOpen(false);
+        }
+      }}
+    >
       <ProSide>
         <ProList>
           <ProListItem>
@@ -70,17 +102,25 @@ const ProfessionalInfoPage = () => {
               onClick={postCode}
               // onChange={changeDongName}
             />
+            <JobSearchInput
+              label="업종"
+              placeholder="가게 업종을 입력해주세요."
+              inputValue={selectedSearch}
+              onChange={onChange}
+              searchResult={searchResult}
+              searchResultOpen={isSearchResultOpen}
+              searchResultRef={searchResultRef}
+              selectItem={selectItem}
+              clearValue={clearItem}
+            />
           </ProListItem>
-          <ProListItem>
-            <div style={{ position: 'relative', width: '100%' }}>
-              <Label>업종</Label>
-              <CsInput
-                placeholder="가게 업종을 입력해주세요."
-                list="business"
-              />
-              <datalist id="business">{csList}</datalist>
-            </div>
-          </ProListItem>
+          {/* <ProListItem>
+            <LabelInput
+              label="업종"
+              placeholder="가게 업종을 입력해주세요."
+              // onChange={changeBusiness}
+            />
+          </ProListItem> */}
           <ProListItem>
             <LabelInput
               label="직원 수"
