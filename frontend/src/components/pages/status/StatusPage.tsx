@@ -5,7 +5,7 @@ import GeometryMap from '../../organisms/GeometryMap';
 import StatusSideBar from '../../organisms/StatusSideBar';
 import Transitions from '../../atoms/Transition';
 import StatusReport from '../../organisms/StatusReport';
-import { useStatusMap } from '../../../hooks/status';
+import { useStatusGuMap, useStatusHinGuMap } from '../../../hooks/status';
 import {
   faPeopleGroup,
   faHouse,
@@ -39,7 +39,6 @@ const StatusPage = () => {
 
   const onClickLabelHandler = (category: string) => {
     setCategory(category);
-    setTab(0);
   };
 
   const onClickRegionHandler = (region: string) => {
@@ -47,7 +46,9 @@ const StatusPage = () => {
     setReportModal(true);
   };
 
-  const { data, isSuccess, isLoading, isError } = useStatusMap();
+  const { guData, isGuSuccess, isGuLoading, isGuError } = useStatusGuMap();
+  const { hinGuData, isHinGuSuccess, isHinGuLoading, isHinGuError } =
+    useStatusHinGuMap();
 
   return (
     <Transitions>
@@ -60,14 +61,16 @@ const StatusPage = () => {
           onClickLabelHandler={onClickLabelHandler}
           tab={tab}
         />
-        {isSuccess && (
+        {isGuSuccess && isHinGuSuccess && (
           <>
             <GeometryMap
               areas={areas.features}
               isOpen={sideBarStatus}
               onClickRegionHandler={onClickRegionHandler}
               tab={tab}
-              data={data}
+              guData={guData}
+              hinGuData={hinGuData}
+              category={category}
             />
             <StatusReport
               icon={icons}

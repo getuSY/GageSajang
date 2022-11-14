@@ -9,15 +9,24 @@ type GeometryProps = {
   isOpen: boolean;
   onClickRegionHandler: any;
   tab: number;
-  data: any;
+  guData: any;
+  hinGuData: any;
+  category: any;
 };
+
+const statusList = [
+  { name: 'main', content: '상권' },
+  { name: 'sub', content: '상권 배후지' },
+];
 
 const GeometryMap = ({
   areas,
   isOpen,
   onClickRegionHandler,
   tab,
-  data,
+  guData,
+  hinGuData,
+  category,
 }: GeometryProps) => {
   const mapData = areas;
   const width = 1000;
@@ -32,7 +41,7 @@ const GeometryMap = ({
   const mapColor = [
     ['#E7E0F9', '#D3C0F7', '#A78DED', '#8C63E5', '#5E28C9'],
     ['#D8EEFF', '#A4D7FC', '#60AEEE', '#0095E5', '#007ECE'],
-    ['#F3FFDA', '#FAF0C3', '#F8DB6D', '#F8D426', '#EDC900'],
+    ['#F3FFDA', '#FAF0C3', '#F8DB6D', '#FFDE3C', '#E8C500'],
     ['#D6FFFD', '#BBFBF7', '#68E1D9', '#10C1CC', '#009FA9'],
     ['#C3FFEA', '#92ECCD', '#5DD0A7', '#00BF7A', '#009E65'],
     ['#FDEAEC', '#FFCCD1', '#F3A6AF', '#E97F8D', '#CC4E5D'],
@@ -42,6 +51,7 @@ const GeometryMap = ({
     onClickRegionHandler(d.properties.SIG_KOR_NM);
   };
 
+  const data = [guData, hinGuData];
   const countries = mapData.map((d: any, i) => (
     <path
       key={'path' + i}
@@ -50,7 +60,7 @@ const GeometryMap = ({
       className="path-gu"
       style={{
         fill: mapColor[tab][
-          data[tab].data.find(
+          data[category === 'main' ? 0 : 1][tab].data.find(
             (guItem: any) => guItem.guName === d.properties.SIG_KOR_NM
           ).level - 1
         ],
