@@ -51,8 +51,8 @@ const Wrapper = styled.div`
   background: #f2edf3;
   width: 100%;
   justify-content: center;
-  padding-top: 1px;
-  height: calc(100vh - 75px);
+  /* padding-top: 1px; */
+  height: calc(100vh - 65px);
 `;
 
 export default AmatuerResultPage;

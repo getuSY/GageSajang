@@ -24,6 +24,7 @@ const IndexSearchBar = () => {
 
   return (
     <Wrapper>
+      <img src="/assets/img/bg-check-out.png" className="bg-img" />
       <div className="search-bar-container">
         <div className="search-bar">
           <div>나</div>
@@ -44,6 +45,14 @@ const IndexSearchBar = () => {
 };
 
 const Wrapper = styled.div`
+  & .bg-img {
+    object-fit: cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0.4;
+  }
+  position: relative;
   display: flex;
   justify-content: center;
   /* 드래그 방지 */
