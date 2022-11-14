@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Label from '../../atoms/Label';
 import Input from '../../atoms/Input';
-import { DongItem } from '../../../data/areaDong';
 
-interface LabelSearchInputProps {
+interface JobSearchInputProps {
   label: string;
   placeholder: string;
   inputValue?: string;
@@ -13,10 +12,10 @@ interface LabelSearchInputProps {
   searchResult?: Array<any>;
   searchResultOpen: boolean;
   searchResultRef: React.MutableRefObject<any>;
-  selectDong?: any;
+  selectItem?: any;
 }
 
-const LabelSearchInput = ({
+const JobSearchInput = ({
   label,
   placeholder,
   onChange,
@@ -24,9 +23,9 @@ const LabelSearchInput = ({
   clearValue,
   searchResult,
   searchResultOpen,
-  selectDong,
+  selectItem,
   searchResultRef,
-}: LabelSearchInputProps) => {
+}: JobSearchInputProps) => {
   return (
     <Wrapper>
       <Label style={{ marginBottom: '1.3rem' }}>{label}</Label>
@@ -38,14 +37,14 @@ const LabelSearchInput = ({
           clearValue={clearValue}
         />
         <InputSearchResult visible={searchResultOpen} ref={searchResultRef}>
-          {searchResult?.map((dong, i) => (
+          {searchResult?.map((e, i) => (
             <InputSearchResultItem
               key={`input-search-result-${i}`}
               onClick={() => {
-                selectDong(dong);
+                selectItem(e);
               }}
             >
-              {dong.name}
+              {e}
             </InputSearchResultItem>
           ))}
         </InputSearchResult>
@@ -85,4 +84,4 @@ const InputSearchResultItem = styled.div`
   }
 `;
 
-export default LabelSearchInput;
+export default JobSearchInput;
