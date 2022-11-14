@@ -35,24 +35,24 @@ spring:
 #                baseMessage: Spring Cloud Gateway Logging Filter
 #                preLogger: true
 #                postLogger: true
-        - id: backend-user-service
+        - id: backend/user-service
           uri: lb://BACKEND-USER
           predicates:
-            - Path=/backend-user/user/**, /user/**
+            - Path=/backend/user/**, /user/**
           filters:
-            - RewritePath=/backend-user/user/(?<path>.*), /$\{path}
+            - RewritePath=/backend/user/(?<path>.*), /$\{path}
             - CustomFilter
             - name: LoggingFilter
               args:
                 baseMessage: Spring Cloud Gateway Logging Filter
                 preLogger: true
                 postLogger: true
-        - id: backend-simul-service
+        - id: backend/simul-service
           uri: lb://BACKEND-SIMUL
           predicates:
-            - Path=/simul/**, /backend-simul/simul/**
+            - Path=/simul/**, /backend/simul/**
           filters:
-            - RewritePath=/backend-simul/simul/(?<path>.*), /$\{path}
+            - RewritePath=/backend/simul/(?<path>.*), /$\{path}
             - CustomFilter
             - name: LoggingFilter
               args:
