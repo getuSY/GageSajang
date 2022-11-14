@@ -213,7 +213,7 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
           </DetailCards>
           <DetailCards>
             <DetailCardHeader>평균 매출 건수</DetailCardHeader>
-            <img src="assets/img/shopping-cart.png" alt="" />
+            <img src="/assets/img/shopping-cart.png" alt="" />
             {/* <img
               src="public\assets\img\shopping-cart.png"
               alt="shop_order"
