@@ -35,6 +35,10 @@ const reportMenuList = [
     name: '상권 배후지',
     icon: 'house-circle-check',
   },
+  {
+    name: '창업 위험도',
+    icon: 'house-circle-check',
+  },
 ];
 
 const Report = ({
@@ -69,6 +73,8 @@ const Report = ({
           contentRefs={contentRefs}
           setTab={setTab}
           amatuerResult={amatuerResult}
+          dongName={dongName}
+          jobName={jobName}
         />
       )}
       {!isLoading && isError && (
