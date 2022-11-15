@@ -651,7 +651,7 @@ export const useHinterlandData = (amatuerResult: any) => {
 
 export const useRiskData = (amatuerResult: any) => {
   const riskData = useMemo(
-    () => [amatuerResult.risk, amatuerResult.riskRate],
+    () => ({ risk: amatuerResult.risk, riskRate: amatuerResult.riskRate }),
     [amatuerResult]
   );
 

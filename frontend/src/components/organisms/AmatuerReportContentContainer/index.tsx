@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import ReportContent from '../../molecules/AmatuerReportContent';
-import Label from '../../atoms/Label';
+import AmatuerReportRisk from '../../atoms/AmatuerReportRisk';
 import { throttle } from 'lodash';
 import {
   useHinterlandData,
@@ -101,7 +101,7 @@ const ReportContentContainer = ({
               <span className="emphasis">
                 {storeGenderData.data.datasets[0].data[0] <
                   storeGenderData.data.datasets[0].data[1] && '증가'}
-                {storeGenderData.data.datasets[0].data[0] ==
+                {storeGenderData.data.datasets[0].data[0] ===
                   storeGenderData.data.datasets[0].data[1] && '유지'}
                 {storeGenderData.data.datasets[0].data[0] >
                   storeGenderData.data.datasets[0].data[1] && '감소'}
@@ -386,7 +386,8 @@ const ReportContentContainer = ({
       </ReportCategory>
       <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
         <ReportContent title="💸 위험도 분석" style={{ marginTop: '2rem' }} />
-        <ReportAlert>❗위험 위험</ReportAlert>
+        {/* <ReportAlert>❗위험 위험{riskData.risk}</ReportAlert> */}
+        <AmatuerReportRisk risk={riskData.risk} />
       </ReportCategory>
     </Wrapper>
   );
