@@ -90,8 +90,8 @@ const ReportChart = ({
 };
 
 const Wrapper = styled.div`
-  /* width: 400px; */
-  max-width: 400px;
+  width: 400px;
+  /* max-width: 400px; */
   height: 300px;
 `;
 
