@@ -17,7 +17,7 @@ public interface StoreRepository extends JpaRepository<StoreEntity, Integer> {
     int save(StoreDto storeDto);
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "update store set dongName=:dongName, industryCode=:industry, sales=:sales, clerk=:clerk, area=:area where email=:email", nativeQuery = true)
+    @Query(value = "update store set dongName=:dongName, industryName=:industry, sales=:sales, clerk=:clerk, area=:area where email=:email", nativeQuery = true)
     int updateStore(String email, String dongName, String industry, double sales, int clerk, int area);
 //    Object save(StoreEntity entity);
     List<StoreEntity> findAll();

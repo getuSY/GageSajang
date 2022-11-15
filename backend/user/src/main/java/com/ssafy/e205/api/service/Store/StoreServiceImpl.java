@@ -29,7 +29,7 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public int updateStore(StoreEntity entity) {
-        return repository.updateStore(entity.getEmail(), entity.getDongName(), entity.getIndustryCode(), entity.getSales(),entity.getClerk(),entity.getArea());
+        return repository.updateStore(entity.getEmail(), entity.getDongName(), entity.getIndustryName(), entity.getSales(),entity.getClerk(),entity.getArea());
     }
 
     @Override

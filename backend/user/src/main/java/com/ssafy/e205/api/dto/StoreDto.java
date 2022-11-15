@@ -16,7 +16,7 @@ public class StoreDto {
     private Long id;
     private String email;
     private String dongName;
-    private String industryCode;
+    private String industryName;
     private double sales;
     private int clerk;
     private int area;
@@ -25,7 +25,7 @@ public class StoreDto {
         this.id = entity.getId();
         this.email = entity.getEmail();
         this.dongName = entity.getDongName();
-        this.industryCode = entity.getIndustryCode();
+        this.industryName = entity.getIndustryName();
         this.sales = entity.getSales();
         this.clerk = entity.getClerk();
         this.area = entity.getArea();
@@ -35,7 +35,7 @@ public class StoreDto {
         return StoreEntity.builder()
                 .email(dto.email)
                 .dongName(dto.dongName)
-                .industryCode(dto.industryCode)
+                .industryName(dto.industryName)
                 .area(dto.area)
                 .clerk(dto.clerk)
                 .sales(dto.sales)
