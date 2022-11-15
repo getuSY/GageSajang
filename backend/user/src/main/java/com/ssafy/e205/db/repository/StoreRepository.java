@@ -2,10 +2,8 @@ package com.ssafy.e205.db.repository;
 
 import com.ssafy.e205.api.dto.StoreDto;
 import com.ssafy.e205.db.entity.StoreEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.LockModeType;
 import javax.persistence.QueryHint;
@@ -17,6 +15,11 @@ public interface StoreRepository extends JpaRepository<StoreEntity, Integer> {
 
     StoreEntity findByEmail(String email);
     int save(StoreDto storeDto);
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(value = "update store set dongName=:dongName, industryCode=:industry, sales=:sales, clerk=:clerk, area=:area where email=:email", nativeQuery = true)
+    int updateStore(String email, String dongName, String industry, double sales, int clerk, int area);
+//    Object save(StoreEntity entity);
     List<StoreEntity> findAll();
     int deleteByEmail(String email);
 }

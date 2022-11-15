@@ -8,6 +8,7 @@ import java.util.List;
 public interface StoreService {
     StoreEntity getStoreEntity(String email);
     int saveStoreEntity(StoreDto storeDto);
+    int updateStore(StoreEntity entity);
     List<StoreEntity> getStoreEntityAll();
     int deleteByEmail(String email);
 }

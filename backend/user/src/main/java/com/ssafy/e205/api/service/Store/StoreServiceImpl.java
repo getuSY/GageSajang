@@ -23,7 +23,13 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public int saveStoreEntity(StoreDto storeDto) {
-        return repository.save(storeDto);
+        repository.save(storeDto.toEntity(storeDto));
+        return 1;
+    }
+
+    @Override
+    public int updateStore(StoreEntity entity) {
+        return repository.updateStore(entity.getEmail(), entity.getDongName(), entity.getIndustryCode(), entity.getSales(),entity.getClerk(),entity.getArea());
     }
 
     @Override
