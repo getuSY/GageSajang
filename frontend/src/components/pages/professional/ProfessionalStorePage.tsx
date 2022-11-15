@@ -70,7 +70,10 @@ const ProfessionalInfoPage = () => {
     setSelectedSearch(item);
     setIsSearchResultOpen(false);
   }, []);
-  const clearItem = useCallback(() => setSelectedSearch(undefined), []);
+  const clearItem = useCallback(
+    () => setSelectedSearch(undefined),
+    [setSelectedSearch]
+  );
 
   return (
     <Wrapper

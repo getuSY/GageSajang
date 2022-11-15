@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Report from '../../organisms/Report';
+import Report from '../../organisms/AmatuerReport';
 import { useSearchParams } from 'react-router-dom';
 import getJobCode from '../../../utils/getJobCode';
 import cs from '../../../data/cs';

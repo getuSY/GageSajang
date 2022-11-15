@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import AnalysisSideBar from '../../organisms/AnalysisSideBar';
+import AnalysisSideBar from '../../organisms/AmatuerSideBar';
 import { areas, DongItem } from '../../../data/areaDong';
 import Transitions from '../../atoms/Transition';
-import KakaoMap from '../../organisms/KakaoMap';
+import KakaoMap from '../../atoms/KakaoMap';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import getCenter from '../../../utils/getCenter';
 import Spinner from '../../atoms/Spinner';
 import getJobCode from '../../../utils/getJobCode';
 import { useQueryClient } from '@tanstack/react-query';
-import { createImportSpecifier } from 'typescript';
 import { getAmatuerResult } from '../../../api/amatuer';
 
 const AmatuerAnalysisPage = () => {
@@ -59,7 +58,7 @@ const AmatuerAnalysisPage = () => {
     const admCd = select!.admCd;
 
     setIsResultLoading(true);
-    const data = await queryClient.prefetchQuery({
+    await queryClient.prefetchQuery({
       queryKey: ['amatuer', 'result', admCd, jobCode],
       queryFn: () => getAmatuerResult({ admCd, jobCode }),
     });

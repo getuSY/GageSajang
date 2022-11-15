@@ -36,6 +36,7 @@ const LabelSearchInput = ({
           onChange={onChange}
           inputValue={inputValue}
           clearValue={clearValue}
+          disabled={true}
         />
         <InputSearchResult visible={searchResultOpen} ref={searchResultRef}>
           {searchResult?.map((dong, i) => (

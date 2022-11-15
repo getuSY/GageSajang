@@ -78,6 +78,9 @@ const Wrapper = styled.div`
   padding: 20px;
   width: 230px;
   color: #3e4b5b;
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
   & .title {
     font-size: 1.5rem;
     margin-bottom: 10px;

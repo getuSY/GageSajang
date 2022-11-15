@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Spinner from '../../atoms/Spinner';
 import ReportSideBar from '../../molecules/ReportSideBar';
-import ReportContentContainer from '../ReportContentContainer';
+import ReportContentContainer from '../AmatuerReportContentContainer';
 
 interface ReportProps {
   jobName: string;

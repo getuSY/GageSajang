@@ -89,7 +89,7 @@ export const useStoreData = (amatuerResult: any) => {
               // 데이터라벨 숨김
               color: 'transparent',
             },
-            // responsive: true,
+            responsive: true,
           },
         ],
       },
@@ -348,9 +348,9 @@ export const useLivingData = (amatuerResult: any) => {
         labels: weekLabels,
         datasets: [
           {
-            label: '요일별 매출',
+            label: '요일별 유동인구',
             data: amatuerResult.living.week,
-            barThickness: 30,
+            barThickness: 40,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
@@ -371,7 +371,7 @@ export const useLivingData = (amatuerResult: any) => {
         labels: timeLabels,
         datasets: [
           {
-            label: '시간대별 매출',
+            label: '시간대별 유동인구',
             data: amatuerResult.living.time,
             borderColor: '#B29AF8',
             backgroundColor: '#B29AF8',
@@ -461,6 +461,7 @@ export const useStoreCntData = (amatuerResult: any) => {
           {
             label: '개업 현황',
             data: amatuerResult.open.open,
+            barThickness: 40,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
@@ -514,6 +515,7 @@ export const useStoreCntData = (amatuerResult: any) => {
           {
             label: '폐업 현황',
             data: amatuerResult.close.close,
+            barThickness: 40,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',

@@ -8,6 +8,7 @@ interface InputProps {
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onClick?: any;
+  disabled?: boolean;
 }
 
 const Input = ({
@@ -17,6 +18,7 @@ const Input = ({
   onClick,
   inputValue,
   clearValue,
+  disabled,
 }: InputProps) => {
   return (
     <>
@@ -30,6 +32,7 @@ const Input = ({
               onChange={onChange}
               onClick={onClick}
               readOnly={onClick !== undefined}
+              disabled={disabled}
             />
             <div className="clear-btn" onClick={clearValue}>
               x
@@ -76,6 +79,9 @@ const StyledInput = styled.input`
   border: none;
   border-radius: 10px;
   outline: none;
+  &:disabled {
+    color: inherit;
+  }
 `;
 
 export default Input;
