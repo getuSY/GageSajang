@@ -83,14 +83,14 @@ const Wrapper = styled.div`
     opacity: 1;
   }
   & .hide {
-    color: white;
+    color: transparent;
     transform: translate3d(0%, 0, -1000px);
     opacity: 0;
   }
 
   & .prevv {
     transform: translate3d(0, -180%, 0) scale3d(0.6, 0.6, 0.6);
-    color: white;
+    color: transparent;
   }
   & .prev {
     transform: translate3d(0, -90%, 0) scale3d(0.7, 0.7, 0.7);
@@ -100,7 +100,7 @@ const Wrapper = styled.div`
   }
   & .nextt {
     transform: translate3d(0, 180%, 0) scale3d(0.6, 0.6, 0.6);
-    color: white;
+    color: transparent;
   }
 `;
 

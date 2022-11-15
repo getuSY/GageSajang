@@ -81,6 +81,9 @@ const StatusReport = ({
       icon: icon[tab],
     });
   }, [tab]);
+
+  // const detailData =
+
   return (
     <Wrapper>
       <ReportModal

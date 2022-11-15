@@ -203,6 +203,7 @@ const ReportContentContainer = ({
             title="일별 유동인구"
             style={{ flexGrow: 1 }}
             chartData={livingWeekData}
+            isVert={false}
           ></ReportContent>
         </div>
         <div className="chart-div">

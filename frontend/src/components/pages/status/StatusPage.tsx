@@ -1,11 +1,16 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import areas from '../../../data/areaGu.json';
 import GeometryMap from '../../organisms/GeometryMap';
 import StatusSideBar from '../../organisms/StatusSideBar';
 import Transitions from '../../atoms/Transition';
 import StatusReport from '../../organisms/StatusReport';
-import { useStatusMap } from '../../../hooks/status';
+import {
+  useStatusGuMap,
+  useStatusHinGuMap,
+  useStatusTrend,
+  useStatusDetail,
+} from '../../../hooks/status';
 import {
   faPeopleGroup,
   faHouse,
@@ -32,6 +37,7 @@ const StatusPage = () => {
   const [tab, setTab] = useState<number>(0); // category별 버튼, 순서 : content
   const [region, setRegion] = useState<string>(''); // 현재 선택한 구 이름
 
+  // 유동인구, 거주인구 등 버튼
   const contentList = content.map((e: string, i: number) => ({
     name: e,
     onClick: () => setTab(i),
@@ -39,7 +45,6 @@ const StatusPage = () => {
 
   const onClickLabelHandler = (category: string) => {
     setCategory(category);
-    setTab(0);
   };
 
   const onClickRegionHandler = (region: string) => {
@@ -47,27 +52,39 @@ const StatusPage = () => {
     setReportModal(true);
   };
 
-  const { data, isSuccess, isLoading, isError } = useStatusMap();
+  const { guData, isGuSuccess, isGuLoading, isGuError } = useStatusGuMap();
+  const { hinGuData, isHinGuSuccess, isHinGuLoading, isHinGuError } =
+    useStatusHinGuMap();
+
+  const trendData = useStatusTrend();
+
+  const detailData = useStatusDetail(region);
+  // console.log('detailData', region, detailData);
 
   return (
     <Transitions>
       <Wrapper>
-        <StatusSideBar
-          sideBarStatus={sideBarStatus}
-          setSideBarStatus={setSideBarStatus}
-          contentList={contentList}
-          category={category!}
-          onClickLabelHandler={onClickLabelHandler}
-          tab={tab}
-        />
-        {isSuccess && (
+        {trendData.isSuccess && (
+          <StatusSideBar
+            sideBarStatus={sideBarStatus}
+            setSideBarStatus={setSideBarStatus}
+            contentList={contentList}
+            category={category!}
+            onClickLabelHandler={onClickLabelHandler}
+            tab={tab}
+            trendData={trendData}
+          />
+        )}
+        {isGuSuccess && isHinGuSuccess && (
           <>
             <GeometryMap
               areas={areas.features}
               isOpen={sideBarStatus}
               onClickRegionHandler={onClickRegionHandler}
               tab={tab}
-              data={data}
+              guData={guData}
+              hinGuData={hinGuData}
+              category={category}
             />
             <StatusReport
               icon={icons}
