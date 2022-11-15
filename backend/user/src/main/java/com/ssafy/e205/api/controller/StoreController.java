@@ -50,7 +50,18 @@ public class StoreController {
 
     @PostMapping("/setStore")
     public ResponseEntity<Integer> saveStoreEntity(@RequestBody StoreDto dto){
-        return new ResponseEntity<Integer>(storeService.updateStore(dto.toEntity(dto)), HttpStatus.OK);
+        StoreEntity entity = storeService.getStoreEntity(dto.getEmail());
+        try{
+            if(entity == null){
+                return new ResponseEntity<Integer>(storeService.saveStoreEntity(dto), HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<Integer>(storeService.updateStore(dto.toEntity(dto)), HttpStatus.OK);
+            }
+        }
+        catch (Exception e){
+            return new ResponseEntity<Integer>(-1, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/deleteStore/{email}")
