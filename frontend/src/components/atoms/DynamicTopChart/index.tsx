@@ -5,79 +5,32 @@ import { ReportChartProps } from '../ReportChart';
 import { SimulInfo } from '../../organisms/SalesSimulation';
 
 interface DynamicTopChartProps {
-  posi: number;
-  // values: Array<SimulInfo>;
+  values?: Array<number>;
+  labels?: Array<string>;
+  title: string;
+  colors: Array<any>;
 }
 
-const given = [
-  { x: 2013, y: 200 },
-  { x: 2014, y: 1523 },
-  { x: 2015, y: 1324 },
-  { x: 2016, y: 11254 },
-  { x: 2017, y: 12124 },
-  { x: 2018, y: 1564 },
-  { x: 2019, y: 1234 },
-  { x: 2020, y: 15644 },
-  { x: 2021, y: 200 },
-  { x: 2022, y: 1564 },
-  { x: 2023, y: 17895 },
-];
-
-type Position = { x: number; y: number };
-
-const DynamicTopChart = ({ posi }: DynamicTopChartProps) => {
-  // const topValues = values;
-  // topValues.sort((a, b) => b.value - a.value);
-
-  const [realData, setRealData] = useState([{ x: 2013, y: 0 }]);
-  const [realLabel, setRealLabel] = useState([2013]);
-  const trackPosi = () => {
-    const newPos = posi / 50;
-    const newData: Array<Position> = given.slice(0, Number(newPos) + 1);
-    // const arr = newData.sort((a: Position, b: Position) => {
-    //   if (a.y < b.y) {
-    //     return -1;
-    //   }
-    // });
-    newData.sort((a, b) => b.y - a.y);
-    let newArr;
-    // if (arr.length >= 5) {
-    //   newArr = arr;
-    // } else {
-    //   newArr = arr.slice(0, 6);
-    // }
-    if (newData.length > 5) {
-      newArr = newData.slice(0, 6);
-    } else {
-      newArr = newData;
-    }
-    setRealData(newArr);
-    let newLabel = newArr.map((a) => a.x);
-    setRealLabel(newLabel);
-  };
-  const years = [
-    2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023,
-  ];
-  useEffect(() => {
-    trackPosi();
-  }, [posi]);
+const DynamicTopChart = ({
+  values,
+  labels,
+  title,
+  colors,
+}: DynamicTopChartProps) => {
   const data = {
-    labels: realLabel,
+    labels: labels,
     datasets: [
       {
-        label: '매출액 TOP 5',
-        data: realData,
+        label: title,
+        data: values,
         backgroundColor: '#eeeeee',
         borderColor: 'black',
         borderWidth: 1,
-        tension: 0.8,
-        // hidden: true,
       },
     ],
   };
   let context;
   const options = {
-    resizeDelay: 500,
     animation: {
       // delay: 500,
       easing: 'easeOutQuad',
@@ -88,19 +41,19 @@ const DynamicTopChart = ({ posi }: DynamicTopChartProps) => {
       axis: 'x',
     },
     reponsive: false,
-    // resizeDelay: 0,
+    resizeDelay: 500,
     elements: { point: { pointStyle: 'rectRot', radius: 5 } },
     plugins: {
       datalabels: { display: false },
       title: {
         display: true,
-        text: '매출액 증감 추이',
+        text: title,
       },
       legend: {
         display: true,
-        labels: {
-          color: 'rgb(255, 99, 132)',
-        },
+        // labels: {
+        //   color: 'rgb(255, 99, 132)',
+        // },
       },
     },
     scales: {
@@ -119,6 +72,7 @@ const DynamicTopChart = ({ posi }: DynamicTopChartProps) => {
       },
       y: {
         axis: 'y',
+        min: 30000000, /// 가변값으로 설정하기
         title: {
           display: 'true',
           text: '매출액(단위 : 원)',
@@ -132,7 +86,16 @@ const DynamicTopChart = ({ posi }: DynamicTopChartProps) => {
         type="bar"
         data={data}
         options={options}
-        style={{ width: '800px', height: 'auto' }}
+        style={{ width: '500px', height: '400px' }}
+        grad={[
+          colors,
+          // [
+          //   [0, 'rgba(73, 208, 168, 0.8'],
+          //   [0.95, 'rgba(249, 242, 84, 0.8)'],
+          // ],
+          // [[0, '#ebdd4a']],
+        ]}
+        isVert={false}
       />
     </Wrapper>
   );

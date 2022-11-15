@@ -114,13 +114,6 @@ const ProfessionalInfoPage = () => {
               clearValue={clearItem}
             />
           </ProListItem>
-          {/* <ProListItem>
-            <LabelInput
-              label="업종"
-              placeholder="가게 업종을 입력해주세요."
-              // onChange={changeBusiness}
-            />
-          </ProListItem> */}
           <ProListItem>
             <LabelInput
               label="직원 수"

@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import type { ChartData, ChartOptions, Chart } from 'chart.js';
 import ReportChart, { ReportChartProps } from '../ReportChart';
 
-interface DynamicRateChartProps {
+interface DynamicFlowChartProps {
   values?: Array<number>;
   labels?: Array<string>;
 }
 
 type Position = { x: string; y: number };
 
-const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
+const DynamicFlowChart = ({ values, labels }: DynamicFlowChartProps) => {
   // const [realData, setRealData] = useState([{ x: '2013년 1분기', y: 0 }]);
 
   const data = {
@@ -25,7 +25,6 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
         tension: 0.3,
         fill: true,
         opacity: 0.5,
-        borderRadius: 500,
       },
     ],
   };
@@ -33,7 +32,7 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
   const options = {
     reponsive: false,
     resizeDelay: 0,
-    elements: { point: { pointStyle: 'rectRot', radius: 5 } },
+    elements: { point: { pointStyle: 'circle', radius: 5 } },
     plugins: {
       datalabels: { display: false },
       title: {
@@ -65,7 +64,7 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
         axis: 'y',
         title: {
           display: 'true',
-          text: '매출 증감량(단위 : %)',
+          text: '매출액(단위 : 원)',
         },
       },
     },
@@ -79,22 +78,14 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
         data={data}
         options={options}
         style={{ width: '95%', height: '400px' }}
-        // grad={[
-        //   [
-        //     [0.9, '#F3B79B'],
-        //     [0.55, '#F872D4'],
-        //     [0.25, '#B6ACF1'],
-        //     [0, '#27CFFB'],
-        //   ],
-        //   // [[0, '#ebdd4a']],
-        // ]}
         grad={[
           [
             [0, 'rgba(73, 208, 168, 0.8'],
-            [0.7, 'rgba(249, 242, 84, 0.8)'],
+            [0.95, 'rgba(249, 242, 84, 0.8)'],
           ],
           // [[0, '#ebdd4a']],
         ]}
+        isVert={false}
       />
     </Wrapper>
   );
@@ -104,4 +95,4 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-export default DynamicRateChart;
+export default DynamicFlowChart;
