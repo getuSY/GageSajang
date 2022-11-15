@@ -11,10 +11,17 @@ import Spinner from '../../atoms/Spinner';
 import { usePostCode } from '../../../hooks/common';
 import { cs1, cs2, cs3 } from '../../../data/cs';
 import JobSearchInput from '../../molecules/JobSearchInput';
+import { useUserStoreInfo, useStoreInfoFix } from '../../../hooks/user';
+import { number } from 'prop-types';
 
-const ProfessionalInfoPage = () => {
+interface ProfessionalStoreInfo extends ProfessionalResultParams {
+  id: number;
+}
+
+const ProfessionalStorePage = () => {
   const userEmail = sessionStorage.getItem('email');
-  const [storeInfo, setStoreInfo] = useState<ProfessionalResultParams>({
+  const [storeInform, setStoreInform] = useState<ProfessionalStoreInfo>({
+    id: 0,
     email: userEmail,
     sales: 0,
     clerk: 0, //직원수
@@ -22,16 +29,27 @@ const ProfessionalInfoPage = () => {
     dongName: '개포2동', //법정동
     industryName: '한식음식점',
   });
-  const values = useProSalesSimulation();
-  const mutation = useProfessionalResult();
-  const { data } = mutation;
-  // const store = data.store;
-  // const sales = data.sales;
-  // const status = data.status;
+  const [content, setContent] = useState<number>(0);
+  // const values = useProSalesSimulation();
+  // const mutation = useProfessionalResult();
 
-  const onClickHandler = () => {
-    mutation.mutate(storeInfo);
-  };
+  // const onClickHandler = () => {
+  //   mutation.mutate(storeInfo);
+  // };
+  const { data: storeInfo } = useUserStoreInfo();
+  useEffect(() => {
+    if (storeInfo) {
+      // console.log('가게 정보 확인', storeInfo);
+      setStoreInform(storeInfo);
+      setContent(1);
+    }
+  }, []);
+
+  // const mutation = useStoreInfoFix();
+  // const { data, isLoading, isSuccess, isError, error } = mutation;
+
+  const onClickHandler = () => {};
+
   const [guDong, setGuDong] = useState('');
   const postCode = usePostCode(setGuDong);
 
@@ -102,6 +120,8 @@ const ProfessionalInfoPage = () => {
               onClick={postCode}
               // onChange={changeDongName}
             />
+          </ProListItem>
+          <ProListItem>
             <JobSearchInput
               label="업종"
               placeholder="가게 업종을 입력해주세요."
@@ -148,12 +168,28 @@ const ProfessionalInfoPage = () => {
           내 가게 분석하기
         </Button>
       </ProSide>
-      <ProReport>
-        {/* <h1>ProReport</h1> */}
-        <ProfessionalResult />
-        {/* {values ? <Spinner /> : <SimulationPage></SimulationPage>} */}
-        <SimulationPage></SimulationPage>
-      </ProReport>
+      {content === 0 ? (
+        <ProReport>
+          <InitialReport>
+            처음 뵙겠습니다, 사장님!<br></br>가게 정보를 입력하고 내 가게 분석을
+            시작해봐요.
+          </InitialReport>
+        </ProReport>
+      ) : content === 1 ? (
+        <ProReport>
+          <InitialReport>
+            사장님, 또 뵙네요! <br></br>이미 저장된 가게 정보가 있네요.
+            <br></br>수정 없이 분석을 진행하시려면 분석하기 버튼을 눌러주세요.
+          </InitialReport>
+        </ProReport>
+      ) : (
+        <ProReport>
+          {/* <h1>ProReport</h1> */}
+          <ProfessionalResult />
+          {/* {values ? <Spinner /> : <SimulationPage></SimulationPage>} */}
+          <SimulationPage></SimulationPage>
+        </ProReport>
+      )}
     </Wrapper>
   );
 };
@@ -214,4 +250,15 @@ const CsInput = styled.input`
   margin-top: 1.3rem;
 `;
 
-export default ProfessionalInfoPage;
+const InitialReport = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 700;
+  margin: auto;
+`;
+
+export default ProfessionalStorePage;

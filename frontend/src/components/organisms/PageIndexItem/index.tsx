@@ -21,7 +21,12 @@ const PageIndexItem = ({ type }: PageIndexItemProps) => {
     navigate('/professional/store');
   };
   const toAnalysis = () => {
-    navigate('/amatuer/analysis');
+    if (sessionStorage.getItem('token')) {
+      navigate('/amatuer/analysis');
+    } else {
+      alert('로그인이 필요한 서비스입니다.');
+      navigate('user/login');
+    }
   };
   return (
     <Wrapper>

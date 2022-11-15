@@ -6,7 +6,6 @@ import {
 } from '../api/simulation';
 import { SimulationParams } from '../models/simultaion';
 
-// 실사용
 export const useProSalesSimulation = () =>
   useMutation({
     mutationFn: (proSimulParams: SimulationParams) =>

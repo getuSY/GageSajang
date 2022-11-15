@@ -1,33 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ReportChart from '../../atoms/ReportChart';
+import { useProfessionalResult } from '../../../hooks/professional';
+import { ProfessionalResultParams } from '../../../models/professional';
 
 const ProfessionalResult = () => {
-  const result = {
-    dongName: '개포2동', // 읍면동명
-    industryCode: 'CS100001', // 업종 구분 코드
-    industryName: '한식음식점', // 업종 명
-    order: 36683, // 매출 건수
-    total: 22.5, // 점포 수
-    similar: 22.5, // 유사 업종 수
-    open: 0, //개업
-    close: 0, //폐업
-    franchise: 2, // 프랜차이즈 업종 수
-    sales: 59331326.5, // 매출/점포수 (user에선 sales int고 경영환경진단에선 float
-    clerk: 3, // 직원수
-    area: 60, //면적수
-  };
-  const salesRate = (12315546 / result.sales) * 100;
-  const openRate = (result.open / Number(result.total)) * 100;
-  const closeRate = (result.close / Number(result.total)) * 100;
-  const clerkRate = 6 / result.clerk;
-  const areaRate = (40.5 / result.area) * 100;
+  const [storeInfo, setStoreInfo] = useState<ProfessionalResultParams>({
+    email: sessionStorage.getItem('email'),
+    sales: 1112345,
+    clerk: 5,
+    area: 48,
+    dongName: '개포2동',
+    industryName: '일식음식점',
+  });
+  const [result, setResult] = useState({
+    store: {
+      total: 1.0,
+      clerk: 3,
+      area: 36,
+      similar: 1.0,
+      franchise: 0.0,
+    },
+    sales: {
+      order: 3881.0,
+      sales: 9.8268952e7,
+    },
+    status: {
+      open: 0.0,
+      close: 0.0,
+    },
+  });
+  const mutation = useProfessionalResult();
+  const { data, isLoading, isSuccess, isError, error } = mutation;
+  useEffect(() => {
+    mutation.mutate(result);
+  }, []);
+
+  // const result = {
+  //   dongName: '개포2동', // 읍면동명
+  //   industryCode: 'CS100001', // 업종 구분 코드
+  //   industryName: '한식음식점', // 업종 명
+  //   order: 36683, // 매출 건수
+  //   total: 22.5, // 점포 수
+  //   similar: 22.5, // 유사 업종 수
+  //   open: 0, //개업
+  //   close: 0, //폐업
+  //   franchise: 2, // 프랜차이즈 업종 수
+  //   sales: 59331326.5, // 매출/점포수 (user에선 sales int고 경영환경진단에선 float
+  //   clerk: 3, // 직원수
+  //   area: 60, //면적수
+  // };
+  const salesRate = (12315546 / result.sales.sales) * 100;
+  const openRate = (result.status.open / Number(result.store.total)) * 100;
+  const closeRate = (result.status.close / Number(result.store.total)) * 100;
+  const clerkRate = 6 / result.store.clerk;
+  const areaRate = (40.5 / result.store.area) * 100;
   const areaData = {
     labels: ['내 가게 면적', '평균 가게 면적'],
     datasets: [
       {
         label: ['내 가게 면적'],
-        data: [42, result.area],
+        data: [42, result.store.area],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
       },
     ],
@@ -40,7 +73,7 @@ const ProfessionalResult = () => {
     datasets: [
       {
         label: ['내 가게 월 매출'],
-        data: [6000000, result.sales / 3],
+        data: [6000000, result.sales.sales / 3],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         borderRadius: 300,
         // borderWidth: 5,
@@ -53,7 +86,7 @@ const ProfessionalResult = () => {
     datasets: [
       {
         label: ['내 가게 직원 수'],
-        data: [6, result.clerk],
+        data: [6, result.store.clerk],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         borderRadius: 100,
       },
@@ -63,7 +96,7 @@ const ProfessionalResult = () => {
     labels: ['총 점포 수', '프랜차이즈 수'],
     datasets: [
       {
-        data: [Math.ceil(result.total), result.franchise],
+        data: [Math.ceil(result.store.total), result.store.franchise],
         backgroundColor: ['#edf3f1', 'rgb(255, 205, 86)'],
         hoverOffset: 5,
       },
@@ -84,7 +117,11 @@ const ProfessionalResult = () => {
     labels: ['총 점포 수', '개업 점포 수', '폐업 점포 수'],
     datasets: [
       {
-        data: [Math.ceil(result.total), result.open, result.close],
+        data: [
+          Math.ceil(result.store.total),
+          result.status.open,
+          result.status.close,
+        ],
         backgroundColor: ['#edf3f1', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         hoverOffset: 5,
       },
@@ -185,8 +222,8 @@ const ProfessionalResult = () => {
       </Summary>
       <ProRepoDetail>
         <p style={{ fontSize: '40px', margin: '8rem auto', fontWeight: '600' }}>
-          " {result.dongName} {result.industryName} "의 평균값을 토대로
-          보여드릴게요!
+          " {result.store.dongName} {result.store.industryName} "의 평균값을
+          토대로 보여드릴게요!
         </p>
         <ReportDetails>
           <DetailCards>

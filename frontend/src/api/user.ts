@@ -1,5 +1,6 @@
 import { client1 as client } from './client';
 import { UserModel } from '../models/user';
+import { ProfessionalResultParams } from '../models/professional';
 
 export const helloUser = async (name: string) => {
   const { data } = await client.get(`user/hello?name=${name}`);
@@ -30,4 +31,18 @@ export const userInfo = async () => {
     return data;
   }
   return null;
+};
+
+export const storeInfo = async () => {
+  if (sessionStorage.getItem('token')) {
+    const email = sessionStorage.getItem('email');
+    const { data } = await client.get(`user/store/getStore/${email}`);
+    return data;
+  }
+};
+
+export const storeInfoFix = async (params: ProfessionalResultParams) => {
+  const { data } = await client.post('user/store/setStore', params);
+
+  return data;
 };

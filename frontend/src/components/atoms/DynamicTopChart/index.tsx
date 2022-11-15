@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import ReportChart from '../ReportChart';
 import { ReportChartProps } from '../ReportChart';
 import { SimulInfo } from '../../organisms/SalesSimulation';
+import { miniSerializeError } from '@reduxjs/toolkit';
 
 interface DynamicTopChartProps {
-  values?: Array<number>;
-  labels?: Array<string>;
+  values: Array<number>;
+  labels: Array<string>;
   title: string;
   colors: Array<any>;
 }
@@ -23,9 +24,9 @@ const DynamicTopChart = ({
       {
         label: title,
         data: values,
-        backgroundColor: '#eeeeee',
-        borderColor: 'black',
-        borderWidth: 1,
+        // backgroundColor: '#eeeeee',
+        borderColor: '#eeeeee',
+        borderWidth: 3,
       },
     ],
   };
@@ -72,10 +73,10 @@ const DynamicTopChart = ({
       },
       y: {
         axis: 'y',
-        min: 30000000, /// 가변값으로 설정하기
+        min: Math.min(...values) - 100, /// 가변값으로 설정하기
         title: {
           display: 'true',
-          text: '매출액(단위 : 원)',
+          text: '매출액(단위 : 만원)',
         },
       },
     },
@@ -86,7 +87,7 @@ const DynamicTopChart = ({
         type="bar"
         data={data}
         options={options}
-        style={{ width: '500px', height: '400px' }}
+        style={{ width: '90%', height: '400px' }}
         grad={[
           colors,
           // [
@@ -101,6 +102,11 @@ const DynamicTopChart = ({
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
 
 export default DynamicTopChart;
