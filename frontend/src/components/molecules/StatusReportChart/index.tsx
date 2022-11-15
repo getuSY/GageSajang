@@ -10,6 +10,7 @@ interface StatusReportChartProps {
   style?: object;
   canvasStyle?: object;
   grad?: any;
+  isVert?: boolean;
 }
 const StatusReportChart = ({
   type,
@@ -19,6 +20,7 @@ const StatusReportChart = ({
   style,
   canvasStyle,
   grad,
+  isVert = true,
 }: StatusReportChartProps) => {
   return (
     <Wrapper style={style}>
@@ -30,6 +32,7 @@ const StatusReportChart = ({
         style={{ width: '450px' }}
         canvasStyle={canvasStyle}
         grad={grad}
+        isVert={isVert}
       />
     </Wrapper>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReportChart from '../ReportChart';
 import { ReportChartProps } from '../ReportChart';
-import { SimulInfo } from '../../pages/simulation/SalesSimulation';
+import { SimulInfo } from '../../organisms/SalesSimulation';
 
 interface DynamicTopChartProps {
   posi: number;
@@ -53,17 +53,13 @@ const DynamicTopChart = ({ posi }: DynamicTopChartProps) => {
     }
     setRealData(newArr);
     let newLabel = newArr.map((a) => a.x);
-    console.log('x값만 뽑기', newLabel);
     setRealLabel(newLabel);
-    console.log(realData);
-    console.log('sorting 비교', newData, newArr);
   };
   const years = [
     2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023,
   ];
   useEffect(() => {
     trackPosi();
-    console.log('top chart posi incoming', posi);
   }, [posi]);
   const data = {
     labels: realLabel,

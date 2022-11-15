@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import SalesSimulation from './SalesSimulation';
+import SalesSimulation from '../../organisms/SalesSimulation';
 import { SimulationParams } from '../../../models/simultaion';
 import {
   useProSalesSimulation,
@@ -320,7 +320,6 @@ const values = [
 
 const SimulationPage = () => {
   const userEmail = sessionStorage.getItem('email');
-  console.log('이메일', userEmail);
   const mutation = useProSalesSimulation();
   const { data } = mutation;
   const [simulInputs, setSimulInputs] = useState<SimulationParams>({
@@ -335,7 +334,6 @@ const SimulationPage = () => {
   return (
     <Wrapper>
       {/* <TempSide></TempSide> */}
-      <h1>SimulationPage</h1>
       <SalesSimulation values={values}></SalesSimulation>
     </Wrapper>
   );
