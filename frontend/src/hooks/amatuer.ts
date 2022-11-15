@@ -1,13 +1,23 @@
 import { useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getAmatuerResult } from '../api/amatuer';
 import { AmatuerResultParams } from '../models/amatuer';
 
 export const useAmatuerResult = (params: AmatuerResultParams) =>
   useQuery({
-    queryKey: ['amatuer', 'result'],
+    queryKey: ['amatuer', 'result', params.admCd, params.jobCode],
     queryFn: () => getAmatuerResult(params),
   });
+
+export const usePrefetchAmatuerResult = async (params: AmatuerResultParams) => {
+  const queryClient = useQueryClient();
+  const data = await queryClient.prefetchQuery({
+    queryKey: ['amatuer', 'result', params.admCd, params.jobCode],
+    queryFn: () => getAmatuerResult(params),
+  });
+
+  return data;
+};
 
 // 이미사장 데이터
 
@@ -34,7 +44,7 @@ const storeCntLabels = [
   '2021년 4분기',
 ];
 
-const genderGrad = [
+export const genderGrad = [
   [
     [0, '#B6ACF1'],
     [1, '#27CFFB'],

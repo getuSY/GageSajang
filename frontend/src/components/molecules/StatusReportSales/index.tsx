@@ -10,6 +10,7 @@ interface StatusReportSalesProps {
   category: string;
   tab: number;
   title?: any;
+  statusResult?: any;
 }
 
 const data = {
@@ -58,6 +59,7 @@ const StatusReportSales = ({
   category,
   tab,
   title,
+  statusResult,
 }: StatusReportSalesProps) => {
   return (
     <Wrapper>

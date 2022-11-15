@@ -10,6 +10,7 @@ interface StatusReportOpenProps {
   category: string;
   tab: number;
   title?: any;
+  statusResult?: any;
 }
 
 const genderRate = {
@@ -70,6 +71,7 @@ const StatusReportOpen = ({
   category,
   tab,
   title,
+  statusResult,
 }: StatusReportOpenProps) => {
   return (
     <Wrapper>

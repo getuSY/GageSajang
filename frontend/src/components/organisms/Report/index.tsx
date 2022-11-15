@@ -62,11 +62,11 @@ const Report = ({
         tab={tab}
         setTab={setTab}
       />
-      {isLoading && (
+      {/* {isLoading && (
         <LodingErrorWrapper>
           <Spinner />
         </LodingErrorWrapper>
-      )}
+      )} */}
       {!isLoading && isSuccess && (
         <ReportContentContainer
           reportMenuList={reportMenuList}

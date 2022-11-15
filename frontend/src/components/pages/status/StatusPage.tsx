@@ -58,8 +58,12 @@ const StatusPage = () => {
 
   const trendData = useStatusTrend();
 
-  const detailData = useStatusDetail(region);
-  // console.log('detailData', region, detailData);
+  const {
+    data: statusResult,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useStatusDetail(region);
 
   return (
     <Transitions>
@@ -95,6 +99,10 @@ const StatusPage = () => {
               // 상세 페이지, 모달 + close 버튼
               isOpen={reportModal}
               setIsOpen={setReportModal}
+              statusResult={statusResult}
+              isLoading={isLoading}
+              isSuccess={isSuccess}
+              isError={isError}
             />
           </>
         )}

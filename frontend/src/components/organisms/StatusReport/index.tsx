@@ -18,49 +18,11 @@ interface StatusReportProps {
   isOpen?: boolean;
   title?: any;
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  statusResult: any;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
 }
-
-const data = {
-  labels: [
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-    '일요일',
-  ],
-  hoverOffset: 4,
-  datasets: [
-    {
-      data: [12, 2, 9, 5, 10, 8, 5],
-
-      backgroundColor: [
-        '#799ECF',
-        '#76A7D5',
-        '#74B1D9',
-        '#79BADB',
-        '#80C4DD',
-        '#88CEDF',
-        '#93D7E9',
-      ],
-    },
-  ],
-};
-
-const options = {
-  plugins: {
-    legend: {
-      display: false,
-    },
-    datalabels: {
-      font: {
-        weight: 'bold',
-      },
-      color: 'green',
-    },
-  },
-};
 
 const StatusReport = ({
   region,
@@ -70,6 +32,10 @@ const StatusReport = ({
   icon,
   isOpen,
   setIsOpen,
+  statusResult,
+  isLoading,
+  isSuccess,
+  isError,
 }: StatusReportProps) => {
   const [title, setTitle] = useState({
     name: content[0].name,
@@ -82,72 +48,78 @@ const StatusReport = ({
     });
   }, [tab]);
 
-  // const detailData =
-
   return (
     <Wrapper>
-      <ReportModal
-        // 상세 페이지, 모달 + close 버튼 //
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      >
-        <StatusReportIndex
-          // 상세페이지 상단 버튼들 //
-          region={region}
-          content={content}
-          category={category}
-          tab={tab}
-          icon={icon}
-        />
-        {tab === 0 && (
-          <StatusReportFP
-            title={title}
+      {isSuccess && (
+        <ReportModal
+          // 상세 페이지, 모달 + close 버튼 //
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        >
+          <StatusReportIndex
+            // 상세페이지 상단 버튼들 //
             region={region}
-            category={category!}
+            content={content}
+            category={category}
             tab={tab}
+            icon={icon}
           />
-        )}
-        {tab === 1 && (
-          <StatusReportRP
-            title={title}
-            region={region}
-            category={category!}
-            tab={tab}
-          />
-        )}
-        {tab === 2 && (
-          <StatusReportStores
-            title={title}
-            region={region}
-            category={category!}
-            tab={tab}
-          />
-        )}
-        {tab === 3 && (
-          <StatusReportOpen
-            title={title}
-            region={region}
-            category={category!}
-            tab={tab}
-          />
-        )}
-        {tab === 4 && (
-          <StatusReportClose
-            title={title}
-            region={region}
-            category={category!}
-            tab={tab}
-          />
-        )}
-        {tab === 5 && (
-          <StatusReportSales
-            title={title}
-            region={region}
-            category={category!}
-            tab={tab}
-          />
-        )}
-      </ReportModal>
+          {tab === 0 && (
+            <StatusReportFP
+              title={title}
+              region={region}
+              category={category!}
+              tab={tab}
+              statusResult={statusResult.living}
+            />
+          )}
+          {tab === 1 && (
+            <StatusReportRP
+              title={title}
+              region={region}
+              category={category!}
+              tab={tab}
+              statusResult={statusResult.resident}
+            />
+          )}
+          {tab === 2 && (
+            <StatusReportStores
+              title={title}
+              region={region}
+              category={category!}
+              tab={tab}
+              statusResult={statusResult.store}
+            />
+          )}
+          {tab === 3 && (
+            <StatusReportOpen
+              title={title}
+              region={region}
+              category={category!}
+              tab={tab}
+              statusResult={statusResult.open}
+            />
+          )}
+          {tab === 4 && (
+            <StatusReportClose
+              title={title}
+              region={region}
+              category={category!}
+              tab={tab}
+              statusResult={statusResult.close + statusResult.change}
+            />
+          )}
+          {tab === 5 && (
+            <StatusReportSales
+              title={title}
+              region={region}
+              category={category!}
+              tab={tab}
+              statusResult={statusResult.sales}
+            />
+          )}
+        </ReportModal>
+      )}
     </Wrapper>
   );
 };
