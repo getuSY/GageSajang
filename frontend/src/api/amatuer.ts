@@ -119,7 +119,7 @@ const dummyData = {
 };
 
 export const getAmatuerResult = async (params: AmatuerResultParams) => {
-  return dummyData;
+  // return dummyData;
   const { admCd, jobCode } = params;
   const { data } = await client.get(`/anlz/dongCS/${admCd}/${jobCode}`);
 

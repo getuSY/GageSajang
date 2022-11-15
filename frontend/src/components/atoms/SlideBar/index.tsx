@@ -66,7 +66,6 @@ const SlideBar = ({
   const trackPos = (data: ControlPosition) => {
     setPosition({ x: data.x, y: data.y });
     setPos(data.x);
-    console.log({ x: data.x, y: data.y });
   };
   const lightenColor = () => {
     setColor('green');

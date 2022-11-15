@@ -7,6 +7,7 @@ import KakaoMap from '../../organisms/KakaoMap';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import getCenter from '../../../utils/getCenter';
+import Spinner from '../../atoms/Spinner';
 
 const AmatuerAnalysisPage = () => {
   const [map, setMap] = useState<any>(); // map 객체
@@ -14,6 +15,7 @@ const AmatuerAnalysisPage = () => {
   const [select, setSelect] = useState<DongItem | null>(null); // 현재 선택한 동 index
   const [searchResult, setSearchResult] = useState<Array<DongItem>>([]);
   const [searchResultOpen, setSearchResultOpen] = useState<boolean>(false);
+  const [isResultLoading, setIsResultLoading] = useState<boolean>(false);
   const searchResultRef = useRef<any>();
   const container = useRef<any>();
   const [params] = useSearchParams();
@@ -48,8 +50,13 @@ const AmatuerAnalysisPage = () => {
   }, []);
 
   const onClickAnlzButton = () => {
-    navigate(
-      `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
+    setIsResultLoading(true);
+    setTimeout(
+      () =>
+        navigate(
+          `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
+        ),
+      3000
     );
   };
 
@@ -73,6 +80,11 @@ const AmatuerAnalysisPage = () => {
           }
         }}
       >
+        {isResultLoading && (
+          <LoadingContainer>
+            <Spinner />
+          </LoadingContainer>
+        )}
         <AnalysisSideBar
           onChange={onChange}
           inputValue={select?.name}
@@ -84,6 +96,7 @@ const AmatuerAnalysisPage = () => {
           mainCategory={mainCategory}
           subCategory={subCategory}
           onClickAnlzButton={onClickAnlzButton}
+          isResultLoading={isResultLoading}
         />
         <KakaoMap
           map={map}
@@ -99,6 +112,17 @@ const AmatuerAnalysisPage = () => {
 
 const Wrapper = styled.div`
   height: calc(100vh - 80px);
+`;
+
+const LoadingContainer = styled.div`
+  position: absolute;
+  z-index: 100000;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default AmatuerAnalysisPage;

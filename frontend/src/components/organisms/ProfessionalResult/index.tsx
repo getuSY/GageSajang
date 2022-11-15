@@ -1,30 +1,8 @@
-import { faBlackTie } from '@fortawesome/free-brands-svg-icons';
-import { url } from 'inspector';
 import React from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 import ReportChart from '../../atoms/ReportChart';
 
-interface ProfessionalResultProps {}
-
-const datas = {
-  labels: [1, 2, 3, 4, 5],
-  datasets: [
-    {
-      label: '매출액 TOP 5',
-      data: [10, 20, 30, 25, 15],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)',
-        'pink',
-        'purple',
-      ],
-      hoverOffset: 4,
-    },
-  ],
-};
-
-const professionalResultPage = ({}: ProfessionalResultProps) => {
+const ProfessionalResult = () => {
   const result = {
     dongName: '개포2동', // 읍면동명
     industryCode: 'CS100001', // 업종 구분 코드
@@ -70,7 +48,6 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
       },
     ],
   };
-  const salesOptions = {};
   const clerkData = {
     labels: ['내 가게 직원 수', '평균 직원 수'],
     datasets: [
@@ -82,7 +59,6 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
       },
     ],
   };
-  const clerkOptions = {};
   const frData = {
     labels: ['총 점포 수', '프랜차이즈 수'],
     datasets: [
@@ -219,13 +195,13 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               type="bar"
               data={salesData}
               style={{ width: '400px', height: '300px' }}
-              grad={[
-                [
-                  [0, '#49D0A8'],
-                  [0.8, '#F9F254'],
-                ],
-                [[0, '#ebdd4a']],
-              ]}
+              // grad={[
+              //   [
+              //     [0, '#49D0A8'],
+              //     [0.8, '#F9F254'],
+              //   ],
+              //   [[0, '#ebdd4a']],
+              // ]}
             ></ReportChart>
             {salesRate > 100 ? (
               <DetailCardScript>
@@ -272,13 +248,13 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               type="bar"
               data={clerkData}
               style={{ width: '400px', height: '300px' }}
-              grad={[
-                [
-                  [0, '#49D0A8'],
-                  [0.8, '#F9F254'],
-                ],
-                [[0, '#ebdd4a']],
-              ]}
+              // grad={[
+              //   [
+              //     [0, '#49D0A8'],
+              //     [0.8, '#F9F254'],
+              //   ],
+              //   [[0, '#ebdd4a']],
+              // ]}
             ></ReportChart>
             <DetailCardScript>
               <br></br>
@@ -307,14 +283,14 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               data={areaData}
               style={{ width: '400px', height: '300px', margin: '20px' }}
               options={areaOptions}
-              grad={[
-                [
-                  [0, '#49D0A8'],
-                  [0.8, '#F9F254'],
-                ],
-                [[0, '#ebdd4a']],
-              ]}
-              isVert={false}
+              // grad={[
+              //   [
+              //     [0, '#49D0A8'],
+              //     [0.8, '#F9F254'],
+              //   ],
+              //   [[0, '#ebdd4a']],
+              // ]}
+              // isVert={false}
             ></ReportChart>
             {areaRate > 100 ? (
               <DetailCardScript>
@@ -343,7 +319,7 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               data={ocData}
               style={{ width: '400px', height: '300px', margin: '20px' }}
               options={ocOptions}
-              grad={[[[0, '#edf3f1']], [[0, '#49D0A8']], [[0.8, '#F9F254']]]}
+              // grad={[[[0, '#edf3f1']], [[0, '#49D0A8']], [[0.8, '#F9F254']]]}
             ></ReportChart>
             {result.open > result.close ? (
               <DetailCardScript>
@@ -375,13 +351,13 @@ const professionalResultPage = ({}: ProfessionalResultProps) => {
               data={frData}
               style={{ width: '400px', height: '300px', margin: '20px' }}
               options={frcOptions}
-              grad={[
-                [[0, '#edf3f1']],
-                [
-                  [1, '#49D0A8'],
-                  [0.7, '#F9F254'],
-                ],
-              ]}
+              // grad={[
+              //   [[0, '#edf3f1']],
+              //   [
+              //     [1, '#49D0A8'],
+              //     [0.7, '#F9F254'],
+              //   ],
+              // ]}
             ></ReportChart>
             <DetailCardScript>
               {result.dongName}의 {result.industryName} 프랜차이즈 점포 수는{' '}
@@ -424,7 +400,7 @@ const SummaryCard = styled.div`
     position: relative;
     font-size: 36px;
     font-weight: 600;
-    color: green;
+    color: #1ca37c;
     margin-bottom: 20px;
   }
 
@@ -464,7 +440,7 @@ const DetailCards = styled.div`
 const DetailCardHeader = styled.p`
   /* text-align: start; */
   font-weight: 600;
-  color: green;
+  /* color: #1ca37c; */
   font-size: 40px;
 `;
 
@@ -492,4 +468,4 @@ const Notice = styled.div`
   padding: 0 30px;
 `;
 
-export default professionalResultPage;
+export default ProfessionalResult;

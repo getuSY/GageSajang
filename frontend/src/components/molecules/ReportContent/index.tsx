@@ -28,6 +28,7 @@ const ReportContent = ({
           type={chartData.type}
           data={chartData.data}
           grad={chartData.grad}
+          options={chartData.options}
           isVert={isVert}
         />
       )}

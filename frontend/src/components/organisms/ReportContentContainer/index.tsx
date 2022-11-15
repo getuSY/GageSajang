@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import ReportContent from '../../molecules/ReportContent';
 import Label from '../../atoms/Label';
@@ -10,6 +10,8 @@ import {
   useSalesData,
   useStoreCntData,
   useStoreData,
+  weekLabels,
+  timeLabels,
 } from '../../../hooks/amatuer';
 import Top3Rank from '../../atoms/Top3Rank';
 
@@ -69,7 +71,6 @@ const ReportContentContainer = ({
     storeCntOpenRateData,
     storeCntCloseData,
     storeCntCloseRateData,
-    storeCntOpenMultiData,
   } = useStoreCntData(amatuerResult); // 점포 수
 
   const { hinterlandPeopleData, hinterlandAgeData, hinterlandGenderData } =
@@ -83,11 +84,6 @@ const ReportContentContainer = ({
         ❗ 아래 분석 결과는 통계에 따른 추정 결과입니다. 향후 상황에 따라 다를
         수 있기 때문에, 판단 하에 참고하여 활용하시기 바랍니다.
       </ReportAlert>
-      {/* <div
-        className="content-div"
-        ref={(e: any) => (contentRefs.current[0] = e)}
-      > */}
-
       {/* 업종 분석 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[0] = e)}>
         <ReportContent>
@@ -126,7 +122,11 @@ const ReportContentContainer = ({
               에게 인기가 많습니다.
             </ReportComment>
           </ReportContent>
-          <ReportContent title="해당 업종 연령별 매출" chartData={storeAgeData}>
+          <ReportContent
+            title="해당 업종 연령별 매출"
+            chartData={storeAgeData}
+            style={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}
+          >
             <ReportComment>
               <span className="dongName">{dongName}</span>의{' '}
               <span className="jobName">{jobName}</span>은{' '}
@@ -154,17 +154,19 @@ const ReportContentContainer = ({
             style={{ flexGrow: 1 }}
             chartData={salesTotalData}
           ></ReportContent>
-          <ReportContent
-            title="해당 동 성별 매출"
-            chartData={salesGenderData}
-          ></ReportContent>
+          <ReportContent title="해당 동 성별 매출" chartData={salesGenderData}>
+            <ReportComment>
+              <span className="dongName">{dongName}</span>은{' '}
+              <span className="emphasis">
+                {salesGenderData.data.datasets[0].data[0] >=
+                salesGenderData.data.datasets[0].data[1]
+                  ? '남성'
+                  : '여성'}
+              </span>{' '}
+              매출이 높습니다.
+            </ReportComment>
+          </ReportContent>
           <ReportContent title="👑 Top 3">
-            {/* {salesAreaTop3Data.map((e: any, i: any) => (
-              <TopItem>
-                <div className="rank">{i + 1}</div>
-                <div className="name">{e}</div>
-              </TopItem>
-            ))} */}
             <Top3Rank top3={salesAreaTop3Data} />
           </ReportContent>
         </div>
@@ -173,18 +175,58 @@ const ReportContentContainer = ({
             title="해당 동 시간대별 매출"
             style={{ flexGrow: 1 }}
             chartData={salesTimeData}
-          ></ReportContent>
+          >
+            <ReportComment>
+              <span className="dongName">{dongName}</span>은{' '}
+              <span className="emphasis">
+                {`${
+                  timeLabels[
+                    salesTimeData.data.datasets[0].data.indexOf(
+                      Math.max(...salesTimeData.data.datasets[0].data)
+                    )
+                  ]
+                }`}
+              </span>
+              에 매출이 가장 높습니다.
+            </ReportComment>
+          </ReportContent>
           <ReportContent
             title="해당 동 연령별 매출"
             style={{ flexGrow: 1 }}
             chartData={salesAgeData}
-          ></ReportContent>
+          >
+            <ReportComment>
+              <span className="dongName">{dongName}</span>은{' '}
+              <span className="emphasis">
+                {`${
+                  salesAgeData.data.datasets[0].data.indexOf(
+                    Math.max(...salesAgeData.data.datasets[0].data)
+                  ) + 1
+                }0대`}
+              </span>
+              에게 인기가 많습니다.
+            </ReportComment>
+          </ReportContent>
           <ReportContent
             title="해당 동 요일별 매출"
             style={{ flexGrow: 1 }}
             chartData={salesWeekData}
             isVert={false}
-          ></ReportContent>
+          >
+            <ReportComment>
+              <span className="dongName">{dongName}</span>은{' '}
+              <span className="emphasis">
+                {`${
+                  weekLabels[
+                    salesWeekData.data.datasets[0].data.indexOf(
+                      Math.max(...salesWeekData.data.datasets[0].data)
+                    )
+                  ]
+                }요일`}
+              </span>
+              에 매출이 가장 높습니다.
+            </ReportComment>
+          </ReportContent>
         </div>
       </ReportCategory>
 
@@ -295,6 +337,7 @@ const Wrapper = styled.div`
   padding: 12px;
   & .chart-div {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     gap: 12px;
   }
@@ -335,6 +378,7 @@ const ReportComment = styled.div`
   margin-top: 1rem;
   font-size: 1.2rem;
   font-weight: 500;
+  max-width: 400px;
   & .jobName,
   .dongName {
     font-weight: 700;

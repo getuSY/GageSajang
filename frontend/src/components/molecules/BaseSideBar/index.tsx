@@ -10,6 +10,7 @@ interface BaseSideBarProps {
   isOpen?: boolean;
   statusmark?: boolean;
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleButton?: boolean;
 }
 
 const BaseSideBar = ({
@@ -19,17 +20,20 @@ const BaseSideBar = ({
   statusmark,
   isOpen,
   setIsOpen,
+  toggleButton = true,
 }: BaseSideBarProps) => {
   return (
     <Wrapper isOpen={isOpen} style={style}>
-      <button
-        className="toggle-btn"
-        onClick={() =>
-          setIsOpen ? setIsOpen((isOpen: boolean) => !isOpen) : null
-        }
-      >
-        {isOpen ? '<' : '>'}
-      </button>
+      {toggleButton && (
+        <button
+          className="toggle-btn"
+          onClick={() =>
+            setIsOpen ? setIsOpen((isOpen: boolean) => !isOpen) : null
+          }
+        >
+          {isOpen ? '<' : '>'}
+        </button>
+      )}
       <ShadowBox>
         {statusmark ? (
           <div className="title-div">
