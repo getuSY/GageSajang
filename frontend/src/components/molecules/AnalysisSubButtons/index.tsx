@@ -73,6 +73,7 @@ const SubButton = styled.button<SubButtonProps>`
   border: ${({ active, theme }) =>
     active ? `2px solid ${theme.darkColor}` : '1px solid darkgray'};
   color: ${({ active, theme }) => (active ? theme.darkColor : '#000')};
+  font-weight: ${({ active }) => (active ? '700' : '')};
   font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
   background: transparent;

@@ -25,7 +25,7 @@ const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
   return (
     <Wrapper>
       <img
-        src="assets/img/default_profile.png"
+        src="/assets/img/default_profile.png"
         alt=""
         className="profile-img"
       />

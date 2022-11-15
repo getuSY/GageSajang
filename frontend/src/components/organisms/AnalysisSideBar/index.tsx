@@ -22,6 +22,7 @@ interface AnalysisSideBarProps {
   mainCategory: number;
   subCategory: number;
   onClickAnlzButton: React.MouseEventHandler<HTMLButtonElement>;
+  isResultLoading?: boolean;
 }
 
 const AnalysisSideBar = ({
@@ -35,6 +36,7 @@ const AnalysisSideBar = ({
   mainCategory,
   subCategory,
   onClickAnlzButton,
+  isResultLoading,
 }: AnalysisSideBarProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -72,7 +74,13 @@ const AnalysisSideBar = ({
   );
 
   return (
-    <BaseSideBar title="🏪 상권 분석" isOpen={isOpen} setIsOpen={setIsOpen}>
+    <BaseSideBar
+      title="🏪 상권 분석"
+      // isOpen={isOpen}
+      isOpen={true}
+      setIsOpen={setIsOpen}
+      toggleButton={false}
+    >
       <Wrapper>
         <LabelSearchInput
           label="📌 주소 입력"
@@ -97,7 +105,9 @@ const AnalysisSideBar = ({
       <Button
         type="blur"
         style={{ width: '100%', fontSize: '1.4rem', fontWeight: '900' }}
-        disabled={!(mainCategory && subCategory && inputValue)}
+        disabled={
+          !(mainCategory && subCategory && inputValue) || isResultLoading
+        }
         onClick={onClickAnlzButton}
       >
         상권 분석하러 가기
