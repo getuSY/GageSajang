@@ -8,6 +8,10 @@ import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import getCenter from '../../../utils/getCenter';
 import Spinner from '../../atoms/Spinner';
+import getJobCode from '../../../utils/getJobCode';
+import { useQueryClient } from '@tanstack/react-query';
+import { createImportSpecifier } from 'typescript';
+import { getAmatuerResult } from '../../../api/amatuer';
 
 const AmatuerAnalysisPage = () => {
   const [map, setMap] = useState<any>(); // map 객체
@@ -20,6 +24,7 @@ const AmatuerAnalysisPage = () => {
   const container = useRef<any>();
   const [params] = useSearchParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const mainCategory = params.get('mainCategory')
     ? parseInt(params.get('mainCategory')!)
@@ -49,8 +54,15 @@ const AmatuerAnalysisPage = () => {
     setSelect(null);
   }, []);
 
-  const onClickAnlzButton = () => {
+  const onClickAnlzButton = async () => {
+    const jobCode = getJobCode(mainCategory, subCategory);
+    const admCd = select!.admCd;
+
     setIsResultLoading(true);
+    const data = await queryClient.prefetchQuery({
+      queryKey: ['amatuer', 'result', admCd, jobCode],
+      queryFn: () => getAmatuerResult({ admCd, jobCode }),
+    });
     setTimeout(
       () =>
         navigate(
