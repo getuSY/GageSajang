@@ -37,27 +37,33 @@ const StatusPage = () => {
   const [tab, setTab] = useState<number>(0); // category별 버튼, 순서 : content
   const [region, setRegion] = useState<string>(''); // 현재 선택한 구 이름
 
-  // 유동인구, 거주인구 등 버튼
+  // 사이드바 하단 버튼(유동인구, 거주인구 등..)
   const contentList = content.map((e: string, i: number) => ({
     name: e,
     onClick: () => setTab(i),
   }));
 
+  // 사이드바 하단 버튼(상권 / 상권배후지)
   const onClickLabelHandler = (category: string) => {
     setCategory(category);
   };
 
+  // 지도에서 지역 선택
   const onClickRegionHandler = (region: string) => {
     setRegion(region);
     setReportModal(true);
   };
 
+  // 상권 지도 API
   const { guData, isGuSuccess, isGuLoading, isGuError } = useStatusGuMap();
+  // 상권 배후지 지도 API
   const { hinGuData, isHinGuSuccess, isHinGuLoading, isHinGuError } =
-    useStatusHinGuMap();
+    useStatusHinGuMap(); //
 
+  // 사이드바 TOP10 API
   const trendData = useStatusTrend();
 
+  // 현황 상세 페이지 API
   const {
     data: statusResult,
     isLoading,
@@ -69,6 +75,7 @@ const StatusPage = () => {
     <Transitions>
       <Wrapper>
         {trendData.isSuccess && (
+          // 사이드바
           <StatusSideBar
             sideBarStatus={sideBarStatus}
             setSideBarStatus={setSideBarStatus}
@@ -81,6 +88,7 @@ const StatusPage = () => {
         )}
         {isGuSuccess && isHinGuSuccess && (
           <>
+            {/* 지도 */}
             <GeometryMap
               areas={areas.features}
               isOpen={sideBarStatus}
@@ -90,11 +98,12 @@ const StatusPage = () => {
               hinGuData={hinGuData}
               category={category}
             />
+            {/* 현황 상세 페이지 */}
             <StatusReport
               icon={icons}
               region={region}
               content={contentList}
-              category={category!}
+              // category={category!}
               tab={tab}
               // 상세 페이지, 모달 + close 버튼
               isOpen={reportModal}
