@@ -64,51 +64,64 @@ const StatusReport = ({
             tab={tab}
             icon={icon}
           />
-          {tab === 0 && (
-            // 유동인구
-            <StatusReportFP title={title} fpDetail={statusResult.living} />
-          )}
-          {tab === 1 && (
-            // 거주인구
-            <StatusReportRP title={title} rpDetail={statusResult.resident} />
-          )}
-          {tab === 2 && (
-            // 점포 수
-            <StatusReportStores
-              title={title}
-              storesDetail={statusResult.store}
-            />
-          )}
-          {tab === 3 && (
-            // 개업률
-            <StatusReportOpen
-              title={title}
-              openDetail={{
-                open: statusResult.open,
-                change: statusResult.change,
-              }}
-            />
-          )}
-          {tab === 4 && (
-            // 폐업률
-            <StatusReportClose
-              title={title}
-              closeDetail={{
-                close: statusResult.close,
-                change: statusResult.change,
-              }}
-            />
-          )}
-          {tab === 5 && (
-            // 매출
-            <StatusReportSales title={title} salesDetail={statusResult.sales} />
-          )}
+          <div className="report-content">
+            {tab === 0 && (
+              // 유동인구
+              <StatusReportFP
+                title={title}
+                fpDetail={statusResult.living}
+                region={region}
+              />
+            )}
+            {tab === 1 && (
+              // 거주인구
+              <StatusReportRP title={title} rpDetail={statusResult.resident} />
+            )}
+            {tab === 2 && (
+              // 점포 수
+              <StatusReportStores
+                title={title}
+                storesDetail={statusResult.store}
+              />
+            )}
+            {tab === 3 && (
+              // 개업률
+              <StatusReportOpen
+                title={title}
+                openDetail={{
+                  open: statusResult.open,
+                  change: statusResult.change,
+                }}
+              />
+            )}
+            {tab === 4 && (
+              // 폐업률
+              <StatusReportClose
+                title={title}
+                closeDetail={{
+                  close: statusResult.close,
+                  change: statusResult.change,
+                }}
+              />
+            )}
+            {tab === 5 && (
+              // 매출
+              <StatusReportSales
+                title={title}
+                salesDetail={statusResult.sales}
+              />
+            )}
+          </div>
         </ReportModal>
       )}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  & .report-content {
+    overflow-y: scroll;
+  }
+`;
 
 export default StatusReport;

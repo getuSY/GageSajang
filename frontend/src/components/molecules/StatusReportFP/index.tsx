@@ -5,28 +5,15 @@ import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusFpData } from '../../../hooks/status';
 import StatusReportDescription from '../../molecules/StatusReportDescription';
 import { numberComma, getMax } from '../../../utils/common';
-
-const reportDescription = [
-  {
-    title: '제목1',
-    content: '내용1내용1',
-  },
-  {
-    title: '제목2',
-    content: '내용2내용2',
-  },
-  {
-    title: '제목3',
-    content: '내용3내용3',
-  },
-];
+import ReportContent from '../AmatuerReportContent';
 
 interface StatusReportFPProps {
   title?: any;
   fpDetail?: any;
+  region?: string;
 }
 
-const StatusReportFP = ({ title, fpDetail }: StatusReportFPProps) => {
+const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
   const { fpGenderData, fpAgeData, fpQuaterData, fpWeekData, fpTimeData } =
     useStatusFpData(fpDetail);
 
@@ -37,7 +24,8 @@ const StatusReportFP = ({ title, fpDetail }: StatusReportFPProps) => {
         title={title}
       >
         <div className="summary-div">
-          분기별 평균 유동인구 수는 <span>{numberComma(fpDetail.total)}명</span>
+          분기별 평균 유동인구 수는{' '}
+          <span>{numberComma(Math.floor(fpDetail.total / 4))}명</span>
           입니다.
         </div>
         <div className="summary-div">
@@ -54,65 +42,79 @@ const StatusReportFP = ({ title, fpDetail }: StatusReportFPProps) => {
 
       <div className="report-top-div">
         {/* 성별별 유동인구 */}
-        <StatusReportChart
-          type={fpGenderData.type}
-          title={'유동인구 평균 성별 비(분기 기준)'}
-          data={fpGenderData.data}
-          options={fpGenderData.options}
-          style={{
-            padding: '20px',
-          }}
-          grad={fpGenderData.grad}
-        />
-        <StatusReportDescription descriptionList={reportDescription} />
+        <ReportContent
+          title="유동인구 평균 성별 비(분기 기준)"
+          chartData={fpGenderData}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">
+              {getMax(fpGenderData.data.datasets[0].data, 'gender')}
+            </span>
+            이 더 많습니다.
+          </ReportComment>
+        </ReportContent>
       </div>
 
       {/* 분기별 유동인구 */}
-      <StatusReportChart
-        type="bar"
-        title={'분기별 평균 유동인구'}
-        data={fpQuaterData.data}
-        style={{
-          // background: 'linear-gradient(90deg, #54BEF9 0%, #715DE9 100%)',
-          padding: '20px',
-          borderRadius: '10px',
-        }}
-        grad={fpQuaterData.grad}
-        isVert={false}
-      />
 
       <div className="report-middle-div">
+        <ReportContent
+          title="분기별 평균 유동인구"
+          chartData={fpQuaterData}
+          isVert={false}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">emphasis</span>이 더 많습니다.
+          </ReportComment>
+        </ReportContent>
         {/* 연령대별 유동인구 */}
-        <StatusReportChart
-          type={fpAgeData.type}
-          title={'연령별 평균 유동인구(분기 기준)'}
-          data={fpAgeData.data}
-          grad={fpAgeData.grad}
-        />
+        <ReportContent
+          title="연령별 평균 유동인구(분기 기준)"
+          chartData={fpAgeData}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">emphasis</span>이 더 많습니다.
+          </ReportComment>
+        </ReportContent>
       </div>
+      <div className="report-middle-div">
+        {/* 요일별 유동인구 */}
+        <ReportContent
+          title="요일별 평균 유동인구(분기 기준)"
+          chartData={fpWeekData}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">emphasis</span>이 더 많습니다.
+          </ReportComment>
+        </ReportContent>
 
-      {/* 요일별 유동인구 */}
-      <StatusReportChart
-        type={fpWeekData.type}
-        title={'요일별 평균 유동인구(분기 기준)'}
-        data={fpWeekData.data}
-        grad={fpWeekData.grad}
-      />
-
-      {/* 시간대별 유동인구 */}
-      <StatusReportChart
-        type="line"
-        title={'시간대별 평균 유동인구(분기 기준)'}
-        data={fpTimeData.data}
-        grad={fpTimeData.grad}
-      />
+        {/* 시간대별 유동인구 */}
+        <ReportContent
+          title="시간대별 평균 유동인구(분기 기준)"
+          chartData={fpTimeData}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">emphasis</span>이 더 많습니다.
+          </ReportComment>
+        </ReportContent>
+      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  height: 3000px;
-  overflow-y: scroll;
+  /* height: 3000px; */
+  /* overflow-y: scroll; */
   & .report-top-div {
     display: flex;
     width: 100%;
@@ -122,6 +124,23 @@ const Wrapper = styled.div`
       flex-direction: column;
       align-items: center;
     }
+  }
+  & .report-middle-div {
+    display: flex;
+  }
+`;
+
+const ReportComment = styled.div`
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  & .jobName,
+  .dongName {
+    font-weight: 700;
+  }
+  & .emphasis {
+    font-weight: 700;
+    color: #ff0000;
   }
 `;
 

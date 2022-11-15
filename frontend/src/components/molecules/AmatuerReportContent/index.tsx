@@ -27,7 +27,17 @@ const ReportContent = ({
 }: ReportContentProps) => {
   return (
     <Wrapper style={style} ref={propsRef}>
-      {title && <Label style={{ width: '100%' }}>{title}</Label>}
+      {title && (
+        <Label
+          style={{
+            width: '100%',
+            // fontWeight: 700,
+            fontSize: '1.3rem',
+          }}
+        >
+          {title}
+        </Label>
+      )}
       {chartData && (
         <ReportChart
           type={chartData.type}
