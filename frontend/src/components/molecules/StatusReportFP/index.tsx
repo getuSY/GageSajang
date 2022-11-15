@@ -16,15 +16,15 @@ const data = {
   datasets: [
     {
       data: [12, 2, 9, 5, 10, 8, 5],
-      backgroundColor: [
-        '#76A7D5',
-        '#76A7D5',
-        '#74B1D9',
-        '#79BADB',
-        '#80C4DD',
-        '#88CEDF',
-        '#93D7E9',
-      ],
+      // backgroundColor: [
+      //   '#76A7D5',
+      //   '#76A7D5',
+      //   '#74B1D9',
+      //   '#79BADB',
+      //   '#80C4DD',
+      //   '#88CEDF',
+      //   '#93D7E9',
+      // ],
     },
   ],
 };
@@ -42,6 +42,16 @@ const options = {
     },
   },
 };
+
+const weekGrad = [
+  [
+    [0, '#23CFFA'],
+    [0.25, '#A9B6F6'],
+    [0.5, '#C2A0EB'],
+    [0.75, '#D98CE1'],
+    [1, '#FC6DD1'],
+  ],
+];
 
 interface StatusReportFPProps {
   region?: string;
@@ -85,12 +95,12 @@ const StatusReportFP = ({
       },
       grad: [
         [
-          [0, '#677DEE'],
-          [1, '#715DE9'],
+          [0, '#F3B79B'],
+          [1, '#F872D4'],
         ],
         [
-          [0, '#54BEF9'],
-          [1, '#5E9AF3'],
+          [0, '#B6ACF1'],
+          [1, '#27CFFB'],
         ],
       ],
     }),
@@ -116,16 +126,14 @@ const StatusReportFP = ({
       </StatusReportTitle>
       <div className="report-top-div">
         <StatusReportChart
-          type="doughnut"
+          type="pie"
           title={'유동인구 평균 성별 비(분기 기준)'}
           data={genderRate.data}
           options={genderRate.options}
           style={{
-            // background: 'linear-gradient(90deg, #54BEF9 0%, #715DE9 100%)',
             padding: '20px',
-            borderRadius: '10px',
           }}
-          // grad={genderRateGrad}
+          grad={genderRate.grad}
         />
         <StatusReportChart
           type="bar"
@@ -137,6 +145,8 @@ const StatusReportFP = ({
             padding: '20px',
             borderRadius: '10px',
           }}
+          grad={weekGrad}
+          isVert={false}
         />
       </div>
       <div className="report-middle-div">

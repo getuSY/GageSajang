@@ -67,3 +67,10 @@ export const getStatusTrend = async () => {
   const { data } = await client.get('/anlz/store/top10');
   return data;
 };
+
+// 상권 현황 상세 API
+export const getStatusDetail = async (params: string) => {
+  const guName = params;
+  const { data } = await client.get(`/anlz/store/detail/${guName}`);
+  return data;
+};
