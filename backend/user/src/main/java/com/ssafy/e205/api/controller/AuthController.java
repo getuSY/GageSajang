@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -124,24 +123,17 @@ public class  AuthController {
         }
     }
 
-    @GetMapping("/overlap")
-    public ResponseEntity<String> overlapCheck(@RequestHeader("Authorization") String accessToken){
+    @GetMapping("/overlap/{email}")
+    public ResponseEntity<String> overlapCheck(@PathVariable String email){
         Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
-        boolean tokenValidate = jwtTokenProvider.validateToken(accessToken);
-        if(tokenValidate){
-            UserDto dto = userService.findByAccessToken(accessToken);
-            if(dto == null){
-                jsonObject.addProperty("result", "false");
-            }
-            else{
-                jsonObject.addProperty("result", "true");
-            }
-
+        Optional<UserEntity> entity = userService.findByEmail(email);
+        if(entity.isEmpty()){
+            jsonObject.addProperty("result", "true");
             return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
         }
         else{
-            jsonObject.addProperty("error","false");
+            jsonObject.addProperty("result", "false");
             return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.BAD_REQUEST);
         }
     }
