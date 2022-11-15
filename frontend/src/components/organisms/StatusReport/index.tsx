@@ -12,7 +12,7 @@ import StatusReportStores from '../../molecules/StatusReportStores';
 interface StatusReportProps {
   region?: string;
   content: any;
-  category: string;
+  // category: string;
   tab: number;
   icon?: any;
   isOpen?: boolean;
@@ -27,7 +27,7 @@ interface StatusReportProps {
 const StatusReport = ({
   region,
   content,
-  category,
+  // category,
   tab,
   icon,
   isOpen,
@@ -60,63 +60,48 @@ const StatusReport = ({
             // 상세페이지 상단 버튼들 //
             region={region}
             content={content}
-            category={category}
+            // category={category}
             tab={tab}
             icon={icon}
           />
           {tab === 0 && (
-            <StatusReportFP
-              title={title}
-              region={region}
-              category={category!}
-              tab={tab}
-              statusResult={statusResult.living}
-            />
+            // 유동인구
+            <StatusReportFP title={title} fpDetail={statusResult.living} />
           )}
           {tab === 1 && (
-            <StatusReportRP
-              title={title}
-              region={region}
-              category={category!}
-              tab={tab}
-              statusResult={statusResult.resident}
-            />
+            // 거주인구
+            <StatusReportRP title={title} rpDetail={statusResult.resident} />
           )}
           {tab === 2 && (
+            // 점포 수
             <StatusReportStores
               title={title}
-              region={region}
-              category={category!}
-              tab={tab}
-              statusResult={statusResult.store}
+              storesDetail={statusResult.store}
             />
           )}
           {tab === 3 && (
+            // 개업률
             <StatusReportOpen
               title={title}
-              region={region}
-              category={category!}
-              tab={tab}
-              statusResult={statusResult.open}
+              openDetail={{
+                open: statusResult.open,
+                change: statusResult.change,
+              }}
             />
           )}
           {tab === 4 && (
+            // 폐업률
             <StatusReportClose
               title={title}
-              region={region}
-              category={category!}
-              tab={tab}
-              statusResult={statusResult.close + statusResult.change}
+              closeDetail={{
+                close: statusResult.close,
+                change: statusResult.change,
+              }}
             />
           )}
           {tab === 5 && (
-            <StatusReportSales
-              title={title}
-              region={region}
-              category={category!}
-              tab={tab}
-              statusResult={statusResult.sales}
-            />
+            // 매출
+            <StatusReportSales title={title} salesDetail={statusResult.sales} />
           )}
         </ReportModal>
       )}

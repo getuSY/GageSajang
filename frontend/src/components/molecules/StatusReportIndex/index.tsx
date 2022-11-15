@@ -8,7 +8,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 interface StatusReportIndexProps {
   region?: string;
   content: any;
-  category: string;
+  // category: string;
   tab?: number;
   icon?: any;
 }
@@ -16,7 +16,7 @@ interface StatusReportIndexProps {
 const StatusReportIndex = ({
   region,
   content,
-  category,
+  // category,
   tab,
   icon,
 }: StatusReportIndexProps) => {
@@ -27,7 +27,8 @@ const StatusReportIndex = ({
         <div className="region-label-div">
           <span className="region-label">{region}</span>
           <span className="label-category">
-            {category === 'sub' ? '상권 배후지' : '상권'}
+            {/* {category === 'sub' ? '상권 배후지' : '상권'} */}
+            현황
           </span>
         </div>
       </ReportRegionLabel>
