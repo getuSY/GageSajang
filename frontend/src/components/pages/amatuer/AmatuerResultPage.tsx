@@ -46,12 +46,9 @@ const AmatuerResultPage = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* gap: 10px; */
-  /* background: #eaeaea; */
   background: #f2edf3;
   width: 100%;
   justify-content: center;
-  /* padding-top: 1px; */
   height: calc(100vh - 65px);
 `;
 

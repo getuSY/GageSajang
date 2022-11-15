@@ -16,7 +16,6 @@ import {
 import Top3Rank from '../../atoms/Top3Rank';
 
 type indexProps = {
-  reportMenuList: Array<{ name: string; icon: string }>;
   contentRefs: React.MutableRefObject<HTMLDivElement[]>;
   setTab: React.Dispatch<React.SetStateAction<number>>;
   amatuerResult: any;
@@ -25,13 +24,13 @@ type indexProps = {
 };
 
 const ReportContentContainer = ({
-  reportMenuList,
   contentRefs,
   setTab,
   amatuerResult,
   dongName,
   jobName,
 }: indexProps) => {
+  console.log(amatuerResult);
   const containerRef = useRef<HTMLDivElement>(null);
   const onScroll = throttle(() => {
     // 스크롤 이벤트
@@ -92,7 +91,7 @@ const ReportContentContainer = ({
             title="연도별 점포 수"
             style={{ flexGrow: 1 }}
             chartData={storeCntData}
-            chartStyle={{ width: '500px' }}
+            chartStyle={{ width: '450px' }}
             // canvasStyle={{ width: '' }}
           >
             <ReportComment style={{ width: '100%' }}>
@@ -151,7 +150,7 @@ const ReportContentContainer = ({
             title="해당 동 총 매출"
             style={{ flexGrow: 1 }}
             chartData={salesTotalData}
-            chartStyle={{ width: '600px' }}
+            chartStyle={{ width: '500px' }}
           >
             <ReportComment>
               <span className="dongName">{dongName}</span>은{' '}
@@ -249,33 +248,35 @@ const ReportContentContainer = ({
             title="전체 유동 인구"
             style={{ flexGrow: 1 }}
             chartData={livingTotalData}
-            chartStyle={{ width: '600px' }}
+            chartStyle={{ width: '500px' }}
           >
             <ReportComment>
               <span className="dongName">{dongName}</span>의 전체 유동인구는{' '}
               <span className="emphasis">증가</span> 하는 추세입니다.
             </ReportComment>
           </ReportContent>
-          <ReportContent
-            title="일별 유동 인구"
-            style={{ flexGrow: 1 }}
-            chartData={livingWeekData}
-            isVert={false}
-            chartStyle={{ width: '600px' }}
-          >
+
+          <ReportContent title="성별 유동인구" chartData={livingGenderData}>
             <ReportComment>
               <span className="dongName">{dongName}</span>의 유동인구는{' '}
               <span className="emphasis">
-                {`${
-                  weekLabels[
-                    livingWeekData.data.datasets[0].data.indexOf(
-                      Math.max(...livingWeekData.data.datasets[0].data)
-                    )
-                  ]
-                }요일`}
+                {storeGenderData.data.datasets[0].data[0] >=
+                storeGenderData.data.datasets[0].data[1]
+                  ? '남성'
+                  : '여성'}
               </span>
-              에 가장 많습니다.
+              이 많습니다.
             </ReportComment>
+          </ReportContent>
+          <ReportContent
+            title="👑 Top 3"
+            style={{
+              width: '360px',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Top3Rank top3={livingAreaTop3Data} />
           </ReportContent>
         </div>
         <div className="chart-div">
@@ -306,8 +307,8 @@ const ReportContentContainer = ({
               <span className="emphasis">
                 {`${
                   timeLabels[
-                    salesTimeData.data.datasets[0].data.indexOf(
-                      Math.max(...salesTimeData.data.datasets[0].data)
+                    livingTimeData.data.datasets[0].data.indexOf(
+                      Math.max(...livingTimeData.data.datasets[0].data)
                     )
                   ]
                 }`}
@@ -315,16 +316,25 @@ const ReportContentContainer = ({
               에 가장 많습니다.
             </ReportComment>
           </ReportContent>
-          <ReportContent title="성별 유동인구" chartData={livingGenderData}>
+          <ReportContent
+            title="일별 유동 인구"
+            style={{ flexGrow: 1 }}
+            chartData={livingWeekData}
+            isVert={false}
+            // chartStyle={{ width: '600px' }}
+          >
             <ReportComment>
               <span className="dongName">{dongName}</span>의 유동인구는{' '}
               <span className="emphasis">
-                {storeGenderData.data.datasets[0].data[0] >=
-                storeGenderData.data.datasets[0].data[1]
-                  ? '남성'
-                  : '여성'}
+                {`${
+                  weekLabels[
+                    livingWeekData.data.datasets[0].data.indexOf(
+                      Math.max(...livingWeekData.data.datasets[0].data)
+                    )
+                  ]
+                }요일`}
               </span>
-              이 많습니다.
+              에 가장 많습니다.
             </ReportComment>
           </ReportContent>
         </div>
@@ -375,7 +385,7 @@ const ReportContentContainer = ({
           <ReportContent
             title="연령별 매출"
             style={{ flexGrow: 1 }}
-            chartStyle={{ width: '600px' }}
+            chartStyle={{ width: '450px' }}
             chartData={hinterlandAgeData}
           ></ReportContent>
           <ReportContent

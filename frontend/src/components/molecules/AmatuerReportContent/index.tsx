@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Label from '../../atoms/Label';
 import ReportChart from '../../atoms/ReportChart';
+// import ReportChart from '../../atoms/AnalysisReportChart';
 
 interface ReportContentProps {
   children?: React.ReactNode;

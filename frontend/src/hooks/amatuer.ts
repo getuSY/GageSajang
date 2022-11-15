@@ -89,7 +89,6 @@ export const useStoreData = (amatuerResult: any) => {
               // 데이터라벨 숨김
               color: 'transparent',
             },
-            responsive: true,
           },
         ],
       },
@@ -336,7 +335,7 @@ export const useLivingData = (amatuerResult: any) => {
 
   // 동 기준 유동인구 top3 상권
   const livingAreaTop3Data = useMemo(
-    () => amatuerResult.living.areaTop3,
+    () => amatuerResult.living.top3,
     [amatuerResult]
   );
 

@@ -62,14 +62,8 @@ const Report = ({
         tab={tab}
         setTab={setTab}
       />
-      {/* {isLoading && (
-        <LodingErrorWrapper>
-          <Spinner />
-        </LodingErrorWrapper>
-      )} */}
       {!isLoading && isSuccess && (
         <ReportContentContainer
-          reportMenuList={reportMenuList}
           contentRefs={contentRefs}
           setTab={setTab}
           amatuerResult={amatuerResult}
