@@ -1,56 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import type { ChartData, ChartOptions, Chart } from 'chart.js';
-import ReportChart from '../ReportChart';
-import { number } from 'prop-types';
+import ReportChart, { ReportChartProps } from '../ReportChart';
 
-interface BarChartProps {
-  // options?: ChartOptions<'line'>;
-  data?: ChartData<'bar'>;
-}
-
-interface DynamicRateChartProps extends BarChartProps {
+interface DynamicRateChartProps {
   posi: number;
   values?: Array<number>;
   labels?: Array<string>;
 }
 
-const given = [
-  { x: 2013, y: 1000 },
-  { x: 2014, y: -1120 },
-  { x: 2015, y: -1234 },
-  { x: 2016, y: 1234 },
-  { x: 2017, y: -1244 },
-  { x: 2018, y: 1564 },
-  { x: 2019, y: 1234 },
-  { x: 2020, y: 1234 },
-  { x: 2021, y: -1200 },
-  { x: 2022, y: 1564 },
-  { x: 2023, y: 1789 },
-];
-
 type Position = { x: string; y: number };
 
 const DynamicRateChart = ({ posi, values, labels }: DynamicRateChartProps) => {
   // const [realData, setRealData] = useState([{ x: '2013년 1분기', y: 0 }]);
-  const [realData, setRealData] = useState([0]);
-  const [realLabel, setRealLabel] = useState(['2013년 1분기']);
-  const trackPosi = () => {
-    const newPos = posi / 50;
-    // const newData: Array<Position> = values.slice(0, (Number(newPos) + 1) * 4);
-    // const newData: Array<number> = values?.slice(0, (Number(newPos) + 1) * 4);
-    // const newLabels: Array<string> = labels?.slice(0, (Number(newPos) + 1) * 4);
-    // setRealLabel(labels);
-    // setRealData(values);
-    // const newData: Position = labels.reduce((acc, curr, idx) => {
-    //   acc[curr] = values[idx];
-    //   return acc;
-    // });
-    console.log(realData);
-  };
-  const years = [
-    2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023,
-  ];
 
   const data = {
     labels: labels,
@@ -59,18 +21,19 @@ const DynamicRateChart = ({ posi, values, labels }: DynamicRateChartProps) => {
         label: '연매출액',
         data: values,
         backgroundColor: '#eeeeee',
-        borderColor: 'black',
-        borderWidth: 1,
-        tension: 0.1,
-        // hidden: true,
+        // borderColor: 'rgba(73, 208, 168, 0.5)',
+        // borderWidth: 5,
+        tension: 0.3,
+        fill: true,
+        opacity: 0.5,
       },
     ],
   };
 
   const options = {
     reponsive: false,
-    // resizeDelay: 0,
-    elements: { point: { pointStyle: 'rectRot', radius: 5 } },
+    resizeDelay: 0,
+    elements: { point: { pointStyle: 'circle', radius: 5 } },
     plugins: {
       datalabels: { display: false },
       title: {
@@ -80,7 +43,7 @@ const DynamicRateChart = ({ posi, values, labels }: DynamicRateChartProps) => {
       legend: {
         display: true,
         labels: {
-          color: 'rgb(255, 99, 132)',
+          color: 'black',
         },
       },
     },
@@ -108,10 +71,6 @@ const DynamicRateChart = ({ posi, values, labels }: DynamicRateChartProps) => {
     },
   };
 
-  useEffect(() => {
-    trackPosi();
-    console.log('매출 증감 비율 확인', values, labels);
-  }, [values]);
   return (
     <Wrapper>
       {/* <Bar data={data} /> */}
@@ -119,15 +78,22 @@ const DynamicRateChart = ({ posi, values, labels }: DynamicRateChartProps) => {
         type="line"
         data={data}
         options={options}
-        style={{ width: '800px', height: '400px' }}
+        style={{ width: '95%', height: '600px' }}
+        grad={[
+          [
+            [0, 'rgba(73, 208, 168, 0.8'],
+            [0.95, 'rgba(249, 242, 84, 0.8)'],
+          ],
+          // [[0, '#ebdd4a']],
+        ]}
+        isVert={false}
       />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 100%;
 `;
 
 export default DynamicRateChart;

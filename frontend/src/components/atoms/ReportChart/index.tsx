@@ -64,10 +64,10 @@ const ReportChart = ({
       return;
     }
     const newChartData = {
-      ...chartData,
+      ...data,
       datasets: [
         {
-          ...chartData.datasets[0],
+          ...data.datasets[0],
           backgroundColor: grad.map((gradArr: any) =>
             createGradient(chart.ctx, chart.chartArea, gradArr, isVert)
           ),
@@ -75,7 +75,7 @@ const ReportChart = ({
       ],
     };
     setChartData(newChartData);
-  }, []);
+  }, [data]);
   return (
     <Wrapper style={style}>
       <Chart
