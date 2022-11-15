@@ -74,13 +74,15 @@ const StatusTrend = ({ trendData }: StatusTrendProps) => {
       <Group>
         {trendContent[getNumber].map((value: any, i: any) => (
           <div
-            className={trend === i ? `gu-div trend` : `gu-div`}
+            className="gu-div"
             key={`gu-${i}`}
             onMouseOver={() => onHoverHandler(i)}
             onMouseOut={() => onNotHoverHandler()}
           >
             <div className="rank">{i + 1}</div>
-            <div className="content">{value}</div>
+            <div className={trend === i ? `content trend` : `content`}>
+              {value}
+            </div>
           </div>
         ))}
       </Group>
@@ -90,9 +92,9 @@ const StatusTrend = ({ trendData }: StatusTrendProps) => {
 
 const Wrapper = styled.div`
   margin-top: 3vh;
-  border: 1px solid darkgray;
+  border: 1px solid #6193f280;
   border-radius: 10px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 2px 2px #6193f280, 0 0 5px 5px #56b6f780;
 `;
 
 const TitleDiv = styled.div`
@@ -120,7 +122,7 @@ const TitleDiv = styled.div`
 
 const Group = styled.div`
   letter-spacing: 2px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: grid;
@@ -136,14 +138,17 @@ const Group = styled.div`
   }
 
   & .trend {
-    border: ${({ theme }) => `2px solid ${theme.darkColor}`};
     border-radius: 10px;
 
-    & :hover {
-      transform: translateX(calc(-100% + 105px));
-      overflow-wrap: hidden;
-      transition: 2s;
-    }
+    // font gradient
+    background: ${({ theme }) => `${theme.gradColor}`};
+    color: transparent;
+    -webkit-background-clip: text;
+    font-weight: bold;
+
+    transform: translateX(calc(-100% + 110px));
+    overflow-wrap: hidden;
+    transition: 2s;
   }
 
   & .gu-div {
@@ -153,16 +158,25 @@ const Group = styled.div`
     align-items: center;
     white-space: nowrap;
     overflow: hidden;
+
+    & .content:hover {
+      transform: translateX(calc(-100% + 105px));
+      overflow-wrap: hidden;
+      transition: 2s;
+    }
   }
 
   & .rank {
     font-weight: 700;
-    color: red;
+    color: ${({ theme }) => `${theme.darkColor}`};
     margin-right: 0.3vw;
     background: #fff;
     z-index: 100;
     padding-left: 10px;
     padding-right: 2px;
+
+    & :hover {
+    }
   }
 `;
 
