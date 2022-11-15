@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   height: 100%;
   align-items: flex-end;
   & .top {
-    width: 100px;
+    width: 120px;
     background: #b6acf1;
     position: relative;
     margin: 0 2px;
@@ -36,13 +36,13 @@ const Wrapper = styled.div`
     font-weight: 700;
   }
   & .top1 {
-    height: 170px;
+    height: 210px;
   }
   & .top2 {
-    height: 115px;
+    height: 145px;
   }
   & .top3 {
-    height: 80px;
+    height: 100px;
   }
   & .top-item {
     position: absolute;

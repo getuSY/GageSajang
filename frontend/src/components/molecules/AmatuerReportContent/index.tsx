@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Label from '../../atoms/Label';
 import ReportChart from '../../atoms/ReportChart';
+// import ReportChart from '../../atoms/AnalysisReportChart';
 
 interface ReportContentProps {
   children?: React.ReactNode;
@@ -10,6 +11,8 @@ interface ReportContentProps {
   title?: string;
   chartData?: any;
   isVert?: boolean;
+  chartStyle?: any;
+  canvasStyle?: any;
 }
 
 const ReportContent = ({
@@ -19,10 +22,12 @@ const ReportContent = ({
   title,
   chartData,
   isVert,
+  chartStyle,
+  canvasStyle,
 }: ReportContentProps) => {
   return (
     <Wrapper style={style} ref={propsRef}>
-      {title && <Label style={{ marginBottom: '1.25rem' }}>{title}</Label>}
+      {title && <Label style={{ width: '100%' }}>{title}</Label>}
       {chartData && (
         <ReportChart
           type={chartData.type}
@@ -30,6 +35,8 @@ const ReportContent = ({
           grad={chartData.grad}
           options={chartData.options}
           isVert={isVert}
+          style={{ marginTop: '1.25rem', ...chartStyle }}
+          canvasStyle={canvasStyle}
         />
       )}
       {children}
@@ -42,6 +49,7 @@ const Wrapper = styled.div`
   /* height: 500px; */
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   padding: 20px 20px;
   border-radius: 10px;

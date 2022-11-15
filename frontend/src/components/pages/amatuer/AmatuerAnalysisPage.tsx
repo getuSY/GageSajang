@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import AnalysisSideBar from '../../organisms/AnalysisSideBar';
+import AnalysisSideBar from '../../organisms/AmatuerSideBar';
 import { areas, DongItem } from '../../../data/areaDong';
 import Transitions from '../../atoms/Transition';
-import KakaoMap from '../../organisms/KakaoMap';
+import KakaoMap from '../../atoms/KakaoMap';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import getCenter from '../../../utils/getCenter';
 import Spinner from '../../atoms/Spinner';
 import getJobCode from '../../../utils/getJobCode';
 import { useQueryClient } from '@tanstack/react-query';
-import { createImportSpecifier } from 'typescript';
 import { getAmatuerResult } from '../../../api/amatuer';
 
 const AmatuerAnalysisPage = () => {
@@ -59,17 +58,22 @@ const AmatuerAnalysisPage = () => {
     const admCd = select!.admCd;
 
     setIsResultLoading(true);
-    const data = await queryClient.prefetchQuery({
-      queryKey: ['amatuer', 'result', admCd, jobCode],
-      queryFn: () => getAmatuerResult({ admCd, jobCode }),
-    });
-    setTimeout(
-      () =>
-        navigate(
-          `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
-        ),
-      3000
-    );
+    setTimeout(() => {
+      queryClient
+        .fetchQuery({
+          queryKey: ['amatuer', 'result', admCd, jobCode],
+          queryFn: () => getAmatuerResult({ admCd, jobCode }),
+        })
+        .then((res) => {
+          navigate(
+            `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
+          );
+        })
+        .catch((e) =>
+          alert('지금은 분석할 수 없습니다. 나중에 다시 시도해주세요.')
+        );
+      setIsResultLoading(false);
+    }, 3000);
   };
 
   const selectDong = useCallback(
@@ -128,10 +132,11 @@ const Wrapper = styled.div`
 
 const LoadingContainer = styled.div`
   position: absolute;
-  z-index: 100000;
+  z-index: 1001;
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
-  height: 100%;
+  bottom: 0;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;

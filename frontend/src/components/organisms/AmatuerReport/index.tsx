@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Spinner from '../../atoms/Spinner';
 import ReportSideBar from '../../molecules/ReportSideBar';
-import ReportContentContainer from '../ReportContentContainer';
+import ReportContentContainer from '../AmatuerReportContentContainer';
 
 interface ReportProps {
   jobName: string;
@@ -62,14 +62,8 @@ const Report = ({
         tab={tab}
         setTab={setTab}
       />
-      {/* {isLoading && (
-        <LodingErrorWrapper>
-          <Spinner />
-        </LodingErrorWrapper>
-      )} */}
       {!isLoading && isSuccess && (
         <ReportContentContainer
-          reportMenuList={reportMenuList}
           contentRefs={contentRefs}
           setTab={setTab}
           amatuerResult={amatuerResult}

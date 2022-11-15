@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import areas from '../../../data/areaGu.json';
-import GeometryMap from '../../organisms/GeometryMap';
+import GeometryMap from '../../atoms/GeometryMap';
 import StatusSideBar from '../../organisms/StatusSideBar';
 import Transitions from '../../atoms/Transition';
 import StatusReport from '../../organisms/StatusReport';
