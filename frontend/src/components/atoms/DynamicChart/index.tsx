@@ -39,13 +39,11 @@ const DynamicChart = ({ posi, options }: DynamicChartProps) => {
   const [realData, setRealData] = useState(datas.slice(0, 1));
   useEffect(() => {
     trckPos();
-    // console.log('차트 내부 posi 인식', posi);
   }, [posi]);
   const trckPos = () => {
     const newPos = posi / 50;
     const newData = datas.slice(0, Number(newPos) + 1);
     setRealData(newData);
-    console.log(realData);
   };
   const chartOptions = {
     title: {

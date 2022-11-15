@@ -28,8 +28,8 @@ const StatusReportChart = ({
         data={data}
         options={options}
         style={{ width: '450px' }}
-        canvasStyle={canvasStyle}
-        grad={grad}
+        // canvasStyle={canvasStyle}
+        // grad={grad}
       />
     </Wrapper>
   );

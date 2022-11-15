@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LabelInput from '../../molecules/LabelInput';
-import ProfessionalResultPage from './ProfessionalResultPage';
+import ProfessionalResult from '../../organisms/ProfessionalResult';
 import { useProfessionalResult } from '../../../hooks/professional';
 import { ProfessionalResultParams } from '../../../models/professional';
 import Button from '../../atoms/Button';
-import SimulationPage from '../simulation/SimulationPage';
+import SimulationPage from './SimulationPage';
 import { useProSalesSimulation } from '../../../hooks/simulation';
 import Spinner from '../../atoms/Spinner';
 import { usePostCode } from '../../../hooks/common';
@@ -28,14 +28,12 @@ const ProfessionalInfoPage = () => {
   // const store = data.store;
   // const sales = data.sales;
   // const status = data.status;
-  console.log(data);
 
   const onClickHandler = () => {
     mutation.mutate(storeInfo);
   };
   const [guDong, setGuDong] = useState('');
   const postCode = usePostCode(setGuDong);
-  console.log(guDong);
 
   // const changeStoreInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setStoreInfo({
@@ -44,7 +42,6 @@ const ProfessionalInfoPage = () => {
   //   });
   // };
   const business = [...cs1, ...cs2, ...cs3];
-  console.log(business);
   const csList = business.map((name, index) => <option value={name}></option>);
   return (
     <Wrapper>
@@ -117,8 +114,9 @@ const ProfessionalInfoPage = () => {
       </ProSide>
       <ProReport>
         {/* <h1>ProReport</h1> */}
-        <ProfessionalResultPage />
-        {values ? <Spinner /> : <SimulationPage></SimulationPage>}
+        <ProfessionalResult />
+        {/* {values ? <Spinner /> : <SimulationPage></SimulationPage>} */}
+        <SimulationPage></SimulationPage>
       </ProReport>
     </Wrapper>
   );

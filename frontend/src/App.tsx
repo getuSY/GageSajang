@@ -17,11 +17,9 @@ const ProfessionalPage = lazy(
 const ProfessionalStorePage = lazy(
   () => import('./components/pages/professional/ProfessionalStorePage')
 );
-const ProfessionalResultPage = lazy(
-  () => import('./components/pages/professional/ProfessionalResultPage')
-);
+
 const SimulationPage = lazy(
-  () => import('./components/pages/simulation/SimulationPage')
+  () => import('./components/pages/professional/SimulationPage')
 );
 // Amatuer
 const AmatuerPage = lazy(
@@ -70,7 +68,6 @@ function App() {
           >
             <Route path="" element={<ProfessionalPage />} />
             <Route path="store" element={<ProfessionalStorePage />} />
-            <Route path="result" element={<ProfessionalResultPage />} />
             <Route path="simul" element={<SimulationPage />} />
           </Route>
           {/* 아마 사장 */}

@@ -54,9 +54,7 @@ const PracticeLineChart = ({
 // chartRef,
 PracticeLineChartProps) => {
   const chartRef = useRef();
-  useEffect(() => {
-    console.log(chart);
-  }, [data]);
+
   // const setTime = () => {
   //   const chart = chartRef.current;
   //   console.log(chart);
@@ -65,7 +63,6 @@ PracticeLineChartProps) => {
   const addRaw = () => {
     raw.push(2);
   };
-  console.log(chart);
   return (
     <Wrapper style={style}>
       <Line data={data} options={options} ref={chartRef} onClick={addRaw} />

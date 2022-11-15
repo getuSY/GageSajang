@@ -27,8 +27,8 @@ const ReportContent = ({
         <ReportChart
           type={chartData.type}
           data={chartData.data}
-          grad={chartData.grad}
-          isVert={isVert}
+          // grad={chartData.grad}
+          // isVert={isVert}
         />
       )}
       {children}
