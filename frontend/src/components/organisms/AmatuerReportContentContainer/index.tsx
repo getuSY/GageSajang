@@ -98,12 +98,12 @@ const ReportContentContainer = ({
               <span className="dongName">{dongName}</span>의{' '}
               <span className="jobName">{jobName}</span>은 작년에 비해 점포수가{' '}
               <span className="emphasis">
-                {storeGenderData.data.datasets[0].data[0] <
-                  storeGenderData.data.datasets[0].data[1] && '증가'}
-                {storeGenderData.data.datasets[0].data[0] ===
-                  storeGenderData.data.datasets[0].data[1] && '유지'}
-                {storeGenderData.data.datasets[0].data[0] >
-                  storeGenderData.data.datasets[0].data[1] && '감소'}
+                {storeCntData.data.datasets[0].data[0] <
+                  storeCntData.data.datasets[0].data[1] && '증가'}
+                {storeCntData.data.datasets[0].data[0] ===
+                  storeCntData.data.datasets[0].data[1] && '유지'}
+                {storeCntData.data.datasets[0].data[0] >
+                  storeCntData.data.datasets[0].data[1] && '감소'}
               </span>
               하는 추세입니다.
             </ReportComment>

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import ReportChart from '../../atoms/ReportChart';
 
 interface StatusReportChartProps {
-  type: 'bar' | 'bubble' | 'doughnut' | 'line' | 'pie' | 'polarArea' | 'radar';
+  type: any;
   title: string;
   data: any;
-  options: any;
+  options?: any;
   style?: object;
   canvasStyle?: object;
   grad?: any;

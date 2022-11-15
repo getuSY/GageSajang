@@ -1,66 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import ReportModal from '../../atoms/ReportModal';
+import React from 'react';
 import styled from 'styled-components';
 import StatusReportChart from '../../molecules/StatusReportChart';
-import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
+import { useStatusRpData } from '../../../hooks/status';
+import { numberComma, getMax, getRate } from '../../../utils/common';
 
 interface StatusReportRPProps {
-  region?: string;
-  category: string;
-  tab: number;
   title?: any;
-  statusResult?: any;
+  rpDetail?: any;
 }
 
-const data = {
-  labels: [
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-    '일요일',
-  ],
-  hoverOffset: 4,
-  datasets: [
-    {
-      data: [12, 2, 9, 5, 10, 8, 5],
-
-      backgroundColor: [
-        '#799ECF',
-        '#76A7D5',
-        '#74B1D9',
-        '#79BADB',
-        '#80C4DD',
-        '#88CEDF',
-        '#93D7E9',
-      ],
-    },
-  ],
-};
-
-const options = {
-  plugins: {
-    legend: {
-      display: false,
-    },
-    datalabels: {
-      font: {
-        weight: 'bold',
-      },
-      color: 'green',
-    },
-  },
-};
-
-const StatusReportRP = ({
-  region,
-  category,
-  tab,
-  title,
-}: StatusReportRPProps) => {
+const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
+  const { rpGenderData, rpAgeData, rpAptData } = useStatusRpData(rpDetail);
   return (
     <Wrapper>
       <StatusReportTitle
@@ -68,51 +19,48 @@ const StatusReportRP = ({
         title={title}
       >
         <div className="summary-div">
-          연평균 거주인구 수는 <span>32,000</span>명 입니다.
+          연평균 거주인구 수는 <span>{numberComma(rpDetail.total)}명</span>
+          입니다.
         </div>
         <div className="summary-div">
-          성별은 <span>여성</span>의 비율이 더 높으며, 주 연령대는{' '}
-          <span>60대 이상</span>입니다.
+          성별은 <span>{getMax(rpDetail.gender, 'gender')}</span>의 비율이 더
+          높으며, 주 연령대는 <span>{getMax(rpDetail.age, 'age')}</span>입니다.
         </div>
         <div className="summary-div">
-          연평균 가구 수는 <span>4,821</span>가구이며, 그 중 아파트의 비율은{' '}
-          <span>91</span>%, 비아파트의 비율은
-          <span>9</span>% 입니다.
+          연평균 가구 수는 <span>{numberComma(rpDetail.house)}가구</span>이며,
+          상권의 아파트 비율은{' '}
+          <span>{getRate([rpDetail.nonApt, rpDetail.apt])[0]}%</span>,
+          {/* 수정해야 함 */}
+          상권 배후지의 아파트 비율은
+          <span>{getRate([rpDetail.nonApt, rpDetail.apt])[1]}%</span> 입니다.
         </div>
       </StatusReportTitle>
+
       <div className="report-top-div">
+        {/* 성별별 거주인구 */}
         <StatusReportChart
-          type="bar"
-          title={'유동인구 평균 성별 비(분기 기준)'}
-          data={data}
-          options={options}
+          type={rpGenderData.type}
+          title={'거주인구 평균 성별 비(분기 기준)'}
+          data={rpGenderData.data}
+          options={rpGenderData.options}
+          grad={rpGenderData.grad}
         />
+
+        {/* 연령대별 거주인구 */}
         <StatusReportChart
-          type="doughnut"
-          title={'분기별 평균 유동인구'}
-          data={data}
-          options={options}
-        />
-      </div>
-      <div className="report-middle-div">
-        <StatusReportChart
-          type="polarArea"
-          title={'연령별 평균 유동인구(분기 기준)'}
-          data={data}
-          options={options}
-        />
-        <StatusReportChart
-          type="radar"
-          title={'요일별 평균 유동인구(분기 기준)'}
-          data={data}
-          options={options}
+          type={rpAgeData.type}
+          title={'연령별 평균 거주인구(분기 기준)'}
+          data={rpAgeData.data}
+          grad={rpAgeData.grad}
         />
       </div>
+
+      {/* 아파트/비아파트 비율 */}
       <StatusReportChart
-        type="line"
-        title={'시간대별 평균 유동인구(분기 기준)'}
-        data={data}
-        options={options}
+        type={rpAptData.type}
+        title={'아파트/비아파트 비율'}
+        data={rpAptData.data}
+        grad={rpAptData.grad}
       />
     </Wrapper>
   );

@@ -1,66 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import ReportModal from '../../atoms/ReportModal';
+import React from 'react';
 import styled from 'styled-components';
 import StatusReportChart from '../StatusReportChart';
-import StatusReportIndex from '../StatusReportIndex';
 import StatusReportTitle from '../StatusReportTitle';
+import { useStatusCloseData } from '../../../hooks/status';
+import { getMax } from '../../../utils/common';
 
 interface StatusReportCloseProps {
-  region?: string;
-  category: string;
-  tab: number;
   title?: any;
-  statusResult?: any;
+  closeDetail?: any;
 }
 
-const data = {
-  labels: [
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-    '일요일',
-  ],
-  hoverOffset: 4,
-  datasets: [
-    {
-      data: [12, 2, 9, 5, 10, 8, 5],
-
-      backgroundColor: [
-        '#799ECF',
-        '#76A7D5',
-        '#74B1D9',
-        '#79BADB',
-        '#80C4DD',
-        '#88CEDF',
-        '#93D7E9',
-      ],
-    },
-  ],
-};
-
-const options = {
-  plugins: {
-    legend: {
-      display: false,
-    },
-    datalabels: {
-      font: {
-        weight: 'bold',
-      },
-      color: 'green',
-    },
-  },
-};
-const StatusReportClose = ({
-  region,
-  category,
-  tab,
-  title,
-  statusResult,
-}: StatusReportCloseProps) => {
+const StatusReportClose = ({ title, closeDetail }: StatusReportCloseProps) => {
+  const { closeCsData, closeTopData, closeChangeData } =
+    useStatusCloseData(closeDetail);
+  console.log(closeDetail);
   return (
     <Wrapper>
       <StatusReportTitle
@@ -68,50 +21,36 @@ const StatusReportClose = ({
         title={title}
       >
         <div className="summary-div">
-          연평균 폐업률은 <span>3</span>% 입니다.
+          연평균 폐업률은 <span>{closeDetail.close.total}%</span> 입니다.
         </div>
         <div className="summary-div">
-          가장 많이 폐업하는 업종은 <span>도소매업</span>이며, "
-          <span>광화문광장</span>"의 폐업률이 가장 높습니다.
+          가장 많이 폐업하는 업종은{' '}
+          <span>{getMax(closeDetail.close.cs, 'cs')}</span>
+          이며, <span>{closeDetail.close.top3[0].name}</span>의 폐업률이 가장
+          높습니다.
         </div>
         <div className="summary-div">
-          상권변화지표는 <span>다이나믹</span>입니다.
+          상권변화지표는 <span>{closeDetail.change}</span>입니다.
         </div>
       </StatusReportTitle>
+
       <div className="report-top-div">
+        {/* 업종별 폐업률 */}
         <StatusReportChart
-          type="bar"
-          title={'유동인구 평균 성별 비(분기 기준)'}
-          data={data}
-          options={options}
+          type={closeCsData.type}
+          title={'업종별 폐업률'}
+          data={closeCsData.data}
+          grad={closeCsData.grad}
         />
+
+        {/* 폐업률 높은 상권 Top3 */}
         <StatusReportChart
-          type="doughnut"
-          title={'분기별 평균 유동인구'}
-          data={data}
-          options={options}
-        />
-      </div>
-      <div className="report-middle-div">
-        <StatusReportChart
-          type="polarArea"
-          title={'연령별 평균 유동인구(분기 기준)'}
-          data={data}
-          options={options}
-        />
-        <StatusReportChart
-          type="radar"
-          title={'요일별 평균 유동인구(분기 기준)'}
-          data={data}
-          options={options}
+          type={closeTopData.type}
+          title={'폐업률 높은 상권 Top3'}
+          data={closeTopData.data}
+          grad={closeTopData.grad}
         />
       </div>
-      <StatusReportChart
-        type="line"
-        title={'시간대별 평균 유동인구(분기 기준)'}
-        data={data}
-        options={options}
-      />
     </Wrapper>
   );
 };

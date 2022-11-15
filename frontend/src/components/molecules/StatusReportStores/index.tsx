@@ -1,65 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import ReportModal from '../../atoms/ReportModal';
+import React from 'react';
 import styled from 'styled-components';
 import StatusReportChart from '../../molecules/StatusReportChart';
-import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
+import { useStatusStoreData } from '../../../hooks/status';
+import { numberComma, getMax } from '../../../utils/common';
+
 interface StatusReportStoresProps {
-  region?: string;
-  category: string;
-  tab: number;
   title?: any;
-  statusResult?: any;
+  storesDetail?: any;
 }
 
-const data = {
-  labels: [
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-    '일요일',
-  ],
-  hoverOffset: 4,
-  datasets: [
-    {
-      data: [12, 2, 9, 5, 10, 8, 5],
-
-      backgroundColor: [
-        '#799ECF',
-        '#76A7D5',
-        '#74B1D9',
-        '#79BADB',
-        '#80C4DD',
-        '#88CEDF',
-        '#93D7E9',
-      ],
-    },
-  ],
-};
-
-const options = {
-  plugins: {
-    legend: {
-      display: false,
-    },
-    datalabels: {
-      font: {
-        weight: 'bold',
-      },
-      color: 'green',
-    },
-  },
-};
 const StatusReportStores = ({
-  region,
-  category,
-  tab,
   title,
-  statusResult,
+  storesDetail,
 }: StatusReportStoresProps) => {
+  const { storeCsData, storeDivData } = useStatusStoreData(storesDetail);
   return (
     <Wrapper>
       <StatusReportTitle
@@ -67,50 +22,42 @@ const StatusReportStores = ({
         title={title}
       >
         <div className="summary-div">
-          연 평균 점포 수는 <span>32,000</span>개 입니다.
+          연 평균 점포 수는 <span>{numberComma(storesDetail.total)}개소</span>
+          입니다.
         </div>
         <div className="summary-div">
-          주요 업종은 <span>외식업</span>이고, 그 중 <span>한식음식점</span>
-          이(가) <span>1,532</span>개소로 가장 많습니다.
+          주요 업종은 <span>{getMax(storesDetail.cs, 'cs')}</span>이고,{' '}
+          <span>{getMax(storesDetail.div, 'div')}</span>
+          이(가){' '}
+          <span>{numberComma(Math.max.apply(Math, storesDetail.div))}개소</span>
+          로 가장 많습니다.
         </div>
         <div className="summary-div">
-          점포 수가 가장 많은 상권은 <span>이북5도청사</span> 입니다.
+          점포 수가 가장 많은 업종은{' '}
+          <span>
+            외식업 : {storesDetail.cs1Top3[0]}, 서비스업 :{' '}
+            {storesDetail.cs2Top3[0]}, 도소매업 :{storesDetail.cs3Top3[0]}
+          </span>{' '}
+          입니다.
         </div>
       </StatusReportTitle>
       <div className="report-top-div">
+        {/* 업종별 점포 수 */}
         <StatusReportChart
-          type="bar"
-          title={'유동인구 평균 성별 비(분기 기준)'}
-          data={data}
-          options={options}
+          type={storeCsData.type}
+          title={'업종별 점포 수'}
+          data={storeCsData.data}
+          grad={storeCsData.grad}
         />
+
+        {/* 상권 구분별 점포 수 */}
         <StatusReportChart
-          type="doughnut"
-          title={'분기별 평균 유동인구'}
-          data={data}
-          options={options}
-        />
-      </div>
-      <div className="report-middle-div">
-        <StatusReportChart
-          type="polarArea"
-          title={'연령별 평균 유동인구(분기 기준)'}
-          data={data}
-          options={options}
-        />
-        <StatusReportChart
-          type="radar"
-          title={'요일별 평균 유동인구(분기 기준)'}
-          data={data}
-          options={options}
+          type={storeDivData.type}
+          title={'상권 구분별 점포 수'}
+          data={storeDivData.data}
+          grad={storeDivData.grad}
         />
       </div>
-      <StatusReportChart
-        type="line"
-        title={'시간대별 평균 유동인구(분기 기준)'}
-        data={data}
-        options={options}
-      />
     </Wrapper>
   );
 };

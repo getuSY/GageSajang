@@ -1,66 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import ReportModal from '../../atoms/ReportModal';
+import React from 'react';
 import styled from 'styled-components';
 import StatusReportChart from '../../molecules/StatusReportChart';
-import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
+import { useStatusSalesData } from '../../../hooks/status';
+import { getMax } from '../../../utils/common';
 
 interface StatusReportSalesProps {
-  region?: string;
-  category: string;
-  tab: number;
   title?: any;
-  statusResult?: any;
+  salesDetail?: any;
 }
 
-const data = {
-  labels: [
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-    '일요일',
-  ],
-  hoverOffset: 4,
-  datasets: [
-    {
-      data: [12, 2, 9, 5, 10, 8, 5],
-
-      backgroundColor: [
-        '#799ECF',
-        '#76A7D5',
-        '#74B1D9',
-        '#79BADB',
-        '#80C4DD',
-        '#88CEDF',
-        '#93D7E9',
-      ],
-    },
-  ],
-};
-
-const options = {
-  plugins: {
-    legend: {
-      display: false,
-    },
-    datalabels: {
-      font: {
-        weight: 'bold',
-      },
-      color: 'green',
-    },
-  },
-};
-const StatusReportSales = ({
-  region,
-  category,
-  tab,
-  title,
-  statusResult,
-}: StatusReportSalesProps) => {
+const StatusReportSales = ({ title, salesDetail }: StatusReportSalesProps) => {
+  const {
+    salesCsData,
+    salesWeekData,
+    salesAgeData,
+    salesGenderData,
+    salesTimeData,
+  } = useStatusSalesData(salesDetail);
   return (
     <Wrapper>
       <StatusReportTitle
@@ -68,50 +25,64 @@ const StatusReportSales = ({
         title={title}
       >
         <div className="summary-div">
-          매출이 가장 높은 업종은 <span>서비스업</span> 입니다.
+          매출이 가장 높은 업종은 <span>{getMax(salesDetail.cs, 'cs')}</span>{' '}
+          입니다.
         </div>
         <div className="summary-div">
-          매출 중 성별은 <span>여성</span>의 비율이 더 높으며, 주 연령대는{' '}
-          <span>60대 이상</span>입니다.
+          매출 중 성별은 <span>{getMax(salesDetail.gender, 'gender')}</span>의
+          비율이 더 높으며, 주 연령대는{' '}
+          <span>{getMax(salesDetail.age, 'age')}</span> 입니다.
         </div>
         <div className="summary-div">
-          요일은 <span>월요일</span>, 시간대는 <span>00~06</span>시에 평균
-          매출이 가장 높습니다.
+          요일은 <span>{getMax(salesDetail.week, 'week')}</span>, 시간대는{' '}
+          <span>{getMax(salesDetail.time, 'time')}</span>에 평균 매출이 가장
+          높습니다.
         </div>
       </StatusReportTitle>
+
       <div className="report-top-div">
+        {/* 업종별 매출 */}
         <StatusReportChart
-          type="bar"
-          title={'유동인구 평균 성별 비(분기 기준)'}
-          data={data}
-          options={options}
+          type={salesCsData.type}
+          title={'업종별 매출'}
+          data={salesCsData.data}
+          grad={salesCsData.grad}
         />
+
+        {/* 요일별 매출 */}
         <StatusReportChart
-          type="doughnut"
-          title={'분기별 평균 유동인구'}
-          data={data}
-          options={options}
+          type={salesWeekData.type}
+          title={'요일별 매출'}
+          data={salesWeekData.data}
+          grad={salesWeekData.grad}
         />
       </div>
+
       <div className="report-middle-div">
+        {/* 연령대별 매출 */}
         <StatusReportChart
-          type="polarArea"
-          title={'연령별 평균 유동인구(분기 기준)'}
-          data={data}
-          options={options}
+          type={salesAgeData.type}
+          title={'연령대별 매출'}
+          data={salesAgeData.data}
+          grad={salesAgeData.grad}
         />
+
+        {/* 성별별 매출 */}
         <StatusReportChart
-          type="radar"
-          title={'요일별 평균 유동인구(분기 기준)'}
-          data={data}
-          options={options}
+          type={salesGenderData.type}
+          title={'성별별 매출'}
+          data={salesGenderData.data}
+          options={salesGenderData.options}
+          grad={salesGenderData.grad}
         />
       </div>
+
+      {/* 시간대별 매출 */}
       <StatusReportChart
-        type="line"
-        title={'시간대별 평균 유동인구(분기 기준)'}
-        data={data}
-        options={options}
+        type={salesTimeData.type}
+        title={'시시간대별 매출'}
+        data={salesTimeData.data}
+        grad={salesTimeData.grad}
       />
     </Wrapper>
   );
