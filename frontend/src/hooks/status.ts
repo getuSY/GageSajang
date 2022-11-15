@@ -303,10 +303,126 @@ const statusDummy = {
   },
 };
 
-export const useStatusDetail = (params: string) => {
-  return statusDummy;
+export const useStatusDetail = (guName: string) =>
   useQuery({
-    queryKey: ['status', 'detail', params],
-    queryFn: () => getStatusDetail(params),
+    queryKey: ['status', 'detail', guName],
+    queryFn: () => getStatusDetail(guName),
   });
+
+const timeLabels = [
+  '0~6시',
+  '6~11시',
+  '11~14시',
+  '14~17시',
+  '17~21시',
+  '21~24시',
+];
+const weekLabels = ['월', '화', '수', '목', '금', '토', '일'];
+const genderLabels = ['남', '여'];
+const ageLabels = ['10대', '20대', '30대', '40대', '50대', '60대'];
+const yearLabels = [2017, 2018, 2019, 2020, 2021];
+const storeCntLabels = [
+  '2021년 1분기',
+  '2021년 2분기',
+  '2021년 3분기',
+  '2021년 4분기',
+];
+const storeCsLabels = ['외식업', '서비스업', '도소매업'];
+const sotreAreaLabels = ['골목상권', '전통시장', '관광특구', '발달상권'];
+const genderGrad = [
+  [
+    [0, '#B6ACF1'],
+    [1, '#27CFFB'],
+  ],
+  [
+    [0, '#F3B79B'],
+    [1, '#F872D4'],
+  ],
+];
+
+const weekGrad = [
+  [
+    [0, '#23CFFA'],
+    [0.25, '#A9B6F6'],
+    [0.5, '#C2A0EB'],
+    [0.75, '#D98CE1'],
+    [1, '#FC6DD1'],
+  ],
+];
+
+const timeGrad = [
+  [
+    [0, '#B29AF860'],
+    [1, '#B29AF8d9'],
+  ],
+];
+export const useStatusData = (statusResult: any) => {
+  // 유동인구 성비
+  const fpGenderData = useMemo(
+    () => ({
+      type: 'pie',
+      data: {
+        labels: genderLabels,
+        datasets: [
+          {
+            label: '매출',
+            barThickness: 70,
+            data: statusResult.living.gender,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'white',
+            },
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          // legend: {
+          //   display: false,
+          // },
+          datalabels: {
+            font: {
+              weight: 'bold',
+            },
+            color: 'white',
+            padding: 6,
+            backgroundColor: '#79797930',
+            borderRadius: 4,
+          },
+        },
+      },
+      grad: genderGrad,
+    }),
+    [statusResult]
+  );
+  // 연령대별 유동인구 수
+  const fpAgeData = useMemo(
+    () => ({
+      type: 'bar',
+      data: {
+        labels: ageLabels,
+        datasets: [
+          {
+            label: '유동 인구',
+            data: statusResult.store.age,
+            barThickness: 30,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'transparent',
+            },
+          },
+        ],
+      },
+      grad: [
+        [
+          [0, '#A82BEC'],
+          [0.8, '#714BF4'],
+          [1, '#545BF9'],
+        ],
+      ],
+    }),
+    [statusResult]
+  );
+
+  // const fpCntData = useMemo(() => (), [])
 };
