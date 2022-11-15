@@ -44,7 +44,7 @@ const storeCntLabels = [
   '2021년 4분기',
 ];
 
-const genderGrad = [
+export const genderGrad = [
   [
     [0, '#B6ACF1'],
     [1, '#27CFFB'],
