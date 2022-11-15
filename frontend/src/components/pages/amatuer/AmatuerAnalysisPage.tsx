@@ -58,17 +58,22 @@ const AmatuerAnalysisPage = () => {
     const admCd = select!.admCd;
 
     setIsResultLoading(true);
-    await queryClient.prefetchQuery({
-      queryKey: ['amatuer', 'result', admCd, jobCode],
-      queryFn: () => getAmatuerResult({ admCd, jobCode }),
-    });
-    setTimeout(
-      () =>
-        navigate(
-          `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
-        ),
-      3000
-    );
+    setTimeout(() => {
+      queryClient
+        .fetchQuery({
+          queryKey: ['amatuer', 'result', admCd, jobCode],
+          queryFn: () => getAmatuerResult({ admCd, jobCode }),
+        })
+        .then((res) => {
+          navigate(
+            `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
+          );
+        })
+        .catch((e) =>
+          alert('지금은 분석할 수 없습니다. 나중에 다시 시도해주세요.')
+        );
+      setIsResultLoading(false);
+    }, 3000);
   };
 
   const selectDong = useCallback(
@@ -127,10 +132,11 @@ const Wrapper = styled.div`
 
 const LoadingContainer = styled.div`
   position: absolute;
-  z-index: 100000;
+  z-index: 1001;
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
-  height: 100%;
+  bottom: 0;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
