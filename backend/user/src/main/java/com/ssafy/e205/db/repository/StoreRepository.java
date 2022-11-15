@@ -12,7 +12,7 @@ import javax.persistence.QueryHint;
 import java.util.List;
 
 public interface StoreRepository extends JpaRepository<StoreEntity, Integer> {
-    @Lock(LockModeType.PESSIMISTIC_FORCE_INCREMENT)
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     @QueryHints({@QueryHint(name="javax.persistence.lock.timeout", value = "10000")}) //mariaDB 에선 작동안함
 
     StoreEntity findByEmail(String email);

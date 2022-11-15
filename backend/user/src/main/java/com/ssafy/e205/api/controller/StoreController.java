@@ -39,7 +39,13 @@ public class StoreController {
 
     @GetMapping("/getStore/{email}")
     public ResponseEntity<StoreEntity> getStoreEntity(@PathVariable String email){
-        return new ResponseEntity<StoreEntity>(storeService.getStoreEntity(email), HttpStatus.OK);
+        StoreEntity entity = storeService.getStoreEntity(email);
+        if(entity == null){
+            return new ResponseEntity<StoreEntity>(entity, HttpStatus.BAD_REQUEST);
+        }
+        else{
+            return new ResponseEntity<StoreEntity>(entity, HttpStatus.OK);
+        }
     }
 
     @PostMapping("/setStore")
