@@ -10,6 +10,7 @@ interface StatusReportCloseProps {
   category: string;
   tab: number;
   title?: any;
+  statusResult?: any;
 }
 
 const data = {
@@ -58,6 +59,7 @@ const StatusReportClose = ({
   category,
   tab,
   title,
+  statusResult,
 }: StatusReportCloseProps) => {
   return (
     <Wrapper>

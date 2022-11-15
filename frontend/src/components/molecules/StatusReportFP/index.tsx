@@ -58,54 +58,15 @@ interface StatusReportFPProps {
   category: string;
   tab: number;
   title?: any;
+  statusResult?: any;
 }
 const StatusReportFP = ({
   region,
   category,
   tab,
   title,
+  statusResult,
 }: StatusReportFPProps) => {
-  const genderRate = useMemo(
-    () => ({
-      data: {
-        labels: ['여성', '남성'],
-        datasets: [
-          {
-            data: [67, 33],
-            hoverOffset: 4,
-            backgroundColor: ['#799ECF', '#93D7E9'],
-          },
-        ],
-      },
-      options: {
-        plugins: {
-          // legend: {
-          //   display: false,
-          // },
-          datalabels: {
-            font: {
-              weight: 'bold',
-            },
-            color: 'white',
-            padding: 6,
-            backgroundColor: '#79797930',
-            borderRadius: 4,
-          },
-        },
-      },
-      grad: [
-        [
-          [0, '#F3B79B'],
-          [1, '#F872D4'],
-        ],
-        [
-          [0, '#B6ACF1'],
-          [1, '#27CFFB'],
-        ],
-      ],
-    }),
-    []
-  );
   return (
     <Wrapper>
       <StatusReportTitle
@@ -128,12 +89,12 @@ const StatusReportFP = ({
         <StatusReportChart
           type="pie"
           title={'유동인구 평균 성별 비(분기 기준)'}
-          data={genderRate.data}
-          options={genderRate.options}
+          data={statusResult.data}
+          options={statusResult.options}
           style={{
             padding: '20px',
           }}
-          grad={genderRate.grad}
+          grad={statusResult.grad}
         />
         <StatusReportChart
           type="bar"

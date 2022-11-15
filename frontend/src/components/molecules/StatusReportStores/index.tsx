@@ -9,6 +9,7 @@ interface StatusReportStoresProps {
   category: string;
   tab: number;
   title?: any;
+  statusResult?: any;
 }
 
 const data = {
@@ -57,6 +58,7 @@ const StatusReportStores = ({
   category,
   tab,
   title,
+  statusResult,
 }: StatusReportStoresProps) => {
   return (
     <Wrapper>

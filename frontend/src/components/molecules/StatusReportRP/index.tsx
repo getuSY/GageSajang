@@ -10,6 +10,7 @@ interface StatusReportRPProps {
   category: string;
   tab: number;
   title?: any;
+  statusResult?: any;
 }
 
 const data = {
