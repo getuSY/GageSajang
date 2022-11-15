@@ -35,7 +35,8 @@ interface WrapperProps {
 }
 
 const Wrapper = styled.div<WrapperProps>`
-  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  /* display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')}; */
+  display: flex;
   /* background: #f4f4f4; */
   background-color: white;
   flex-direction: column;
@@ -43,8 +44,9 @@ const Wrapper = styled.div<WrapperProps>`
   height: calc(100% - 100px);
   position: absolute;
   top: 82px;
-  left: 20px;
-  transition: left 0.6s;
+  /* left: 20px; */
+  left: ${({ isOpen }) => (isOpen ? '10px' : '-1020px')};
+  transition: left 1.1s;
   z-index: 999;
   box-shadow: 2px 2px 2px 2px darkgray;
   border-radius: 15px;
