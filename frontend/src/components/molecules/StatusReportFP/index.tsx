@@ -24,8 +24,8 @@ const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
         title={title}
       >
         <div className="summary-div">
-          분기별 평균 유동인구 수는{' '}
-          <span>{numberComma(Math.floor(fpDetail.total / 4))}명</span>
+          하루 평균 유동인구 수는{' '}
+          <span>{numberComma(Math.floor(fpDetail.total / 90))}명</span>
           입니다.
         </div>
         <div className="summary-div">
@@ -40,11 +40,34 @@ const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
         </div>
       </StatusReportTitle>
 
-      <div className="report-top-div">
+      <div className="report-div">
+        <ReportContent
+          title="분기별 일일 평균 유동인구"
+          chartData={fpQuaterData}
+          isVert={false}
+          style={{ width: '600px' }}
+          chartStyle={{ width: '600px' }}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">
+              {getMax(fpQuaterData.data.datasets[0].data, 'quarter')}
+            </span>
+            가 가장 많습니다.
+          </ReportComment>
+        </ReportContent>
+        <ReportContent style={{ flexGrow: 1 }}></ReportContent>
+      </div>
+
+      {/* 분기별 유동인구 */}
+
+      <div className="report-div">
         {/* 성별별 유동인구 */}
         <ReportContent
           title="유동인구 평균 성별 비(분기 기준)"
           chartData={fpGenderData}
+          style={{ flexGrow: 1 }}
         >
           {' '}
           <ReportComment>
@@ -55,26 +78,11 @@ const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
             이 더 많습니다.
           </ReportComment>
         </ReportContent>
-      </div>
-
-      {/* 분기별 유동인구 */}
-
-      <div className="report-middle-div">
-        <ReportContent
-          title="분기별 평균 유동인구"
-          chartData={fpQuaterData}
-          isVert={false}
-        >
-          {' '}
-          <ReportComment>
-            <span className="dongName">{region}</span>의 유동인구는{' '}
-            <span className="emphasis">emphasis</span>이 더 많습니다.
-          </ReportComment>
-        </ReportContent>
         {/* 연령대별 유동인구 */}
         <ReportContent
           title="연령별 평균 유동인구(분기 기준)"
           chartData={fpAgeData}
+          style={{ flexGrow: 1 }}
         >
           {' '}
           <ReportComment>
@@ -83,11 +91,12 @@ const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
           </ReportComment>
         </ReportContent>
       </div>
-      <div className="report-middle-div">
+      <div className="report-div">
         {/* 요일별 유동인구 */}
         <ReportContent
           title="요일별 평균 유동인구(분기 기준)"
           chartData={fpWeekData}
+          style={{ flexGrow: 1 }}
         >
           {' '}
           <ReportComment>
@@ -100,6 +109,7 @@ const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
         <ReportContent
           title="시간대별 평균 유동인구(분기 기준)"
           chartData={fpTimeData}
+          style={{ flexGrow: 1 }}
         >
           {' '}
           <ReportComment>
@@ -115,18 +125,12 @@ const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
 const Wrapper = styled.div`
   /* height: 3000px; */
   /* overflow-y: scroll; */
-  & .report-top-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  & .report-div {
     display: flex;
-    width: 100%;
-    & > div {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  & .report-middle-div {
-    display: flex;
+    gap: 1rem;
   }
 `;
 

@@ -39,8 +39,9 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   /* background: #f4f4f4; */
   /* background-color: white; */
+  background: #f4f4f4;
   overflow: hidden;
-  background: #ffffff;
+  /* background: #ffffff; */
   /* background: #ff000f; */
   flex-direction: column;
   width: 1000px;

@@ -121,6 +121,7 @@ const StatusReport = ({
 const Wrapper = styled.div`
   & .report-content {
     overflow-y: scroll;
+    padding: 1rem;
   }
 `;
 
