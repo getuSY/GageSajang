@@ -95,11 +95,12 @@ public class SimulServiceImpl implements SimulService{
             dto.setIndustryName(industryName);
             output.add(dto);
 
+            year++;
 
             for (int i = 1; i < len; i++){
                 SimulDto tmp = new SimulDto();;
                 tmp.setYear(year);
-                tmp.setQuarter(i%4);
+                tmp.setQuarter(i%4 == 0 ? 4 : i%4);
                 tmp.setValue(Integer.parseInt(outputSales[i]));
                 tmp.setDongName(dongName);
                 tmp.setIndustryName(industryName);
@@ -181,11 +182,11 @@ public class SimulServiceImpl implements SimulService{
             dto.setIndustryName(industryName);
             output.add(dto);
 
-
+            year ++;
             for (int i = 1; i < len; i++){
                 SimulDto tmp = new SimulDto();;
                 tmp.setYear(year);
-                tmp.setQuarter(i%4);
+                tmp.setQuarter(i%4 == 0 ? 4 : i%4);
                 tmp.setValue(Integer.parseInt(outputSales[i]));
                 tmp.setDongName(dongName);
                 tmp.setIndustryName(industryName);
@@ -267,11 +268,12 @@ public class SimulServiceImpl implements SimulService{
             dto.setIndustryName(industryName);
             output.add(dto);
 
+            year++;
 
             for (int i = 1; i < len; i++){
                 SimulDto tmp = new SimulDto();;
                 tmp.setYear(year);
-                tmp.setQuarter(i%4);
+                tmp.setQuarter(i%4 == 0 ? 4 : i%4);
                 tmp.setValue(Integer.parseInt(outputSales[i]));
                 tmp.setDongName(dongName);
                 tmp.setIndustryName(industryName);
@@ -353,11 +355,12 @@ public class SimulServiceImpl implements SimulService{
             dto.setIndustryName(industryName);
             output.add(dto);
 
+            year++;
 
             for (int i = 1; i < len; i++){
                 SimulDto tmp = new SimulDto();;
                 tmp.setYear(year);
-                tmp.setQuarter(i%4);
+                tmp.setQuarter(i%4 == 0 ? 4 : i%4);
                 tmp.setValue(Integer.parseInt(outputSales[i]));
                 tmp.setDongName(dongName);
                 tmp.setIndustryName(industryName);
@@ -439,11 +442,12 @@ public class SimulServiceImpl implements SimulService{
             dto.setIndustryName(industryName);
             output.add(dto);
 
+            year++;
 
             for (int i = 1; i < len; i++){
                 SimulDto tmp = new SimulDto();;
                 tmp.setYear(year);
-                tmp.setQuarter(i%4);
+                tmp.setQuarter(i%4 == 0 ? 4 : i%4);
                 tmp.setValue(Integer.parseInt(outputSales[i]));
                 tmp.setDongName(dongName);
                 tmp.setIndustryName(industryName);
