@@ -4,13 +4,20 @@ import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusSalesData } from '../../../hooks/status';
 import { getMax } from '../../../utils/common';
+import ReportContent from '../AmatuerReportContent';
+import ReportComment from '../../atoms/ReportComment';
 
 interface StatusReportSalesProps {
   title?: any;
   salesDetail?: any;
+  region?: string;
 }
 
-const StatusReportSales = ({ title, salesDetail }: StatusReportSalesProps) => {
+const StatusReportSales = ({
+  title,
+  salesDetail,
+  region,
+}: StatusReportSalesProps) => {
   const {
     salesCsData,
     salesWeekData,
@@ -40,67 +47,80 @@ const StatusReportSales = ({ title, salesDetail }: StatusReportSalesProps) => {
         </div>
       </StatusReportTitle>
 
-      <div className="report-top-div">
+      <div className="report-div">
         {/* 업종별 매출 */}
-        <StatusReportChart
-          type={salesCsData.type}
-          title={'업종별 매출'}
-          data={salesCsData.data}
-          grad={salesCsData.grad}
-        />
+        <ReportContent
+          title="업종별 매출"
+          chartData={salesCsData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="dongName">{region}</span>의 ~~~는{' '}
+            <span className="emphasis">~~~~</span>가 ~~~~
+          </ReportComment>
+        </ReportContent>
 
         {/* 요일별 매출 */}
-        <StatusReportChart
-          type={salesWeekData.type}
-          title={'요일별 매출'}
-          data={salesWeekData.data}
-          grad={salesWeekData.grad}
-        />
+        <ReportContent
+          title="요일별 매출"
+          chartData={salesWeekData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="dongName">{region}</span>의 ~~~는{' '}
+            <span className="emphasis">~~~~</span>가 ~~~~
+          </ReportComment>
+        </ReportContent>
       </div>
 
-      <div className="report-middle-div">
+      <div className="report-div">
         {/* 연령대별 매출 */}
-        <StatusReportChart
-          type={salesAgeData.type}
-          title={'연령대별 매출'}
-          data={salesAgeData.data}
-          grad={salesAgeData.grad}
-        />
+        <ReportContent
+          title="연령대별 매출"
+          chartData={salesAgeData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="dongName">~~~</span>의 ~~~는{' '}
+            <span className="emphasis">~~~~</span>가 ~~~~
+          </ReportComment>
+        </ReportContent>
 
         {/* 성별별 매출 */}
-        <StatusReportChart
-          type={salesGenderData.type}
-          title={'성별별 매출'}
-          data={salesGenderData.data}
-          options={salesGenderData.options}
-          grad={salesGenderData.grad}
-        />
+        <ReportContent
+          title="성별별 매출"
+          chartData={salesGenderData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="dongName">~~~</span>의 ~~~는{' '}
+            <span className="emphasis">~~~~</span>가 ~~~~
+          </ReportComment>
+        </ReportContent>
       </div>
 
       {/* 시간대별 매출 */}
-      <StatusReportChart
-        type={salesTimeData.type}
-        title={'시시간대별 매출'}
-        data={salesTimeData.data}
-        grad={salesTimeData.grad}
-      />
+      <ReportContent
+        title="시간대별 매출"
+        chartData={salesTimeData}
+        style={{ flexGrow: 1 }}
+      >
+        <ReportComment>
+          <span className="dongName">~~~</span>의 ~~~는{' '}
+          <span className="emphasis">~~~~</span>가 ~~~~
+        </ReportComment>
+      </ReportContent>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  height: 3000px;
-  overflow-y: scroll;
-  & .report-top-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  & .report-div {
     display: flex;
-    gap: 2rem;
-    width: 100%;
-    & > div {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    gap: 1rem;
   }
 `;
 

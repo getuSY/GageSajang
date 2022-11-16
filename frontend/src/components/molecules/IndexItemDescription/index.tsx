@@ -26,7 +26,7 @@ const IndexItemDescription = ({
           width: '250px',
           height: '73px',
           fontSize: '1.3rem',
-          fontFamily: 'Pretendard-Regular',
+          fontFamily: 'GmarketSansMedium',
         }}
         onClick={onClick}
         type="grad"
@@ -45,7 +45,8 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
 
-  font-family: 'Pretendard-Regular';
+  /* font-family: 'Pretendard-Regular'; */
+  font-family: 'GmarketSansMedium';
   align-items: ${({ right }) => (!right ? 'flex-end' : 'flex-start')};
   gap: 2.5rem;
   & .index-div {
