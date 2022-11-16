@@ -32,6 +32,8 @@ public class DetailServiceImpl implements DetailService{
     StoreCountTop3Repository countTop3;
     @Autowired
     StoreOpenCloseTop3Repository openCloseTop3;
+    @Autowired
+    StoreDetailAptRepository aptDetail;
 
     @Cacheable(value = "detail",key="#guName")
     @Override
@@ -63,5 +65,12 @@ public class DetailServiceImpl implements DetailService{
         DetailDto detailDto = new DetailDto(livingDto, residentDto, storeDto, openDto, closeDto, changeGu, salesDto);
 
         return detailDto;
+    }
+
+    @Override
+    public DetailAptDto detailAptFindByName(String guName) {
+        System.out.println(guName);
+        StoreDetailApt entity = aptDetail.findByGuName(guName);
+        return new DetailAptDto(entity);
     }
 }

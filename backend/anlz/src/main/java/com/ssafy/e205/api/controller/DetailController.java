@@ -41,5 +41,15 @@ public class DetailController {
             return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @GetMapping("/detail/apt/{guName}")
+    public ResponseEntity<DetailAptDto> detailApt(@PathVariable String guName){
+        DetailAptDto result = new DetailAptDto();
+        try {
+            result = service.detailAptFindByName(guName);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

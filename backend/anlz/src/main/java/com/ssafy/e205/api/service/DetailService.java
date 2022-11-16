@@ -8,5 +8,6 @@ import java.util.List;
 public interface DetailService {
 
     DetailDto detailFindByName(String guName);
+    DetailAptDto detailAptFindByName(String guName);
 
 }
