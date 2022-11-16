@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusFpData } from '../../../hooks/status';
-import StatusReportDescription from '../../molecules/StatusReportDescription';
 import { numberComma, getMax } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
+import ReportComment from '../../atoms/ReportComment';
 
 interface StatusReportFPProps {
   title?: any;
@@ -123,28 +123,12 @@ const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
 };
 
 const Wrapper = styled.div`
-  /* height: 3000px; */
-  /* overflow-y: scroll; */
   display: flex;
   flex-direction: column;
   gap: 1rem;
   & .report-div {
     display: flex;
     gap: 1rem;
-  }
-`;
-
-const ReportComment = styled.div`
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  font-weight: 500;
-  & .jobName,
-  .dongName {
-    font-weight: 700;
-  }
-  & .emphasis {
-    font-weight: 700;
-    color: #ff0000;
   }
 `;
 

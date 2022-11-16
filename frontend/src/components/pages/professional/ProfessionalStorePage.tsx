@@ -11,6 +11,7 @@ import Spinner from '../../atoms/Spinner';
 import { usePostCode } from '../../../hooks/common';
 import { cs1, cs2, cs3 } from '../../../data/cs';
 import JobSearchInput from '../../molecules/JobSearchInput';
+import { areas, DongItem } from '../../../data/areaDong';
 
 const ProfessionalInfoPage = () => {
   const userEmail = sessionStorage.getItem('email');
@@ -33,53 +34,82 @@ const ProfessionalInfoPage = () => {
     mutation.mutate(storeInfo);
   };
   const [guDong, setGuDong] = useState('');
-  const postCode = usePostCode(setGuDong);
-
-  // const changeStoreInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setStoreInfo({
-  //     ...storeInfo,
-  //     [e.target.storeName]: e.target.value,
-  //   });
-  // };
 
   // 업종 검색창
   const jobList = [...cs1, ...cs2, ...cs3];
-  const [keyword, setKeyword] = useState(''); // 검색 input
-  const [isSearchResultOpen, setIsSearchResultOpen] = useState<boolean>(false);
-  const [searchResult, setSearchResult] = useState<string[]>([]);
-  const searchResultRef = useRef<any>();
+  const [jobKeyword, setJobKeyword] = useState(''); // 검색 input
+  const [isJobSearchResultOpen, setIsJobSearchResultOpen] =
+    useState<boolean>(false);
+  const [jobSearchResult, setJobSearchResult] = useState<string[]>([]);
+  const jobSearchResultRef = useRef<any>();
   // API 요청에 보낼 데이터
-  const [selectedSearch, setSelectedSearch] =
+  const [selectedJobSearch, setSelectedJobSearch] =
     useState<string | undefined>(undefined); // 검색 결과 => 직업 이름
 
   useEffect(() => {
-    if (keyword) {
-      const tmp = jobList.filter((e: any, i) => e.includes(keyword));
-      setSearchResult(tmp);
+    if (jobKeyword) {
+      const tmp = jobList.filter((e: any, i) => e.includes(jobKeyword));
+      setJobSearchResult(tmp);
       if (tmp.length > 0) {
-        setIsSearchResultOpen(true);
+        setIsJobSearchResultOpen(true);
       }
     }
-  }, [keyword]);
+  }, [jobKeyword]);
 
-  const onChange = useCallback((e: any) => {
-    setKeyword(e.target.value);
+  const onJobChange = useCallback((e: any) => {
+    setJobKeyword(e.target.value);
   }, []);
 
-  const selectItem = useCallback((item: any) => {
-    setSelectedSearch(item);
-    setIsSearchResultOpen(false);
+  const selectJobItem = useCallback((item: any) => {
+    setSelectedJobSearch(item);
+    setIsJobSearchResultOpen(false);
   }, []);
-  const clearItem = useCallback(
-    () => setSelectedSearch(undefined),
-    [setSelectedSearch]
+  const clearJobItem = useCallback(
+    () => setSelectedJobSearch(undefined),
+    [setSelectedJobSearch]
   );
+
+  // 지역 검색창
+  const [dongKeyword, setDongKeyword] = useState(''); // 검색 input
+  const [isDongSearchResultOpen, setIsDongSearchResultOpen] =
+    useState<boolean>(false);
+  const [dongSearchResult, setDongSearchResult] = useState<string[]>([]);
+  const dongSearchResultRef = useRef<any>();
+  // API 요청에 보낼 데이터
+  const [selectedDongSearch, setSelectedDongSearch] =
+    useState<string | undefined>(undefined); // 검색 결과 => 직업 이름
+
+  const onDongChange = useCallback((e: any) => {
+    setDongKeyword(e.target.value);
+  }, []);
+
+  const selectDongItem = useCallback((item: any) => {
+    setSelectedDongSearch(item);
+    setIsDongSearchResultOpen(false);
+  }, []);
+  const clearDongItem = useCallback(
+    () => setSelectedDongSearch(undefined),
+    [setSelectedDongSearch]
+  );
+
+  // 동 검색
+  useEffect(() => {
+    if (dongKeyword) {
+      const tmp = areas
+        .filter((e: DongItem, i) => e.name.includes(dongKeyword))
+        .map((e: DongItem) => e.name);
+      setDongSearchResult(tmp);
+      if (tmp.length > 0) {
+        setIsDongSearchResultOpen(true);
+      }
+    }
+  }, [dongKeyword]);
 
   return (
     <Wrapper
       onClick={(e) => {
-        if (!searchResultRef.current.contains(e.target)) {
-          setIsSearchResultOpen(false);
+        if (!jobSearchResultRef.current.contains(e.target)) {
+          setIsJobSearchResultOpen(false);
         }
       }}
     >
@@ -98,23 +128,27 @@ const ProfessionalInfoPage = () => {
             </div>
           </ProListItem>
           <ProListItem>
-            <LabelInput
+            <JobSearchInput
               label="가게 주소"
               placeholder="행정동을 입력해주세요."
-              inputValue={guDong}
-              onClick={postCode}
-              // onChange={changeDongName}
+              inputValue={selectedDongSearch}
+              onChange={onDongChange}
+              searchResult={dongSearchResult}
+              searchResultOpen={isDongSearchResultOpen}
+              searchResultRef={dongSearchResultRef}
+              selectItem={selectDongItem}
+              clearValue={clearDongItem}
             />
             <JobSearchInput
               label="업종"
               placeholder="가게 업종을 입력해주세요."
-              inputValue={selectedSearch}
-              onChange={onChange}
-              searchResult={searchResult}
-              searchResultOpen={isSearchResultOpen}
-              searchResultRef={searchResultRef}
-              selectItem={selectItem}
-              clearValue={clearItem}
+              inputValue={selectedJobSearch}
+              onChange={onJobChange}
+              searchResult={jobSearchResult}
+              searchResultOpen={isJobSearchResultOpen}
+              searchResultRef={jobSearchResultRef}
+              selectItem={selectJobItem}
+              clearValue={clearJobItem}
             />
           </ProListItem>
           <ProListItem>

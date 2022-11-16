@@ -4,13 +4,16 @@ import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusRpData } from '../../../hooks/status';
 import { numberComma, getMax, getRate } from '../../../utils/common';
+import ReportContent from '../AmatuerReportContent';
+import ReportComment from '../../atoms/ReportComment';
 
 interface StatusReportRPProps {
   title?: any;
   rpDetail?: any;
+  region?: string;
 }
 
-const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
+const StatusReportRP = ({ title, rpDetail, region }: StatusReportRPProps) => {
   const { rpGenderData, rpAgeData, rpAptData } = useStatusRpData(rpDetail);
   return (
     <Wrapper>
@@ -36,49 +39,65 @@ const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
         </div>
       </StatusReportTitle>
 
-      <div className="report-top-div">
+      <div className="report-div">
         {/* 성별별 거주인구 */}
-        <StatusReportChart
-          type={rpGenderData.type}
-          title={'거주인구 평균 성별 비(분기 기준)'}
-          data={rpGenderData.data}
-          options={rpGenderData.options}
-          grad={rpGenderData.grad}
-        />
+        <ReportContent
+          title="거주인구 평균 성별 비(분기 기준)"
+          chartData={rpGenderData}
+          isVert={false}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">
+              {getMax(rpGenderData.data.datasets[0].data, 'quarter')}
+            </span>
+            가 가장 많습니다.
+          </ReportComment>
+        </ReportContent>
 
         {/* 연령대별 거주인구 */}
-        <StatusReportChart
-          type={rpAgeData.type}
-          title={'연령별 평균 거주인구(분기 기준)'}
-          data={rpAgeData.data}
-          grad={rpAgeData.grad}
-        />
+        <ReportContent
+          title="연령별 평균 거주인구(분기 기준)"
+          chartData={rpAgeData}
+          isVert={false}
+          style={{ flexGrow: 1 }}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">xxx</span>가 가장 많습니다.
+          </ReportComment>
+        </ReportContent>
       </div>
 
       {/* 아파트/비아파트 비율 */}
-      <StatusReportChart
-        type={rpAptData.type}
-        title={'아파트/비아파트 비율'}
-        data={rpAptData.data}
-        grad={rpAptData.grad}
-      />
+      <ReportContent
+        title="아파트/비아파트 비율"
+        chartData={rpAptData}
+        isVert={false}
+        style={{ flexGrow: 1 }}
+      >
+        {' '}
+        <ReportComment>
+          <span className="dongName">{region}</span>의 유동인구는{' '}
+          <span className="emphasis">
+            {getMax(rpAptData.data.datasets[0].data, 'quarter')}
+          </span>
+          가 가장 많습니다.
+        </ReportComment>
+      </ReportContent>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  height: 3000px;
-  overflow-y: scroll;
-  & .report-top-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  & .report-div {
     display: flex;
-    gap: 2rem;
-    width: 100%;
-    & > div {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    gap: 1rem;
   }
 `;
 

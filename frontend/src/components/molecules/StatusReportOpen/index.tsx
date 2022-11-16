@@ -4,13 +4,20 @@ import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusOpenData } from '../../../hooks/status';
 import { getMax } from '../../../utils/common';
+import ReportContent from '../AmatuerReportContent';
+import ReportComment from '../../atoms/ReportComment';
 
 interface StatusReportOpenProps {
   title?: any;
   openDetail?: any;
+  region?: string;
 }
 
-const StatusReportOpen = ({ title, openDetail }: StatusReportOpenProps) => {
+const StatusReportOpen = ({
+  title,
+  openDetail,
+  region,
+}: StatusReportOpenProps) => {
   const { openCsData, openTopData, openChangeData } =
     useStatusOpenData(openDetail);
 
@@ -34,40 +41,49 @@ const StatusReportOpen = ({ title, openDetail }: StatusReportOpenProps) => {
         </div>
       </StatusReportTitle>
 
-      <div className="report-top-div">
+      <div className="report-div">
         {/* 업종별 개업률 */}
-        <StatusReportChart
-          type={openCsData.type}
-          title={'업종별 개업률 '}
-          data={openCsData.data}
-          grad={openCsData.grad}
-        />
+        <ReportContent
+          title="업종별 개업률"
+          chartData={openCsData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="dongName">{region}</span>의 ~~~는{' '}
+            <span className="emphasis">
+              {getMax(openCsData.data.datasets[0].data, 'quarter')}
+            </span>
+            가 ~~~
+          </ReportComment>
+        </ReportContent>
 
         {/* 개업률 높은 상권 Top3 */}
-        <StatusReportChart
-          type={openTopData.type}
-          title={'개업률 높은 상권 Top3'}
-          data={openTopData.data}
-          grad={openTopData.grad}
-        />
+        <ReportContent
+          title="개업률 높은 상권 Top3"
+          chartData={openTopData}
+          style={{ flexGrow: 1 }}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 ~~~는{' '}
+            <span className="emphasis">
+              {getMax(openTopData.data.datasets[0].data, 'quarter')}
+            </span>
+            가 ~~~~
+          </ReportComment>
+        </ReportContent>
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  height: 3000px;
-  overflow-y: scroll;
-  & .report-top-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  & .report-div {
     display: flex;
-    gap: 2rem;
-    width: 100%;
-    & > div {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    gap: 1rem;
   }
 `;
 
