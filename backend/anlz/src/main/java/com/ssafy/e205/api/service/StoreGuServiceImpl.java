@@ -24,18 +24,18 @@ public class StoreGuServiceImpl implements StoreGuService{
         List<StoreGuLivingDto> result = new ArrayList<>();
         for(StoreGu storeGu : list){
             int level = 0;
-            if(storeGu.getLiving()<40000000){
+            if(storeGu.getLiving()/90<400000){
                 level = 1;
-            } else if(storeGu.getLiving()<50000000){
+            } else if(storeGu.getLiving()/90<500000){
                 level = 2;
-            } else if(storeGu.getLiving()<60000000){
+            } else if(storeGu.getLiving()/90<600000){
                 level = 3;
-            } else if(storeGu.getLiving()<70000000){
+            } else if(storeGu.getLiving()/90<700000){
                 level = 4;
             } else {
                 level = 5;
             }
-            result.add(new StoreGuLivingDto(storeGu.getGuName(), storeGu.getLiving(), level));
+            result.add(new StoreGuLivingDto(storeGu.getGuName(), storeGu.getLiving()/90, level));
         }
 
         return result;

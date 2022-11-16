@@ -26,18 +26,18 @@ public class StoreHinGuServiceImpl implements StoreHinGuService{
         List<StoreGuLivingDto> result = new ArrayList<>();
         for(StoreHinGu storeGu : list){
             int level = 0;
-            if(storeGu.getLiving()<100000000){
+            if(storeGu.getLiving()/90<1400000){
                 level = 1;
-            } else if(storeGu.getLiving()<150000000){
+            } else if(storeGu.getLiving()/90<2000000){
                 level = 2;
-            } else if(storeGu.getLiving()<200000000){
+            } else if(storeGu.getLiving()/90<2500000){
                 level = 3;
-            } else if(storeGu.getLiving()<250000000){
+            } else if(storeGu.getLiving()/90<3000000){
                 level = 4;
             } else {
                 level = 5;
             }
-            result.add(new StoreGuLivingDto(storeGu.getGuName(), storeGu.getLiving(), level));
+            result.add(new StoreGuLivingDto(storeGu.getGuName(), storeGu.getLiving()/90, level));
         }
 
         return result;
