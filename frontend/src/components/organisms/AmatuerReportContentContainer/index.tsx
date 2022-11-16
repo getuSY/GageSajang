@@ -12,6 +12,7 @@ import {
   useStoreData,
   weekLabels,
   timeLabels,
+  useAmatuerSimulationData,
 } from '../../../hooks/amatuer';
 import Top3Rank from '../../atoms/Top3Rank';
 import ReportComment from '../../atoms/ReportComment';
@@ -22,6 +23,7 @@ type indexProps = {
   amatuerResult: any;
   dongName?: string;
   jobName?: string;
+  amatuerSimulation: any;
 };
 
 const ReportContentContainer = ({
@@ -30,6 +32,7 @@ const ReportContentContainer = ({
   amatuerResult,
   dongName,
   jobName,
+  amatuerSimulation,
 }: indexProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const onScroll = throttle(() => {
@@ -75,7 +78,14 @@ const ReportContentContainer = ({
   const { hinterlandPeopleData, hinterlandAgeData, hinterlandGenderData } =
     useHinterlandData(amatuerResult); // 상권 배후지
 
-  const { riskData } = useRiskData(amatuerResult);
+  const { riskData } = useRiskData(amatuerResult); // 위험도 분석
+  // const {
+  //   amaSimulSalesData,
+  //   amaSimulLifeData,
+  //   amaSimulResidentData,
+  //   amaSimulJobData,
+  //   amaSimulCountData,
+  // } = useAmatuerSimulationData(amatuerSimulation);
 
   return (
     <Wrapper onScroll={onScroll} ref={containerRef}>
@@ -399,6 +409,40 @@ const ReportContentContainer = ({
         {/* <ReportAlert>❗위험 위험{riskData.risk}</ReportAlert> */}
         <AmatuerReportRisk risk={riskData.risk} />
       </ReportCategory>
+      {/* 시뮬레이션 */}
+      {/* <ReportCategory ref={(e: any) => (contentRefs.current[6] = e)}>
+        <ReportContent title="💸 시뮬레이션" style={{ marginTop: '2rem' }} />
+        <div className="chart-div">
+          <ReportContent
+            title="amaSimulSalesData"
+            style={{ flexGrow: 1 }}
+            chartData={amaSimulSalesData}
+          ></ReportContent>
+          <ReportContent
+            title="amaSimulLifeData"
+            style={{ flexGrow: 1 }}
+            // chartStyle={{ width: '450px' }}
+            chartData={amaSimulLifeData}
+          ></ReportContent>
+          <ReportContent
+            title="amaSimulResidentData"
+            chartData={amaSimulResidentData}
+          ></ReportContent>
+        </div>
+        <div className="chart-div">
+          <ReportContent
+            title="amaSimulJobData"
+            style={{ flexGrow: 1 }}
+            chartData={amaSimulJobData}
+          ></ReportContent>
+          <ReportContent
+            title="amaSimulCountData"
+            style={{ flexGrow: 1 }}
+            // chartStyle={{ width: '450px' }}
+            chartData={amaSimulCountData}
+          ></ReportContent>
+        </div>
+      </ReportCategory> */}
     </Wrapper>
   );
 };

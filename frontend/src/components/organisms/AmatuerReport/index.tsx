@@ -8,9 +8,7 @@ interface ReportProps {
   jobName: string;
   dongName?: string;
   amatuerResult: any;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
+  amatuerSimulation: any;
 }
 
 const reportMenuList = [
@@ -45,12 +43,11 @@ const Report = ({
   jobName,
   dongName,
   amatuerResult,
-  isLoading,
-  isSuccess,
-  isError,
+  amatuerSimulation,
 }: ReportProps) => {
   const contentRefs = useRef<HTMLDivElement[]>([]);
   const [tab, setTab] = useState<number>(0);
+  console.log(amatuerSimulation);
 
   return (
     <Wrapper>
@@ -62,16 +59,19 @@ const Report = ({
         tab={tab}
         setTab={setTab}
       />
-      {!isLoading && isSuccess && (
-        <ReportContentContainer
-          contentRefs={contentRefs}
-          setTab={setTab}
-          amatuerResult={amatuerResult}
-          dongName={dongName}
-          jobName={jobName}
-        />
-      )}
-      {!isLoading && isError && (
+      {!amatuerResult.isLoading &&
+        amatuerResult.isSuccess &&
+        amatuerSimulation.isSuccess && (
+          <ReportContentContainer
+            contentRefs={contentRefs}
+            setTab={setTab}
+            amatuerResult={amatuerResult.data}
+            amatuerSimulation={amatuerSimulation}
+            dongName={dongName}
+            jobName={jobName}
+          />
+        )}
+      {!amatuerResult.isLoading && amatuerResult.isError && (
         <LodingErrorWrapper>
           <h1>서버가 아파요,,,</h1>
         </LodingErrorWrapper>
