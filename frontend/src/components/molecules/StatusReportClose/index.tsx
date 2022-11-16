@@ -4,16 +4,22 @@ import StatusReportChart from '../StatusReportChart';
 import StatusReportTitle from '../StatusReportTitle';
 import { useStatusCloseData } from '../../../hooks/status';
 import { getMax } from '../../../utils/common';
+import ReportContent from '../AmatuerReportContent';
+import ReportComment from '../../atoms/ReportComment';
 
 interface StatusReportCloseProps {
   title?: any;
   closeDetail?: any;
+  region?: string;
 }
 
-const StatusReportClose = ({ title, closeDetail }: StatusReportCloseProps) => {
+const StatusReportClose = ({
+  title,
+  closeDetail,
+  region,
+}: StatusReportCloseProps) => {
   const { closeCsData, closeTopData, closeChangeData } =
     useStatusCloseData(closeDetail);
-  console.log(closeDetail);
   return (
     <Wrapper>
       <StatusReportTitle
@@ -34,40 +40,42 @@ const StatusReportClose = ({ title, closeDetail }: StatusReportCloseProps) => {
         </div>
       </StatusReportTitle>
 
-      <div className="report-top-div">
+      <div className="report-div">
         {/* 업종별 폐업률 */}
-        <StatusReportChart
-          type={closeCsData.type}
-          title={'업종별 폐업률'}
-          data={closeCsData.data}
-          grad={closeCsData.grad}
-        />
+        <ReportContent
+          title="업종별 폐업률"
+          chartData={closeCsData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="dongName">{region}</span>의 ~~~는{' '}
+            <span className="emphasis">~~~~</span>가 ~~~~
+          </ReportComment>
+        </ReportContent>
 
         {/* 폐업률 높은 상권 Top3 */}
-        <StatusReportChart
-          type={closeTopData.type}
-          title={'폐업률 높은 상권 Top3'}
-          data={closeTopData.data}
-          grad={closeTopData.grad}
-        />
+        <ReportContent
+          title="폐업률 높은 상권 Top3"
+          chartData={closeTopData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="dongName">{region}</span>의 ~~~는{' '}
+            <span className="emphasis">~~~~</span>가 ~~~~
+          </ReportComment>
+        </ReportContent>
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  height: 3000px;
-  overflow-y: scroll;
-  & .report-top-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  & .report-div {
     display: flex;
-    gap: 2rem;
-    width: 100%;
-    & > div {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    gap: 1rem;
   }
 `;
 

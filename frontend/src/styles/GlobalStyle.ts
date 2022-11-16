@@ -35,7 +35,22 @@ const GlobalStyle = createGlobalStyle`
       /* font-size: 1.3rem; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
   }
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #6f7582;
+    border-radius: 6px;
+    background-clip: padding-box;
+    border: 0px solid transparent;
+  }
+  *::-webkit-scrollbar-track {
+    border-radius: 6px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+
   button {
     border: none;
     font-family: inherit;

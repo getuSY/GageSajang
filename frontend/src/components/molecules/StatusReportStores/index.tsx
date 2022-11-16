@@ -4,15 +4,19 @@ import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusStoreData } from '../../../hooks/status';
 import { numberComma, getMax } from '../../../utils/common';
+import ReportContent from '../AmatuerReportContent';
+import ReportComment from '../../atoms/ReportComment';
 
 interface StatusReportStoresProps {
   title?: any;
   storesDetail?: any;
+  region?: string;
 }
 
 const StatusReportStores = ({
   title,
   storesDetail,
+  region,
 }: StatusReportStoresProps) => {
   const { storeCsData, storeDivData } = useStatusStoreData(storesDetail);
   return (
@@ -41,40 +45,43 @@ const StatusReportStores = ({
           입니다.
         </div>
       </StatusReportTitle>
-      <div className="report-top-div">
+      <div className="report-div">
         {/* 업종별 점포 수 */}
-        <StatusReportChart
-          type={storeCsData.type}
-          title={'업종별 점포 수'}
-          data={storeCsData.data}
-          grad={storeCsData.grad}
-        />
+        <ReportContent
+          title="업종별 점포 수"
+          chartData={storeCsData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">ascsc</span>가 가장 많습니다.
+          </ReportComment>
+        </ReportContent>
 
         {/* 상권 구분별 점포 수 */}
-        <StatusReportChart
-          type={storeDivData.type}
-          title={'상권 구분별 점포 수'}
-          data={storeDivData.data}
-          grad={storeDivData.grad}
-        />
+        <ReportContent
+          title="상권 구분별 점포 수"
+          chartData={storeDivData}
+          style={{ flexGrow: 1 }}
+        >
+          {' '}
+          <ReportComment>
+            <span className="dongName">{region}</span>의 유동인구는{' '}
+            <span className="emphasis">asvas</span>가 가장 많습니다.
+          </ReportComment>
+        </ReportContent>
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  height: 3000px;
-  overflow-y: scroll;
-  & .report-top-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  & .report-div {
     display: flex;
-    gap: 2rem;
-    width: 100%;
-    & > div {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    gap: 1rem;
   }
 `;
 

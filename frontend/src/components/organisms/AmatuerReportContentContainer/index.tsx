@@ -14,6 +14,7 @@ import {
   timeLabels,
 } from '../../../hooks/amatuer';
 import Top3Rank from '../../atoms/Top3Rank';
+import ReportComment from '../../atoms/ReportComment';
 
 type indexProps = {
   contentRefs: React.MutableRefObject<HTMLDivElement[]>;
@@ -30,7 +31,6 @@ const ReportContentContainer = ({
   dongName,
   jobName,
 }: indexProps) => {
-  console.log(amatuerResult);
   const containerRef = useRef<HTMLDivElement>(null);
   const onScroll = throttle(() => {
     // 스크롤 이벤트
@@ -432,21 +432,6 @@ const ReportAlert = styled.div`
 const ReportCategory = styled.div`
   & > div {
     margin-top: 12px;
-  }
-`;
-
-const ReportComment = styled.div`
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  font-weight: 500;
-  /* max-width: 400px; */
-  & .jobName,
-  .dongName {
-    font-weight: 700;
-  }
-  & .emphasis {
-    font-weight: 700;
-    color: #ff0000;
   }
 `;
 
