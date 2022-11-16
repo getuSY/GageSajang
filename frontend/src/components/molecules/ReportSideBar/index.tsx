@@ -77,6 +77,7 @@ const Wrapper = styled.div`
   background: #ffffff;
   padding: 20px;
   width: 230px;
+  flex-shrink: 0;
   color: #3e4b5b;
   @media screen and (max-width: 1200px) {
     display: none;
