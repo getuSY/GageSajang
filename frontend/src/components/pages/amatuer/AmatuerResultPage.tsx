@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import getJobCode from '../../../utils/getJobCode';
 import cs from '../../../data/cs';
 import getDongName from '../../../utils/getDongName';
-import { useAmatuerResult } from '../../../hooks/amatuer';
+import { useAmatuerResult, useAmatuerSimulation } from '../../../hooks/amatuer';
 
 const AmatuerResultPage = () => {
   const [params] = useSearchParams();
@@ -19,14 +19,13 @@ const AmatuerResultPage = () => {
   const dongName = getDongName(admCd); // 동 이름
   const jobCode = getJobCode(mainCategory, subCategory); // 업종 코드 : CSX000XX
   const jobName = cs[mainCategory - 1][subCategory - 1]; // 업종명
-  const {
-    data: amatuerResult,
-    isLoading,
-    isSuccess,
-    isError,
-  } = useAmatuerResult({
+  const amatuerResult = useAmatuerResult({
     admCd,
     jobCode,
+  });
+  const amatuerSimulation = useAmatuerSimulation({
+    dongName,
+    industryName: jobName,
   });
 
   return (
@@ -35,9 +34,7 @@ const AmatuerResultPage = () => {
         jobName={jobName}
         dongName={dongName}
         amatuerResult={amatuerResult}
-        isLoading={isLoading}
-        isSuccess={isSuccess}
-        isError={isError}
+        amatuerSimulation={amatuerSimulation}
       />
     </Wrapper>
   );

@@ -63,7 +63,6 @@ const ReportSideBar = ({
           content={e}
           select={i === tab}
           onClick={() => {
-            setTab(i);
             contentRefs.current[i].scrollIntoView({ behavior: 'smooth' });
           }}
         />
