@@ -173,7 +173,7 @@ export const useStatusFpData = (fpDetail: any) => {
           {
             label: '성별별 유동인구',
             barThickness: 70,
-            data: fpDetail.gender,
+            data: fpDetail.gender.map((e: number) => Math.floor(e / 90)),
             datalabels: {
               // 데이터라벨 숨김
               color: 'white',
@@ -208,7 +208,7 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             label: '연령대별 유동인구',
-            data: fpDetail.age,
+            data: fpDetail.age.map((e: number) => Math.floor(e / 90)),
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -237,8 +237,8 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             label: '분기별 유동인구',
-            data: fpDetail.age,
-            barThickness: 30,
+            data: fpDetail.quarter.map((e: number) => Math.floor(e / 90)),
+            barThickness: 60,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
@@ -266,7 +266,7 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             label: '요일별 유동인구',
-            data: fpDetail.week,
+            data: fpDetail.week.map((e: number) => Math.floor(e / 90)),
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -289,7 +289,7 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             label: '시간대별 매출',
-            data: fpDetail.time,
+            data: fpDetail.time.map((e: number) => Math.floor(e / 90)),
             borderColor: '#B29AF8',
             backgroundColor: '#B29AF8',
             borderWidth: 2,

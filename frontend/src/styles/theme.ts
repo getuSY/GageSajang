@@ -41,7 +41,10 @@ export const blueTheme: DefaultTheme = {
   // gradColor: 'linear-gradient(270deg, #00D1FF 0%, #0855F9 56.2%, #1406B4 100%)',
   // gradColor: 'linear-gradient(90deg, #23CFFA 0%, #A9B6F6 36.98%, #FC6DD1 100%)',
   gradColor: 'linear-gradient(90deg, #54BEF9 0%, #715DE9 100%)',
-  ...commonTheme,
+
+  // ...commonTheme,
+  darkColor: '#6193F2',
+  lightColor: '#56B6F7',
 };
 
 // export const orangeTheme: DefaultTheme = {

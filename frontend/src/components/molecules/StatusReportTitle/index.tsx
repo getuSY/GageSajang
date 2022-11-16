@@ -10,14 +10,8 @@ interface StatusReportTitleProps {
 const StatusReportTitle = ({ title, children }: StatusReportTitleProps) => {
   return (
     <Wrapper>
-      <ReportTitle
-        title={title}
-        style={{
-          marginTop: '1rem',
-          marginLeft: '1rem',
-        }}
-      />
-      <ReportSummary style={{ margin: '1rem' }}>{children}</ReportSummary>
+      <ReportTitle title={title} />
+      <ReportSummary style={{ marginTop: '1rem' }}>{children}</ReportSummary>
     </Wrapper>
   );
 };
@@ -35,7 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const ReportSummary = styled.div`
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   padding: 20px 0px 20px 30px;
   border-left: ${({ theme }) => `3px solid ${theme.mainColor}`};
 `;

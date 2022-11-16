@@ -52,6 +52,7 @@ const StatusReportIndex = ({
 };
 
 const Wrapper = styled.div`
+  background: #ffffff;
   display: flex;
   padding: 15px 5rem 15px 1.5rem;
   width: 90%;
