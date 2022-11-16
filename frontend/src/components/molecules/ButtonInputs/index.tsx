@@ -55,11 +55,14 @@ const BaseSideBarButton = styled.button<BaseSideBarButtonProps>`
   font-family: 'Pretendard-Regular';
   letter-spacing: 2px;
   background: transparent;
+  font-weight: ${({ active }) => (active ? 700 : '')};
 
   &:hover {
     cursor: pointer;
     border-radius: 15px;
+    color: ${({ theme }) => `${theme.darkColor}`};
     border: ${({ theme }) => `3px solid ${theme.darkColor}`};
+    font-weight: 700;
   }
 `;
 
