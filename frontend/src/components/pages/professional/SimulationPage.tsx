@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SalesSimulation from '../../organisms/SalesSimulation';
 import { SimulationParams } from '../../../models/simultaion';
@@ -6,6 +6,8 @@ import {
   useProSalesSimulation,
   useProSimulInfo,
 } from '../../../hooks/simulation';
+import { useProfessionalResult } from '../../../hooks/professional';
+import { ProfessionalResultParams } from '../../../models/professional';
 
 const values = [
   {
@@ -320,8 +322,8 @@ const values = [
 
 const SimulationPage = () => {
   const userEmail = sessionStorage.getItem('email');
-  const mutation = useProSalesSimulation();
-  const { data } = mutation;
+  // const mutation = useProSalesSimulation();
+  // const { data } = mutation;
   const [simulInputs, setSimulInputs] = useState<SimulationParams>({
     email: userEmail,
     year: 2022,
@@ -330,6 +332,22 @@ const SimulationPage = () => {
     dongName: '',
     industryName: '',
   });
+
+  // const test: ProfessionalResultParams = {
+  //   email: 'seungyeonlee1898@gmail.com',
+  //   sales: 12314564,
+  //   clerk: 3,
+  //   area: 40,
+  //   dongName: '개포2동',
+  //   industryName: '한식음식점',
+  // };
+
+  // const result = useProfessionalResult(test);
+  // useEffect(() => {
+  //   if (result.isSuccess) {
+  //     console.log('쿼리로 받아보기', result.data);
+  //   }
+  // }, [result]);
 
   return (
     <Wrapper>
