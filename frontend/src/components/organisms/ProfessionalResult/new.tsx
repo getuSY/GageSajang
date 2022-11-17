@@ -18,9 +18,6 @@ interface ProfessionalResultProps {
 const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
   const mutation = useStoreInfoFix();
   const { data, isLoading, isSuccess, isError, error } = mutation;
-  useEffect(() => {
-    mutation.mutate(info);
-  }, []);
   const [result, setResult] = useState<ProfessionalStoreResult>({
     store: {
       total: 1.0,

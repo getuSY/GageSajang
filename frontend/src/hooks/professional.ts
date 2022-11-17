@@ -10,6 +10,7 @@ export const useProfessionalResult = (
     queryKey: ['professional', 'result'],
     queryFn: () => professionalResult(proResultParams),
   });
+};
 
 export const useProfessionalData = (result: any) => {
   const areaData = useMemo(
