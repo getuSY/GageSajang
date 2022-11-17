@@ -49,8 +49,10 @@ const AmatuerReportRisk = ({ risk }: AmatuerReportRiskProps) => {
 };
 
 const Wrapper = styled.div<{ riskColor?: string }>`
-  height: 40px;
-  align-items: center;
+  /* height: 40px; */
+  /* height: 100%; */
+  flex-grow: 1;
+  /* align-items: center; */
   font-size: 1.2rem;
   display: flex;
   /* background: #feffca; */

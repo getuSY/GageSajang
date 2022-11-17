@@ -16,6 +16,7 @@ import {
 } from '../../../hooks/amatuer';
 import Top3Rank from '../../atoms/Top3Rank';
 import ReportComment from '../../atoms/ReportComment';
+import RiskGaugeChart from '../../atoms/RiskGaugeChart';
 
 type indexProps = {
   contentRefs: React.MutableRefObject<HTMLDivElement[]>;
@@ -407,7 +408,11 @@ const ReportContentContainer = ({
       <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
         <ReportContent title="💸 위험도 분석" style={{ marginTop: '2rem' }} />
         {/* <ReportAlert>❗위험 위험{riskData.risk}</ReportAlert> */}
-        <AmatuerReportRisk risk={riskData.risk} />
+        <div className="chart-div">
+          {/* <AmatuerReportRisk risk={riskData.risk} /> */}
+
+          <RiskGaugeChart></RiskGaugeChart>
+        </div>
       </ReportCategory>
       {/* 시뮬레이션 */}
       {/* <ReportCategory ref={(e: any) => (contentRefs.current[6] = e)}>
