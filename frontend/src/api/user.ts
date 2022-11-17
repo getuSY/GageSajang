@@ -31,3 +31,9 @@ export const userInfo = async () => {
   }
   return null;
 };
+
+export const userOverlap = async (email: string) => {
+  const { data } = await client.get(`user/auth/overlap/${email}`);
+
+  return data;
+};
