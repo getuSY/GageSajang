@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusRpData } from '../../../hooks/status';
-import { numberComma, getMax, getRate } from '../../../utils/common';
+import { numberComma, getMax, getMin, getRate } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
 
@@ -14,7 +14,11 @@ interface StatusReportRPProps {
 }
 
 const StatusReportRP = ({ title, rpDetail, region }: StatusReportRPProps) => {
-  const { rpGenderData, rpAgeData, rpAptData } = useStatusRpData(rpDetail);
+  const { rpGenderData, rpAgeData, rpAptData, rpApt2Data } =
+    useStatusRpData(rpDetail);
+
+  console.log(rpDetail.resident, rpDetail.apt);
+
   return (
     <Wrapper>
       <StatusReportTitle
@@ -22,71 +26,140 @@ const StatusReportRP = ({ title, rpDetail, region }: StatusReportRPProps) => {
         title={title}
       >
         <div className="summary-div">
-          연평균 거주인구 수는 <span>{numberComma(rpDetail.total)}명</span>
+          주요 상권의 일 평균 거주인구 수는{' '}
+          <span>{numberComma(rpDetail.resident.total)}명</span>
           입니다.
         </div>
         <div className="summary-div">
-          성별은 <span>{getMax(rpDetail.gender, 'gender')}</span>의 비율이 더
-          높으며, 주 연령대는 <span>{getMax(rpDetail.age, 'age')}</span>입니다.
+          성별은 <span>{getMax(rpDetail.resident.gender, 'gender')}</span>의
+          비율이 더 높으며, 주 연령대는{' '}
+          <span>{getMax(rpDetail.resident.age, 'age')}</span>입니다.
         </div>
         <div className="summary-div">
-          연평균 가구 수는 <span>{numberComma(rpDetail.house)}가구</span>이며,
-          상권의 아파트 비율은{' '}
-          <span>{getRate([rpDetail.nonApt, rpDetail.apt])[0]}%</span>,
-          {/* 수정해야 함 */}
-          상권 배후지의 아파트 비율은
-          <span>{getRate([rpDetail.nonApt, rpDetail.apt])[1]}%</span> 입니다.
+          평균 가구 수는 <span>{numberComma(rpDetail.resident.house)}가구</span>
+          이며, 상권의 아파트 비율은{' '}
+          <span>
+            {Math.round(
+              getRate([rpDetail.resident.nonApt, rpDetail.resident.apt])[0]
+            )}
+            %
+          </span>
+          , 상권 배후지의 아파트 비율은{' '}
+          <span>
+            {Math.round(getRate([rpDetail.apt.nonApt, rpDetail.apt.apt])[1])}%
+          </span>{' '}
+          입니다.
         </div>
       </StatusReportTitle>
 
       <div className="report-div">
         {/* 성별별 거주인구 */}
         <ReportContent
-          title="거주인구 평균 성별 비(분기 기준)"
+          title="일 평균 성별 비"
           chartData={rpGenderData}
           isVert={false}
         >
-          {' '}
           <ReportComment>
-            <span className="dongName">{region}</span>의 유동인구는{' '}
+            남성{' '}
             <span className="emphasis">
-              {getMax(rpGenderData.data.datasets[0].data, 'quarter')}
+              {Math.round(
+                getRate([
+                  rpDetail.resident.gender[0],
+                  rpDetail.resident.gender[1],
+                ])[0]
+              )}
+              %
             </span>
-            가 가장 많습니다.
+            , 여성{' '}
+            <span className="emphasis">
+              {Math.round(
+                getRate([
+                  rpDetail.resident.gender[0],
+                  rpDetail.resident.gender[1],
+                ])[1]
+              )}
+              %
+            </span>{' '}
+            입니다.
           </ReportComment>
         </ReportContent>
 
         {/* 연령대별 거주인구 */}
         <ReportContent
-          title="연령별 평균 거주인구(분기 기준)"
+          title="연령별 평균 거주인구"
           chartData={rpAgeData}
           isVert={false}
           style={{ flexGrow: 1 }}
         >
           {' '}
           <ReportComment>
-            <span className="dongName">{region}</span>의 유동인구는{' '}
-            <span className="emphasis">xxx</span>가 가장 많습니다.
+            <span className="emphasis">
+              {getMax(rpDetail.resident.age, 'age')}
+            </span>
+            이(가) 가장 많고,{' '}
+            <span className="emphasis">
+              {getMin(rpDetail.resident.age, 'age')}
+            </span>
+            이(가) 가장 적습니다.
           </ReportComment>
         </ReportContent>
       </div>
 
-      {/* 아파트/비아파트 비율 */}
-      <ReportContent
-        title="아파트/비아파트 비율"
-        chartData={rpAptData}
-        isVert={false}
-        style={{ flexGrow: 1 }}
-      >
-        {' '}
-        <ReportComment>
-          <span className="dongName">{region}</span>의 유동인구는{' '}
-          <span className="emphasis">
-            {getMax(rpAptData.data.datasets[0].data, 'quarter')}
-          </span>
-          가 가장 많습니다.
-        </ReportComment>
-      </ReportContent>
+      <div className="report-div">
+        {/* 상권 아파트/비아파트 비율 */}
+        <ReportContent
+          title="상권 내 아파트/비아파트 비율"
+          chartData={rpAptData}
+          isVert={false}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            총 가구는{' '}
+            <span className="emphasis">
+              {numberComma(rpDetail.resident.house)}호
+            </span>
+            이고, 그 중 아파트는{' '}
+            <span className="emphasis">
+              {Math.round(
+                getRate([rpDetail.resident.apt, rpDetail.resident.nonApt])[0]
+              )}
+              %
+            </span>
+            , 비아파트는{' '}
+            <span className="emphasis">
+              {Math.round(
+                getRate([rpDetail.resident.apt, rpDetail.resident.nonApt])[1]
+              )}
+              %
+            </span>{' '}
+            입니다.
+          </ReportComment>
+        </ReportContent>
+
+        {/* 상권배후지 아파트/비아파트 비율 */}
+        <ReportContent
+          title="상권배후지 내 아파트/비아파트 비율"
+          chartData={rpApt2Data}
+          isVert={false}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            총 가구는{' '}
+            <span className="emphasis">
+              {numberComma(rpDetail.apt.house)}호
+            </span>
+            이고, 그 중 아파트는{' '}
+            <span className="emphasis">
+              {Math.round(getRate([rpDetail.apt.apt, rpDetail.apt.nonApt])[0])}%
+            </span>
+            , 비아파트는{' '}
+            <span className="emphasis">
+              {Math.round(getRate([rpDetail.apt.apt, rpDetail.apt.nonApt])[1])}%
+            </span>{' '}
+            입니다.
+          </ReportComment>
+        </ReportContent>
+      </div>
     </Wrapper>
   );
 };
