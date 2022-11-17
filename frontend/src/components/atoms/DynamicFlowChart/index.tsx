@@ -64,7 +64,7 @@ const DynamicFlowChart = ({ values, labels }: DynamicFlowChartProps) => {
         axis: 'y',
         title: {
           display: 'true',
-          text: '매출액(단위 : 원)',
+          text: '매출액(단위 : 만원)',
         },
       },
     },
@@ -77,7 +77,7 @@ const DynamicFlowChart = ({ values, labels }: DynamicFlowChartProps) => {
         type="line"
         data={data}
         options={options}
-        style={{ width: '95%', height: '400px' }}
+        style={{ width: '90%', height: '400px' }}
         grad={[
           [
             [0, 'rgba(73, 208, 168, 0.8'],
@@ -93,6 +93,9 @@ const DynamicFlowChart = ({ values, labels }: DynamicFlowChartProps) => {
 
 const Wrapper = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export default DynamicFlowChart;
