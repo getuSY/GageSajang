@@ -42,6 +42,7 @@ export const storeInfo = async () => {
 
 export const storeInfoFix = async (params: ProfessionalResultParams) => {
   const { data } = await client.post('user/store/setStore', params);
+};
 
 export const userOverlap = async (email: string) => {
   const { data } = await client.get(`user/auth/overlap/${email}`);
