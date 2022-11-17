@@ -68,10 +68,14 @@ def salesSimulationForMaybe():
 
         x_train = x.copy()
 
-        x_test1 = x[(x['기준_년_코드']==2022) & (x['기준_분기_코드']==4)]
-        x_test2 = x[x['기준_년_코드'] == 2023]
-        x_test = pd.concat([x_test1, x_test2])
+
+        print("x")
+        print(x)
+
+        x_test = x.iloc[-5:, :]
+        print("x_test")
         print(x_test)
+
         y_train = y.copy()
 
         regression = LinearRegression()
@@ -137,9 +141,11 @@ def lifeSimulationForMaybe():
 
         x_train = x.copy()
 
-        x_test1 = x[(x['기준_년_코드']==2022) & (x['기준_분기_코드']==4)]
-        x_test2 = x[x['기준_년_코드'] == 2023]
-        x_test = pd.concat([x_test1, x_test2])
+        print("x")
+        print(x)
+
+        x_test = x.iloc[-5:, :]
+        print("x_test")
         print(x_test)
         y_train = y.copy()
 
@@ -192,9 +198,11 @@ def residentSimulationForMaybe():
 
         x_train = x.copy()
 
-        x_test1 = x[(x['기준_년_코드']==2022) & (x['기준_분기_코드']==4)]
-        x_test2 = x[x['기준_년_코드'] == 2023]
-        x_test = pd.concat([x_test1, x_test2])
+        print("x")
+        print(x)
+
+        x_test = x.iloc[-5:, :]
+        print("x_test")
         print(x_test)
         y_train = y.copy()
 
@@ -246,9 +254,11 @@ def jobSimulationForMaybe():
 
         x_train = x.copy()
 
-        x_test1 = x[(x['기준_년_코드']==2022) & (x['기준_분기_코드']==4)]
-        x_test2 = x[x['기준_년_코드'] == 2023]
-        x_test = pd.concat([x_test1, x_test2])
+        print("x")
+        print(x)
+
+        x_test = x.iloc[-5:, :]
+        print("x_test")
         print(x_test)
         y_train = y.copy()
 
@@ -282,13 +292,20 @@ def countSimulationForMaybe():
         data = redisClient.get('simulation')
         df = pd.read_json(data)
         print("df from redis")
-        # print(df)
+        print(df.info())
 
         x = df[['기준_년_코드', '기준_분기_코드', '총_직장_인구_수', '점포수', '프랜차이즈_점포_수', '소득_구간_코드', '지출_총금액', '총_생활인구_수',
                 '총 상주인구 수', '아파트_평균_시가', '집객시설_수', '분기당_매출_금액/점포수']]
 
         df['분기당_매출_건수/점포수'] = df['분기당_매출_건수']/df['점포수']
         y = df[['분기당_매출_건수/점포수']]
+
+        # print("mean")
+        # print( y['분기당_매출_건수/점포수'].mean())
+        y = y.replace(np.inf, 0)
+        y = y.replace(0, y['분기당_매출_건수/점포수'].mean())
+        # print("y")
+        # print(y)
 
         polynomial = PolynomialFeatures(degree=2, include_bias=False)
         features_polynomial = polynomial.fit_transform(x)
@@ -301,12 +318,15 @@ def countSimulationForMaybe():
 
         x_train = x.copy()
 
-        x_test1 = x[(x['기준_년_코드']==2022) & (x['기준_분기_코드']==4)]
-        x_test2 = x[x['기준_년_코드'] == 2023]
-        x_test = pd.concat([x_test1, x_test2])
+        print("x")
+        print(x)
+
+        x_test = x.iloc[-5:, :]
+        print("x_test")
         print(x_test)
         y_train = y.copy()
 
+        print("여기까지 되시나요? 1")
         regression = LinearRegression()
         regression.fit(x_train, y_train)
 
@@ -361,7 +381,6 @@ def salesSimulationForAlready():
         len(df)
         # print(df)
         df = df.astype({'분기당_매출_금액/점포수': 'int64'})
-
         df.drop(['_id', '시군구명', '읍면동명', '서비스_업종_코드', '서비스_업종_코드_명'], axis=1, inplace=True)
 
         data = df.to_json(force_ascii=False, orient='records', indent=4)
@@ -603,7 +622,11 @@ def countSimulationForAready():
         x = df[['기준_년_코드', '기준_분기_코드', '총_직장_인구_수', '점포수', '프랜차이즈_점포_수', '분기당_매출_금액/점포수', '소득_구간_코드', '지출_총금액', '총_생활인구_수',
                 '총 상주인구 수', '아파트_평균_시가', '집객시설_수']]
 
-        y = df[['분기당_매출_건수']]
+        df['분기당_매출_건수/점포수'] = df['분기당_매출_건수'] / df['점포수']
+        y = df[['분기당_매출_건수/점포수']]
+
+        y = y.replace(np.inf, 0)
+        y = y.replace(0, y['분기당_매출_건수/점포수'].mean())
 
         polynomial = PolynomialFeatures(degree=2, include_bias=False)
         features_polynomial = polynomial.fit_transform(x)
