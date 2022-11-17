@@ -58,7 +58,7 @@ const StatusPage = () => {
   const { guData, isGuSuccess, isGuLoading, isGuError } = useStatusGuMap();
   // 상권 배후지 지도 API
   const { hinGuData, isHinGuSuccess, isHinGuLoading, isHinGuError } =
-    useStatusHinGuMap(); //
+    useStatusHinGuMap();
 
   // 사이드바 TOP10 API
   const trendData = useStatusTrend();

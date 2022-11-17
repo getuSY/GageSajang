@@ -3,8 +3,8 @@ export interface ProfessionalResultParams {
   sales: number;
   clerk: number;
   area: number;
-  dongName: string;
-  industryName: string;
+  dongName: string | undefined;
+  industryName: string | undefined;
 }
 
 export interface ProfessionalSimulationParams {
@@ -13,4 +13,22 @@ export interface ProfessionalSimulationParams {
   quarter: number;
   value: number;
   year: number;
+}
+
+export interface ProfessionalStoreResult {
+  store: {
+    total: number;
+    clerk: number;
+    area: number;
+    similar: number;
+    franchise: number;
+  };
+  sales: {
+    order: number;
+    sales: number;
+  };
+  status: {
+    open: number;
+    close: number;
+  };
 }
