@@ -6,18 +6,19 @@ import ReportChart, { ReportChartProps } from '../ReportChart';
 interface DynamicRateChartProps {
   values?: Array<number>;
   labels?: Array<string>;
+  name: string;
 }
 
 type Position = { x: string; y: number };
 
-const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
+const DynamicRateChart = ({ values, labels, name }: DynamicRateChartProps) => {
   // const [realData, setRealData] = useState([{ x: '2013년 1분기', y: 0 }]);
 
   const data = {
     labels: labels,
     datasets: [
       {
-        label: '연매출액',
+        label: '연' + name,
         data: values,
         backgroundColor: '#eeeeee',
         // borderColor: 'rgba(73, 208, 168, 0.5)',
@@ -38,7 +39,7 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
       datalabels: { display: false },
       title: {
         display: true,
-        text: '매출액 증감 추이',
+        text: name + ' 증감 추이',
       },
       legend: {
         display: true,
@@ -55,7 +56,7 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
         // max: realData[realData.length - 1].y,
         title: {
           display: 'true',
-          text: '매출 기준 분기',
+          text: name + ' 기준 분기',
         },
         grid: {
           display: false,
@@ -65,7 +66,7 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
         axis: 'y',
         title: {
           display: 'true',
-          text: '매출 증감량(단위 : %)',
+          text: name + ' 증감량(단위 : %)',
         },
       },
     },

@@ -20,42 +20,6 @@ interface ProfessionalStoreInfo extends ProfessionalResultParams {
 
 const ProfessionalStorePage = () => {
   const userEmail = sessionStorage.getItem('email');
-  const [storeInform, setStoreInform] = useState<ProfessionalStoreInfo>({
-    id: 0,
-    email: userEmail,
-    sales: 0,
-    clerk: 0,
-    area: 0,
-    dongName: '',
-    industryName: '',
-  });
-  const [content, setContent] = useState<number>(0);
-
-  const userStoreInfo = useUserStoreInfo();
-  useEffect(() => {
-    if (userStoreInfo.isSuccess) {
-      console.log('가게 정보 확인', userStoreInfo.data);
-      setStoreInform(userStoreInfo.data);
-      setContent(1);
-    } else if (userStoreInfo.isError) {
-      console.log('정보 없음');
-    }
-  }, [userStoreInfo]);
-
-  const changeStoreInform = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('change', e.target.value);
-    setStoreInform({
-      ...storeInform,
-      [e.target.id]: Number(e.target.value),
-    });
-  };
-
-  const mutation = useStoreInfoFix();
-  const { data, isLoading, isSuccess, isError, error } = mutation;
-
-  const onClickHandler = () => {
-    mutation.mutate(storeInform);
-  };
   const [guDong, setGuDong] = useState('');
 
   // 업종 검색창
@@ -128,6 +92,52 @@ const ProfessionalStorePage = () => {
     }
   }, [dongKeyword]);
 
+  const [storeInform, setStoreInform] = useState<ProfessionalStoreInfo>({
+    id: 0,
+    email: userEmail,
+    sales: 0,
+    clerk: 0,
+    area: 0,
+    dongName: selectedDongSearch,
+    industryName: selectedJobSearch,
+  });
+  const [content, setContent] = useState<number>(0);
+
+  const userStoreInfo = useUserStoreInfo();
+  useEffect(() => {
+    if (userStoreInfo.isSuccess) {
+      console.log('가게 정보 확인', userStoreInfo.data);
+      setStoreInform(userStoreInfo.data);
+      setContent(1);
+    } else if (userStoreInfo.isError) {
+      console.log('정보 없음');
+    }
+  }, [userStoreInfo]);
+
+  useEffect(() => {
+    setStoreInform({
+      ...storeInform,
+      dongName: selectedDongSearch,
+      industryName: selectedJobSearch,
+    });
+    console.log('위치 업종 정보 바뀜!!', storeInform);
+  }, [selectedDongSearch, selectedJobSearch]);
+
+  const changeStoreInform = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('change', e.target.value);
+    setStoreInform({
+      ...storeInform,
+      [e.target.id]: Number(e.target.value),
+    });
+  };
+
+  const onClickHandler = () => {
+    if (storeInform.dongName && storeInform.industryName) {
+      setContent(2);
+      console.log('content', content);
+    }
+  };
+
   return (
     <Wrapper
       onClick={(e) => {
@@ -180,6 +190,7 @@ const ProfessionalStorePage = () => {
               placeholder="직원 수를 입력해주세요. (숫자만)"
               inputId="clerk"
               onChange={changeStoreInform}
+              inputValue={storeInform.clerk.toString()}
             />
           </ProListItem>
           <ProListItem>
@@ -233,7 +244,16 @@ const ProfessionalStorePage = () => {
       )}
       {!userStoreInfo.isLoading && content === 2 && (
         <ProReport>
-          <ProfessionalResult />
+          <ProfessionalResult
+            info={{
+              email: storeInform.email,
+              sales: storeInform.sales,
+              clerk: storeInform.clerk,
+              area: storeInform.area,
+              dongName: storeInform.dongName,
+              industryName: storeInform.industryName,
+            }}
+          />
           <SimulationPage></SimulationPage>
         </ProReport>
       )}

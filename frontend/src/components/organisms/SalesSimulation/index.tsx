@@ -9,6 +9,7 @@ import DynamicFlowChart from '../../atoms/DynamicFlowChart';
 
 interface SalesSimulationProps {
   values: Array<SimulInfo>;
+  name: string;
 }
 
 export type SimulInfo = {
@@ -19,7 +20,16 @@ export type SimulInfo = {
   industryName: string;
 };
 
-const SalesSimulation = ({ values }: SalesSimulationProps) => {
+const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
+  // if (name === '매출') {
+  //   const mutation =
+  // } else if (name === '생활인구') {
+  //   const mutation =
+  // } else if (name === '거주인구') {
+
+  // } else if (name === '직장인구') {
+
+  // } else if (name === '매출 건수'){}
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState(0);
   const [yearLabel, setYearLabel] = useState<Array<string>>(['2013년 1분기']);
@@ -114,7 +124,7 @@ const SalesSimulation = ({ values }: SalesSimulationProps) => {
               type="main"
               style={{ width: '300px', height: '65px', fontSize: '24px' }}
             >
-              매출 시뮬레이션 결과
+              {name} 시뮬레이션 결과
             </Button>
             <TitleMsg>
               아래 바를 움직여 시뮬레이션 결과를 확인하세요. 모든 시뮬레이션
@@ -145,39 +155,58 @@ const SalesSimulation = ({ values }: SalesSimulationProps) => {
           <ChartBox>
             <Inside>
               {' '}
-              <DynamicFlowChart values={salesValues} labels={yearLabel} />
-              <DynamicRateChart values={rateValue} labels={yearLabel} />
+              <DynamicFlowChart
+                values={salesValues}
+                labels={yearLabel}
+                name={name}
+              />
+              <DynamicRateChart
+                values={rateValue}
+                labels={yearLabel}
+                name={name}
+              />
               <ExBox>
-                <span>3개월 후 매출 예측 : 약 {values[40].value} 원 </span>
+                <span>
+                  3개월 후 {name} 예측 : 약 {values[40].value}{' '}
+                </span>
                 <br></br>
-                <span>6개월 후 매출 예측 : 약 {values[41].value} 원</span>
+                <span>
+                  6개월 후 {name} 예측 : 약 {values[41].value}
+                </span>
                 <br></br>
-                <span>6개월 후 매출 예측 : 약 {values[42].value} 원</span>
+                <span>
+                  6개월 후 {name} 예측 : 약 {values[42].value}
+                </span>
                 <br></br>
-                <span>1년 후 매출 예측 : 약 {values[43].value} 원</span>
+                <span>
+                  1년 후 {name} 예측 : 약 {values[43].value}
+                </span>
               </ExBox>
             </Inside>
             <Inside>
               <DynamicTopChart
-                title="매출액 TOP 5"
+                title={name + 'TOP 5'}
                 values={topValues}
                 labels={topLabel}
                 colors={topColor}
+                name={name}
               ></DynamicTopChart>
               <DynamicTopChart
-                title="매출액 BOTTOM 5"
+                title={name + 'BOTTOM 5'}
                 values={btmValues}
                 labels={btmLabel}
                 colors={btmColor}
+                name={name}
               ></DynamicTopChart>
               <ExBox>
-                <span>매출 상위 5분기 : </span>
+                <span>{name} 상위 5분기 : </span>
                 <br></br>
-                <span>매출 하위 5분기 : </span>
+                <span>{name} 하위 5분기 : </span>
                 <br></br>
                 <span>
                   {/* <FontAwesomeIcon icon="fa-sharp fa-solid fa-tag" /> */}
-                  tip : 매출 상위 및 하위에 특정 분기가 자주 보인다면, <br></br>
+                  tip : {name} 상위 및 하위에 특정 분기가 자주 보인다면,{' '}
+                  <br></br>
                   해당 분기 서비스를 재고해보시면 어떨까요?
                 </span>
               </ExBox>
@@ -202,7 +231,7 @@ const SalesSimulation = ({ values }: SalesSimulationProps) => {
               justifyContent: 'space-between',
             }}
           >
-            💰 매출 시뮬레이션 결과를 확인할 수 있습니다.
+            💰 {name} 시뮬레이션 결과를 확인할 수 있습니다.
             <img
               src="/assets/icons/greenblue_down_btn.png"
               alt="exit"
@@ -256,14 +285,6 @@ const roundStyle = {
   // height: '800px',
   boxShadow: '0 7px 25px rgba(0, 0, 0, 0.1)',
 };
-
-const OpenBtn = styled.div`
-  background-color: black;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-`;
 
 const ChartBox = styled.div`
   display: flex;

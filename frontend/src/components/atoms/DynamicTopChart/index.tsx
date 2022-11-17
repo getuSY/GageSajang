@@ -10,6 +10,7 @@ interface DynamicTopChartProps {
   labels: Array<string>;
   title: string;
   colors: Array<any>;
+  name: string;
 }
 
 const DynamicTopChart = ({
@@ -17,6 +18,7 @@ const DynamicTopChart = ({
   labels,
   title,
   colors,
+  name,
 }: DynamicTopChartProps) => {
   const data = {
     labels: labels,
@@ -65,7 +67,7 @@ const DynamicTopChart = ({
         // max: realData[realData.length - 1].y,
         title: {
           display: 'true',
-          text: '매출 기준 분기',
+          text: name + ' 기준 분기',
         },
         grid: {
           display: false,
@@ -76,7 +78,7 @@ const DynamicTopChart = ({
         min: Math.min(...values) - 100, /// 가변값으로 설정하기
         title: {
           display: 'true',
-          text: '매출액(단위 : 만원)',
+          text: name + '(단위 : 만)',
         },
       },
     },

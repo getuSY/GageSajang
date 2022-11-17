@@ -55,4 +55,10 @@ export const useStoreInfoFix = () =>
   useMutation({
     mutationFn: (storeParams: ProfessionalResultParams) =>
       storeInfoFix(storeParams),
+    onSuccess: (data) => {
+      return data;
+    },
+    onError: (data) => {
+      return data;
+    },
   });
