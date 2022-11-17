@@ -411,7 +411,7 @@ const ReportContentContainer = ({
         <div className="chart-div">
           {/* <AmatuerReportRisk risk={riskData.risk} /> */}
 
-          <RiskGaugeChart></RiskGaugeChart>
+          <RiskGaugeChart gauge={riskData.risk} />
         </div>
       </ReportCategory>
       {/* 시뮬레이션 */}

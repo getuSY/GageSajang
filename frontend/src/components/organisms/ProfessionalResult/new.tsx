@@ -66,8 +66,8 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
         가게 경영을 한 경우 모든 책임은 사장님께 있습니다.
       </Notice> */}
       <ReportAlert>
-        ❗ 아래 보고서는 통계 자료에 따른 분석 결과입니다. 보고서를 참고하여
-        가게 경영을 한 경우 모든 책임은 사장님께 있습니다.
+        ❗ 아래 분석 결과는 통계에 따른 추정 결과입니다. 향후 상황에 따라 다를
+        수 있기 때문에, 판단 하에 참고하여 활용하시기 바랍니다.
       </ReportAlert>
       <Summary>
         <SummaryItem title="매출 비교" style={{ width: 0, flexGrow: 1 }}>
@@ -147,13 +147,36 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
             )}
           </div>
         </SummaryItem>
+        <SummaryItem title="가게 면적 비교" style={{ width: 0, flexGrow: 1 }}>
+          <div>
+            {areaRate > 100 && (
+              <>
+                평균 대비 <Highlight>{areaRate - 100}%</Highlight> 더 넓어요!
+              </>
+            )}
+            {areaRate === 100 && (
+              <>
+                평균 면적과 거의 <Highlight>비슷해요!</Highlight>
+              </>
+            )}
+            {areaRate < 100 && (
+              <>
+                평균 대비 <Highlight>{100 - areaRate}%</Highlight> 더 좁아요!
+              </>
+            )}
+          </div>
+        </SummaryItem>
       </Summary>
       <ReportContent
         style={{ marginTop: '2rem' }}
         title="~~의 평균값을 토대로 보여드릴게요!"
       />
       <div className="chart-div">
-        <ReportContent style={{ width: 0, flexGrow: 1 }} chartData={salesData}>
+        <ReportContent
+          title="평균 월 매출"
+          style={{ width: 0, flexGrow: 1 }}
+          chartData={salesData}
+        >
           {salesRate > 100 ? (
             <DetailCardScript>
               <div>평균 월 매출보다 많이 벌고 있습니다.</div>
@@ -170,7 +193,7 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
             </DetailCardScript>
           )}
         </ReportContent>
-        <ReportContent style={{ width: 0, flexGrow: 1 }}>
+        <ReportContent title="평균 매출 건수" style={{ width: 0, flexGrow: 1 }}>
           <img
             src="/assets/img/shopping-cart.png"
             alt="sales_number"
@@ -192,7 +215,11 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
             낮다면 경영 환경 개선이 필요합니다.
           </DetailCardScript>
         </ReportContent>
-        <ReportContent style={{ width: 0, flexGrow: 1 }} chartData={clerkData}>
+        <ReportContent
+          title="평균 직원 수"
+          style={{ width: 0, flexGrow: 1 }}
+          chartData={clerkData}
+        >
           {clerkRate > 1 ? (
             <DetailCardScript>
               평균 직원 수보다 많이 고용하고 있습니다. <br></br>
@@ -213,6 +240,7 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
       </div>
       <div className="chart-div">
         <ReportContent
+          title="평균 가게 면적"
           style={{ width: 0, flexGrow: 1 }}
           chartData={areaData}
           isVert={false}
@@ -236,7 +264,11 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
             </DetailCardScript>
           )}
         </ReportContent>
-        <ReportContent style={{ width: 0, flexGrow: 1 }} chartData={ocData}>
+        <ReportContent
+          title="개폐업 점포 수"
+          style={{ width: 0, flexGrow: 1 }}
+          chartData={ocData}
+        >
           {result.status.open > result.status.close ? (
             <DetailCardScript>
               {info.dongName}에 새로 개업한 {info.industryName} 수는{' '}
@@ -260,7 +292,11 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
             </DetailCardScript>
           )}
         </ReportContent>
-        <ReportContent style={{ width: 0, flexGrow: 1 }} chartData={frData}>
+        <ReportContent
+          title="프랜차이즈 점포 수"
+          style={{ width: 0, flexGrow: 1 }}
+          chartData={frData}
+        >
           <DetailCardScript>
             {info.dongName}의 {info.industryName} 프랜차이즈 점포 수는 {''}
             {result.store.franchise}곳입니다.
@@ -281,7 +317,7 @@ const Wrapper = styled.div`
   /* height: calc(100vh - 65px); */
   overflow-y: scroll;
   left: 450px;
-  background: #f4f4f4;
+  background: #eef1ee;
   transition: 0.5s;
   /* display: flex;
   flex-direction: column; */

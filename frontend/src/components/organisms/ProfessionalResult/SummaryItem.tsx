@@ -52,7 +52,7 @@ const Wrapper = styled.div`
   padding: 20px 20px;
   border-radius: 10px;
   font-size: 1.2rem;
-  height: 140px;
+  height: 100px;
   & .content {
     flex-grow: 1;
     display: flex;

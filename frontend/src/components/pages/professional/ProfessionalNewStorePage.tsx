@@ -294,7 +294,7 @@ const ProSide = styled.div`
 const ProList = styled.div`
   flex-grow: 1;
   color: #3e4b5b;
-  & div + div {
+  & > div + div {
     margin-top: 1rem;
   }
 `;
@@ -304,18 +304,6 @@ const ProListItem = styled.div`
   display: flex;
   flex-direction: column;
   /* margin-bottom: 10px; */
-`;
-
-const ProReport = styled.div`
-  flex-grow: 1;
-  height: 100%;
-  overflow-y: scroll;
-  left: 450px;
-  background: #f2edf3;
-  transition: 0.5s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 export default ProfessionalStorePage;

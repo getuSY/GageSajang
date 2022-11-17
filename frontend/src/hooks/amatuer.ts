@@ -241,7 +241,7 @@ export const useSalesData = (amatuerResult: any) => {
           {
             label: '총 매출(단위: 원)',
             data: amatuerResult.sales.total,
-            borderColor: '#A82BEC',
+            borderColor: '#B29AF8',
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
@@ -251,7 +251,7 @@ export const useSalesData = (amatuerResult: any) => {
       },
       grad: [
         [
-          [0, '#A82BEC'],
+          [0, '#B29AF8'],
           // [0.8, '#545BF9'],
         ],
       ],
@@ -387,7 +387,7 @@ export const useLivingData = (amatuerResult: any) => {
           {
             label: '총 유동인구 추이',
             data: amatuerResult.living.total,
-            borderColor: '#A82BEC',
+            borderColor: '#B29AF8',
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
@@ -395,7 +395,7 @@ export const useLivingData = (amatuerResult: any) => {
           },
         ],
       },
-      grad: [[[0, '#A82BEC']]],
+      grad: [[[0, '#B29AF8']]],
     }),
     [amatuerResult]
   );

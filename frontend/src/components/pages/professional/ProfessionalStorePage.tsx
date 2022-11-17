@@ -53,7 +53,7 @@ const ProfessionalStorePage = () => {
     // }}
     >
       <ProSideBar info={inform} setInfo={setInform} setContent={setContent} />
-      {!userStoreInfo.isLoading && content === 0 && (
+      {/* {!userStoreInfo.isLoading && content === 0 && (
         <ProReport>
           <InitialReport>
             처음 뵙겠습니다, 사장님!<br></br>가게 정보를 입력하고 내 가게 분석을
@@ -68,7 +68,7 @@ const ProfessionalStorePage = () => {
             <br></br>수정 없이 분석을 진행하시려면 분석하기 버튼을 눌러주세요.
           </InitialReport>
         </ProReport>
-      )}
+      )} */}
       {/* {!userStoreInfo.isLoading && result.isLoading && (
         <ProReport>
           분석 결과를 불러오는 중입니다. <br></br>잠시만 기다려주세요...
@@ -90,6 +90,20 @@ const ProfessionalStorePage = () => {
           <SimulationPage></SimulationPage>
         </ProReport>
       )} */}
+      <ProReport>
+        <ProfessionalResult
+          info={{
+            email: inform.email,
+            sales: inform.sales,
+            clerk: inform.clerk,
+            area: inform.area,
+            dongName: inform.dongName,
+            industryName: inform.industryName,
+          }}
+          // result={result.data}
+        />
+        <SimulationPage></SimulationPage>
+      </ProReport>
     </Wrapper>
   );
 };
