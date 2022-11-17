@@ -333,8 +333,8 @@ const SimulationPage = () => {
 
   return (
     <Wrapper>
-      {/* <TempSide></TempSide> */}
-      <SalesSimulation values={values}></SalesSimulation>
+      <SalesSimulation values={values} name="매출"></SalesSimulation>
+      <SalesSimulation values={values} name="유동인구"></SalesSimulation>
     </Wrapper>
   );
 };
@@ -346,13 +346,5 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
 `;
-
-const TempSide = styled.div`
-  background-color: green;
-  width: 500px;
-  height: 100%;
-`;
-
-const DataBox = styled.div``;
 
 export default SimulationPage;
