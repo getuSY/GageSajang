@@ -456,7 +456,6 @@ const Wrapper = styled.div`
   position: relative;
   flex-grow: 1;
   overflow-y: scroll;
-
   padding: 12px;
   & .chart-div {
     display: flex;
