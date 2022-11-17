@@ -1,33 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ReportChart from '../../atoms/ReportChart';
+import { useStoreInfoFix } from '../../../hooks/user';
+import {
+  ProfessionalResultParams,
+  ProfessionalStoreResult,
+} from '../../../models/professional';
+import Spinner from '../../atoms/Spinner';
 
-const ProfessionalResult = () => {
-  const result = {
-    dongName: '개포2동', // 읍면동명
-    industryCode: 'CS100001', // 업종 구분 코드
-    industryName: '한식음식점', // 업종 명
-    order: 36683, // 매출 건수
-    total: 22.5, // 점포 수
-    similar: 22.5, // 유사 업종 수
-    open: 0, //개업
-    close: 0, //폐업
-    franchise: 2, // 프랜차이즈 업종 수
-    sales: 59331326.5, // 매출/점포수 (user에선 sales int고 경영환경진단에선 float
-    clerk: 3, // 직원수
-    area: 60, //면적수
-  };
-  const salesRate = (12315546 / result.sales) * 100;
-  const openRate = (result.open / Number(result.total)) * 100;
-  const closeRate = (result.close / Number(result.total)) * 100;
-  const clerkRate = 6 / result.clerk;
-  const areaRate = (40.5 / result.area) * 100;
+interface ProfessionalResultProps {
+  info: ProfessionalResultParams;
+}
+
+const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
+  const mutation = useStoreInfoFix();
+  const { data, isLoading, isSuccess, isError, error } = mutation;
+  useEffect(() => {
+    mutation.mutate(info);
+  }, []);
+  const [result, setResult] = useState<ProfessionalStoreResult>({
+    store: {
+      total: 1.0,
+      clerk: 3,
+      area: 36,
+      similar: 1.0,
+      franchise: 0.0,
+    },
+    sales: {
+      order: 3881.0,
+      sales: 9.8268952e7,
+    },
+    status: {
+      open: 0.0,
+      close: 0.0,
+    },
+  });
+  // const result = {
+  //   dongName: '개포2동', // 읍면동명
+  //   industryCode: 'CS100001', // 업종 구분 코드
+  //   industryName: '한식음식점', // 업종 명
+  //   order: 36683, // 매출 건수
+  //   total: 22.5, // 점포 수
+  //   similar: 22.5, // 유사 업종 수
+  //   open: 0, //개업
+  //   close: 0, //폐업
+  //   franchise: 2, // 프랜차이즈 업종 수
+  //   sales: 59331326.5, // 매출/점포수 (user에선 sales int고 경영환경진단에선 float
+  //   clerk: 3, // 직원수
+  //   area: 60, //면적수
+  // };
+  const salesRate = (info.sales / result.sales.sales) * 100;
+  const openRate = (result.status.open / Number(result.store.total)) * 100;
+  const closeRate = (result.status.close / Number(result.store.total)) * 100;
+  const clerkRate = info.clerk / result.store.clerk;
+  const areaRate = (info.area / result.store.area) * 100;
   const areaData = {
     labels: ['내 가게 면적', '평균 가게 면적'],
     datasets: [
       {
         label: ['내 가게 면적'],
-        data: [42, result.area],
+        data: [42, result.store.area],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
       },
     ],
@@ -40,7 +72,7 @@ const ProfessionalResult = () => {
     datasets: [
       {
         label: ['내 가게 월 매출'],
-        data: [6000000, result.sales / 3],
+        data: [6000000, result.sales.sales / 3],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         borderRadius: 300,
         // borderWidth: 5,
@@ -53,7 +85,7 @@ const ProfessionalResult = () => {
     datasets: [
       {
         label: ['내 가게 직원 수'],
-        data: [6, result.clerk],
+        data: [6, result.store.clerk],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         borderRadius: 100,
       },
@@ -63,7 +95,7 @@ const ProfessionalResult = () => {
     labels: ['총 점포 수', '프랜차이즈 수'],
     datasets: [
       {
-        data: [Math.ceil(result.total), result.franchise],
+        data: [Math.ceil(result.store.total), result.store.franchise],
         backgroundColor: ['#edf3f1', 'rgb(255, 205, 86)'],
         hoverOffset: 5,
       },
@@ -84,7 +116,11 @@ const ProfessionalResult = () => {
     labels: ['총 점포 수', '개업 점포 수', '폐업 점포 수'],
     datasets: [
       {
-        data: [Math.ceil(result.total), result.open, result.close],
+        data: [
+          Math.ceil(result.store.total),
+          result.status.open,
+          result.status.close,
+        ],
         backgroundColor: ['#edf3f1', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         hoverOffset: 5,
       },
@@ -103,6 +139,7 @@ const ProfessionalResult = () => {
   };
   return (
     <Wrapper>
+      {mutation.isLoading && <Spinner></Spinner>}
       <Notice>
         ❗ 아래 보고서는 통계 자료에 따른 분석 결과입니다. 보고서를 참고하여
         가게 경영을 한 경우 모든 책임은 사장님께 있습니다.
@@ -185,7 +222,7 @@ const ProfessionalResult = () => {
       </Summary>
       <ProRepoDetail>
         <p style={{ fontSize: '40px', margin: '8rem auto', fontWeight: '600' }}>
-          " {result.dongName} {result.industryName} "의 평균값을 토대로
+          " {info.dongName} {info.industryName} "의 평균값을 토대로
           보여드릴게요!
         </p>
         <ReportDetails>
@@ -234,11 +271,11 @@ const ProfessionalResult = () => {
                 marginTop: '20px',
               }}
             >
-              {result.order} 건
+              {result.sales.order} 건
             </div>
             <DetailCardScript>
-              월 평균 매출 건수는 {result.order} 건입니다. <br></br> 평균 매출
-              건수가 이보다 낮지 않은지 생각해보세요. <br></br> 매출 건수가
+              월 평균 매출 건수는 {result.sales.order} 건입니다. <br></br> 평균
+              매출 건수가 이보다 낮지 않은지 생각해보세요. <br></br> 매출 건수가
               낮다면 경영 환경 개선이 필요합니다.
             </DetailCardScript>
           </DetailCards>
@@ -294,21 +331,20 @@ const ProfessionalResult = () => {
             ></ReportChart>
             {areaRate > 100 ? (
               <DetailCardScript>
-                {result.dongName} {result.industryName} 평균 가게 면적보다
-                넓습니다.<br></br>
+                {info.dongName} {info.industryName} 평균 가게 면적보다 넓습니다.
+                <br></br>
                 가게 면적을 제대로 활용하고 있는지 체크해보세요.
               </DetailCardScript>
             ) : areaRate < 100 ? (
               <DetailCardScript>
-                {result.dongName} {result.industryName} 평균 가게 면적보다
-                좁습니다.<br></br> 상황에 따라 확장이전을 고려하거나 <br></br>{' '}
-                배치를 바꿔보면 도움이 될 것 같습니다.
+                {info.dongName} {info.industryName} 평균 가게 면적보다 좁습니다.
+                <br></br> 상황에 따라 확장이전을 고려하거나 <br></br> 배치를
+                바꿔보면 도움이 될 것 같습니다.
               </DetailCardScript>
             ) : (
               <DetailCardScript>
-                {result.dongName} {result.industryName} 평균 가게 면적과
-                비슷합니다.<br></br>순이익이 낮다면 다른 지출 항목을 살펴보면
-                어떨까요?
+                {info.dongName} {info.industryName} 평균 가게 면적과 비슷합니다.
+                <br></br>순이익이 낮다면 다른 지출 항목을 살펴보면 어떨까요?
               </DetailCardScript>
             )}
           </DetailCards>
@@ -321,25 +357,25 @@ const ProfessionalResult = () => {
               options={ocOptions}
               grad={[[[0, '#edf3f1']], [[0, '#49D0A8']], [[0.8, '#F9F254']]]}
             ></ReportChart>
-            {result.open > result.close ? (
+            {result.status.open > result.status.close ? (
               <DetailCardScript>
-                {result.dongName}에 새로 개업한 {result.industryName} 수는{' '}
-                {result.open} 곳, <br></br> 폐업한 {result.industryName} 수는{' '}
-                {result.close} 곳입니다. <br></br>
+                {info.dongName}에 새로 개업한 {info.industryName} 수는{' '}
+                {result.status.open} 곳, <br></br> 폐업한 {info.industryName}{' '}
+                수는 {result.status.close} 곳입니다. <br></br>
                 동종업종이 늘고 있는 추세라고 할 수 있습니다.
               </DetailCardScript>
-            ) : result.open < result.close ? (
+            ) : result.status.open < result.status.close ? (
               <DetailCardScript>
-                {result.dongName}에 새로 개업한 {result.industryName} 수는{' '}
-                {result.open} 곳, <br></br> 폐업한 {result.industryName} 수는{' '}
-                {result.close} 곳입니다. <br></br>
+                {info.dongName}에 새로 개업한 {info.industryName} 수는{' '}
+                {result.status.open} 곳, <br></br> 폐업한 {info.industryName}{' '}
+                수는 {result.status.close} 곳입니다. <br></br>
                 동종업종 성장률이 하락하고 있는 추세라고 할 수 있습니다.
               </DetailCardScript>
             ) : (
               <DetailCardScript>
-                {result.dongName}에 새로 개업한 {result.industryName} 수는{' '}
-                {result.open} 곳, <br></br> 폐업한 {result.industryName} 수는{' '}
-                {result.close} 곳입니다. <br></br>
+                {info.dongName}에 새로 개업한 {info.industryName} 수는{' '}
+                {result.status.open} 곳, <br></br> 폐업한 {info.industryName}{' '}
+                수는 {result.status.close} 곳입니다. <br></br>
                 동종업계 성장률은 정체되어 있다고 할 수 있습니다.
               </DetailCardScript>
             )}
@@ -360,9 +396,8 @@ const ProfessionalResult = () => {
               ]}
             ></ReportChart>
             <DetailCardScript>
-              {result.dongName}의 {result.industryName} 프랜차이즈 점포 수는{' '}
-              {''}
-              {result.franchise}곳입니다.
+              {info.dongName}의 {info.industryName} 프랜차이즈 점포 수는 {''}
+              {result.store.franchise}곳입니다.
               <br></br> 프랜차이즈 점포가 많다면 <br></br>내 가게만의 특별함을
               만들어보면 좋을 것 같아요.
             </DetailCardScript>
