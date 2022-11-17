@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import LabelInput from '../../molecules/LabelInput';
-import ProfessionalResult from '../../organisms/ProfessionalResult';
+import ProfessionalResult from '../../organisms/ProfessionalResult/new';
 import { useProfessionalResult } from '../../../hooks/professional';
 import { ProfessionalResultParams } from '../../../models/professional';
 import Button from '../../atoms/Button';
@@ -13,6 +13,8 @@ import { cs1, cs2, cs3 } from '../../../data/cs';
 import JobSearchInput from '../../molecules/JobSearchInput';
 import { areas, DongItem } from '../../../data/areaDong';
 import { useUserStoreInfo, useStoreInfoFix } from '../../../hooks/user';
+import Label from '../../atoms/Label';
+import Input from '../../atoms/Input';
 
 interface ProfessionalStoreInfo extends ProfessionalResultParams {
   id: number;
@@ -151,75 +153,74 @@ const ProfessionalStorePage = () => {
           <ProListItem>
             <div
               style={{
-                fontSize: '40px',
-                color: 'white',
-                fontWeight: '500',
-                margin: '10px 0 30px 0',
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                margin: '10px 0 10px 0',
               }}
             >
               🏪 내 가게 정보
             </div>
           </ProListItem>
+          <JobSearchInput
+            label="가게 주소"
+            placeholder="행정동을 입력해주세요."
+            inputValue={selectedDongSearch}
+            onChange={onDongChange}
+            searchResult={dongSearchResult}
+            searchResultOpen={isDongSearchResultOpen}
+            searchResultRef={dongSearchResultRef}
+            selectItem={selectDongItem}
+            clearValue={clearDongItem}
+          />
+          <JobSearchInput
+            label="업종"
+            placeholder="가게 업종을 입력해주세요."
+            inputValue={selectedJobSearch}
+            onChange={onJobChange}
+            searchResult={jobSearchResult}
+            searchResultOpen={isJobSearchResultOpen}
+            searchResultRef={jobSearchResultRef}
+            selectItem={selectJobItem}
+            clearValue={clearJobItem}
+          />
           <ProListItem>
-            <JobSearchInput
-              label="가게 주소"
-              placeholder="행정동을 입력해주세요."
-              inputValue={selectedDongSearch}
-              onChange={onDongChange}
-              searchResult={dongSearchResult}
-              searchResultOpen={isDongSearchResultOpen}
-              searchResultRef={dongSearchResultRef}
-              selectItem={selectDongItem}
-              clearValue={clearDongItem}
-            />
-            <JobSearchInput
-              label="업종"
-              placeholder="가게 업종을 입력해주세요."
-              inputValue={selectedJobSearch}
-              onChange={onJobChange}
-              searchResult={jobSearchResult}
-              searchResultOpen={isJobSearchResultOpen}
-              searchResultRef={jobSearchResultRef}
-              selectItem={selectJobItem}
-              clearValue={clearJobItem}
-            />
-          </ProListItem>
-          <ProListItem>
-            <LabelInput
-              label="직원 수"
+            <Label style={{ marginBottom: '0.6rem', fontSize: '1.05rem' }}>
+              직원 수
+            </Label>
+            <Input
               placeholder="직원 수를 입력해주세요. (숫자만)"
-              inputId="clerk"
+              inputId="clert"
               onChange={changeStoreInform}
               inputValue={storeInform.clerk.toString()}
             />
           </ProListItem>
           <ProListItem>
-            <LabelInput
-              label="가게 면적"
+            <Label style={{ marginBottom: '0.6rem', fontSize: '1.05rem' }}>
+              가게 면적
+            </Label>
+            <Input
               placeholder="가게 면적을 입력해주세요. (숫자만)"
+              inputId="clert"
               onChange={changeStoreInform}
-              inputId="area"
               inputValue={storeInform.area.toString()}
-              // onChange={changeStoreArea}
             />
           </ProListItem>
           <ProListItem>
-            <LabelInput
-              label="평균 월 매출"
+            <Label style={{ marginBottom: '0.6rem', fontSize: '1.05rem' }}>
+              평균 월 매출
+            </Label>
+            <Input
               placeholder="평균 월 매출을 입력해주세요. (숫자만)"
+              inputId="clert"
               onChange={changeStoreInform}
-              inputId="sales"
               inputValue={storeInform.sales.toString()}
-              // onChange={changeSales}
             />
           </ProListItem>
         </ProList>
         <Button
           type="border"
           style={{
-            width: '260px',
-            alignSelf: 'center',
-            margin: '10rem 0 0 0',
+            width: '100%',
           }}
           onClick={onClickHandler}
         >
@@ -257,19 +258,19 @@ const ProfessionalStorePage = () => {
           <SimulationPage></SimulationPage>
         </ProReport>
       )} */}
-      <ProReport>
-        <ProfessionalResult
-          info={{
-            email: storeInform.email,
-            sales: storeInform.sales,
-            clerk: storeInform.clerk,
-            area: storeInform.area,
-            dongName: storeInform.dongName,
-            industryName: storeInform.industryName,
-          }}
-        />
-        <SimulationPage></SimulationPage>
-      </ProReport>
+      {/* <ProReport> */}
+      <ProfessionalResult
+        info={{
+          email: storeInform.email,
+          sales: storeInform.sales,
+          clerk: storeInform.clerk,
+          area: storeInform.area,
+          dongName: storeInform.dongName,
+          industryName: storeInform.industryName,
+        }}
+      />
+      {/* <SimulationPage /> */}
+      {/* </ProReport> */}
     </Wrapper>
   );
 };
@@ -281,22 +282,28 @@ const Wrapper = styled.div`
 `;
 
 const ProSide = styled.div`
-  width: 400px;
-  height: 100%;
-  background: ${({ theme }) => theme.lightColor};
+  width: 300px;
+  flex-shrink: 0;
+  /* background: ${({ theme }) => theme.lightColor}; */
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding: 20px;
 `;
 
 const ProList = styled.div`
-  padding: 20px;
+  flex-grow: 1;
+  color: #3e4b5b;
+  & div + div {
+    margin-top: 1rem;
+  }
 `;
 
 const ProListItem = styled.div`
   width: 100%;
-  color: white;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  /* margin-bottom: 10px; */
 `;
 
 const ProReport = styled.div`
@@ -304,23 +311,11 @@ const ProReport = styled.div`
   height: 100%;
   overflow-y: scroll;
   left: 450px;
-  /* background: #edf3f0; */
-  background: white;
+  background: #f2edf3;
   transition: 0.5s;
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const InitialReport = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 50px;
-  font-weight: 700;
-  margin: auto;
 `;
 
 export default ProfessionalStorePage;
