@@ -15,6 +15,7 @@ import {
   getStatusHinGuSalesMap,
   getStatusTrend,
   getStatusDetail,
+  getStatusApt,
 } from '../api/status';
 
 // 상권 Map API
@@ -114,6 +115,13 @@ export const useStatusDetail = (guName: string) =>
     queryFn: () => getStatusDetail(guName),
   });
 
+// 상권 배후지 아파트 API
+export const useStatusApt = (guName: string) =>
+  useQuery({
+    queryKey: ['status', 'apt', guName],
+    queryFn: () => getStatusApt(guName),
+  });
+
 const timeLabels = [
   '0~6시',
   '6~11시',
@@ -122,8 +130,16 @@ const timeLabels = [
   '17~21시',
   '21~24시',
 ];
-const weekLabels = ['월', '화', '수', '목', '금', '토', '일'];
-const genderLabels = ['남', '여'];
+const weekLabels = [
+  '월요일',
+  '화요일',
+  '수요일',
+  '목요일',
+  '금요일',
+  '토요일',
+  '일요일',
+];
+const genderLabels = ['남성(명)', '여성(명)'];
 const ageLabels = ['10대', '20대', '30대', '40대', '50대', '60대'];
 const storeCntLabels = [
   '2021년 1분기',
@@ -133,6 +149,7 @@ const storeCntLabels = [
 ];
 const storeCsLabels = ['외식업', '서비스업', '도소매업'];
 const sotreAreaLabels = ['골목상권', '전통시장', '관광특구', '발달상권'];
+
 const genderGrad = [
   [
     [0, '#B6ACF1'],
@@ -146,18 +163,36 @@ const genderGrad = [
 
 const weekGrad = [
   [
-    [0, '#23CFFA'],
-    [0.25, '#A9B6F6'],
-    [0.5, '#C2A0EB'],
-    [0.75, '#D98CE1'],
-    [1, '#FC6DD1'],
+    [0, '#A78DED90'],
+    [0.3, '#60AEEE90'],
+    [0.6, '#A4D7FC90'],
+    [1, '#BBFBF790'],
   ],
 ];
 
 const timeGrad = [
   [
-    [0, '#B29AF860'],
-    [1, '#B29AF8d9'],
+    [0, '#72C5F860'],
+    [1, '#705FE9d9'],
+  ],
+];
+
+const blueGrad = [
+  [
+    [0, '#72C5F8'],
+    [0.8, '#6975ED'],
+    [1, '#705FE9'],
+  ],
+];
+
+const aptGrad = [
+  [
+    [0, '#B6ACF1'],
+    [1, '#27CFFB'],
+  ],
+  [
+    [0, '#F3B79B'],
+    [1, '#F872D4'],
   ],
 ];
 
@@ -171,28 +206,19 @@ export const useStatusFpData = (fpDetail: any) => {
         labels: genderLabels,
         datasets: [
           {
-            label: '성별별 유동인구',
             barThickness: 70,
             data: fpDetail.gender.map((e: number) => Math.floor(e / 90)),
             datalabels: {
-              // 데이터라벨 숨김
+              font: {
+                weight: 'bold',
+              },
               color: 'white',
+              padding: 6,
+              backgroundColor: '#79797930',
+              borderRadius: 4,
             },
           },
         ],
-      },
-      options: {
-        plugins: {
-          datalabels: {
-            font: {
-              weight: 'bold',
-            },
-            color: 'white',
-            padding: 6,
-            backgroundColor: '#79797930',
-            borderRadius: 4,
-          },
-        },
       },
       grad: genderGrad,
     }),
@@ -207,7 +233,7 @@ export const useStatusFpData = (fpDetail: any) => {
         labels: ageLabels,
         datasets: [
           {
-            label: '연령대별 유동인구',
+            label: '연령대별 유동인구(명)',
             data: fpDetail.age.map((e: number) => Math.floor(e / 90)),
             barThickness: 30,
             datalabels: {
@@ -219,9 +245,9 @@ export const useStatusFpData = (fpDetail: any) => {
       },
       grad: [
         [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
+          [0, '#56B6F7'],
+          [0.8, '#6193F2'],
+          [1, '#705FE9'],
         ],
       ],
     }),
@@ -236,23 +262,16 @@ export const useStatusFpData = (fpDetail: any) => {
         labels: storeCntLabels,
         datasets: [
           {
-            label: '분기별 유동인구',
+            label: '하루 평균(명)',
             data: fpDetail.quarter.map((e: number) => Math.floor(e / 90)),
             barThickness: 60,
             datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
+              color: 'transparent', // 데이터라벨 숨김
             },
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [fpDetail]
   );
@@ -265,17 +284,32 @@ export const useStatusFpData = (fpDetail: any) => {
         labels: weekLabels,
         datasets: [
           {
-            label: '요일별 유동인구',
+            label: '요일별 유동인구(명)',
             data: fpDetail.week.map((e: number) => Math.floor(e / 90)),
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
+              // color: 'red',
             },
+            borderWidth: 3, // 선 굵기
+            borderColor: '#6585EF80', // 선 색
+            pointRadius: 4, // 포인터 크기
           },
         ],
       },
       grad: weekGrad,
+      options: {
+        scale: {
+          // 눈금 조정(선 3개만 나오게)
+          ticks: {
+            maxTicksLimit: 3,
+          },
+        },
+        tooltips: {
+          mode: 'dataset',
+        },
+      },
     }),
     [fpDetail]
   );
@@ -288,10 +322,10 @@ export const useStatusFpData = (fpDetail: any) => {
         labels: timeLabels,
         datasets: [
           {
-            label: '시간대별 매출',
+            label: '시간대별 유동인구(명)',
             data: fpDetail.time.map((e: number) => Math.floor(e / 90)),
-            borderColor: '#B29AF8',
-            backgroundColor: '#B29AF8',
+            borderColor: '#6585EF',
+            backgroundColor: '#6585EF',
             borderWidth: 2,
             fill: true,
             datalabels: {
@@ -321,11 +355,7 @@ export const useStatusRpData = (rpDetail: any) => {
           {
             label: '성별별 거주인구',
             barThickness: 70,
-            data: rpDetail.gender,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'white',
-            },
+            data: rpDetail.resident.gender,
           },
         ],
       },
@@ -355,8 +385,8 @@ export const useStatusRpData = (rpDetail: any) => {
         labels: ageLabels,
         datasets: [
           {
-            label: '연령대별 거주인구',
-            data: rpDetail.age,
+            label: '연령대별 거주인구(명)',
+            data: rpDetail.resident.age,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -365,18 +395,12 @@ export const useStatusRpData = (rpDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [rpDetail]
   );
 
-  // 아파트/비아파트 비율
+  // 상권 아파트/비아파트 비율
   const rpAptData = useMemo(
     () => ({
       type: 'pie',
@@ -384,8 +408,8 @@ export const useStatusRpData = (rpDetail: any) => {
         labels: ['아파트', '비아파트'],
         datasets: [
           {
-            label: '아파트/비아파트 비율',
-            data: [rpDetail.apt, rpDetail.nonApt],
+            label: '상권 아파트/비아파트 비율',
+            data: [rpDetail.resident.apt, rpDetail.resident.nonApt],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -394,18 +418,35 @@ export const useStatusRpData = (rpDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: aptGrad,
     }),
     [rpDetail]
   );
 
-  return { rpGenderData, rpAgeData, rpAptData };
+  //상권 배후지 아파트/비아파트 비율
+  const rpApt2Data = useMemo(
+    () => ({
+      type: 'pie',
+      data: {
+        labels: ['아파트', '비아파트'],
+        datasets: [
+          {
+            label: '상권배후지 아파트/비아파트 비율',
+            data: [rpDetail.apt.apt, rpDetail.apt.nonApt],
+            barThickness: 30,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'transparent',
+            },
+          },
+        ],
+      },
+      grad: aptGrad,
+    }),
+    [rpDetail]
+  );
+
+  return { rpGenderData, rpAgeData, rpAptData, rpApt2Data };
 };
 
 // 점포 수 상세 페이지
@@ -428,13 +469,7 @@ export const useStatusStoreData = (storeDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [storeDetail]
   );
@@ -457,13 +492,7 @@ export const useStatusStoreData = (storeDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [storeDetail]
   );
@@ -490,13 +519,7 @@ export const useStatusOpenData = (openDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [openDetail]
   );
@@ -527,13 +550,7 @@ export const useStatusOpenData = (openDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [openDetail]
   );
@@ -563,13 +580,7 @@ export const useStatusCloseData = (closeDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [closeDetail]
   );
@@ -600,13 +611,7 @@ export const useStatusCloseData = (closeDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [closeDetail]
   );
@@ -636,13 +641,7 @@ export const useStatusSalesData = (salesDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [salesDetail]
   );
@@ -667,9 +666,9 @@ export const useStatusSalesData = (salesDetail: any) => {
         ],
       },
       grad: weekGrad,
-      options: {
-        scales: { ticks: { stepSize: 10, count: 2, maxTicksLimit: 2 } },
-      },
+      // options: {
+      //   scales: { ticks: { stepSize: 10, count: 2, maxTicksLimit: 2 } },
+      // },
     }),
     [salesDetail]
   );
@@ -692,13 +691,7 @@ export const useStatusSalesData = (salesDetail: any) => {
           },
         ],
       },
-      grad: [
-        [
-          [0, '#A82BEC'],
-          [0.8, '#714BF4'],
-          [1, '#545BF9'],
-        ],
-      ],
+      grad: blueGrad,
     }),
     [salesDetail]
   );
@@ -749,8 +742,8 @@ export const useStatusSalesData = (salesDetail: any) => {
           {
             label: '시간대별 매출',
             data: salesDetail.time,
-            borderColor: '#B29AF8',
-            backgroundColor: '#B29AF8',
+            borderColor: '#6585EF',
+            backgroundColor: '#6585EF',
             borderWidth: 2,
             fill: true,
             datalabels: {

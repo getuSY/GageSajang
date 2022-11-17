@@ -74,3 +74,10 @@ export const getStatusDetail = async (params: string) => {
   const { data } = await client.get(`/anlz/store/detail/${guName}`);
   return data;
 };
+
+// 상권배후지 아파트 API
+export const getStatusApt = async (params: string) => {
+  const guName = params;
+  const { data } = await client.get(`/anlz/store/detail/apt/${guName}`);
+  return data;
+};

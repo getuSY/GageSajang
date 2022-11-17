@@ -38,11 +38,19 @@ const labels: {
   div,
 };
 
+// max값 추출
 export const getMax = (
   data: number[],
   type: 'gender' | 'week' | 'age' | 'year' | 'quarter' | 'time' | 'cs' | 'div'
 ) => labels[type][data.indexOf(Math.max(...data))];
 
+// min값 추출
+export const getMin = (
+  data: number[],
+  type: 'gender' | 'week' | 'age' | 'year' | 'quarter' | 'time' | 'cs' | 'div'
+) => labels[type][data.indexOf(Math.min(...data))];
+
+// 비율(%) 추출
 export const getRate = (data: number[]) => {
   const newData = data.map(() => 0);
   const dataSum = data.reduce((a, b) => a + b);
