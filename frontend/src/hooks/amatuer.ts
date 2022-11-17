@@ -1,7 +1,17 @@
 import { useMemo } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getAmatuerResult } from '../api/amatuer';
-import { AmatuerResultParams } from '../models/amatuer';
+import { useQuery, useQueryClient, useQueries } from '@tanstack/react-query';
+import {
+  getAmatuerResult,
+  amatuerSales,
+  amatuerLife,
+  amatuerResident,
+  amatuerJob,
+  amatuerCount,
+} from '../api/amatuer';
+import {
+  AmatuerResultParams,
+  AmatuerSimulationParams,
+} from '../models/amatuer';
 
 export const useAmatuerResult = (params: AmatuerResultParams) =>
   useQuery({
@@ -19,8 +29,57 @@ export const usePrefetchAmatuerResult = async (params: AmatuerResultParams) => {
   return data;
 };
 
-// 이미사장 데이터
+export const useAmatuerSimulation = (params: AmatuerSimulationParams) => {
+  const { dongName, industryName } = params;
+  const response = useQueries({
+    queries: [
+      {
+        queryKey: ['amatuer', 'sales', dongName, industryName],
+        queryFn: () => amatuerSales(params),
+      },
+      {
+        queryKey: ['amatuer', 'life', dongName, industryName],
+        queryFn: () => amatuerLife(params),
+      },
+      {
+        queryKey: ['amatuer', 'resident', dongName, industryName],
+        queryFn: () => amatuerResident(params),
+      },
+      {
+        queryKey: ['amatuer', 'job', dongName, industryName],
+        queryFn: () => amatuerJob(params),
+      },
+      {
+        queryKey: ['amatuer', 'count', dongName, industryName],
+        queryFn: () => amatuerCount(params),
+      },
+    ],
+  });
+  console.log('res', response);
+  const data = useMemo(
+    () => ({
+      sales: response[0].data,
+      life: response[1].data,
+      resident: response[2].data,
+      job: response[3].data,
+      count: response[4].data,
+    }),
+    [response]
+  );
+  const isSuccess = useMemo(
+    () => response.every((e) => e.isSuccess),
+    [response]
+  );
+  const isLoading = useMemo(
+    () => response.some((e) => e.isLoading),
+    [response]
+  );
+  const isError = useMemo(() => response.some((e) => e.isError), [response]);
 
+  return { data, isSuccess, isLoading, isError };
+};
+
+// 이미사장 데이터
 export const timeLabels = [
   '0~6시',
   '6~11시',
@@ -42,6 +101,14 @@ const storeCntLabels = [
   '2021년 2분기',
   '2021년 3분기',
   '2021년 4분기',
+];
+
+const simulLabels = [
+  '2022년 4분기',
+  '2023년 1분기',
+  '2023년 2분기',
+  '2023년 3분기',
+  '2023년 4분기',
 ];
 
 export const genderGrad = [
@@ -655,4 +722,121 @@ export const useRiskData = (amatuerResult: any) => {
   );
 
   return { riskData };
+};
+
+// 시뮬레이션 데이터
+export const useAmatuerSimulationData = (amatuerSimulation: any) => {
+  const amaSimulSalesData = useMemo(
+    () => ({
+      type: 'bar',
+      data: {
+        labels: simulLabels,
+        datasets: [
+          {
+            label: 'sales',
+            data: amatuerSimulation.sales.map((e: any) => e.value),
+            // barThickness: 30,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'transparent',
+            },
+          },
+        ],
+      },
+      grad: weekGrad,
+    }),
+    [amatuerSimulation]
+  );
+  const amaSimulLifeData = useMemo(
+    () => ({
+      type: 'bar',
+      data: {
+        labels: simulLabels,
+        datasets: [
+          {
+            label: 'life',
+            data: amatuerSimulation.life.map((e: any) => e.value),
+            // barThickness: 30,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'transparent',
+            },
+          },
+        ],
+      },
+      grad: weekGrad,
+    }),
+    [amatuerSimulation]
+  );
+  const amaSimulResidentData = useMemo(
+    () => ({
+      type: 'bar',
+      data: {
+        labels: simulLabels,
+        datasets: [
+          {
+            label: 'resident',
+            data: amatuerSimulation.resident.map((e: any) => e.value),
+            // barThickness: 30,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'transparent',
+            },
+          },
+        ],
+      },
+      grad: weekGrad,
+    }),
+    [amatuerSimulation]
+  );
+  const amaSimulJobData = useMemo(
+    () => ({
+      type: 'bar',
+      data: {
+        labels: simulLabels,
+        datasets: [
+          {
+            label: 'job',
+            data: amatuerSimulation.job.map((e: any) => e.value),
+            // barThickness: 30,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'transparent',
+            },
+          },
+        ],
+      },
+      grad: weekGrad,
+    }),
+    [amatuerSimulation]
+  );
+  const amaSimulCountData = useMemo(
+    () => ({
+      type: 'bar',
+      data: {
+        labels: simulLabels,
+        datasets: [
+          {
+            label: 'count',
+            data: amatuerSimulation.count.map((e: any) => e.value),
+            // barThickness: 30,
+            datalabels: {
+              // 데이터라벨 숨김
+              color: 'transparent',
+            },
+          },
+        ],
+      },
+      grad: weekGrad,
+    }),
+    [amatuerSimulation]
+  );
+
+  return {
+    amaSimulSalesData,
+    amaSimulLifeData,
+    amaSimulResidentData,
+    amaSimulJobData,
+    amaSimulCountData,
+  };
 };

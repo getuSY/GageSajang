@@ -5,6 +5,7 @@ import Button from '../../atoms/Button/index';
 import { useNavigate } from 'react-router-dom';
 import { useUserSignUp } from '../../../hooks/user';
 import { UserModel } from '../../../models/user';
+import { userOverlap } from '../../../api/user';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,13 @@ const RegisterPage = () => {
     nickName: 'string',
     pw: 'string',
   });
+  const [signUpError, setSignUpError] = useState({
+    email: false,
+    pw: false,
+    pwConfirm: false,
+    nickName: false,
+  });
+  const [emailOverlapError, setEmailOverlapError] = useState(false);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpInputs({
@@ -40,6 +48,19 @@ const RegisterPage = () => {
       navigate('/');
     }
   }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    userOverlap(signUpInputs.email)
+      .then((res) => console.log(res))
+      .catch((e) => setEmailOverlapError(true));
+    if (signUpInputs.email && signUpInputs.email) {
+      setSignUpError((signUpError) => ({ ...signUpError, email: true }));
+    } else {
+      setSignUpError((signUpError) => ({ ...signUpError, email: false }));
+    }
+  }, [signUpInputs.email]);
+
+  useEffect(() => console.log('pw', signUpInputs.pw), [signUpInputs.pw]);
 
   return (
     <Wrapper>

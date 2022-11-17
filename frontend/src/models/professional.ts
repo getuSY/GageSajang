@@ -6,3 +6,11 @@ export interface ProfessionalResultParams {
   dongName: string;
   industryName: string;
 }
+
+export interface ProfessionalSimulationParams {
+  dongName: string;
+  industryName: string;
+  quarter: number;
+  value: number;
+  year: number;
+}

@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavItem } from '../models/common';
 import { AnimatePresence } from 'framer-motion';
-import HelpButton from '../components/atoms/HelpButton';
+
 const navList: Array<NavItem> = [
   {
     content: '상권현황',
@@ -29,7 +29,6 @@ const Layout = () => {
           <Suspense fallback={<div />}>
             <Outlet />
           </Suspense>
-          {/* <HelpButton /> */}
         </Wrapper>
       </AnimatePresence>
     </>

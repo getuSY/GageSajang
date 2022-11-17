@@ -68,7 +68,7 @@ const SlideBar = ({
     setPos(data.x);
   };
   const lightenColor = () => {
-    setColor('green');
+    setColor('#93f3c4');
   };
   const darkenColor = () => {
     setColor('white');
@@ -78,8 +78,8 @@ const SlideBar = ({
   ];
   const yearList = years.map((i) => <div>{i}</div>);
   return (
-    <>
-      <Wrapper>
+    <Wrapper>
+      <SliderBody>
         <Draggable
           axis="x"
           onDrag={(e, data) => trackPos(data)}
@@ -89,20 +89,27 @@ const SlideBar = ({
           grid={[50, 0]}
           bounds={{ top: 0, left: 0, right: 500, bottom: 0 }}
         >
-          <SliderBody className="box" style={{ backgroundColor: `${color}` }}>
-            <div>Handle</div>
-          </SliderBody>
+          <SliderBall className="box" style={{ backgroundColor: `${color}` }}>
+            <div> </div>
+          </SliderBall>
         </Draggable>
-      </Wrapper>
-      <WrapperLabel>{yearList}</WrapperLabel>
-    </>
+      </SliderBody>
+      <SliderLabel>{yearList}</SliderLabel>
+    </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SliderBody = styled.div`
   width: 575px;
   height: 40px;
-  background-color: black;
+  background-color: ${({ theme }) => theme.lightColor};
   border-radius: 100px;
   display: flex;
   flex-direction: row;
@@ -111,9 +118,10 @@ const Wrapper = styled.div`
   overflow: 'auto';
   padding-left: 20px;
   color: black;
+  opacity: 0.7;
 `;
 
-const WrapperLabel = styled.div`
+const SliderLabel = styled.div`
   /* width: 625px;
   height: 40px;
   border-radius: 100px;
@@ -141,7 +149,7 @@ const WrapperLabel = styled.div`
   /* gap: 13px; */
 `;
 
-const SliderBody = styled.div`
+const SliderBall = styled.div`
   position: absolute;
   cursor: move;
   color: black;

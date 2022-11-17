@@ -1,7 +1,48 @@
 import { client1 as client } from './client';
-import { ProfessionalResultParams } from '../models/professional';
+import {
+  ProfessionalResultParams,
+  ProfessionalSimulationParams,
+} from '../models/professional';
 
-export const ProfessionalResult = async (params: ProfessionalResultParams) => {
+export const professionalResult = async (params: ProfessionalResultParams) => {
   const { data } = await client.post('simul/asset/already', params);
+  return data;
+};
+
+export const professionalSales = async (
+  params: ProfessionalSimulationParams
+) => {
+  const { data } = await client.post('simul/sales/already', params);
+
+  return data;
+};
+
+export const professionalLife = async (
+  params: ProfessionalSimulationParams
+) => {
+  const { data } = await client.post('simul/life/already', params);
+
+  return data;
+};
+
+export const professionalResident = async (
+  params: ProfessionalSimulationParams
+) => {
+  const { data } = await client.post('simul/resident/already', params);
+
+  return data;
+};
+
+export const professionalJob = async (params: ProfessionalSimulationParams) => {
+  const { data } = await client.post('simul/job/already', params);
+
+  return data;
+};
+
+export const professionalCount = async (
+  params: ProfessionalSimulationParams
+) => {
+  const { data } = await client.post('simul/count/already', params);
+
   return data;
 };
