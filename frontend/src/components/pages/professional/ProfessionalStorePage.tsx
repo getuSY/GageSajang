@@ -13,220 +13,47 @@ import { cs1, cs2, cs3 } from '../../../data/cs';
 import JobSearchInput from '../../molecules/JobSearchInput';
 import { areas, DongItem } from '../../../data/areaDong';
 import { useUserStoreInfo, useStoreInfoFix } from '../../../hooks/user';
+import ProSideBar from '../../organisms/ProSideBar';
 
-interface ProfessionalStoreInfo extends ProfessionalResultParams {
+export interface ProfessionalStoreInfo extends ProfessionalResultParams {
   id: number;
 }
 
 const ProfessionalStorePage = () => {
   const userEmail = sessionStorage.getItem('email');
-  const [guDong, setGuDong] = useState('');
-
-  // 업종 검색창
-  const jobList = [...cs1, ...cs2, ...cs3];
-  const [jobKeyword, setJobKeyword] = useState(''); // 검색 input
-  const [isJobSearchResultOpen, setIsJobSearchResultOpen] =
-    useState<boolean>(false);
-  const [jobSearchResult, setJobSearchResult] = useState<string[]>([]);
-  const jobSearchResultRef = useRef<any>();
-  // API 요청에 보낼 데이터
-  const [selectedJobSearch, setSelectedJobSearch] =
-    useState<string | undefined>(undefined); // 검색 결과 => 직업 이름
-
-  useEffect(() => {
-    if (jobKeyword) {
-      const tmp = jobList.filter((e: any, i) => e.includes(jobKeyword));
-      setJobSearchResult(tmp);
-      if (tmp.length > 0) {
-        setIsJobSearchResultOpen(true);
-      }
-    }
-  }, [jobKeyword]);
-
-  const onJobChange = useCallback((e: any) => {
-    setJobKeyword(e.target.value);
-  }, []);
-
-  const selectJobItem = useCallback((item: any) => {
-    setSelectedJobSearch(item);
-    setIsJobSearchResultOpen(false);
-  }, []);
-  const clearJobItem = useCallback(
-    () => setSelectedJobSearch(undefined),
-    [setSelectedJobSearch]
-  );
-
-  // 지역 검색창
-  const [dongKeyword, setDongKeyword] = useState(''); // 검색 input
-  const [isDongSearchResultOpen, setIsDongSearchResultOpen] =
-    useState<boolean>(false);
-  const [dongSearchResult, setDongSearchResult] = useState<string[]>([]);
-  const dongSearchResultRef = useRef<any>();
-  // API 요청에 보낼 데이터
-  const [selectedDongSearch, setSelectedDongSearch] =
-    useState<string | undefined>(undefined); // 검색 결과 => 직업 이름
-
-  const onDongChange = useCallback((e: any) => {
-    setDongKeyword(e.target.value);
-  }, []);
-
-  const selectDongItem = useCallback((item: any) => {
-    setSelectedDongSearch(item);
-    setIsDongSearchResultOpen(false);
-  }, []);
-  const clearDongItem = useCallback(
-    () => setSelectedDongSearch(undefined),
-    [setSelectedDongSearch]
-  );
-
-  // 동 검색
-  useEffect(() => {
-    if (dongKeyword) {
-      const tmp = areas
-        .filter((e: DongItem, i) => e.name.includes(dongKeyword))
-        .map((e: DongItem) => e.name);
-      setDongSearchResult(tmp);
-      if (tmp.length > 0) {
-        setIsDongSearchResultOpen(true);
-      }
-    }
-  }, [dongKeyword]);
-
-  const [storeInform, setStoreInform] = useState<ProfessionalStoreInfo>({
+  const [inform, setInform] = useState<ProfessionalStoreInfo>({
     id: 0,
     email: userEmail,
     sales: 0,
     clerk: 0,
     area: 0,
-    dongName: selectedDongSearch,
-    industryName: selectedJobSearch,
+    dongName: '',
+    industryName: '',
   });
   const [content, setContent] = useState<number>(0);
 
   const userStoreInfo = useUserStoreInfo();
   useEffect(() => {
+    console.log(userStoreInfo);
     if (userStoreInfo.isSuccess) {
-      console.log('가게 정보 확인', userStoreInfo.data);
-      setStoreInform(userStoreInfo.data);
+      // console.log('맨처음 api 통신으로 가게 정보 확인', userStoreInfo);
+      setInform(userStoreInfo.data);
       setContent(1);
     } else if (userStoreInfo.isError) {
       console.log('정보 없음');
     }
   }, [userStoreInfo]);
 
-  useEffect(() => {
-    setStoreInform({
-      ...storeInform,
-      dongName: selectedDongSearch,
-      industryName: selectedJobSearch,
-    });
-    console.log('위치 업종 정보 바뀜!!', storeInform);
-  }, [selectedDongSearch, selectedJobSearch]);
-
-  const changeStoreInform = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('change', e.target.value);
-    setStoreInform({
-      ...storeInform,
-      [e.target.id]: Number(e.target.value),
-    });
-  };
-
-  const onClickHandler = () => {
-    if (storeInform.dongName && storeInform.industryName) {
-      setContent(2);
-      console.log('content', content);
-    }
-  };
-
   return (
     <Wrapper
-      onClick={(e) => {
-        if (!jobSearchResultRef.current.contains(e.target)) {
-          setIsJobSearchResultOpen(false);
-        }
-      }}
+    // onClick={(e) => {
+    //   if (!jobSearchResultRef.current.contains(e.target)) {
+    //     setIsJobSearchResultOpen(false);
+    //   }
+    // }}
     >
-      <ProSide>
-        <ProList>
-          <ProListItem>
-            <div
-              style={{
-                fontSize: '40px',
-                color: 'white',
-                fontWeight: '500',
-                margin: '10px 0 30px 0',
-              }}
-            >
-              🏪 내 가게 정보
-            </div>
-          </ProListItem>
-          <ProListItem>
-            <JobSearchInput
-              label="가게 주소"
-              placeholder="행정동을 입력해주세요."
-              inputValue={selectedDongSearch}
-              onChange={onDongChange}
-              searchResult={dongSearchResult}
-              searchResultOpen={isDongSearchResultOpen}
-              searchResultRef={dongSearchResultRef}
-              selectItem={selectDongItem}
-              clearValue={clearDongItem}
-            />
-            <JobSearchInput
-              label="업종"
-              placeholder="가게 업종을 입력해주세요."
-              inputValue={selectedJobSearch}
-              onChange={onJobChange}
-              searchResult={jobSearchResult}
-              searchResultOpen={isJobSearchResultOpen}
-              searchResultRef={jobSearchResultRef}
-              selectItem={selectJobItem}
-              clearValue={clearJobItem}
-            />
-          </ProListItem>
-          <ProListItem>
-            <LabelInput
-              label="직원 수"
-              placeholder="직원 수를 입력해주세요. (숫자만)"
-              inputId="clerk"
-              onChange={changeStoreInform}
-              inputValue={storeInform.clerk.toString()}
-            />
-          </ProListItem>
-          <ProListItem>
-            <LabelInput
-              label="가게 면적"
-              placeholder="가게 면적을 입력해주세요. (숫자만)"
-              onChange={changeStoreInform}
-              inputId="area"
-              inputValue={storeInform.area.toString()}
-              // onChange={changeStoreArea}
-            />
-          </ProListItem>
-          <ProListItem>
-            <LabelInput
-              label="평균 월 매출"
-              placeholder="평균 월 매출을 입력해주세요. (숫자만)"
-              onChange={changeStoreInform}
-              inputId="sales"
-              inputValue={storeInform.sales.toString()}
-              // onChange={changeSales}
-            />
-          </ProListItem>
-        </ProList>
-        <Button
-          type="border"
-          style={{
-            width: '260px',
-            alignSelf: 'center',
-            margin: '10rem 0 0 0',
-          }}
-          onClick={onClickHandler}
-        >
-          내 가게 분석하기
-        </Button>
-      </ProSide>
-      {/* {!userStoreInfo.isLoading && content === 0 && (
+      <ProSideBar info={inform} setInfo={setInform} setContent={setContent} />
+      {!userStoreInfo.isLoading && content === 0 && (
         <ProReport>
           <InitialReport>
             처음 뵙겠습니다, 사장님!<br></br>가게 정보를 입력하고 내 가게 분석을
@@ -241,35 +68,28 @@ const ProfessionalStorePage = () => {
             <br></br>수정 없이 분석을 진행하시려면 분석하기 버튼을 눌러주세요.
           </InitialReport>
         </ProReport>
-      )} */}
-      {/* {!userStoreInfo.isLoading && content === 2 && (
+      )}
+      {/* {!userStoreInfo.isLoading && result.isLoading && (
+        <ProReport>
+          분석 결과를 불러오는 중입니다. <br></br>잠시만 기다려주세요...
+        </ProReport>
+      )}
+      {!userStoreInfo.isLoading && result.isSuccess && content === 2 && (
         <ProReport>
           <ProfessionalResult
             info={{
-              email: storeInform.email,
-              sales: storeInform.sales,
-              clerk: storeInform.clerk,
-              area: storeInform.area,
-              dongName: storeInform.dongName,
-              industryName: storeInform.industryName,
+              email: inform.email,
+              sales: inform.sales,
+              clerk: inform.clerk,
+              area: inform.area,
+              dongName: inform.dongName,
+              industryName: inform.industryName,
             }}
+            result={result.data}
           />
           <SimulationPage></SimulationPage>
         </ProReport>
       )} */}
-      <ProReport>
-        <ProfessionalResult
-          info={{
-            email: storeInform.email,
-            sales: storeInform.sales,
-            clerk: storeInform.clerk,
-            area: storeInform.area,
-            dongName: storeInform.dongName,
-            industryName: storeInform.industryName,
-          }}
-        />
-        <SimulationPage></SimulationPage>
-      </ProReport>
     </Wrapper>
   );
 };
@@ -278,25 +98,6 @@ const Wrapper = styled.div`
   display: flex;
   width: 100%;
   height: calc(100vh - 65px);
-`;
-
-const ProSide = styled.div`
-  width: 400px;
-  height: 100%;
-  background: ${({ theme }) => theme.lightColor};
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ProList = styled.div`
-  padding: 20px;
-`;
-
-const ProListItem = styled.div`
-  width: 100%;
-  color: white;
-  margin-bottom: 10px;
 `;
 
 const ProReport = styled.div`

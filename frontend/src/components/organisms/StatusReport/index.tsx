@@ -8,6 +8,7 @@ import StatusReportSales from '../../molecules/StatusReportSales';
 import StatusReportOpen from '../../molecules/StatusReportOpen';
 import StatusReportClose from '../../molecules/StatusReportClose';
 import StatusReportStores from '../../molecules/StatusReportStores';
+import { useStatusApt } from '../../../hooks/status';
 
 interface StatusReportProps {
   region?: string;
@@ -27,7 +28,6 @@ interface StatusReportProps {
 const StatusReport = ({
   region,
   content,
-  // category,
   tab,
   icon,
   isOpen,
@@ -47,6 +47,15 @@ const StatusReport = ({
       icon: icon[tab],
     });
   }, [tab]);
+
+  const {
+    data,
+    isSuccess: isAptSuccess,
+    isLoading: isAptLoading,
+    isError: isAptError,
+  } = useStatusApt(region!);
+
+  console.log(data);
 
   return (
     <Wrapper>
@@ -78,7 +87,7 @@ const StatusReport = ({
                 // 거주인구
                 <StatusReportRP
                   title={title}
-                  rpDetail={statusResult.resident}
+                  rpDetail={{ resident: statusResult.resident, apt: data }}
                   region={region}
                 />
               )}
