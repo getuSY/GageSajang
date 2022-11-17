@@ -78,7 +78,7 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
         type="line"
         data={data}
         options={options}
-        style={{ width: '95%', height: '400px' }}
+        style={{ width: '90%', height: '400px' }}
         // grad={[
         //   [
         //     [0.9, '#F3B79B'],
@@ -102,6 +102,9 @@ const DynamicRateChart = ({ values, labels }: DynamicRateChartProps) => {
 
 const Wrapper = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export default DynamicRateChart;

@@ -12,26 +12,49 @@ import { usePostCode } from '../../../hooks/common';
 import { cs1, cs2, cs3 } from '../../../data/cs';
 import JobSearchInput from '../../molecules/JobSearchInput';
 import { areas, DongItem } from '../../../data/areaDong';
+import { useUserStoreInfo, useStoreInfoFix } from '../../../hooks/user';
 
-const ProfessionalInfoPage = () => {
+interface ProfessionalStoreInfo extends ProfessionalResultParams {
+  id: number;
+}
+
+const ProfessionalStorePage = () => {
   const userEmail = sessionStorage.getItem('email');
-  const [storeInfo, setStoreInfo] = useState<ProfessionalResultParams>({
+  const [storeInform, setStoreInform] = useState<ProfessionalStoreInfo>({
+    id: 0,
     email: userEmail,
     sales: 0,
-    clerk: 0, //직원수
-    area: 0, //면적
-    dongName: '개포2동', //법정동
-    industryName: '한식음식점',
+    clerk: 0,
+    area: 0,
+    dongName: '',
+    industryName: '',
   });
-  const values = useProSalesSimulation();
-  const mutation = useProfessionalResult();
-  const { data } = mutation;
-  // const store = data.store;
-  // const sales = data.sales;
-  // const status = data.status;
+  const [content, setContent] = useState<number>(0);
+
+  const userStoreInfo = useUserStoreInfo();
+  useEffect(() => {
+    if (userStoreInfo.isSuccess) {
+      console.log('가게 정보 확인', userStoreInfo.data);
+      setStoreInform(userStoreInfo.data);
+      setContent(1);
+    } else if (userStoreInfo.isError) {
+      console.log('정보 없음');
+    }
+  }, [userStoreInfo]);
+
+  const changeStoreInform = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('change', e.target.value);
+    setStoreInform({
+      ...storeInform,
+      [e.target.id]: Number(e.target.value),
+    });
+  };
+
+  const mutation = useStoreInfoFix();
+  const { data, isLoading, isSuccess, isError, error } = mutation;
 
   const onClickHandler = () => {
-    mutation.mutate(storeInfo);
+    mutation.mutate(storeInform);
   };
   const [guDong, setGuDong] = useState('');
 
@@ -155,13 +178,17 @@ const ProfessionalInfoPage = () => {
             <LabelInput
               label="직원 수"
               placeholder="직원 수를 입력해주세요. (숫자만)"
-              // onChange={changeEmployee}
+              inputId="clerk"
+              onChange={changeStoreInform}
             />
           </ProListItem>
           <ProListItem>
             <LabelInput
               label="가게 면적"
               placeholder="가게 면적을 입력해주세요. (숫자만)"
+              onChange={changeStoreInform}
+              inputId="area"
+              inputValue={storeInform.area.toString()}
               // onChange={changeStoreArea}
             />
           </ProListItem>
@@ -169,6 +196,9 @@ const ProfessionalInfoPage = () => {
             <LabelInput
               label="평균 월 매출"
               placeholder="평균 월 매출을 입력해주세요. (숫자만)"
+              onChange={changeStoreInform}
+              inputId="sales"
+              inputValue={storeInform.sales.toString()}
               // onChange={changeSales}
             />
           </ProListItem>
@@ -185,27 +215,39 @@ const ProfessionalInfoPage = () => {
           내 가게 분석하기
         </Button>
       </ProSide>
-      <ProReport>
-        {/* <h1>ProReport</h1> */}
-        <ProfessionalResult />
-        {/* {values ? <Spinner /> : <SimulationPage></SimulationPage>} */}
-        <SimulationPage></SimulationPage>
-      </ProReport>
+      {!userStoreInfo.isLoading && content === 0 && (
+        <ProReport>
+          <InitialReport>
+            처음 뵙겠습니다, 사장님!<br></br>가게 정보를 입력하고 내 가게 분석을
+            시작해봐요.
+          </InitialReport>
+        </ProReport>
+      )}
+      {!userStoreInfo.isLoading && content === 1 && (
+        <ProReport>
+          <InitialReport>
+            사장님, 또 뵙네요! <br></br>이미 저장된 가게 정보가 있네요.
+            <br></br>수정 없이 분석을 진행하시려면 분석하기 버튼을 눌러주세요.
+          </InitialReport>
+        </ProReport>
+      )}
+      {!userStoreInfo.isLoading && content === 2 && (
+        <ProReport>
+          <ProfessionalResult />
+          <SimulationPage></SimulationPage>
+        </ProReport>
+      )}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  // min-height: 100vh;
-  /* overflow-x: hidden; */
-  /* position: relative; */
   display: flex;
   width: 100%;
   height: calc(100vh - 65px);
 `;
 
 const ProSide = styled.div`
-  /* position: fixed; */
   width: 400px;
   height: 100%;
   background: ${({ theme }) => theme.lightColor};
@@ -237,18 +279,15 @@ const ProReport = styled.div`
   align-items: center;
 `;
 
-const CsInput = styled.input`
-  max-width: 320px;
-  width: 100%;
-  height: 45px;
-  font-weight: 900;
-  font-size: 1rem;
-  padding: 0 20px;
-  background: #eaeaea;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  margin-top: 1.3rem;
+const InitialReport = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 700;
+  margin: auto;
 `;
 
-export default ProfessionalInfoPage;
+export default ProfessionalStorePage;

@@ -9,6 +9,7 @@ interface InputProps {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onClick?: any;
   disabled?: boolean;
+  inputId?: string;
 }
 
 const Input = ({
@@ -19,6 +20,7 @@ const Input = ({
   inputValue,
   clearValue,
   disabled,
+  inputId,
 }: InputProps) => {
   return (
     <>
@@ -33,10 +35,13 @@ const Input = ({
               onClick={onClick}
               readOnly={onClick !== undefined}
               disabled={disabled}
+              id={inputId}
             />
-            <div className="clear-btn" onClick={clearValue}>
-              x
-            </div>
+            {clearValue && (
+              <div className="clear-btn" onClick={clearValue}>
+                x
+              </div>
+            )}
           </Wrapper>
         </>
       )}
@@ -47,6 +52,7 @@ const Input = ({
             placeholder={placeholder}
             style={style}
             onChange={onChange}
+            id={inputId}
           />
         </Wrapper>
       )}
