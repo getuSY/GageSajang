@@ -9,6 +9,7 @@ import {
 } from '../api/user';
 import { UserModel } from '../models/user';
 import { ProfessionalResultParams } from '../models/professional';
+import { ProfessionalStoreInfo } from '../components/pages/professional/ProfessionalStorePage';
 
 export const useHelloUser = (username: string) =>
   useQuery({ queryKey: ['user', 'hello'], queryFn: () => helloUser(username) });
@@ -48,17 +49,18 @@ export const useUserStoreInfo = () => {
   return useQuery({
     queryKey: ['user', 'store', 'info', email],
     queryFn: () => storeInfo(),
+    onSuccess: () => console.log('success'),
   });
 };
 
 export const useStoreInfoFix = () =>
   useMutation({
-    mutationFn: (storeParams: ProfessionalResultParams) =>
+    mutationFn: (storeParams: ProfessionalStoreInfo) =>
       storeInfoFix(storeParams),
     onSuccess: (data) => {
       return data;
     },
-    onError: (data) => {
-      return data;
+    onError: (error) => {
+      return error;
     },
   });

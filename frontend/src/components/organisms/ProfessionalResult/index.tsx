@@ -7,34 +7,38 @@ import {
   ProfessionalStoreResult,
 } from '../../../models/professional';
 import Spinner from '../../atoms/Spinner';
+import { useProfessionalResult } from '../../../hooks/professional';
 
 interface ProfessionalResultProps {
   info: ProfessionalResultParams;
+  result: ProfessionalStoreResult;
 }
 
-const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
-  const mutation = useStoreInfoFix();
-  const { data, isLoading, isSuccess, isError, error } = mutation;
-  useEffect(() => {
-    mutation.mutate(info);
-  }, []);
-  const [result, setResult] = useState<ProfessionalStoreResult>({
-    store: {
-      total: 1.0,
-      clerk: 3,
-      area: 36,
-      similar: 1.0,
-      franchise: 0.0,
-    },
-    sales: {
-      order: 3881.0,
-      sales: 9.8268952e7,
-    },
-    status: {
-      open: 0.0,
-      close: 0.0,
-    },
-  });
+const ProfessionalResult = ({ info, result }: ProfessionalResultProps) => {
+  const [flag, setFlag] = useState<boolean>(false);
+  // const professsionalData = useProfessionalResult(info);
+  // useEffect(() => {
+  //   if (professsionalData.isSuccess) {
+  //     console.log('쿼리로 받아보기', professsionalData.data);
+  //   }
+  // }, [professsionalData]);
+  // const [result, setResult] = useState<ProfessionalStoreResult>({
+  //   store: {
+  //     total: 1.0,
+  //     clerk: 3,
+  //     area: 36,
+  //     similar: 1.0,
+  //     franchise: 0.0,
+  //   },
+  //   sales: {
+  //     order: 3881.0,
+  //     sales: 9.8268952e7,
+  //   },
+  //   status: {
+  //     open: 0.0,
+  //     close: 0.0,
+  //   },
+  // });
   // const result = {
   //   dongName: '개포2동', // 읍면동명
   //   industryCode: 'CS100001', // 업종 구분 코드
@@ -59,7 +63,7 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
     datasets: [
       {
         label: ['내 가게 면적'],
-        data: [42, result.store.area],
+        data: [info.area, result.store.area],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
       },
     ],
@@ -72,7 +76,7 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
     datasets: [
       {
         label: ['내 가게 월 매출'],
-        data: [6000000, result.sales.sales / 3],
+        data: [info.sales, result.sales.sales / 3],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         borderRadius: 300,
         // borderWidth: 5,
@@ -85,7 +89,7 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
     datasets: [
       {
         label: ['내 가게 직원 수'],
-        data: [6, result.store.clerk],
+        data: [info.clerk, result.store.clerk],
         backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         borderRadius: 100,
       },
@@ -139,7 +143,6 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
   };
   return (
     <Wrapper>
-      {mutation.isLoading && <Spinner></Spinner>}
       <Notice>
         ❗ 아래 보고서는 통계 자료에 따른 분석 결과입니다. 보고서를 참고하여
         가게 경영을 한 경우 모든 책임은 사장님께 있습니다.
@@ -221,7 +224,13 @@ const ProfessionalResult = ({ info }: ProfessionalResultProps) => {
         </SummaryCard>
       </Summary>
       <ProRepoDetail>
-        <p style={{ fontSize: '40px', margin: '8rem auto', fontWeight: '600' }}>
+        <p
+          style={{
+            fontSize: '40px',
+            margin: '8rem auto',
+            fontWeight: '600',
+          }}
+        >
           " {info.dongName} {info.industryName} "의 평균값을 토대로
           보여드릴게요!
         </p>
