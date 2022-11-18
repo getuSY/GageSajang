@@ -411,7 +411,7 @@ const ReportContentContainer = ({
         <div className="chart-div">
           {/* <AmatuerReportRisk risk={riskData.risk} /> */}
 
-          <RiskGaugeChart></RiskGaugeChart>
+          <RiskGaugeChart gauge={riskData.risk} />
         </div>
       </ReportCategory>
       {/* 시뮬레이션 */}
@@ -456,7 +456,6 @@ const Wrapper = styled.div`
   position: relative;
   flex-grow: 1;
   overflow-y: scroll;
-
   padding: 12px;
   & .chart-div {
     display: flex;

@@ -28,7 +28,9 @@ const JobSearchInput = ({
 }: JobSearchInputProps) => {
   return (
     <Wrapper>
-      <Label style={{ marginBottom: '1.3rem' }}>{label}</Label>
+      <Label style={{ marginBottom: '0.6rem', fontSize: '1.05rem' }}>
+        {label}
+      </Label>
       <div className="input-div">
         <Input
           placeholder={placeholder}

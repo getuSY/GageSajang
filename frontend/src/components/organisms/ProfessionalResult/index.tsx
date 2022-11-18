@@ -11,10 +11,13 @@ import { useProfessionalResult } from '../../../hooks/professional';
 
 interface ProfessionalResultProps {
   info: ProfessionalResultParams;
-  result: ProfessionalStoreResult;
+  // result: ProfessionalStoreResult;
 }
 
-const ProfessionalResult = ({ info, result }: ProfessionalResultProps) => {
+const ProfessionalResult = ({
+  info,
+}: // result
+ProfessionalResultProps) => {
   const [flag, setFlag] = useState<boolean>(false);
   // const professsionalData = useProfessionalResult(info);
   // useEffect(() => {
@@ -22,23 +25,23 @@ const ProfessionalResult = ({ info, result }: ProfessionalResultProps) => {
   //     console.log('쿼리로 받아보기', professsionalData.data);
   //   }
   // }, [professsionalData]);
-  // const [result, setResult] = useState<ProfessionalStoreResult>({
-  //   store: {
-  //     total: 1.0,
-  //     clerk: 3,
-  //     area: 36,
-  //     similar: 1.0,
-  //     franchise: 0.0,
-  //   },
-  //   sales: {
-  //     order: 3881.0,
-  //     sales: 9.8268952e7,
-  //   },
-  //   status: {
-  //     open: 0.0,
-  //     close: 0.0,
-  //   },
-  // });
+  const [result, setResult] = useState<ProfessionalStoreResult>({
+    store: {
+      total: 1.0,
+      clerk: 3,
+      area: 36,
+      similar: 1.0,
+      franchise: 0.0,
+    },
+    sales: {
+      order: 3881.0,
+      sales: 9.8268952e7,
+    },
+    status: {
+      open: 0.0,
+      close: 0.0,
+    },
+  });
   // const result = {
   //   dongName: '개포2동', // 읍면동명
   //   industryCode: 'CS100001', // 업종 구분 코드

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Label from '../../atoms/Label';
 import ReportChart from '../../atoms/ReportChart';
-// import ReportChart from '../../atoms/AnalysisReportChart';
 
 interface ReportContentProps {
   children?: React.ReactNode;
@@ -15,7 +14,7 @@ interface ReportContentProps {
   canvasStyle?: any;
 }
 
-const ReportContent = ({
+const SummaryItem = ({
   children,
   style,
   propsRef,
@@ -31,39 +30,35 @@ const ReportContent = ({
         <Label
           style={{
             width: '100%',
-            // fontWeight: 700,
             fontSize: '1.3rem',
-            fontFamily: 'GmarketSansMedium',
+            color: '#1ca37c',
+            fontWeight: 700,
+            marginBottom: '1.3rem',
           }}
         >
           {title}
         </Label>
       )}
-      {chartData && (
-        <ReportChart
-          type={chartData.type}
-          data={chartData.data}
-          grad={chartData.grad}
-          options={chartData.options}
-          isVert={isVert}
-          style={{ marginTop: '1.25rem', ...chartStyle }}
-          canvasStyle={canvasStyle}
-        />
-      )}
-      {children}
+      <div className="content">{children}</div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   background: #ffffff;
-  /* height: 500px; */
   display: flex;
   flex-direction: column;
   align-items: center;
-
   padding: 20px 20px;
   border-radius: 10px;
+  font-size: 1.2rem;
+  height: 100px;
+  & .content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
-export default ReportContent;
+export default SummaryItem;

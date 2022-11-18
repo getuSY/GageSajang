@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusStoreData } from '../../../hooks/status';
 import { numberComma, getMax } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
+import Top3Rank from '../../atoms/Top3Rank';
 
 interface StatusReportStoresProps {
   title?: any;
@@ -40,7 +40,7 @@ const StatusReportStores = ({
           점포 수가 가장 많은 업종은{' '}
           <span>
             외식업 : {storesDetail.cs1Top3[0]}, 서비스업 :{' '}
-            {storesDetail.cs2Top3[0]}, 도소매업 :{storesDetail.cs3Top3[0]}
+            {storesDetail.cs2Top3[0]}, 도소매업 : {storesDetail.cs3Top3[0]}
           </span>{' '}
           입니다.
         </div>
@@ -53,8 +53,21 @@ const StatusReportStores = ({
           style={{ flexGrow: 1 }}
         >
           <ReportComment>
-            <span className="dongName">{region}</span>의 유동인구는{' '}
-            <span className="emphasis">ascsc</span>가 가장 많습니다.
+            외식업{' '}
+            <span className="emphasis">
+              {numberComma(storesDetail.cs[0])}개소
+            </span>
+            , 서비스업{' '}
+            <span className="emphasis">
+              {numberComma(storesDetail.cs[1])}개소
+            </span>
+            ,
+            <br />
+            도소매업{' '}
+            <span className="emphasis">
+              {numberComma(storesDetail.cs[2])}개소
+            </span>{' '}
+            입니다.
           </ReportComment>
         </ReportContent>
 
@@ -66,11 +79,74 @@ const StatusReportStores = ({
         >
           {' '}
           <ReportComment>
-            <span className="dongName">{region}</span>의 유동인구는{' '}
-            <span className="emphasis">asvas</span>가 가장 많습니다.
+            골목상권{' '}
+            <span className="emphasis">
+              {numberComma(storesDetail.div[0])}개소
+            </span>
+            , 전통시장{' '}
+            <span className="emphasis">
+              {numberComma(storesDetail.div[1])}개소
+            </span>
+            ,
+            <br />
+            관광특구{' '}
+            <span className="emphasis">
+              {numberComma(storesDetail.div[2])}개소
+            </span>
+            , 발달상권{' '}
+            <span className="emphasis">
+              {numberComma(storesDetail.div[3])}개소
+            </span>
+            입니다.
           </ReportComment>
         </ReportContent>
       </div>
+      <div className="report-div">
+        <ReportContent title="외식업 내 점포 수 Top3" style={{ flexGrow: 1 }}>
+          <Top3Rank
+            top3={storesDetail.cs1Top3}
+            style={{ marginTop: '80px' }}
+            style1={{
+              background: 'linear-gradient(90deg, #D3C0F7 0%, #5E28C9 100%)',
+            }}
+            style2={{
+              background: 'linear-gradient(90deg, #A4D7FC 0%, #007ECE 100%)',
+            }}
+            style3={{
+              background: 'linear-gradient(90deg, #BBFBF7 0%, #009FA9 100%)',
+            }}
+          />
+        </ReportContent>
+        <ReportContent title="서비스업 내 점포 수 Top3" style={{ flexGrow: 1 }}>
+          <Top3Rank
+            top3={storesDetail.cs2Top3}
+            style1={{
+              background: 'linear-gradient(90deg, #D3C0F7 0%, #5E28C9 100%)',
+            }}
+            style2={{
+              background: 'linear-gradient(90deg, #A4D7FC 0%, #007ECE 100%)',
+            }}
+            style3={{
+              background: 'linear-gradient(90deg, #BBFBF7 0%, #009FA9 100%)',
+            }}
+          />
+        </ReportContent>
+      </div>
+      <ReportContent title="도소매업 내 점포 수 Top3" style={{ flexGrow: 1 }}>
+        <Top3Rank
+          top3={storesDetail.cs3Top3}
+          style={{ marginTop: '80px' }}
+          style1={{
+            background: 'linear-gradient(90deg, #D3C0F7 0%, #5E28C9 100%)',
+          }}
+          style2={{
+            background: 'linear-gradient(90deg, #A4D7FC 0%, #007ECE 100%)',
+          }}
+          style3={{
+            background: 'linear-gradient(90deg, #BBFBF7 0%, #009FA9 100%)',
+          }}
+        />
+      </ReportContent>
     </Wrapper>
   );
 };
