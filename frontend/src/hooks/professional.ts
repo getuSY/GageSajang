@@ -6,9 +6,18 @@ import { ProfessionalResultParams } from '../models/professional';
 export const useProfessionalResult = (
   proResultParams: ProfessionalResultParams
 ) => {
+  const { email, dongName, industryName, area, clerk, sales } = proResultParams;
   return useQuery({
-    queryKey: ['professional', 'result'],
+    queryKey: [
+      'professional',
+      'result',
+      email,
+      dongName,
+      industryName,
+      `area=${area}&clerk=${clerk}&sales=${sales}`,
+    ],
     queryFn: () => professionalResult(proResultParams),
+    cacheTime: 0,
   });
 };
 

@@ -7,6 +7,10 @@ export interface ProfessionalResultParams {
   industryName: string | undefined;
 }
 
+export interface ProfessionalStoreInfo extends ProfessionalResultParams {
+  id: number;
+}
+
 export interface ProfessionalSimulationParams {
   dongName: string;
   industryName: string;

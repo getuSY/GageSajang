@@ -36,12 +36,13 @@ export const userInfo = async () => {
 export const storeInfo = async () => {
   const email = sessionStorage.getItem('email');
   const { data } = await client.get(`user/store/getStore/${email}`);
-
   return data;
 };
 
 export const storeInfoFix = async (params: ProfessionalResultParams) => {
   const { data } = await client.post('user/store/setStore', params);
+
+  return data;
 };
 
 export const userOverlap = async (email: string) => {

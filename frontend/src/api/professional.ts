@@ -5,6 +5,9 @@ import {
 } from '../models/professional';
 
 export const professionalResult = async (params: ProfessionalResultParams) => {
+  console.log('result params', params);
+  const resultParams = { ...params, dongName: params.dongName?.split(' ')[1] };
+  console.log('dongName', resultParams.dongName);
   const { data } = await client.post('simul/asset/already', params);
   return data;
 };

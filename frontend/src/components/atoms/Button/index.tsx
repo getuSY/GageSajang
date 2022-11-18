@@ -19,12 +19,14 @@ const Button = ({ onClick, type, style, children, disabled }: ButtonProps) => {
         </BlurButton>
       )}
       {type === 'border' && (
-        <BorderWrapper style={style}>
-          <BorderButton onClick={onClick}>{children}</BorderButton>
+        <BorderWrapper style={style} disabled={disabled}>
+          <BorderButton onClick={onClick} disabled={disabled}>
+            {children}
+          </BorderButton>
         </BorderWrapper>
       )}
       {type === 'grad' && (
-        <GradButton onClick={onClick} style={style}>
+        <GradButton onClick={onClick} style={style} disabled={disabled}>
           {children}
         </GradButton>
       )}
@@ -103,12 +105,13 @@ const SubButton = styled.button`
   color: white;
 `;
 
-const BorderWrapper = styled.div`
+const BorderWrapper = styled.div<{ disabled?: boolean }>`
   position: relative;
   width: 145px;
   height: 54px;
   font-size: 16px;
-  border: 3px solid transparent;
+  border: ${({ disabled }) =>
+    disabled ? '3px solid #c0c0c0' : '3px solid transparent'};
   border-radius: 15px;
   background-image: linear-gradient(#fff, #fff),
     ${({ theme }) => theme.gradColor};
@@ -117,8 +120,8 @@ const BorderWrapper = styled.div`
   background-clip: content-box, border-box;
 `;
 
-const BorderButton = styled.button`
-  cursor: pointer;
+const BorderButton = styled.button<{ disabled?: boolean }>`
+  cursor: ${({ disabled }) => (disabled ? '' : 'pointer')};
   position: absolute;
   font-size: inherit;
   left: 0;
