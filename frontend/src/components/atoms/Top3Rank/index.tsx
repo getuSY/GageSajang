@@ -3,18 +3,22 @@ import styled from 'styled-components';
 
 interface Top3RankProps {
   top3: string[];
+  style?: object;
+  style1?: object;
+  style2?: object;
+  style3?: object;
 }
 
-const Top3Rank = ({ top3 }: Top3RankProps) => {
+const Top3Rank = ({ top3, style, style1, style2, style3 }: Top3RankProps) => {
   return (
-    <Wrapper>
-      <div className="top top3">
+    <Wrapper style={style}>
+      <div className="top top3" style={style3}>
         3<div className="top-item">{top3[2]}</div>
       </div>
-      <div className="top top1">
+      <div className="top top1" style={style1}>
         1<div className="top-item">{top3[0]}</div>
       </div>
-      <div className="top top2">
+      <div className="top top2" style={style2}>
         2<div className="top-item">{top3[1]}</div>
       </div>
     </Wrapper>

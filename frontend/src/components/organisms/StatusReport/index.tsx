@@ -70,7 +70,6 @@ const StatusReport = ({
               // 상세페이지 상단 버튼들 //
               region={region}
               content={content}
-              // category={category}
               tab={tab}
               icon={icon}
             />
