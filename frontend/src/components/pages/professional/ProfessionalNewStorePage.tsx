@@ -9,8 +9,6 @@ import {
 
 import { useProSalesSimulation } from '../../../hooks/simulation';
 import Spinner from '../../atoms/Spinner';
-
-import { areas, DongItem } from '../../../data/areaDong';
 import { useUserStoreInfo, useStoreInfoFix } from '../../../hooks/user';
 import ProfessionalSideBar from '../../molecules/ProfessionalSideBar';
 import { useQueryClient } from '@tanstack/react-query';
@@ -37,7 +35,7 @@ const ProfessionalStorePage = () => {
       industryName: '',
     });
   // 상태 구분 | 0: 가게정보 없음, 1: 가게정보 있음, 2: 로딩중, 3: 분석, -1: 서버 에러
-  const [content, setContent] = useState<number>(0);
+  const [content, setContent] = useState<number>(-1);
   // API 요청에 보낼 데이터
   // 검색 결과 => 직업 이름
   const [selectedJobSearch, setSelectedJobSearch] =
@@ -60,14 +58,13 @@ const ProfessionalStorePage = () => {
   });
   useEffect(() => {
     if (userStoreInfo.isSuccess) {
-      console.log('가게 정보 확인', userStoreInfo.data);
       setStoreInform(userStoreInfo.data);
       setSelectedDongSearch(userStoreInfo.data.dongName);
       setSelectedJobSearch(userStoreInfo.data.industryName);
       setContent(1);
     } else if (userStoreInfo.isError) {
       if (userStoreInfo.error.response?.status === 400) {
-        console.log('정보 없음');
+        setContent(0);
       } else {
         setContent(-1);
       }
@@ -79,9 +76,6 @@ const ProfessionalStorePage = () => {
       setTimeout(() => setContent(3), 2000);
     }
   }, [mutationStoreInfoFix.isSuccess]);
-  useEffect(() => {
-    console.log('proresult', professionalResult);
-  }, [professionalResult]);
 
   const onSubmitHandler = () => {
     const params: ProfessionalStoreInfo = {
@@ -90,35 +84,15 @@ const ProfessionalStorePage = () => {
       industryName: selectedJobSearch,
     };
     setSubmitStoreInform(params);
-    // console.log('submit!', storeInform);
     mutationStoreInfoFix.mutate(params);
   };
 
-  // useEffect(() => {
-  //   setStoreInform({
-  //     ...storeInform,
-  //     dongName: selectedDongSearch,
-  //     industryName: selectedJobSearch,
-  //   });
-  //   console.log('위치 업종 정보 바뀜!!', storeInform);
-  // }, [selectedDongSearch, selectedJobSearch]);
-
   const changeStoreInform = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log({
-      ...storeInform,
-      [e.target.id]: Number(e.target.value),
-    });
     setStoreInform({
       ...storeInform,
       [e.target.id]: Number(e.target.value),
     });
   };
-
-  // const onClickHandler = () => {
-  //   if (storeInform.dongName && storeInform.industryName) {
-  //     setContent(2);
-  //   }
-  // };
 
   return (
     <Wrapper onClick={(e) => setClickTarget(e.target)}>
@@ -159,33 +133,15 @@ const ProfessionalStorePage = () => {
               </div>
             </SpinnerDiv>
           )}
-          {content === 3 && (
+          {content === 3 && professionalResult.isSuccess && (
             <ProfessionalResult
-              info={{
-                email: storeInform.email,
-                sales: storeInform.sales,
-                clerk: storeInform.clerk,
-                area: storeInform.area,
-                dongName: storeInform.dongName,
-                industryName: storeInform.industryName,
-              }}
+              storeInfo={submitStoreInform}
+              professionalResult={professionalResult.data}
             />
           )}
           {content === -1 && <InitialReport>서버가 아파요 ㅠㅠ</InitialReport>}
         </>
       )}
-
-      {/* <ProfessionalResult
-        info={{
-          email: storeInform.email,
-          sales: storeInform.sales,
-          clerk: storeInform.clerk,
-          area: storeInform.area,
-          dongName: storeInform.dongName,
-          industryName: storeInform.industryName,
-        }}
-      /> */}
-      {/* <SimulationPage /> */}
     </Wrapper>
   );
 };

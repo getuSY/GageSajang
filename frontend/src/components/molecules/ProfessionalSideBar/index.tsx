@@ -203,7 +203,7 @@ const ProfessionalSideBar = ({
 };
 
 const Wrapper = styled.div`
-  width: 300px;
+  width: 270px;
   flex-shrink: 0;
   /* background: ${({ theme }) => theme.lightColor}; */
   overflow: hidden;

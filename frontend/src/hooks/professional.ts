@@ -6,20 +6,21 @@ import { ProfessionalResultParams } from '../models/professional';
 export const useProfessionalResult = (
   proResultParams: ProfessionalResultParams
 ) => {
-  const { email, dongName, industryName, area, clerk, sales } = proResultParams;
+  const { email, dongName, industryName } = proResultParams;
   return useQuery({
-    queryKey: [
-      'professional',
-      'result',
-      email,
-      dongName,
-      industryName,
-      `area=${area}&clerk=${clerk}&sales=${sales}`,
-    ],
+    queryKey: ['professional', 'result', email, dongName, industryName],
     queryFn: () => professionalResult(proResultParams),
     cacheTime: 0,
   });
 };
+// linear-gradient(90deg, #00BF7A 0%, #FFDE3B 100%);
+
+const gradColor = [
+  [
+    [0, '#F2ED5F'],
+    [1, '#74F991'],
+  ],
+];
 
 export const useProfessionalData = (result: any) => {
   const areaData = useMemo(
@@ -39,13 +40,7 @@ export const useProfessionalData = (result: any) => {
       options: {
         indexAxis: 'y',
       },
-      grad: [
-        [
-          [0, '#49D0A8'],
-          [0.8, '#F9F254'],
-        ],
-        [[0, '#ebdd4a']],
-      ],
+      grad: gradColor,
     }),
     [result]
   );
@@ -59,20 +54,11 @@ export const useProfessionalData = (result: any) => {
             label: ['내 가게 월 매출'],
             data: [6000000, result.sales.sales / 3],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-            // borderRadius: 300,
-            // borderWidth: 5,
-            // borderColor: 'rgb(255, 99, 125)',
             barThickness: 70,
           },
         ],
       },
-      grad: [
-        [
-          [0, '#49D0A8'],
-          [0.8, '#F9F254'],
-        ],
-        [[0, '#ebdd4a']],
-      ],
+      grad: gradColor,
     }),
     [result]
   );
@@ -86,18 +72,11 @@ export const useProfessionalData = (result: any) => {
             label: ['내 가게 직원 수'],
             data: [6, result.store.clerk],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-            // borderRadius: 100,
             barThickness: 70,
           },
         ],
       },
-      grad: [
-        [
-          [0, '#49D0A8'],
-          [0.8, '#F9F254'],
-        ],
-        [[0, '#ebdd4a']],
-      ],
+      grad: gradColor,
     }),
     [result]
   );
