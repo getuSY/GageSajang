@@ -140,6 +140,7 @@ const weekLabels = [
   '일요일',
 ];
 const genderLabels = ['남성(명)', '여성(명)'];
+const genderPerLabels = ['남성(%)', '여성(%)'];
 const ageLabels = ['10대', '20대', '30대', '40대', '50대', '60대'];
 const storeCntLabels = [
   '2021년 1분기',
@@ -187,12 +188,12 @@ const blueGrad = [
 
 const aptGrad = [
   [
-    [0, '#B6ACF1'],
-    [1, '#27CFFB'],
+    [0, '#F8DB6D'],
+    [1, '#10C1CC'],
   ],
   [
-    [0, '#F3B79B'],
-    [1, '#F872D4'],
+    [0, '#60AEEE'],
+    [1, '#8C63E5'],
   ],
 ];
 
@@ -459,7 +460,7 @@ export const useStatusStoreData = (storeDetail: any) => {
         labels: storeCsLabels,
         datasets: [
           {
-            label: '업종별 점포 수',
+            label: '업종별 점포 수(개소)',
             data: storeDetail.cs,
             barThickness: 30,
             datalabels: {
@@ -482,7 +483,7 @@ export const useStatusStoreData = (storeDetail: any) => {
         labels: sotreAreaLabels,
         datasets: [
           {
-            label: '상권 구분별 점포 수',
+            label: '상권 구분별 점포 수(개소)',
             data: storeDetail.div,
             barThickness: 30,
             datalabels: {
@@ -509,7 +510,7 @@ export const useStatusOpenData = (openDetail: any) => {
         labels: storeCsLabels,
         datasets: [
           {
-            label: '업종별 개업률',
+            label: '업종별 개업률(%)',
             data: openDetail.open.cs,
             barThickness: 30,
             datalabels: {
@@ -536,7 +537,7 @@ export const useStatusOpenData = (openDetail: any) => {
         ],
         datasets: [
           {
-            label: '개업률 높은 상권 Top3',
+            label: '개업률 높은 상권(%)',
             data: [
               openDetail.open.top3[0].per,
               openDetail.open.top3[1].per,
@@ -570,7 +571,7 @@ export const useStatusCloseData = (closeDetail: any) => {
         labels: storeCsLabels,
         datasets: [
           {
-            label: '업종별 폐업률',
+            label: '업종별 폐업률(%)',
             data: closeDetail.close.cs,
             barThickness: 30,
             datalabels: {
@@ -631,8 +632,8 @@ export const useStatusSalesData = (salesDetail: any) => {
         labels: storeCsLabels,
         datasets: [
           {
-            label: '업종별 매출',
-            data: salesDetail.cs,
+            label: '월 평균 업종별 매출(만 원)',
+            data: salesDetail.cs.map((sales: number) => sales / 10000),
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -654,7 +655,7 @@ export const useStatusSalesData = (salesDetail: any) => {
         labels: weekLabels,
         datasets: [
           {
-            label: '요일별 매출',
+            label: '요일별 매출 비율(%)',
             data: salesDetail.week,
             min: 0,
             barThickness: 30,
@@ -681,7 +682,7 @@ export const useStatusSalesData = (salesDetail: any) => {
         labels: ageLabels,
         datasets: [
           {
-            label: '연령대별 매출',
+            label: '연령대별 매출 비율(%)',
             data: salesDetail.age,
             barThickness: 30,
             datalabels: {
@@ -701,10 +702,10 @@ export const useStatusSalesData = (salesDetail: any) => {
     () => ({
       type: 'pie',
       data: {
-        labels: genderLabels,
+        labels: genderPerLabels,
         datasets: [
           {
-            label: '성별별 매출',
+            label: '성별별 매출 비율(%)',
             barThickness: 70,
             data: salesDetail.gender,
             datalabels: {
@@ -740,7 +741,7 @@ export const useStatusSalesData = (salesDetail: any) => {
         labels: timeLabels,
         datasets: [
           {
-            label: '시간대별 매출',
+            label: '시간대별 매출 비율(%)',
             data: salesDetail.time,
             borderColor: '#6585EF',
             backgroundColor: '#6585EF',

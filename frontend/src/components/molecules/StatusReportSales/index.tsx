@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusSalesData } from '../../../hooks/status';
-import { getMax } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
+import { numberComma, getMax, getMin, getRate } from '../../../utils/common';
 
 interface StatusReportSalesProps {
   title?: any;
@@ -50,39 +50,26 @@ const StatusReportSales = ({
       <div className="report-div">
         {/* 업종별 매출 */}
         <ReportContent
-          title="업종별 매출"
+          title="월 평균 업종별 매출"
           chartData={salesCsData}
           style={{ flexGrow: 1 }}
         >
           <ReportComment>
-            <span className="dongName">{region}</span>의 ~~~는{' '}
-            <span className="emphasis">~~~~</span>가 ~~~~
-          </ReportComment>
-        </ReportContent>
-
-        {/* 요일별 매출 */}
-        <ReportContent
-          title="요일별 매출"
-          chartData={salesWeekData}
-          style={{ flexGrow: 1 }}
-        >
-          <ReportComment>
-            <span className="dongName">{region}</span>의 ~~~는{' '}
-            <span className="emphasis">~~~~</span>가 ~~~~
-          </ReportComment>
-        </ReportContent>
-      </div>
-
-      <div className="report-div">
-        {/* 연령대별 매출 */}
-        <ReportContent
-          title="연령대별 매출"
-          chartData={salesAgeData}
-          style={{ flexGrow: 1 }}
-        >
-          <ReportComment>
-            <span className="dongName">~~~</span>의 ~~~는{' '}
-            <span className="emphasis">~~~~</span>가 ~~~~
+            외식업{' '}
+            <span className="emphasis">
+              {numberComma(salesDetail.cs[0])} 원
+            </span>
+            , 서비스업{' '}
+            <span className="emphasis">
+              {numberComma(salesDetail.cs[1])} 원
+            </span>
+            ,
+            <br />
+            도소매업{' '}
+            <span className="emphasis">
+              {numberComma(salesDetail.cs[2])} 원
+            </span>{' '}
+            입니다.
           </ReportComment>
         </ReportContent>
 
@@ -93,21 +80,66 @@ const StatusReportSales = ({
           style={{ flexGrow: 1 }}
         >
           <ReportComment>
-            <span className="dongName">~~~</span>의 ~~~는{' '}
-            <span className="emphasis">~~~~</span>가 ~~~~
+            남성{' '}
+            <span className="emphasis">
+              {Math.round(
+                getRate([salesDetail.gender[0], salesDetail.gender[1]])[0]
+              )}
+              %
+            </span>
+            , 여성{' '}
+            <span className="emphasis">
+              {Math.round(
+                getRate([salesDetail.gender[0], salesDetail.gender[1]])[1]
+              )}
+              %
+            </span>{' '}
+            입니다.
+          </ReportComment>
+        </ReportContent>
+      </div>
+
+      <div className="report-div">
+        {/* 연령대별 매출 */}
+        <ReportContent
+          title="연령대별 일 평균 매출 비율"
+          chartData={salesAgeData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="emphasis">{getMax(salesDetail.age, 'age')}</span>
+            이(가) 가장 많고,{' '}
+            <span className="emphasis">{getMin(salesDetail.age, 'age')}</span>
+            이(가) 가장 적습니다.
+          </ReportComment>
+        </ReportContent>
+
+        {/* 요일별 매출 */}
+        <ReportContent
+          title="요일별 일 평균 매출 비율"
+          chartData={salesWeekData}
+          style={{ flexGrow: 1 }}
+        >
+          <ReportComment>
+            <span className="emphasis">{getMax(salesDetail.week, 'week')}</span>
+            에 가장 많고,{' '}
+            <span className="emphasis">{getMin(salesDetail.week, 'week')}</span>
+            에 가장 적습니다.
           </ReportComment>
         </ReportContent>
       </div>
 
       {/* 시간대별 매출 */}
       <ReportContent
-        title="시간대별 매출"
+        title="시간대별 매출 비율"
         chartData={salesTimeData}
         style={{ flexGrow: 1 }}
       >
         <ReportComment>
-          <span className="dongName">~~~</span>의 ~~~는{' '}
-          <span className="emphasis">~~~~</span>가 ~~~~
+          <span className="emphasis">{getMax(salesDetail.time, 'time')}</span>에
+          가장 많고,{' '}
+          <span className="emphasis">{getMin(salesDetail.time, 'time')}</span>에
+          가장 적습니다.
         </ReportComment>
       </ReportContent>
     </Wrapper>
