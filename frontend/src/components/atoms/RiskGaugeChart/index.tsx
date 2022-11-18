@@ -4,88 +4,72 @@ import Label from '../../atoms/Label';
 import ReportChart from '../../atoms/ReportChart';
 
 interface RiskGaugeChartProps {
-  children?: React.ReactNode;
   style?: object;
-  propsRef?: any;
-  title?: string;
   chartStyle?: any;
   canvasStyle?: any;
+  gauge?: 1 | 2 | 3 | 4;
 }
 
+const chartData = {
+  type: 'doughnut',
+  data: {
+    datasets: [
+      {
+        label: 'Gauge',
+        data: [1, 1, 1, 1],
+        backgroundColor: ['#f0533e', '#eea25c', '#fff671', '#62ff6f'],
+      },
+    ],
+  },
+  options: {
+    circumference: 180,
+    rotation: -90,
+    // cutoutPercentage: 80, // precent
+    plugins: {
+      datalabels: {
+        color: '#ffffff',
+        formatter: function (value: any, context: any) {
+          return `${['고위험', '위험', '주의', '정상'][context.dataIndex]}`;
+        },
+        font: {
+          size: 16,
+          weight: 700,
+        },
+      },
+    },
+    legend: {
+      display: false,
+    },
+    title: {
+      display: false,
+    },
+    tooltips: {
+      enabled: false,
+    },
+  },
+};
+
 const RiskGaugeChart = ({
-  children,
   style,
-  propsRef,
-  title,
   chartStyle,
   canvasStyle,
+  gauge = 4,
 }: RiskGaugeChartProps) => {
-  const chartData = {
-    type: 'doughnut',
-    data: {
-      datasets: [
-        {
-          label: 'Gauge',
-          data: [1, 1, 1, 1],
-          backgroundColor: ['#f0533e', '#eea25c', '#fff671', '#62ff6f'],
-        },
-      ],
-    },
-    options: {
-      circumference: 180,
-      rotation: -90,
-      // cutoutPercentage: 80, // precent
-      plugins: {
-        datalabels: {
-          color: '#ffffff',
-          formatter: function (value: any, context: any) {
-            return `${['고위험', '위험', '주의', '정상'][context.dataIndex]}`;
-          },
-          font: {
-            size: 16,
-            weight: 700,
-          },
-        },
-      },
-      legend: {
-        display: false,
-      },
-      title: {
-        display: false,
-      },
-      tooltips: {
-        enabled: false,
-      },
-    },
-  };
   return (
-    <Wrapper style={style} ref={propsRef}>
-      {title && (
-        <Label
-          style={{
-            width: '100%',
-            fontSize: '1.3rem',
-          }}
-        >
-          {title}
-        </Label>
-      )}
-      {chartData && (
-        <ReportChart
-          type="doughnut"
-          data={chartData.data}
-          options={chartData.options}
-          style={{ marginTop: '1.25rem', ...chartStyle }}
-          canvasStyle={canvasStyle}
-        />
-      )}
+    <Wrapper style={style} gauge={gauge}>
+      <ReportChart
+        type="doughnut"
+        data={chartData.data}
+        options={chartData.options}
+        style={{ ...chartStyle }}
+        canvasStyle={canvasStyle}
+      />
       <div className="pointer" />
-      {children}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ gauge: 1 | 2 | 3 | 4 }>`
   background: #ffffff;
   /* height: 500px; */
   position: relative;
@@ -104,16 +88,22 @@ const Wrapper = styled.div`
     z-index: 1000;
     bottom: 42px;
     left: 50%;
-    transform: rotate(160deg);
+    transform: ${({ gauge }) => `rotate(${20 + (gauge - 1) * 45}deg)`};
     &::before {
       content: '';
-      width: 80px;
-      height: 10px;
-      background: #ff0000;
+      /* width: 100px;
+      height: 10px; */
+      width: 0px;
+      height: 0px;
+      border-bottom: 5px solid transparent;
+      border-top: 5px solid transparent;
+      border-left: 5px solid transparent;
+      border-right: 120px solid #000000;
+      border-radius: 100px;
+      /* background: #ff0000; */
       position: absolute;
       right: 10px;
       top: 0;
-      transform: rotate(0deg);
     }
   }
 `;

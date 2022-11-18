@@ -33,6 +33,7 @@ const ReportContent = ({
             width: '100%',
             // fontWeight: 700,
             fontSize: '1.3rem',
+            fontFamily: 'GmarketSansMedium',
           }}
         >
           {title}
