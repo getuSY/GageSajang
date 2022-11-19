@@ -36,15 +36,10 @@ const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
           평균 가구 수는 <span>{numberComma(rpDetail.resident.house)}가구</span>
           이며, 상권의 아파트 비율은{' '}
           <span>
-            {Math.round(
-              getRate([rpDetail.resident.nonApt, rpDetail.resident.apt])[0]
-            )}
-            %
+            {getRate([rpDetail.resident.nonApt, rpDetail.resident.apt])[0]}%
           </span>
           , 상권 배후지의 아파트 비율은{' '}
-          <span>
-            {Math.round(getRate([rpDetail.apt.nonApt, rpDetail.apt.apt])[1])}%
-          </span>{' '}
+          <span>{getRate([rpDetail.apt.nonApt, rpDetail.apt.apt])[1]}%</span>{' '}
           입니다.
         </div>
       </StatusReportTitle>
@@ -59,22 +54,22 @@ const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
           <ReportComment>
             남성{' '}
             <span className="emphasis">
-              {Math.round(
+              {
                 getRate([
                   rpDetail.resident.gender[0],
                   rpDetail.resident.gender[1],
                 ])[0]
-              )}
+              }
               %
             </span>
             , 여성{' '}
             <span className="emphasis">
-              {Math.round(
+              {
                 getRate([
                   rpDetail.resident.gender[0],
                   rpDetail.resident.gender[1],
                 ])[1]
-              )}
+              }
               %
             </span>{' '}
             입니다.
@@ -117,17 +112,11 @@ const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
             </span>
             이고, 그 중 아파트는{' '}
             <span className="emphasis">
-              {Math.round(
-                getRate([rpDetail.resident.apt, rpDetail.resident.nonApt])[0]
-              )}
-              %
+              {getRate([rpDetail.resident.apt, rpDetail.resident.nonApt])[0]}%
             </span>
             , 비아파트는{' '}
             <span className="emphasis">
-              {Math.round(
-                getRate([rpDetail.resident.apt, rpDetail.resident.nonApt])[1]
-              )}
-              %
+              {getRate([rpDetail.resident.apt, rpDetail.resident.nonApt])[1]}%
             </span>{' '}
             입니다.
           </ReportComment>
@@ -147,11 +136,11 @@ const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
             </span>
             이고, 그 중 아파트는{' '}
             <span className="emphasis">
-              {Math.round(getRate([rpDetail.apt.apt, rpDetail.apt.nonApt])[0])}%
+              {getRate([rpDetail.apt.apt, rpDetail.apt.nonApt])[0]}%
             </span>
             , 비아파트는{' '}
             <span className="emphasis">
-              {Math.round(getRate([rpDetail.apt.apt, rpDetail.apt.nonApt])[1])}%
+              {getRate([rpDetail.apt.apt, rpDetail.apt.nonApt])[1]}%
             </span>{' '}
             입니다.
           </ReportComment>

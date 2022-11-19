@@ -56,24 +56,12 @@ const AmatuerAnalysisPage = () => {
   const onClickAnlzButton = async () => {
     const jobCode = getJobCode(mainCategory, subCategory);
     const admCd = select!.admCd;
-
     setIsResultLoading(true);
     setTimeout(() => {
-      queryClient
-        .fetchQuery({
-          queryKey: ['amatuer', 'result', admCd, jobCode],
-          queryFn: () => getAmatuerResult({ admCd, jobCode }),
-        })
-        .then((res) => {
-          navigate(
-            `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
-          );
-        })
-        .catch((e) =>
-          alert('지금은 분석할 수 없습니다. 나중에 다시 시도해주세요.')
-        );
-      setIsResultLoading(false);
-    }, 3000);
+      navigate(
+        `/amatuer/result?admCd=${select?.admCd}&mainCategory=${mainCategory}&subCategory=${subCategory}`
+      );
+    }, 1500);
   };
 
   const selectDong = useCallback(

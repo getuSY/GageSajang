@@ -50,14 +50,21 @@ export const getMin = (
   type: 'gender' | 'week' | 'age' | 'year' | 'quarter' | 'time' | 'cs' | 'div'
 ) => labels[type][data.indexOf(Math.min(...data))];
 
-// 비율(%) 추출
+// 비율(%) 추출 (100% 이상이 없을 때)
 export const getRate = (data: number[]) => {
   const newData = data.map(() => 0);
   const dataSum = data.reduce((a, b) => a + b);
   for (let i = 0; i < data.length; i++) {
-    newData[i] = (data[i] / dataSum) * 100;
+    newData[i] = Math.round((data[i] / dataSum) * 100);
   }
   return newData;
+};
+
+// 비교 비율(%) 추출 (100% 이상도 있을 때)
+export const getProRate = (num: number, compareNum: number) => {
+  const rate = Math.round(((num - compareNum) / compareNum) * 100);
+
+  return rate;
 };
 
 // 유효성 검사

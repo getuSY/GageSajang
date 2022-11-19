@@ -31,6 +31,7 @@ const gradColor = [
   ],
 ];
 
+// 가게 면적
 export const useProfessionalData = (result: any) => {
   const areaData = useMemo(
     () => ({

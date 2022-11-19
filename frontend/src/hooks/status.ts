@@ -667,9 +667,6 @@ export const useStatusSalesData = (salesDetail: any) => {
         ],
       },
       grad: weekGrad,
-      // options: {
-      //   scales: { ticks: { stepSize: 10, count: 2, maxTicksLimit: 2 } },
-      // },
     }),
     [salesDetail]
   );

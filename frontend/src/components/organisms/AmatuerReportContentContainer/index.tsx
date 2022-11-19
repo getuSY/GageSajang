@@ -79,13 +79,14 @@ const ReportContentContainer = ({
     useHinterlandData(amatuerResult); // 상권 배후지
 
   const { riskData } = useRiskData(amatuerResult); // 위험도 분석
-  // const {
-  //   amaSimulSalesData,
-  //   amaSimulLifeData,
-  //   amaSimulResidentData,
-  //   amaSimulJobData,
-  //   amaSimulCountData,
-  // } = useAmatuerSimulationData(amatuerSimulation);
+  const {
+    amaSimulSalesData,
+    amaSimulLifeData,
+    amaSimulResidentData,
+    amaSimulJobData,
+    amaSimulCountData,
+  } = useAmatuerSimulationData(amatuerSimulation);
+  // console.log(amatuerSimulation);
 
   return (
     <Wrapper onScroll={onScroll} ref={containerRef}>
@@ -166,10 +167,10 @@ const ReportContentContainer = ({
             chartData={salesTotalData}
             chartStyle={{ width: '500px' }}
           >
-            <ReportComment>
+            {/* <ReportComment>
               <span className="dongName">{dongName}</span>은{' '}
               <span className="emphasis"></span>
-            </ReportComment>
+            </ReportComment> */}
           </ReportContent>
           <ReportContent
             title="해당 동 성별 매출"
@@ -418,11 +419,11 @@ const ReportContentContainer = ({
         </div>
       </ReportCategory>
       <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
-        <ReportContent title="💸 위험도 분석" style={{ marginTop: '2rem' }} />
+        <ReportContent title="💸 창업 위험도" style={{ marginTop: '2rem' }} />
         <div className="chart-div">
           <RiskGaugeChart gauge={riskData.risk} style={{ width: '500px' }} />
           <ReportContent
-            title="위험도 설명"
+            title="창업 위험도 설명"
             style={{ flexGrow: 1, alignItems: 'flex-start' }}
           >
             <ReportRiskDescription>
@@ -460,39 +461,54 @@ const ReportContentContainer = ({
         </div>
       </ReportCategory>
       {/* 시뮬레이션 */}
-      {/* <ReportCategory ref={(e: any) => (contentRefs.current[6] = e)}>
+      <ReportCategory ref={(e: any) => (contentRefs.current[6] = e)}>
         <ReportContent title="💸 시뮬레이션" style={{ marginTop: '2rem' }} />
+        <ReportAlert>
+          ❗<div className="emphasis">{dongName}</div>의
+          <div className="emphasis" style={{ margin: '0 0.3rem' }}>
+            {jobName}
+          </div>
+          향후
+          <div className="emphasis" style={{ marginLeft: '0.3rem' }}>
+            5분기
+          </div>
+          의 예측 결과입니다. 향후 상황에 따라 오차가 있을 수 있기 때문에, 판단
+          하에 참고하여 활용하시기 바랍니다.
+        </ReportAlert>
         <div className="chart-div">
           <ReportContent
-            title="amaSimulSalesData"
+            title="분기별 매출"
             style={{ flexGrow: 1 }}
             chartData={amaSimulSalesData}
+            chartStyle={{ width: '600px' }}
           ></ReportContent>
+
           <ReportContent
-            title="amaSimulLifeData"
+            title="분기별 점포 수"
+            style={{ flexGrow: 1 }}
+            // chartStyle={{ width: '450px' }}
+            chartData={amaSimulCountData}
+            chartStyle={{ width: '600px' }}
+          ></ReportContent>
+        </div>
+        <div className="chart-div">
+          <ReportContent
+            title="분기별 유동인구"
             style={{ flexGrow: 1 }}
             // chartStyle={{ width: '450px' }}
             chartData={amaSimulLifeData}
           ></ReportContent>
           <ReportContent
-            title="amaSimulResidentData"
+            title="분기별 거주인구"
             chartData={amaSimulResidentData}
           ></ReportContent>
-        </div>
-        <div className="chart-div">
           <ReportContent
-            title="amaSimulJobData"
+            title="분기별 직업인구"
             style={{ flexGrow: 1 }}
             chartData={amaSimulJobData}
           ></ReportContent>
-          <ReportContent
-            title="amaSimulCountData"
-            style={{ flexGrow: 1 }}
-            // chartStyle={{ width: '450px' }}
-            chartData={amaSimulCountData}
-          ></ReportContent>
         </div>
-      </ReportCategory> */}
+      </ReportCategory>
     </Wrapper>
   );
 };
@@ -516,10 +532,14 @@ const Wrapper = styled.div`
 const ReportAlert = styled.div`
   background: #feffca;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  /* flex-direction: column; */
   padding: 20px 20px;
   border-radius: 10px;
+  & > .emphasis {
+    font-weight: 700;
+  }
 `;
 
 const ReportCategory = styled.div`

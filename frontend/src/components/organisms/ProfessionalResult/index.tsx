@@ -15,6 +15,7 @@ import {
   useProfessionalSimulation,
 } from '../../../hooks/professional';
 import SalesSimulation from '../SalesSimulation';
+import { numberComma, getRate, getProRate } from '../../../utils/common';
 
 interface ProfessionalResultProps {
   storeInfo: ProfessionalResultParams;
@@ -25,12 +26,6 @@ const ProfessionalResult = ({
   storeInfo,
   professionalResult,
 }: ProfessionalResultProps) => {
-  // const salesRate = (info.sales / result.sales.sales) * 100;
-  // const openRate = (result.status.open / Number(result.store.total)) * 100;
-  // const closeRate = (result.status.close / Number(result.store.total)) * 100;
-  // const clerkRate = info.clerk / result.store.clerk;
-  // const areaRate = (info.area / result.store.area) * 100;
-
   const { areaData, salesData, clerkData, frData, ocData } =
     useProfessionalData(professionalResult);
   const { sales, clerk, area, dongName, industryName } = storeInfo;
@@ -42,6 +37,20 @@ const ProfessionalResult = ({
     year: 2022,
   });
 
+  console.log(professionalResult);
+
+  const salesRate = getProRate(sales, professionalResult.sales.sales); // 매출 배교
+  const openRate = getRate([
+    professionalResult.status.open,
+    professionalResult.store.total,
+  ])[0];
+  const closeRate = getRate([
+    professionalResult.status.close,
+    professionalResult.store.total,
+  ])[0];
+  const clerkRate = clerk / professionalResult.store.clerk;
+  const areaRate = getProRate(area, professionalResult.store.area);
+
   return (
     <Wrapper>
       <ReportAlert>
@@ -49,26 +58,111 @@ const ProfessionalResult = ({
         수 있기 때문에, 판단 하에 참고하여 활용하시기 바랍니다.
       </ReportAlert>
       <Summary>
+        {/* 매출 비교 */}
         <SummaryItem
           title="매출 비교"
           style={{ width: 0, flexGrow: 1 }}
-        ></SummaryItem>
+          iconSrc="/assets/icons/sales.png"
+        >
+          <div>
+            {salesRate > 0 && (
+              <>
+                평균보다 <Highlight>{numberComma(salesRate)} %</Highlight> 더{' '}
+              </>
+            )}
+            {salesRate === 0 && (
+              <>
+                평균 월 매출과 <Highlight>비슷하게</Highlight>{' '}
+              </>
+            )}
+            {salesRate < 0 && (
+              <>
+                평균보다{' '}
+                <Highlight>{numberComma(Math.abs(salesRate))} %</Highlight> 적게{' '}
+              </>
+            )}
+            벌고 있습니다.
+          </div>
+        </SummaryItem>
+
+        {/* 평균 매출 건수 */}
         <SummaryItem
-          title="평균 매출 건수"
+          title="월 평균 매출 건수"
           style={{ width: 0, flexGrow: 1 }}
-        ></SummaryItem>
+          iconSrc="/assets/icons/salesCnt.png"
+        >
+          <div>
+            약{' '}
+            <Highlight>
+              {numberComma(Math.round(professionalResult.sales.order / 3))} 건
+            </Highlight>{' '}
+            입니다.
+          </div>
+        </SummaryItem>
         <SummaryItem
           title="개폐업률"
           style={{ width: 0, flexGrow: 1 }}
-        ></SummaryItem>
+          iconSrc="/assets/icons/openClose.png"
+        >
+          <div>
+            개업률은 <Highlight>{numberComma(openRate)} %</Highlight> 입니다.
+            <br /> 폐업률은 <Highlight>
+              {numberComma(closeRate)} %
+            </Highlight>{' '}
+            입니다.
+          </div>
+        </SummaryItem>
         <SummaryItem
           title="가게 면적 비교"
           style={{ width: 0, flexGrow: 1 }}
-        ></SummaryItem>
+          iconSrc="/assets/icons/store.png"
+        >
+          <div>
+            {areaRate > 0 && (
+              <div className="cardBody">
+                평균 대비 <Highlight>{numberComma(areaRate)}%</Highlight>{' '}
+                넓습니다.
+              </div>
+            )}
+            {areaRate === 0 && (
+              <div className="cardBody">
+                평균 면적과 거의 <Highlight>비슷해요!</Highlight>
+              </div>
+            )}
+            {areaRate < 0 && (
+              <div className="cardBody">
+                평균 대비{' '}
+                <Highlight>{numberComma(Math.abs(areaRate))}%</Highlight>{' '}
+                좁습니다.
+              </div>
+            )}
+          </div>
+        </SummaryItem>
         <SummaryItem
           title="직원 수 비교"
           style={{ width: 0, flexGrow: 1 }}
-        ></SummaryItem>
+          iconSrc="/assets/icons/clerk.png"
+        >
+          <div>
+            {clerkRate > 1 && (
+              <div className="cardBody">
+                평균보다 <Highlight>{clerkRate} 배</Highlight> 더 고용하고
+                있습니다.
+              </div>
+            )}
+            {clerkRate === 1 && (
+              <div className="cardBody">
+                <Highlight>평균만큼</Highlight> 고용하고 있습니다.
+              </div>
+            )}
+            {clerkRate < 1 && (
+              <div className="cardBody">
+                평균보다 <Highlight>{clerkRate} 배</Highlight> 적게 고용하고
+                있습니다.
+              </div>
+            )}
+          </div>
+        </SummaryItem>
       </Summary>
       <ReportContent
         style={{ marginTop: '2rem' }}
@@ -179,6 +273,12 @@ const ReportAlert = styled.div`
   flex-direction: column;
   padding: 20px 20px;
   border-radius: 10px;
+`;
+
+const Highlight = styled.span`
+  color: red;
+  font-size: 22px;
+  font-weight: 600;
 `;
 
 export default React.memo(ProfessionalResult);
