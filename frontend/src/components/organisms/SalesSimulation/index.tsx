@@ -172,8 +172,8 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   display: flex;
   padding: 14px 20px;
   /* height: 48px; */
-  height: ${({ isOpen }) => (isOpen ? '80%' : '48px')};
-  transition: 1s;
+  height: ${({ isOpen }) => (isOpen ? '1000px' : '48px')};
+  transition: 1.5s;
   flex-shrink: 0;
   overflow: hidden;
 `;
