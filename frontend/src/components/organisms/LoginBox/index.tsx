@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import UnsetLabelInput from '../../molecules/UnsetLabelInput/index';
 import Button from '../../atoms/Button/index';
 import CheckLabelInput from '../../molecules/CheckLabelInput/index';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { UserModel } from '../../../models/user';
 import { useUserLogin, useUserInfo } from '../../../hooks/user';
 
 const LoginBox = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const mutation = useUserLogin();
   const { data, isLoading, isSuccess, isError, error } = mutation;
   const { data: userInfo } = useUserInfo();
@@ -44,8 +45,12 @@ const LoginBox = () => {
       sessionStorage.setItem('email', loginInputs.email);
     }
   }, [isSuccess, isError]);
+
   useEffect(() => {
-    if (userInfo) navigate('/');
+    if (userInfo) {
+      const from = location.state?.from?.pathname || '/';
+      navigate(from, { replace: true });
+    }
   }, [userInfo]);
 
   const onClickHandler = () => {
