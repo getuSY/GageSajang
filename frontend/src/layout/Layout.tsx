@@ -11,12 +11,12 @@ const navList: Array<NavItem> = [
     linkTo: '/status',
   },
   {
-    content: '이미사장',
-    linkTo: '/professional',
-  },
-  {
     content: '아마사장',
     linkTo: '/amatuer',
+  },
+  {
+    content: '이미사장',
+    linkTo: '/professional',
   },
 ];
 
