@@ -34,7 +34,11 @@ const reportMenuList = [
   },
   {
     name: '창업 위험도',
-    icon: 'house-circle-check',
+    icon: 'circle-exclamation',
+  },
+  {
+    name: '시뮬레이션',
+    icon: 'square-poll-vertical',
   },
 ];
 
@@ -57,18 +61,14 @@ const Report = ({
         tab={tab}
         setTab={setTab}
       />
-      {!amatuerResult.isLoading &&
-        amatuerResult.isSuccess &&
-        amatuerSimulation.isSuccess && (
-          <ReportContentContainer
-            contentRefs={contentRefs}
-            setTab={setTab}
-            amatuerResult={amatuerResult.data}
-            amatuerSimulation={amatuerSimulation}
-            dongName={dongName}
-            jobName={jobName}
-          />
-        )}
+      <ReportContentContainer
+        contentRefs={contentRefs}
+        setTab={setTab}
+        amatuerResult={amatuerResult.data}
+        amatuerSimulation={amatuerSimulation.data}
+        dongName={dongName}
+        jobName={jobName}
+      />
       {!amatuerResult.isLoading && amatuerResult.isError && (
         <LodingErrorWrapper>
           <h1>서버가 아파요,,,</h1>
