@@ -77,17 +77,11 @@ const StatusReportSales = ({ title, salesDetail }: StatusReportSalesProps) => {
           <ReportComment>
             남성{' '}
             <span className="emphasis">
-              {Math.round(
-                getRate([salesDetail.gender[0], salesDetail.gender[1]])[0]
-              )}
-              %
+              {getRate([salesDetail.gender[0], salesDetail.gender[1]])[0]}%
             </span>
             , 여성{' '}
             <span className="emphasis">
-              {Math.round(
-                getRate([salesDetail.gender[0], salesDetail.gender[1]])[1]
-              )}
-              %
+              {getRate([salesDetail.gender[0], salesDetail.gender[1]])[1]}%
             </span>{' '}
             입니다.
           </ReportComment>

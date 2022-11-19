@@ -73,13 +73,11 @@ const StatusReportFP = ({ title, fpDetail }: StatusReportFPProps) => {
           <ReportComment>
             남성{' '}
             <span className="emphasis">
-              {Math.round(getRate([fpDetail.gender[0], fpDetail.gender[1]])[0])}
-              %
+              {getRate([fpDetail.gender[0], fpDetail.gender[1]])[0]}%
             </span>
             , 여성{' '}
             <span className="emphasis">
-              {Math.round(getRate([fpDetail.gender[0], fpDetail.gender[1]])[1])}
-              %
+              {getRate([fpDetail.gender[0], fpDetail.gender[1]])[1]}%
             </span>{' '}
             입니다.
           </ReportComment>
