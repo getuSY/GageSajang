@@ -1,6 +1,13 @@
 import React, { lazy } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+  useLocation,
+} from 'react-router-dom';
 import { greenTheme, blueTheme, purpleTheme } from './styles/theme';
 import Layout from './layout/Layout';
 import LoadingPage from './components/pages/LoadingPage';
@@ -67,7 +74,9 @@ function App() {
             element={<CustomThemeProvider theme={greenTheme} />}
           >
             <Route path="" element={<ProfessionalPage />} />
-            <Route path="store" element={<ProfessionalStorePage />} />
+            <Route path="" element={<LoginRequired />}>
+              <Route path="store" element={<ProfessionalStorePage />} />
+            </Route>
           </Route>
           {/* 아마 사장 */}
           <Route
@@ -103,5 +112,16 @@ const Wrapper = styled.div`
   background-position-x: center;
   background-size: 2560px 1836px;
 `;
+
+const LoginRequired = () => {
+  const user = sessionStorage.getItem('email');
+  const location = useLocation();
+  if (!user) {
+    alert('로그인이 필요합니다!!');
+    return <Navigate to="/user/login" state={{ from: location }} replace />;
+  }
+
+  return <Outlet />;
+};
 
 export default App;
