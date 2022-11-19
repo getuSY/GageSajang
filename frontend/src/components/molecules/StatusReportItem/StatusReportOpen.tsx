@@ -16,7 +16,6 @@ const StatusReportOpen = ({ title, openDetail }: StatusReportOpenProps) => {
   const { openCsData, openTopData, openChangeData } =
     useStatusOpenData(openDetail);
 
-  console.log(openDetail);
   return (
     <Wrapper>
       <StatusReportTitle
@@ -32,7 +31,7 @@ const StatusReportOpen = ({ title, openDetail }: StatusReportOpenProps) => {
           이며, <span>광화문광장</span>의 개업률이 가장 높습니다.
         </div>
         <div className="summary-div">
-          상권변화지표는 <span>{openDetail.change}</span>입니다.
+          상권변화지표는 <span>{openChangeData}</span>입니다.
         </div>
       </StatusReportTitle>
 

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import Spinner from '../../atoms/Spinner';
 import ReportSideBar from '../../molecules/ReportSideBar';
 import ReportContentContainer from '../AmatuerReportContentContainer';
 
@@ -47,7 +46,6 @@ const Report = ({
 }: ReportProps) => {
   const contentRefs = useRef<HTMLDivElement[]>([]);
   const [tab, setTab] = useState<number>(0);
-  console.log(amatuerSimulation);
 
   return (
     <Wrapper>

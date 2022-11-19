@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface AnalysisSideBarProps {}
+interface AmatuerSideBarProps {}
 
-const AnalysisSideBar = ({}: AnalysisSideBarProps) => {
+const AmatuerSideBar = ({}: AmatuerSideBarProps) => {
   return <Wrapper></Wrapper>;
 };
 
 const Wrapper = styled.div``;
 
-export default AnalysisSideBar;
+export default AmatuerSideBar;

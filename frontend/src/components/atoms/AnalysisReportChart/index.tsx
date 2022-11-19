@@ -30,7 +30,7 @@ ChartJS.register(
   ...registerables
 );
 
-export interface AnalysisReportChartProps {
+export interface AmatuerReportChartProps {
   type: 'bar' | 'bubble' | 'doughnut' | 'line' | 'pie' | 'polarArea' | 'radar';
   options?: any;
   data: any;
@@ -40,7 +40,7 @@ export interface AnalysisReportChartProps {
   isVert?: boolean;
 }
 
-const AnalysisReportChart = ({
+const AmatuerReportChart = ({
   type,
   data,
   options,
@@ -48,7 +48,7 @@ const AnalysisReportChart = ({
   grad,
   canvasStyle,
   isVert,
-}: AnalysisReportChartProps) => {
+}: AmatuerReportChartProps) => {
   const chartOptions = {
     ...options,
     maintainAspectRatio: true,
@@ -86,4 +86,4 @@ const AnalysisReportChart = ({
   );
 };
 
-export default React.memo(AnalysisReportChart);
+export default React.memo(AmatuerReportChart);

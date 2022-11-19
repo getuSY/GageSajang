@@ -16,8 +16,6 @@ const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
   const { rpGenderData, rpAgeData, rpAptData, rpApt2Data } =
     useStatusRpData(rpDetail);
 
-  console.log(rpDetail.resident, rpDetail.apt);
-
   return (
     <Wrapper>
       <StatusReportTitle

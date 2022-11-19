@@ -3,20 +3,16 @@ import ReportModal from '../../atoms/ReportModal';
 import styled from 'styled-components';
 import StatusReportIndex from '../../molecules/StatusReportIndex';
 import StatusReportItem from '../../molecules/StatusReportItem';
-import { useStatusApt } from '../../../hooks/status';
+import { useStatusApt, useStatusDetail } from '../../../hooks/status';
 
 interface StatusReportProps {
-  region?: string;
+  region: string;
   content: any;
   tab: number;
   icon?: any;
   isOpen?: boolean;
   title?: any;
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-  statusResult: any;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
 }
 
 const StatusReport = ({
@@ -26,15 +22,14 @@ const StatusReport = ({
   icon,
   isOpen,
   setIsOpen,
-  statusResult,
-  isLoading,
-  isSuccess,
-  isError,
 }: StatusReportProps) => {
   const [title, setTitle] = useState({
     name: content[0].name,
     icon: icon[0],
   });
+  // 현황 상세 페이지 API
+  const { data: statusResult, isSuccess } = useStatusDetail(region);
+
   useEffect(() => {
     setTitle({
       name: content[tab].name,
@@ -64,7 +59,7 @@ const StatusReport = ({
               {tab === 0 && (
                 // 유동인구
                 <StatusReportItem
-                  type="RP"
+                  type="FP"
                   title={title}
                   detail={statusResult.living}
                 />
@@ -72,7 +67,7 @@ const StatusReport = ({
               {tab === 1 && (
                 // 거주인구
                 <StatusReportItem
-                  type="FP"
+                  type="RP"
                   title={title}
                   detail={{ resident: statusResult.resident, apt: data }}
                 />

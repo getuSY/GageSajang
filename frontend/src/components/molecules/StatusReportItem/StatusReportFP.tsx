@@ -13,7 +13,6 @@ interface StatusReportFPProps {
 }
 
 const StatusReportFP = ({ title, fpDetail }: StatusReportFPProps) => {
-  console.log('fpDetail', fpDetail);
   const { fpGenderData, fpAgeData, fpQuaterData, fpWeekData, fpTimeData } =
     useStatusFpData(fpDetail);
 

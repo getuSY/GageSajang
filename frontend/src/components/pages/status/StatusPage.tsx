@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import areas from '../../../data/areaGu.json';
 import GeometryMap from '../../atoms/GeometryMap';
@@ -9,7 +9,6 @@ import {
   useStatusGuMap,
   useStatusHinGuMap,
   useStatusTrend,
-  useStatusDetail,
 } from '../../../hooks/status';
 import {
   faPeopleGroup,
@@ -55,21 +54,12 @@ const StatusPage = () => {
   };
 
   // 상권 지도 API
-  const { guData, isGuSuccess, isGuLoading, isGuError } = useStatusGuMap();
+  const { guData, isGuSuccess } = useStatusGuMap();
   // 상권 배후지 지도 API
-  const { hinGuData, isHinGuSuccess, isHinGuLoading, isHinGuError } =
-    useStatusHinGuMap();
+  const { hinGuData, isHinGuSuccess } = useStatusHinGuMap();
 
   // 사이드바 TOP10 API
   const trendData = useStatusTrend();
-
-  // 현황 상세 페이지 API
-  const {
-    data: statusResult,
-    isLoading,
-    isSuccess,
-    isError,
-  } = useStatusDetail(region);
 
   return (
     <Transitions>
@@ -99,20 +89,17 @@ const StatusPage = () => {
               category={category}
             />
             {/* 현황 상세 페이지 */}
-            <StatusReport
-              icon={icons}
-              region={region}
-              content={contentList}
-              // category={category!}
-              tab={tab}
-              // 상세 페이지, 모달 + close 버튼
-              isOpen={reportModal}
-              setIsOpen={setReportModal}
-              statusResult={statusResult}
-              isLoading={isLoading}
-              isSuccess={isSuccess}
-              isError={isError}
-            />
+            {region && (
+              <StatusReport
+                icon={icons}
+                region={region}
+                content={contentList}
+                tab={tab}
+                // 상세 페이지, 모달 + close 버튼
+                isOpen={reportModal}
+                setIsOpen={setReportModal}
+              />
+            )}
           </>
         )}
       </Wrapper>

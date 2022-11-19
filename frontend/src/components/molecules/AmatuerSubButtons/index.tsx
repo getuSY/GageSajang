@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import cs from '../../../data/cs';
 import { useNavigate } from 'react-router-dom';
 
-interface AnalysisSubButtonsProps {
+interface AmatuerSubButtonsProps {
   tab: number;
   subCategory: number;
 }
 
-const AnalysisSubButtons = ({ tab, subCategory }: AnalysisSubButtonsProps) => {
+const AmatuerSubButtons = ({ tab, subCategory }: AmatuerSubButtonsProps) => {
   const navigate = useNavigate();
 
   return (
@@ -83,4 +83,4 @@ const SubButton = styled.button<SubButtonProps>`
   }
 `;
 
-export default AnalysisSubButtons;
+export default AmatuerSubButtons;
