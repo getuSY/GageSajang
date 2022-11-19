@@ -138,6 +138,15 @@ const timeGrad = [
   ],
 ];
 
+// default Value
+const genderDefault = [0, 0];
+const timeDefault = [0, 0, 0, 0, 0, 0];
+const ageDefault = [0, 0, 0, 0, 0, 0];
+const weekDefault = [0, 0, 0, 0, 0, 0, 0];
+const quarterDefault = [0, 0, 0, 0];
+const cntDefault = [0, 0, 0, 0, 0, 0, 0, 0];
+const yearDefault = [0, 0, 0, 0, 0];
+
 /* 업종 분석 */
 export const useStoreData = (amatuerResult: any) => {
   // 해당 동 점포 수 (2021.4분기, 2020.4분기)
@@ -149,7 +158,9 @@ export const useStoreData = (amatuerResult: any) => {
         datasets: [
           {
             label: '해당 업종 점포 수',
-            data: [amatuerResult.store.yearAgo, amatuerResult.store.total],
+            data: amatuerResult
+              ? [amatuerResult.store.yearAgo, amatuerResult.store.total]
+              : [0, 0],
             barThickness: 70,
             datalabels: {
               // 데이터라벨 숨김
@@ -159,13 +170,21 @@ export const useStoreData = (amatuerResult: any) => {
         ],
       },
       grad: [
+        // [
+        //   [0, '#A82BECc1'],
+        //   [1, '#545BF9c1'],
+        // ],
+        // [
+        //   [0, '#A82BEC'],
+        //   [1, '#545BF9'],
+        // ],
         [
-          [0, '#A82BECc1'],
-          [1, '#545BF9c1'],
+          [0, '#B6ACF1c0'],
+          [1, '#27CFFBc0'],
         ],
         [
-          [0, '#A82BEC'],
-          [1, '#545BF9'],
+          [0, '#B6ACF1'],
+          [1, '#27CFFB'],
         ],
       ],
     }),
@@ -182,7 +201,7 @@ export const useStoreData = (amatuerResult: any) => {
           {
             label: '매출',
             barThickness: 70,
-            data: amatuerResult.store.gender,
+            data: amatuerResult ? amatuerResult.store.gender : genderDefault,
             datalabels: {
               // 데이터라벨 숨김
               color: 'white',
@@ -205,7 +224,7 @@ export const useStoreData = (amatuerResult: any) => {
         datasets: [
           {
             label: '유동 인구',
-            data: amatuerResult.store.age,
+            data: amatuerResult ? amatuerResult.store.age : ageDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -239,7 +258,7 @@ export const useSalesData = (amatuerResult: any) => {
         datasets: [
           {
             label: '총 매출(단위: 원)',
-            data: amatuerResult.sales.total,
+            data: amatuerResult ? amatuerResult.sales.total : ageDefault,
             borderColor: '#B29AF8',
             datalabels: {
               // 데이터라벨 숨김
@@ -260,7 +279,7 @@ export const useSalesData = (amatuerResult: any) => {
 
   // 매출 Top3 상권
   const salesAreaTop3Data = useMemo(
-    () => amatuerResult.sales.top3,
+    () => (amatuerResult ? amatuerResult.sales.top3 : ['', '', '']),
     [amatuerResult]
   );
 
@@ -273,7 +292,7 @@ export const useSalesData = (amatuerResult: any) => {
         datasets: [
           {
             label: '요일별 매출',
-            data: amatuerResult.sales.week,
+            data: amatuerResult ? amatuerResult.sales.week : weekDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -296,7 +315,7 @@ export const useSalesData = (amatuerResult: any) => {
         datasets: [
           {
             label: '시간대별 매출',
-            data: amatuerResult.sales.time,
+            data: amatuerResult ? amatuerResult.sales.time : timeDefault,
             borderColor: '#B29AF8',
             backgroundColor: '#B29AF8',
             borderWidth: 2,
@@ -322,7 +341,7 @@ export const useSalesData = (amatuerResult: any) => {
         datasets: [
           {
             label: '연령대별 매출',
-            data: amatuerResult.sales.age,
+            data: amatuerResult ? amatuerResult.sales.age : ageDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -351,7 +370,7 @@ export const useSalesData = (amatuerResult: any) => {
           {
             label: '매출',
             barThickness: 70,
-            data: amatuerResult.sales.gender,
+            data: amatuerResult ? amatuerResult.sales.gender : genderDefault,
             datalabels: {
               // 데이터라벨 숨김
               color: 'white',
@@ -385,7 +404,7 @@ export const useLivingData = (amatuerResult: any) => {
         datasets: [
           {
             label: '총 유동인구 추이',
-            data: amatuerResult.living.total,
+            data: amatuerResult ? amatuerResult.living.total : [0, 0, 0, 0, 0],
             borderColor: '#B29AF8',
             datalabels: {
               // 데이터라벨 숨김
@@ -401,7 +420,7 @@ export const useLivingData = (amatuerResult: any) => {
 
   // 동 기준 유동인구 top3 상권
   const livingAreaTop3Data = useMemo(
-    () => amatuerResult.living.top3,
+    () => (amatuerResult ? amatuerResult.living.top3 : ['', '', '']),
     [amatuerResult]
   );
 
@@ -414,7 +433,7 @@ export const useLivingData = (amatuerResult: any) => {
         datasets: [
           {
             label: '요일별 유동인구',
-            data: amatuerResult.living.week,
+            data: amatuerResult ? amatuerResult.living.week : weekDefault,
             barThickness: 40,
             datalabels: {
               // 데이터라벨 숨김
@@ -437,7 +456,7 @@ export const useLivingData = (amatuerResult: any) => {
         datasets: [
           {
             label: '시간대별 유동인구',
-            data: amatuerResult.living.time,
+            data: amatuerResult ? amatuerResult.living.time : timeDefault,
             borderColor: '#B29AF8',
             backgroundColor: '#B29AF8',
             borderWidth: 2,
@@ -463,7 +482,7 @@ export const useLivingData = (amatuerResult: any) => {
         datasets: [
           {
             label: '연령대별 매출',
-            data: amatuerResult.living.age,
+            data: amatuerResult ? amatuerResult.living.age : ageDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -492,7 +511,7 @@ export const useLivingData = (amatuerResult: any) => {
           {
             label: '매출',
             barThickness: 70,
-            data: amatuerResult.living.gender,
+            data: amatuerResult ? amatuerResult.living.gender : genderDefault,
             datalabels: {
               // 데이터라벨 숨김
               color: 'white',
@@ -525,7 +544,7 @@ export const useStoreCntData = (amatuerResult: any) => {
         datasets: [
           {
             label: '개업 현황',
-            data: amatuerResult.open.open,
+            data: amatuerResult ? amatuerResult.open.open : cntDefault,
             barThickness: 40,
             datalabels: {
               // 데이터라벨 숨김
@@ -557,16 +576,17 @@ export const useStoreCntData = (amatuerResult: any) => {
         datasets: [
           {
             label: '개업률(단위: %)',
-            data: amatuerResult.open.rate,
+            data: amatuerResult ? amatuerResult.open.open : cntDefault,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
             },
-            backgroundColor: '#27CFFB',
+            // backgroundColor: '#27CFFB',
             borderColor: '#27CFFB',
           },
         ],
       },
+      grad: [[[0, '#27CFFB']]],
     }),
     [amatuerResult]
   );
@@ -579,7 +599,7 @@ export const useStoreCntData = (amatuerResult: any) => {
         datasets: [
           {
             label: '폐업 현황',
-            data: amatuerResult.close.close,
+            data: amatuerResult ? amatuerResult.close.close : cntDefault,
             barThickness: 40,
             datalabels: {
               // 데이터라벨 숨김
@@ -607,16 +627,17 @@ export const useStoreCntData = (amatuerResult: any) => {
           {
             label: '폐업률(단위: %)',
             barThickness: 70,
-            data: amatuerResult.close.rate,
+            data: amatuerResult ? amatuerResult.close.rate : cntDefault,
             datalabels: {
               // 데이터라벨 숨김
               color: 'transparent',
             },
-            backgroundColor: '#FE5D84',
+            // backgroundColor: '#FE5D84',
             borderColor: '#FE5D84',
           },
         ],
       },
+      grad: [[[0, '#FE5D84']]],
     }),
     [amatuerResult]
   );
@@ -639,11 +660,13 @@ export const useHinterlandData = (amatuerResult: any) => {
         datasets: [
           {
             label: '상권 배후지 인구',
-            data: [
-              amatuerResult.hinterland.living,
-              amatuerResult.hinterland.work,
-              amatuerResult.hinterland.resident,
-            ],
+            data: amatuerResult
+              ? [
+                  amatuerResult.hinterland.living,
+                  amatuerResult.hinterland.work,
+                  amatuerResult.hinterland.resident,
+                ]
+              : [0, 0, 0],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -670,7 +693,7 @@ export const useHinterlandData = (amatuerResult: any) => {
         datasets: [
           {
             label: '연령대별 매출',
-            data: amatuerResult.hinterland.age,
+            data: amatuerResult ? amatuerResult.hinterland.age : ageDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -698,7 +721,9 @@ export const useHinterlandData = (amatuerResult: any) => {
           {
             label: '매출',
             barThickness: 70,
-            data: amatuerResult.hinterland.gender,
+            data: amatuerResult
+              ? amatuerResult.hinterland.gender
+              : genderDefault,
             datalabels: {
               // 데이터라벨 숨김
               color: 'white',
@@ -716,7 +741,10 @@ export const useHinterlandData = (amatuerResult: any) => {
 
 export const useRiskData = (amatuerResult: any) => {
   const riskData = useMemo(
-    () => ({ risk: amatuerResult.risk, riskRate: amatuerResult.riskRate }),
+    () =>
+      amatuerResult
+        ? { risk: amatuerResult.risk, riskRate: amatuerResult.riskRate }
+        : { risk: 1, riskRate: 0 },
     [amatuerResult]
   );
 
@@ -732,8 +760,10 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         labels: simulLabels,
         datasets: [
           {
-            label: 'sales',
-            data: amatuerSimulation.sales.map((e: any) => e.value),
+            label: '매출(단위: 원)',
+            data: amatuerSimulation.sales
+              ? amatuerSimulation.sales.map((e: any) => e.value)
+              : [0, 0, 0, 0, 0],
             // barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -742,7 +772,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
           },
         ],
       },
-      grad: weekGrad,
+      grad: timeGrad,
     }),
     [amatuerSimulation]
   );
@@ -753,8 +783,10 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         labels: simulLabels,
         datasets: [
           {
-            label: 'life',
-            data: amatuerSimulation.life.map((e: any) => e.value),
+            label: '유동인구(단위: 명)',
+            data: amatuerSimulation.life
+              ? amatuerSimulation.life.map((e: any) => e.value)
+              : [0, 0, 0, 0, 0],
             // barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -763,7 +795,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
           },
         ],
       },
-      grad: weekGrad,
+      grad: timeGrad,
     }),
     [amatuerSimulation]
   );
@@ -774,8 +806,10 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         labels: simulLabels,
         datasets: [
           {
-            label: 'resident',
-            data: amatuerSimulation.resident.map((e: any) => e.value),
+            label: '거주인구(단위: 명)',
+            data: amatuerSimulation.resident
+              ? amatuerSimulation.resident.map((e: any) => e.value)
+              : [0, 0, 0, 0, 0],
             // barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -784,7 +818,12 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
           },
         ],
       },
-      grad: weekGrad,
+      grad: [
+        [
+          [0, '#545BF980'],
+          [1, '#545BF9'],
+        ],
+      ],
     }),
     [amatuerSimulation]
   );
@@ -795,8 +834,10 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         labels: simulLabels,
         datasets: [
           {
-            label: 'job',
-            data: amatuerSimulation.job.map((e: any) => e.value),
+            label: '직업인구(단위: 명)',
+            data: amatuerSimulation.job
+              ? amatuerSimulation.job.map((e: any) => e.value)
+              : [0, 0, 0, 0, 0],
             // barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -805,7 +846,12 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
           },
         ],
       },
-      grad: weekGrad,
+      grad: [
+        [
+          [0, '#FC6DD180'],
+          [1, '#FC6DD1'],
+        ],
+      ],
     }),
     [amatuerSimulation]
   );
@@ -816,8 +862,10 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         labels: simulLabels,
         datasets: [
           {
-            label: 'count',
-            data: amatuerSimulation.count.map((e: any) => e.value),
+            label: '점포 수(단위: 개)',
+            data: amatuerSimulation.count
+              ? amatuerSimulation.count.map((e: any) => e.value)
+              : [0, 0, 0, 0, 0],
             // barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -826,7 +874,12 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
           },
         ],
       },
-      grad: weekGrad,
+      grad: [
+        [
+          [0, '#23CFFA80'],
+          [1, '#23CFFA'],
+        ],
+      ],
     }),
     [amatuerSimulation]
   );

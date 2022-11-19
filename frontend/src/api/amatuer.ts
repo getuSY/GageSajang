@@ -14,8 +14,9 @@ export const getAmatuerResult = async (params: AmatuerResultParams) => {
 export const amatuerSales = async (params: AmatuerSimulationParams) => {
   const { dongName, industryName } = params;
   const { data } = await client1.get(
-    `simul/sales/maybe/${dongName}/${industryName}`
+    `simul/sales/maybe/${dongName.split(' ')[1]}/${industryName}`
   );
+  console.log(dongName.split(' ')[1], data);
 
   return data;
 };

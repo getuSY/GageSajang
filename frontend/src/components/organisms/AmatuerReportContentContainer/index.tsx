@@ -79,13 +79,14 @@ const ReportContentContainer = ({
     useHinterlandData(amatuerResult); // 상권 배후지
 
   const { riskData } = useRiskData(amatuerResult); // 위험도 분석
-  // const {
-  //   amaSimulSalesData,
-  //   amaSimulLifeData,
-  //   amaSimulResidentData,
-  //   amaSimulJobData,
-  //   amaSimulCountData,
-  // } = useAmatuerSimulationData(amatuerSimulation);
+  const {
+    amaSimulSalesData,
+    amaSimulLifeData,
+    amaSimulResidentData,
+    amaSimulJobData,
+    amaSimulCountData,
+  } = useAmatuerSimulationData(amatuerSimulation);
+  // console.log(amatuerSimulation);
 
   return (
     <Wrapper onScroll={onScroll} ref={containerRef}>
@@ -118,7 +119,11 @@ const ReportContentContainer = ({
               하는 추세입니다.
             </ReportComment>
           </ReportContent>
-          <ReportContent title="성별 매출" chartData={storeGenderData}>
+          <ReportContent
+            title="성별 매출"
+            chartData={storeGenderData}
+            style={{ width: '350px' }}
+          >
             <ReportComment>
               <span className="dongName">{dongName}</span>의{' '}
               <span className="jobName">{jobName}</span>은{' '}
@@ -162,12 +167,16 @@ const ReportContentContainer = ({
             chartData={salesTotalData}
             chartStyle={{ width: '500px' }}
           >
-            <ReportComment>
+            {/* <ReportComment>
               <span className="dongName">{dongName}</span>은{' '}
               <span className="emphasis"></span>
-            </ReportComment>
+            </ReportComment> */}
           </ReportContent>
-          <ReportContent title="해당 동 성별 매출" chartData={salesGenderData}>
+          <ReportContent
+            title="해당 동 성별 매출"
+            chartData={salesGenderData}
+            style={{ width: '350px' }}
+          >
             <ReportComment>
               <span className="dongName">{dongName}</span>은{' '}
               <span className="emphasis">
@@ -266,7 +275,11 @@ const ReportContentContainer = ({
             </ReportComment>
           </ReportContent>
 
-          <ReportContent title="성별 유동인구" chartData={livingGenderData}>
+          <ReportContent
+            title="성별 유동인구"
+            chartData={livingGenderData}
+            style={{ width: '350px' }}
+          >
             <ReportComment>
               <span className="dongName">{dongName}</span>의 유동인구는{' '}
               <span className="emphasis">
@@ -401,49 +414,101 @@ const ReportContentContainer = ({
           <ReportContent
             title="성별 매출"
             chartData={hinterlandGenderData}
+            style={{ width: '350px' }}
           ></ReportContent>
         </div>
       </ReportCategory>
       <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
-        <ReportContent title="💸 위험도 분석" style={{ marginTop: '2rem' }} />
+        <ReportContent title="💸 창업 위험도" style={{ marginTop: '2rem' }} />
         <div className="chart-div">
-          <RiskGaugeChart gauge={riskData.risk} />
+          <RiskGaugeChart gauge={riskData.risk} style={{ width: '500px' }} />
+          <ReportContent
+            title="창업 위험도 설명"
+            style={{ flexGrow: 1, alignItems: 'flex-start' }}
+          >
+            <ReportRiskDescription>
+              <div className="risk-desc">
+                <span className="risk-name risk-name1">고위험</span>
+                <span> : </span>
+                <span>해당 업종은 창업을 강력히 비추천 드립니다.</span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name2">위험</span>
+                <span> : </span>
+                <span>
+                  해당 업종은 창업하는데 어려움이 있습니다. 다른 업종 및 지역을
+                  고려하시길 추천드립니다.
+                </span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name3">주의</span>
+                <span> : </span>
+                <span>
+                  이 지역에서 해당 업종을 창업할 시 주의가 필요합니다.
+                </span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name4">정상</span>
+                <span> : </span>
+                <span>이 지역에서 해당 업종은 전망이 좋은 편입니다.</span>
+              </div>
+            </ReportRiskDescription>
+            <div className="data-desc">
+              위험도 데이터 출처 : 서울신용보증재단 100대 생활밀접업종
+              창업위험도
+            </div>
+          </ReportContent>
         </div>
       </ReportCategory>
       {/* 시뮬레이션 */}
-      {/* <ReportCategory ref={(e: any) => (contentRefs.current[6] = e)}>
+      <ReportCategory ref={(e: any) => (contentRefs.current[6] = e)}>
         <ReportContent title="💸 시뮬레이션" style={{ marginTop: '2rem' }} />
+        <ReportAlert>
+          ❗<div className="emphasis">{dongName}</div>의
+          <div className="emphasis" style={{ margin: '0 0.3rem' }}>
+            {jobName}
+          </div>
+          향후
+          <div className="emphasis" style={{ marginLeft: '0.3rem' }}>
+            5분기
+          </div>
+          의 예측 결과입니다. 향후 상황에 따라 오차가 있을 수 있기 때문에, 판단
+          하에 참고하여 활용하시기 바랍니다.
+        </ReportAlert>
         <div className="chart-div">
           <ReportContent
-            title="amaSimulSalesData"
+            title="분기별 매출"
             style={{ flexGrow: 1 }}
             chartData={amaSimulSalesData}
+            chartStyle={{ width: '600px' }}
           ></ReportContent>
+
           <ReportContent
-            title="amaSimulLifeData"
+            title="분기별 점포 수"
+            style={{ flexGrow: 1 }}
+            // chartStyle={{ width: '450px' }}
+            chartData={amaSimulCountData}
+            chartStyle={{ width: '600px' }}
+          ></ReportContent>
+        </div>
+        <div className="chart-div">
+          <ReportContent
+            title="분기별 유동인구"
             style={{ flexGrow: 1 }}
             // chartStyle={{ width: '450px' }}
             chartData={amaSimulLifeData}
           ></ReportContent>
           <ReportContent
-            title="amaSimulResidentData"
+            title="분기별 거주인구"
             chartData={amaSimulResidentData}
           ></ReportContent>
-        </div>
-        <div className="chart-div">
           <ReportContent
-            title="amaSimulJobData"
+            title="분기별 직업인구"
             style={{ flexGrow: 1 }}
             chartData={amaSimulJobData}
           ></ReportContent>
-          <ReportContent
-            title="amaSimulCountData"
-            style={{ flexGrow: 1 }}
-            // chartStyle={{ width: '450px' }}
-            chartData={amaSimulCountData}
-          ></ReportContent>
         </div>
-      </ReportCategory> */}
+      </ReportCategory>
     </Wrapper>
   );
 };
@@ -467,15 +532,49 @@ const Wrapper = styled.div`
 const ReportAlert = styled.div`
   background: #feffca;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  /* flex-direction: column; */
   padding: 20px 20px;
   border-radius: 10px;
+  & > .emphasis {
+    font-weight: 700;
+  }
 `;
 
 const ReportCategory = styled.div`
   & > div {
     margin-top: 12px;
+  }
+`;
+
+const ReportRiskDescription = styled.div`
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  & .risk-desc {
+    margin-top: 8px;
+  }
+  & .risk-name {
+    font-weight: 700;
+  }
+  & .risk-name1 {
+    color: #f0533e;
+  }
+  & .risk-name2 {
+    color: #eea25c;
+  }
+  & .risk-name3 {
+    color: #e9e059;
+  }
+  & .risk-name4 {
+    color: #62ff6f;
+  }
+  & .data-desc {
+    font-size: 1.1rem;
+    justify-self: end;
   }
 `;
 

@@ -166,7 +166,7 @@ const ProfessionalResult = ({
       </Summary>
       <ReportContent
         style={{ marginTop: '2rem' }}
-        title="~~의 평균값을 토대로 보여드릴게요!"
+        title="평균값을 토대로 보여드릴게요!"
       />
       <div className="chart-div">
         <ReportContent
