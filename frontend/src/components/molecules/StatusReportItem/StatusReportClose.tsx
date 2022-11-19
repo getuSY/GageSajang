@@ -1,21 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import StatusReportChart from '../StatusReportChart';
 import StatusReportTitle from '../StatusReportTitle';
 import { useStatusCloseData } from '../../../hooks/status';
 import { getMax } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 interface StatusReportCloseProps {
-  title?: any;
+  title?: { name: string; icon: IconDefinition };
   closeDetail?: any;
-  region?: string;
 }
 
 const StatusReportClose = ({ title, closeDetail }: StatusReportCloseProps) => {
-  const { closeCsData, closeTopData, closeChangeData } =
-    useStatusCloseData(closeDetail);
+  const { closeCsData, closeTopData } = useStatusCloseData(closeDetail);
   return (
     <Wrapper>
       <StatusReportTitle

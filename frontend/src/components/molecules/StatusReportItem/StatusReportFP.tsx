@@ -5,14 +5,15 @@ import { useStatusFpData } from '../../../hooks/status';
 import { numberComma, getMax, getMin, getRate } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 interface StatusReportFPProps {
-  title?: any;
+  title?: { name: string; icon: IconDefinition };
   fpDetail?: any;
-  region?: string;
 }
 
-const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
+const StatusReportFP = ({ title, fpDetail }: StatusReportFPProps) => {
+  console.log('fpDetail', fpDetail);
   const { fpGenderData, fpAgeData, fpQuaterData, fpWeekData, fpTimeData } =
     useStatusFpData(fpDetail);
 
@@ -49,7 +50,7 @@ const StatusReportFP = ({ title, fpDetail, region }: StatusReportFPProps) => {
         >
           {' '}
           <ReportComment>
-            <span className="dongName">{region}</span>의 유동인구는{' '}
+            유동인구는{' '}
             <span className="emphasis">
               {getMax(fpDetail.quarter, 'quarter')}
             </span>

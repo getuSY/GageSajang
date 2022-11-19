@@ -6,17 +6,16 @@ import { numberComma, getMax } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
 import Top3Rank from '../../atoms/Top3Rank';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 interface StatusReportStoresProps {
-  title?: any;
+  title?: { name: string; icon: IconDefinition };
   storesDetail?: any;
-  region?: string;
 }
 
 const StatusReportStores = ({
   title,
   storesDetail,
-  region,
 }: StatusReportStoresProps) => {
   const { storeCsData, storeDivData } = useStatusStoreData(storesDetail);
   return (

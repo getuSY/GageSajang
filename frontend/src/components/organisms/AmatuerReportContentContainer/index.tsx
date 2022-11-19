@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import ReportContent from '../../molecules/AmatuerReportContent';
-import AmatuerReportRisk from '../../atoms/AmatuerReportRisk';
 import { throttle } from 'lodash';
 import {
   useHinterlandData,
@@ -407,10 +406,7 @@ const ReportContentContainer = ({
       </ReportCategory>
       <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
         <ReportContent title="💸 위험도 분석" style={{ marginTop: '2rem' }} />
-        {/* <ReportAlert>❗위험 위험{riskData.risk}</ReportAlert> */}
         <div className="chart-div">
-          {/* <AmatuerReportRisk risk={riskData.risk} /> */}
-
           <RiskGaugeChart gauge={riskData.risk} />
         </div>
       </ReportCategory>

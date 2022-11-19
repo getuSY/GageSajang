@@ -1,23 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusOpenData } from '../../../hooks/status';
-import { getMax, getRate } from '../../../utils/common';
+import { getMax } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 interface StatusReportOpenProps {
-  title?: any;
+  title?: { name: string; icon: IconDefinition };
   openDetail?: any;
-  region?: string;
 }
 
-const StatusReportOpen = ({
-  title,
-  openDetail,
-  region,
-}: StatusReportOpenProps) => {
+const StatusReportOpen = ({ title, openDetail }: StatusReportOpenProps) => {
   const { openCsData, openTopData, openChangeData } =
     useStatusOpenData(openDetail);
 

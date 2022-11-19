@@ -1,19 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusRpData } from '../../../hooks/status';
 import { numberComma, getMax, getMin, getRate } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 interface StatusReportRPProps {
-  title?: any;
+  title?: { name: string; icon: IconDefinition };
   rpDetail?: any;
-  region?: string;
 }
 
-const StatusReportRP = ({ title, rpDetail, region }: StatusReportRPProps) => {
+const StatusReportRP = ({ title, rpDetail }: StatusReportRPProps) => {
   const { rpGenderData, rpAgeData, rpAptData, rpApt2Data } =
     useStatusRpData(rpDetail);
 
