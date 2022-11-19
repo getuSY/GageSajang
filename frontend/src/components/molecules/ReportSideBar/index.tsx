@@ -11,6 +11,8 @@ import {
   faPeopleGroup,
   faLocationDot,
   faStore,
+  faCircleExclamation,
+  faSquarePollVertical,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -20,7 +22,9 @@ library.add(
   faCashRegister,
   faPeopleGroup,
   faLocationDot,
-  faStore
+  faStore,
+  faCircleExclamation,
+  faSquarePollVertical
 );
 
 interface ReportSideBarProps {
