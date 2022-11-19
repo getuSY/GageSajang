@@ -13,7 +13,6 @@ export const useProfessionalResult = (
     cacheTime: 0,
   });
 };
-// linear-gradient(90deg, #00BF7A 0%, #FFDE3B 100%);
 
 const gradColor = [
   [
@@ -152,3 +151,5 @@ export const useProfessionalData = (result: any) => {
 
   return { areaData, salesData, clerkData, frData, ocData };
 };
+
+export const useProfessionalSimulationData = () => {};

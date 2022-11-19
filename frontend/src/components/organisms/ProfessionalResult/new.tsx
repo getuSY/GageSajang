@@ -23,9 +23,6 @@ const ProfessionalResult = ({
   storeInfo,
   professionalResult,
 }: ProfessionalResultProps) => {
-  console.log('info', storeInfo);
-  console.log('professionalResult', professionalResult);
-
   // const result = useProfessionalResult();
   // const [result, setResult] = useState<ProfessionalStoreResult>({
   //   store: {
@@ -108,11 +105,15 @@ const ProfessionalResult = ({
             </DetailCardScript>
           )} */}
         </ReportContent>
-        <ReportContent title="평균 매출 건수" style={{ width: 0, flexGrow: 1 }}>
+        <ReportContent
+          title="평균 매출 건수"
+          style={{ width: 0, flexGrow: 1, justifyContent: 'space-between' }}
+        >
           <img
             src="/assets/img/shopping-cart.png"
             alt="sales_number"
             width="200px"
+            style={{ marginTop: '1.25rem', marginRight: '1.75rem' }}
           />
           <div
             style={{
