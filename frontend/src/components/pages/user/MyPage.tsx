@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import LeftLineTitle from '../../atoms/LeftLineTitle/index';
 import RoundBox from '../../atoms/RoundBox/index';
 import WhiteLabelInput from '../../molecules/WhiteLabelInput/index';
 import Button from '../../atoms/Button/index';
@@ -13,8 +12,6 @@ interface MyPageProps {
 }
 
 const MyPage = ({ page, style, children }: MyPageProps) => {
-  // const params = useParams();
-  // console.log(params);
   const navigate = useNavigate();
   const toUserInfo = () => {
     navigate('/user/mypage');

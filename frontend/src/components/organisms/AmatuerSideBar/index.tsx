@@ -2,16 +2,16 @@ import React, { useEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import BaseSideBar from '../../molecules/BaseSideBar';
 import LabelSearchInput from '../../molecules/LabelSearchInput';
-import AnalysisMainButtons from '../../molecules/AnalysisMainButtons';
+import AmatuerMainButtons from '../../molecules/AmatuerMainButtons';
 import Button from '../../atoms/Button';
 import Label from '../../atoms/Label';
-import AnalysisSubButtons from '../../molecules/AnalysisSubButtons';
+import AmatuerSubButtons from '../../molecules/AmatuerSubButtons';
 import { useNavigate } from 'react-router-dom';
 import { DongItem } from '../../../data/areaDong';
 
 const menus = ['요식업', '서비스업', '도소매업'];
 
-interface AnalysisSideBarProps {
+interface AmatuerSideBarProps {
   inputValue?: string;
   clearValue?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -25,7 +25,7 @@ interface AnalysisSideBarProps {
   isResultLoading?: boolean;
 }
 
-const AnalysisSideBar = ({
+const AmatuerSideBar = ({
   onChange,
   inputValue,
   clearValue,
@@ -37,7 +37,7 @@ const AnalysisSideBar = ({
   subCategory,
   onClickAnlzButton,
   isResultLoading,
-}: AnalysisSideBarProps) => {
+}: AmatuerSideBarProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // 메인 -> 분석 페이지 시 사이드바 오픈
@@ -74,13 +74,7 @@ const AnalysisSideBar = ({
   );
 
   return (
-    <BaseSideBar
-      title="🏪 상권 분석"
-      // isOpen={isOpen}
-      isOpen={true}
-      setIsOpen={setIsOpen}
-      toggleButton={false}
-    >
+    <BaseSideBar title="🏪 상권 분석" isOpen={isOpen} setIsOpen={setIsOpen}>
       <Wrapper>
         <LabelSearchInput
           label="📌 주소 입력"
@@ -94,11 +88,11 @@ const AnalysisSideBar = ({
           searchResultRef={searchResultRef}
         />
         <Label>🍴 업종 선택</Label>
-        <AnalysisMainButtons menuList={menuList} tab={mainCategory} />
+        <AmatuerMainButtons menuList={menuList} tab={mainCategory} />
         {mainCategory ? (
           <>
             <Label>🍴 상세 선택</Label>
-            <AnalysisSubButtons tab={mainCategory} subCategory={subCategory} />
+            <AmatuerSubButtons tab={mainCategory} subCategory={subCategory} />
           </>
         ) : null}
       </Wrapper>
@@ -124,4 +118,4 @@ const Wrapper = styled.div`
   margin-top: 1.3rem;
 `;
 
-export default AnalysisSideBar;
+export default AmatuerSideBar;

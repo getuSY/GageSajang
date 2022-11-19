@@ -11,7 +11,7 @@ const LoginBox = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const mutation = useUserLogin();
-  const { data, isLoading, isSuccess, isError, error } = mutation;
+  const { isSuccess, isError } = mutation;
   const { data: userInfo } = useUserInfo();
 
   const toRegister = () => {
@@ -116,10 +116,6 @@ const ButtonBox = styled.div`
 
 const lineStyle = {
   width: '350px',
-};
-
-const flexStyle: object = {
-  margin: '2rem',
 };
 
 const buttonStyle = {

@@ -1,23 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusSalesData } from '../../../hooks/status';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
 import { numberComma, getMax, getMin, getRate } from '../../../utils/common';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 interface StatusReportSalesProps {
-  title?: any;
+  title?: { name: string; icon: IconDefinition };
   salesDetail?: any;
-  region?: string;
 }
 
-const StatusReportSales = ({
-  title,
-  salesDetail,
-  region,
-}: StatusReportSalesProps) => {
+const StatusReportSales = ({ title, salesDetail }: StatusReportSalesProps) => {
   const {
     salesCsData,
     salesWeekData,

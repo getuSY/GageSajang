@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Label from '../../atoms/Label';
 import ReportChart from '../../atoms/ReportChart';
-// import ReportChart from '../../atoms/AnalysisReportChart';
 
 interface ReportContentProps {
   children?: React.ReactNode;
@@ -31,7 +30,6 @@ const ReportContent = ({
         <Label
           style={{
             width: '100%',
-            // fontWeight: 700,
             fontSize: '1.3rem',
             fontFamily: 'GmarketSansMedium',
           }}
@@ -57,7 +55,6 @@ const ReportContent = ({
 
 const Wrapper = styled.div`
   background: #ffffff;
-  /* height: 500px; */
   display: flex;
   flex-direction: column;
   align-items: center;

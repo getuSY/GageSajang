@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReportIndexItem from '../../atoms/ReportIndexItem';
-// import ReportRegionLabel from '../../atoms/ReportRegionLabel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 interface StatusReportIndexProps {
   region?: string;
   content: any;
-  // category: string;
   tab?: number;
   icon?: any;
 }
@@ -16,7 +14,6 @@ interface StatusReportIndexProps {
 const StatusReportIndex = ({
   region,
   content,
-  // category,
   tab,
   icon,
 }: StatusReportIndexProps) => {
@@ -26,10 +23,7 @@ const StatusReportIndex = ({
         <FontAwesomeIcon icon={faLocationDot} className="region-icon" />
         <div className="region-label-div">
           <span className="region-label">{region}</span>
-          <span className="label-category">
-            {/* {category === 'sub' ? '상권 배후지' : '상권'} */}
-            현황
-          </span>
+          <span className="label-category">현황</span>
         </div>
       </ReportRegionLabel>
       <div className="label-div">
