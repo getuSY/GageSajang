@@ -14,16 +14,13 @@ const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
 const ProfessionalPage = lazy(
   () => import('./components/pages/professional/ProfessionalPage')
 );
+// const ProfessionalStorePage = lazy(
+//   () => import('./components/pages/professional/ProfessionalStorePage')
+// );
 const ProfessionalStorePage = lazy(
   () => import('./components/pages/professional/ProfessionalStorePage')
 );
-const ProfessionalNewStorePage = lazy(
-  () => import('./components/pages/professional/ProfessionalNewStorePage')
-);
 
-const SimulationPage = lazy(
-  () => import('./components/pages/professional/SimulationPage')
-);
 // Amatuer
 const AmatuerPage = lazy(
   () => import('./components/pages/amatuer/AmatuerPage')
@@ -71,8 +68,6 @@ function App() {
           >
             <Route path="" element={<ProfessionalPage />} />
             <Route path="store" element={<ProfessionalStorePage />} />
-            <Route path="store/new" element={<ProfessionalNewStorePage />} />
-            <Route path="simul" element={<SimulationPage />} />
           </Route>
           {/* 아마 사장 */}
           <Route

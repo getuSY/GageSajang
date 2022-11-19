@@ -12,8 +12,8 @@ export interface ProfessionalStoreInfo extends ProfessionalResultParams {
 }
 
 export interface ProfessionalSimulationParams {
-  dongName: string;
-  industryName: string;
+  dongName: string | undefined;
+  industryName: string | undefined;
   quarter: number;
   value: number;
   year: number;

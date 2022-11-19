@@ -104,6 +104,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* height: 100px; */
 `;
 
 const SliderBody = styled.div`
@@ -114,7 +115,7 @@ const SliderBody = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: 'relative';
+  /* position: 'relative'; */
   overflow: 'auto';
   padding-left: 20px;
   color: black;
@@ -141,7 +142,7 @@ const SliderLabel = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  position: 'relative';
+  /* position: 'relative'; */
   overflow: 'auto';
   padding-left: 10px;
   padding-right: 15px;
@@ -150,7 +151,7 @@ const SliderLabel = styled.div`
 `;
 
 const SliderBall = styled.div`
-  position: absolute;
+  /* position: absolute; */
   cursor: move;
   color: black;
   border-radius: 50%;

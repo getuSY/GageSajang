@@ -8,8 +8,7 @@ import {
   storeInfoFix,
 } from '../api/user';
 import { UserModel } from '../models/user';
-import { ProfessionalResultParams } from '../models/professional';
-import { ProfessionalStoreInfo } from '../components/pages/professional/ProfessionalStorePage';
+import { ProfessionalStoreInfo } from '../models/professional';
 import { AxiosError } from 'axios';
 
 export const useHelloUser = (username: string) =>
