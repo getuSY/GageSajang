@@ -55,7 +55,6 @@ export const useAmatuerSimulation = (params: AmatuerSimulationParams) => {
       },
     ],
   });
-  console.log('res', response);
   const data = useMemo(
     () => ({
       sales: response[0].data,

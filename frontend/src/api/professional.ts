@@ -15,7 +15,6 @@ export const professionalSales = async (
 ) => {
   const salesParams = { ...params, dongName: params.dongName?.split(' ')[1] };
   const { data } = await client.post('simul/sales/already', salesParams);
-  console.log('sales', data, 'params', params);
   return data;
 };
 

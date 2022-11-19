@@ -1,27 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import StatusReportChart from '../../molecules/StatusReportChart';
 import StatusReportTitle from '../../molecules/StatusReportTitle';
 import { useStatusOpenData } from '../../../hooks/status';
-import { getMax, getRate } from '../../../utils/common';
+import { getMax } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 interface StatusReportOpenProps {
-  title?: any;
+  title?: { name: string; icon: IconDefinition };
   openDetail?: any;
-  region?: string;
 }
 
-const StatusReportOpen = ({
-  title,
-  openDetail,
-  region,
-}: StatusReportOpenProps) => {
+const StatusReportOpen = ({ title, openDetail }: StatusReportOpenProps) => {
   const { openCsData, openTopData, openChangeData } =
     useStatusOpenData(openDetail);
 
-  console.log(openDetail);
   return (
     <Wrapper>
       <StatusReportTitle
@@ -37,7 +31,7 @@ const StatusReportOpen = ({
           이며, <span>광화문광장</span>의 개업률이 가장 높습니다.
         </div>
         <div className="summary-div">
-          상권변화지표는 <span>{openDetail.change}</span>입니다.
+          상권변화지표는 <span>{openChangeData}</span>입니다.
         </div>
       </StatusReportTitle>
 

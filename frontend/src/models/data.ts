@@ -1,5 +1,3 @@
-import { Polygon } from 'geojson';
-
 export interface Property {
   SIG_CD: string;
   SIG_ENG_NM: string;

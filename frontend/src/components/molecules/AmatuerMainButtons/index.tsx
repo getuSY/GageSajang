@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface AnalysisMainButtonsProps {
+interface AmatuerMainButtonsProps {
   style?: object;
   menuList: Array<any>;
   tab?: number;
 }
 
-const AnalysisMainButtons = ({
+const AmatuerMainButtons = ({
   style,
   menuList,
   tab,
-}: AnalysisMainButtonsProps) => {
+}: AmatuerMainButtonsProps) => {
   return (
     <Wrapper style={style}>
       <div className="menu-container">
@@ -68,4 +68,4 @@ const BaseSideBarButton = styled.button<BaseSideBarButtonProps>`
   }
 `;
 
-export default AnalysisMainButtons;
+export default AmatuerMainButtons;

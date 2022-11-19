@@ -51,7 +51,7 @@ const RegisterPage = () => {
 
   useEffect(() => {
     userOverlap(signUpInputs.email)
-      .then((res) => console.log(res))
+      .then((res) => setEmailOverlapError(false))
       .catch((e) => setEmailOverlapError(true));
     if (signUpInputs.email && signUpInputs.email) {
       setSignUpError((signUpError) => ({ ...signUpError, email: true }));
@@ -59,8 +59,6 @@ const RegisterPage = () => {
       setSignUpError((signUpError) => ({ ...signUpError, email: false }));
     }
   }, [signUpInputs.email]);
-
-  useEffect(() => console.log('pw', signUpInputs.pw), [signUpInputs.pw]);
 
   return (
     <Wrapper>

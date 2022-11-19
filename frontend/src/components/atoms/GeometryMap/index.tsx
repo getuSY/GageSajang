@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { geoMercator, geoPath } from 'd3-geo';
 import { Gu } from '../../../models/data';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Legend, Tooltip } from 'chart.js';
 
 type GeometryProps = {
   areas: Array<Gu>;
@@ -14,11 +12,6 @@ type GeometryProps = {
   hinGuData: any;
   category: any;
 };
-
-const statusList = [
-  { name: 'main', content: '상권' },
-  { name: 'sub', content: '상권 배후지' },
-];
 
 const GeometryMap = ({
   areas,
@@ -105,7 +98,7 @@ const GeometryMap = ({
       <LegendDiv style={{ border: `3px solid ${mapColor[tab][3]}` }}>
         <div className="legend-content-div">
           {mapColor[tab].map((color, i) => (
-            <div className="legend-unit-line">
+            <div className="legend-unit-line" key={`legend-unit-line-${i + 1}`}>
               <div
                 className="legend-square"
                 style={{ backgroundColor: color }}

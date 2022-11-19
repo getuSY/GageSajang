@@ -45,10 +45,7 @@ const ReportSubTitle = styled.div`
   font-size: 1.5rem;
   font-family: 'GmarketSansMedium';
   font-weight: 700;
-  /* background: ${({ theme }) => theme.gradColor}; */
   width: fit-content;
-  /* color: transparent; */
-  /* -webkit-background-clip: text; */
 `;
 
 export default StatusReportChart;

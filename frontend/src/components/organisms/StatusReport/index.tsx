@@ -2,27 +2,17 @@ import React, { useEffect, useState } from 'react';
 import ReportModal from '../../atoms/ReportModal';
 import styled from 'styled-components';
 import StatusReportIndex from '../../molecules/StatusReportIndex';
-import StatusReportFP from '../../molecules/StatusReportFP';
-import StatusReportRP from '../../molecules/StatusReportRP';
-import StatusReportSales from '../../molecules/StatusReportSales';
-import StatusReportOpen from '../../molecules/StatusReportOpen';
-import StatusReportClose from '../../molecules/StatusReportClose';
-import StatusReportStores from '../../molecules/StatusReportStores';
-import { useStatusApt } from '../../../hooks/status';
+import StatusReportItem from '../../molecules/StatusReportItem';
+import { useStatusApt, useStatusDetail } from '../../../hooks/status';
 
 interface StatusReportProps {
-  region?: string;
+  region: string;
   content: any;
-  // category: string;
   tab: number;
   icon?: any;
   isOpen?: boolean;
   title?: any;
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-  statusResult: any;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
 }
 
 const StatusReport = ({
@@ -32,15 +22,14 @@ const StatusReport = ({
   icon,
   isOpen,
   setIsOpen,
-  statusResult,
-  isLoading,
-  isSuccess,
-  isError,
 }: StatusReportProps) => {
   const [title, setTitle] = useState({
     name: content[0].name,
     icon: icon[0],
   });
+  // 현황 상세 페이지 API
+  const { data: statusResult, isSuccess } = useStatusDetail(region);
+
   useEffect(() => {
     setTitle({
       name: content[tab].name,
@@ -48,14 +37,7 @@ const StatusReport = ({
     });
   }, [tab]);
 
-  const {
-    data,
-    isSuccess: isAptSuccess,
-    isLoading: isAptLoading,
-    isError: isAptError,
-  } = useStatusApt(region!);
-
-  console.log(data);
+  const { data } = useStatusApt(region!);
 
   return (
     <Wrapper>
@@ -76,56 +58,56 @@ const StatusReport = ({
             <div className="report-content">
               {tab === 0 && (
                 // 유동인구
-                <StatusReportFP
+                <StatusReportItem
+                  type="FP"
                   title={title}
-                  fpDetail={statusResult.living}
-                  region={region}
+                  detail={statusResult.living}
                 />
               )}
               {tab === 1 && (
                 // 거주인구
-                <StatusReportRP
+                <StatusReportItem
+                  type="RP"
                   title={title}
-                  rpDetail={{ resident: statusResult.resident, apt: data }}
-                  region={region}
+                  detail={{ resident: statusResult.resident, apt: data }}
                 />
               )}
               {tab === 2 && (
                 // 점포 수
-                <StatusReportStores
+                <StatusReportItem
+                  type="stores"
                   title={title}
-                  storesDetail={statusResult.store}
-                  region={region}
+                  detail={statusResult.store}
                 />
               )}
               {tab === 3 && (
                 // 개업률
-                <StatusReportOpen
+                <StatusReportItem
+                  type="open"
                   title={title}
-                  openDetail={{
+                  detail={{
                     open: statusResult.open,
                     change: statusResult.change,
                   }}
-                  region={region}
                 />
               )}
               {tab === 4 && (
                 // 폐업률
-                <StatusReportClose
+                <StatusReportItem
+                  type="close"
                   title={title}
-                  closeDetail={{
+                  detail={{
                     close: statusResult.close,
                     change: statusResult.change,
                   }}
-                  region={region}
                 />
               )}
               {tab === 5 && (
                 // 매출
-                <StatusReportSales
+                <StatusReportItem
+                  type="sales"
                   title={title}
-                  salesDetail={statusResult.sales}
-                  region={region}
+                  detail={statusResult.sales}
                 />
               )}
             </div>

@@ -1,21 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import StatusReportChart from '../StatusReportChart';
 import StatusReportTitle from '../StatusReportTitle';
 import { useStatusCloseData } from '../../../hooks/status';
 import { getMax } from '../../../utils/common';
 import ReportContent from '../AmatuerReportContent';
 import ReportComment from '../../atoms/ReportComment';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 interface StatusReportCloseProps {
-  title?: any;
+  title?: { name: string; icon: IconDefinition };
   closeDetail?: any;
-  region?: string;
 }
 
 const StatusReportClose = ({ title, closeDetail }: StatusReportCloseProps) => {
-  const { closeCsData, closeTopData, closeChangeData } =
-    useStatusCloseData(closeDetail);
+  const { closeCsData, closeTopData } = useStatusCloseData(closeDetail);
   return (
     <Wrapper>
       <StatusReportTitle
@@ -81,16 +79,16 @@ const StatusReportClose = ({ title, closeDetail }: StatusReportCloseProps) => {
           }}
         >
           {closeDetail.change === '정체' && (
-            <img src="assets/status/stop.png" />
+            <img src="assets/status/stop.png" alt="정체" />
           )}
           {closeDetail.change === '상권축소' && (
-            <img src="assets/status/down.png" />
+            <img src="assets/status/down.png" alt="상권축소" />
           )}
           {closeDetail.change === '상권확장' && (
-            <img src="assets/status/up.png" />
+            <img src="assets/status/up.png" alt="상권확장" />
           )}
           {closeDetail.change === '다이나믹' && (
-            <img src="assets/status/dynamic.png" />
+            <img src="assets/status/dynamic.png" alt="다이나믹" />
           )}
           <ReportComment style={{ fontWeight: 700, color: '#6193F2' }}>
             {closeDetail.change}
@@ -115,6 +113,7 @@ const StatusReportClose = ({ title, closeDetail }: StatusReportCloseProps) => {
                   <img
                     src="assets/status/stop.png"
                     className="status-change-img"
+                    alt="status-change-img"
                   />
                   정체(LL)
                 </span>
@@ -122,6 +121,7 @@ const StatusReportClose = ({ title, closeDetail }: StatusReportCloseProps) => {
                   <img
                     src="assets/status/down.png"
                     className="status-change-img"
+                    alt="status-change-img"
                   />
                   상권축소(LH)
                 </span>
