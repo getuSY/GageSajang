@@ -38,7 +38,7 @@ const Wrapper = styled.div`
     font-family: 'Pretendard-Regular';
     font-size: 1.1rem;
     position: relative;
-    color: #909090;
+    /* color: #909090; */
     padding: 0.5rem 0.5rem;
   }
   & .active {

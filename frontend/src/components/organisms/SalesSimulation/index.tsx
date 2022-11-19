@@ -21,16 +21,7 @@ export type SimulInfo = {
 };
 
 const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
-  // if (name === '매출') {
-  //   const mutation =
-  // } else if (name === '생활인구') {
-  //   const mutation =
-  // } else if (name === '거주인구') {
-
-  // } else if (name === '직장인구') {
-
-  // } else if (name === '매출 건수'){}
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [pos, setPos] = useState(0);
   const [yearLabel, setYearLabel] = useState<Array<string>>(['2013년 1분기']);
   const [salesValues, setSalesValues] = useState<Array<number>>([0]);
@@ -39,12 +30,6 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
   const [rateValue, setRateValue] = useState<Array<number>>([0]);
   const [btmValues, setBtmValues] = useState<Array<number>>([0]);
   const [btmLabel, setBtmLabel] = useState<Array<string>>(['2013년 1분기']);
-  const showGraph = () => {
-    setOpen(true);
-  };
-  const hideGraph = () => {
-    setOpen(false);
-  };
   useEffect(() => {
     let perPos = pos / 50;
     // flow Chart 넘겨줄 데이터
@@ -116,152 +101,93 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
   ];
 
   return (
-    <Wrapper>
-      {open === true && (
-        <RoundBox style={roundStyle}>
-          <TitleDiv>
-            <Button
-              type="main"
-              style={{ width: '300px', height: '65px', fontSize: '24px' }}
-            >
-              {name} 시뮬레이션 결과
-            </Button>
-            <TitleMsg>
-              아래 바를 움직여 시뮬레이션 결과를 확인하세요. 모든 시뮬레이션
-              결과는 입력하신 가게 정보를 바탕으로 예측된 값이니 이용에 참고
-              바랍니다.
-            </TitleMsg>
-            <img
-              src="/assets/icons/greenblue_up_btn.png"
-              alt="exit"
-              width="50px"
-              height="50px"
-              onClick={hideGraph}
-              style={{ marginTop: '10px' }}
-            />
-          </TitleDiv>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}
-          >
-            <SlideBar setPos={setPos} />
-          </div>
+    <Wrapper isOpen={isOpen}>
+      <TitleDiv>
+        <div className="title">
+          💰 {name} 시뮬레이션 결과를 확인할 수 있습니다.
+        </div>
+        <img
+          src={`/assets/icons/greenblue_${isOpen ? 'up' : 'down'}_btn.png`}
+          alt="exit"
+          width="50px"
+          height="50px"
+          onClick={() => setIsOpen((isOpen) => !isOpen)}
+        />
+      </TitleDiv>
 
-          <ChartBox></ChartBox>
-
-          <ChartBox>
-            <Inside>
-              {' '}
-              <DynamicFlowChart
-                values={salesValues}
-                labels={yearLabel}
-                name={name}
-              />
-              <DynamicRateChart
-                values={rateValue}
-                labels={yearLabel}
-                name={name}
-              />
-              <ExBox>
-                <span>
-                  3개월 후 {name} 예측 : 약 {values[40].value}{' '}
-                </span>
-                <br></br>
-                <span>
-                  6개월 후 {name} 예측 : 약 {values[41].value}
-                </span>
-                <br></br>
-                <span>
-                  6개월 후 {name} 예측 : 약 {values[42].value}
-                </span>
-                <br></br>
-                <span>
-                  1년 후 {name} 예측 : 약 {values[43].value}
-                </span>
-              </ExBox>
-            </Inside>
-            <Inside>
-              <DynamicTopChart
-                title={name + 'TOP 5'}
-                values={topValues}
-                labels={topLabel}
-                colors={topColor}
-                name={name}
-              ></DynamicTopChart>
-              <DynamicTopChart
-                title={name + 'BOTTOM 5'}
-                values={btmValues}
-                labels={btmLabel}
-                colors={btmColor}
-                name={name}
-              ></DynamicTopChart>
-              <ExBox>
-                <span>{name} 상위 5분기 : </span>
-                <br></br>
-                <span>{name} 하위 5분기 : </span>
-                <br></br>
-                <span>
-                  {/* <FontAwesomeIcon icon="fa-sharp fa-solid fa-tag" /> */}
-                  tip : {name} 상위 및 하위에 특정 분기가 자주 보인다면,{' '}
-                  <br></br>
-                  해당 분기 서비스를 재고해보시면 어떨까요?
-                </span>
-              </ExBox>
-            </Inside>
-          </ChartBox>
-        </RoundBox>
-      )}
-      {open === false && (
-        <RoundBox
+      <>
+        <div
           style={{
-            width: 'calc(100% - 60px)',
-            height: '80px',
-            margin: '30px',
-            boxShadow: '0 7px 25px rgba(0, 0, 0, 0.1)',
-            borderRadius: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
           }}
         >
-          <TitleDiv
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}
-          >
-            💰 {name} 시뮬레이션 결과를 확인할 수 있습니다.
-            <img
-              src="/assets/icons/greenblue_down_btn.png"
-              alt="exit"
-              width="50px"
-              height="50px"
-              onClick={showGraph}
-              style={{ alignSelf: 'center', marginTop: '-50px' }}
+          <SlideBar setPos={setPos} />
+        </div>
+
+        <ChartBox>
+          <Inside>
+            {' '}
+            <DynamicFlowChart
+              values={salesValues}
+              labels={yearLabel}
+              name={name}
             />
-          </TitleDiv>
-        </RoundBox>
-      )}
+            <DynamicRateChart
+              values={rateValue}
+              labels={yearLabel}
+              name={name}
+            />
+          </Inside>
+          <Inside>
+            <DynamicTopChart
+              title={name + 'TOP 5'}
+              values={topValues}
+              labels={topLabel}
+              colors={topColor}
+              name={name}
+            ></DynamicTopChart>
+            <DynamicTopChart
+              title={name + 'BOTTOM 5'}
+              values={btmValues}
+              labels={btmLabel}
+              colors={btmColor}
+              name={name}
+            ></DynamicTopChart>
+          </Inside>
+        </ChartBox>
+      </>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  /* position: relative; */
-  /* width: 100%; */
+const Wrapper = styled.div<{ isOpen: boolean }>`
+  background: #ffffff;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
+  /* justify-content: space-between; */
+  display: flex;
+  padding: 14px 20px;
+  /* height: 48px; */
+  height: ${({ isOpen }) => (isOpen ? '80%' : '48px')};
+  transition: 1s;
+  flex-shrink: 0;
+  overflow: hidden;
 `;
 
 const TitleDiv = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  margin: 2rem;
-  z-index: 1;
-  gap: 2rem;
-  height: 65px;
+  height: 48px;
+  & .title {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+  }
+  margin-bottom: 14px;
 `;
 
 const TitleMsg = styled.div`
@@ -280,8 +206,7 @@ const roundStyle = {
   flexDirection: 'column',
   alignitems: 'center',
 
-  width: 'calc(100% - 60px)',
-  margin: '30px',
+  width: '100%',
   // height: '800px',
   boxShadow: '0 7px 25px rgba(0, 0, 0, 0.1)',
 };
@@ -299,18 +224,6 @@ const Inside = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-`;
-
-const ExBox = styled.div`
-  width: 80%;
-  border-left: solid 10px ${({ theme }) => theme.lightColor};
-  background: #ffffe0b9;
-  padding: 30px;
-  margin: 30px;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-evenly;
-  align-items: flex-start; */
 `;
 
 export default SalesSimulation;

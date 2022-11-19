@@ -8,8 +8,8 @@ import {
   storeInfoFix,
 } from '../api/user';
 import { UserModel } from '../models/user';
-import { ProfessionalResultParams } from '../models/professional';
-import { ProfessionalStoreInfo } from '../components/pages/professional/ProfessionalStorePage';
+import { ProfessionalStoreInfo } from '../models/professional';
+import { AxiosError } from 'axios';
 
 export const useHelloUser = (username: string) =>
   useQuery({ queryKey: ['user', 'hello'], queryFn: () => helloUser(username) });
@@ -49,7 +49,7 @@ export const useUserStoreInfo = () => {
   return useQuery({
     queryKey: ['user', 'store', 'info', email],
     queryFn: () => storeInfo(),
-    onSuccess: () => console.log('success'),
+    onError: (error: AxiosError) => {},
   });
 };
 
@@ -57,10 +57,4 @@ export const useStoreInfoFix = () =>
   useMutation({
     mutationFn: (storeParams: ProfessionalStoreInfo) =>
       storeInfoFix(storeParams),
-    onSuccess: (data) => {
-      return data;
-    },
-    onError: (error) => {
-      return error;
-    },
   });

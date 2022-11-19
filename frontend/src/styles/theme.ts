@@ -13,7 +13,7 @@ export const greenTheme: DefaultTheme = {
   blurColor: 'linear-gradient(92.86deg, #01AD7C 0%, #FFF95B 100%)',
   gradColor:
     'linear-gradient(-90deg, #F9F254 0%, #9CED80 43.75%, #49D0A8 100%)',
-  // gradColor: 'linear-gradient(90deg, #01AD7C 0%, #37E19D 43.89%, #FFF80B 100%)',
+  // gradColor: 'linear-gradient(-90deg, #F2ED5F 0%, #74F991 100%)',
   lightColor: '#53C882',
   darkColor: '#1CA37C',
 };
