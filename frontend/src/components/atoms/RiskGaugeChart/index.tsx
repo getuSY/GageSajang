@@ -17,7 +17,7 @@ const chartData = {
       {
         label: 'Gauge',
         data: [1, 1, 1, 1],
-        backgroundColor: ['#f0533e', '#eea25c', '#fff671', '#62ff6f'],
+        backgroundColor: ['#f0533e', '#eea25c', '#e9e059', '#62ff6f'],
       },
     ],
   },

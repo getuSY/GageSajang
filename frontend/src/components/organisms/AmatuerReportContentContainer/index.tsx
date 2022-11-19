@@ -118,7 +118,11 @@ const ReportContentContainer = ({
               하는 추세입니다.
             </ReportComment>
           </ReportContent>
-          <ReportContent title="성별 매출" chartData={storeGenderData}>
+          <ReportContent
+            title="성별 매출"
+            chartData={storeGenderData}
+            style={{ width: '350px' }}
+          >
             <ReportComment>
               <span className="dongName">{dongName}</span>의{' '}
               <span className="jobName">{jobName}</span>은{' '}
@@ -167,7 +171,11 @@ const ReportContentContainer = ({
               <span className="emphasis"></span>
             </ReportComment>
           </ReportContent>
-          <ReportContent title="해당 동 성별 매출" chartData={salesGenderData}>
+          <ReportContent
+            title="해당 동 성별 매출"
+            chartData={salesGenderData}
+            style={{ width: '350px' }}
+          >
             <ReportComment>
               <span className="dongName">{dongName}</span>은{' '}
               <span className="emphasis">
@@ -266,7 +274,11 @@ const ReportContentContainer = ({
             </ReportComment>
           </ReportContent>
 
-          <ReportContent title="성별 유동인구" chartData={livingGenderData}>
+          <ReportContent
+            title="성별 유동인구"
+            chartData={livingGenderData}
+            style={{ width: '350px' }}
+          >
             <ReportComment>
               <span className="dongName">{dongName}</span>의 유동인구는{' '}
               <span className="emphasis">
@@ -401,13 +413,50 @@ const ReportContentContainer = ({
           <ReportContent
             title="성별 매출"
             chartData={hinterlandGenderData}
+            style={{ width: '350px' }}
           ></ReportContent>
         </div>
       </ReportCategory>
       <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
         <ReportContent title="💸 위험도 분석" style={{ marginTop: '2rem' }} />
         <div className="chart-div">
-          <RiskGaugeChart gauge={riskData.risk} />
+          <RiskGaugeChart gauge={riskData.risk} style={{ width: '500px' }} />
+          <ReportContent
+            title="위험도 설명"
+            style={{ flexGrow: 1, alignItems: 'flex-start' }}
+          >
+            <ReportRiskDescription>
+              <div className="risk-desc">
+                <span className="risk-name risk-name1">고위험</span>
+                <span> : </span>
+                <span>해당 업종은 창업을 강력히 비추천 드립니다.</span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name2">위험</span>
+                <span> : </span>
+                <span>
+                  해당 업종은 창업하는데 어려움이 있습니다. 다른 업종 및 지역을
+                  고려하시길 추천드립니다.
+                </span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name3">주의</span>
+                <span> : </span>
+                <span>
+                  이 지역에서 해당 업종을 창업할 시 주의가 필요합니다.
+                </span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name4">정상</span>
+                <span> : </span>
+                <span>이 지역에서 해당 업종은 전망이 좋은 편입니다.</span>
+              </div>
+            </ReportRiskDescription>
+            <div className="data-desc">
+              위험도 데이터 출처 : 서울신용보증재단 100대 생활밀접업종
+              창업위험도
+            </div>
+          </ReportContent>
         </div>
       </ReportCategory>
       {/* 시뮬레이션 */}
@@ -476,6 +525,36 @@ const ReportAlert = styled.div`
 const ReportCategory = styled.div`
   & > div {
     margin-top: 12px;
+  }
+`;
+
+const ReportRiskDescription = styled.div`
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  & .risk-desc {
+    margin-top: 8px;
+  }
+  & .risk-name {
+    font-weight: 700;
+  }
+  & .risk-name1 {
+    color: #f0533e;
+  }
+  & .risk-name2 {
+    color: #eea25c;
+  }
+  & .risk-name3 {
+    color: #e9e059;
+  }
+  & .risk-name4 {
+    color: #62ff6f;
+  }
+  & .data-desc {
+    font-size: 1.1rem;
+    justify-self: end;
   }
 `;
 
