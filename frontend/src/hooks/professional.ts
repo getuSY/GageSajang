@@ -1,16 +1,35 @@
 import { useMemo } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { professionalResult } from '../api/professional';
-import { ProfessionalResultParams } from '../models/professional';
+import { useQuery, useQueries } from '@tanstack/react-query';
+import {
+  professionalResult,
+  professionalCount,
+  professionalJob,
+  professionalLife,
+  professionalResident,
+  professionalSales,
+} from '../api/professional';
+import {
+  ProfessionalResultParams,
+  ProfessionalSimulationParams,
+} from '../models/professional';
 
 export const useProfessionalResult = (
   proResultParams: ProfessionalResultParams
 ) => {
+  const { email, dongName, industryName } = proResultParams;
   return useQuery({
-    queryKey: ['professional', 'result'],
+    queryKey: ['professional', 'result', email, dongName, industryName],
     queryFn: () => professionalResult(proResultParams),
+    cacheTime: 0,
   });
 };
+
+const gradColor = [
+  [
+    [0, '#F2ED5F'],
+    [1, '#74F991'],
+  ],
+];
 
 export const useProfessionalData = (result: any) => {
   const areaData = useMemo(
@@ -30,13 +49,7 @@ export const useProfessionalData = (result: any) => {
       options: {
         indexAxis: 'y',
       },
-      grad: [
-        [
-          [0, '#49D0A8'],
-          [0.8, '#F9F254'],
-        ],
-        [[0, '#ebdd4a']],
-      ],
+      grad: gradColor,
     }),
     [result]
   );
@@ -50,20 +63,11 @@ export const useProfessionalData = (result: any) => {
             label: ['내 가게 월 매출'],
             data: [6000000, result.sales.sales / 3],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-            // borderRadius: 300,
-            // borderWidth: 5,
-            // borderColor: 'rgb(255, 99, 125)',
             barThickness: 70,
           },
         ],
       },
-      grad: [
-        [
-          [0, '#49D0A8'],
-          [0.8, '#F9F254'],
-        ],
-        [[0, '#ebdd4a']],
-      ],
+      grad: gradColor,
     }),
     [result]
   );
@@ -77,18 +81,11 @@ export const useProfessionalData = (result: any) => {
             label: ['내 가게 직원 수'],
             data: [6, result.store.clerk],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-            // borderRadius: 100,
             barThickness: 70,
           },
         ],
       },
-      grad: [
-        [
-          [0, '#49D0A8'],
-          [0.8, '#F9F254'],
-        ],
-        [[0, '#ebdd4a']],
-      ],
+      grad: gradColor,
     }),
     [result]
   );
@@ -163,4 +160,97 @@ export const useProfessionalData = (result: any) => {
   );
 
   return { areaData, salesData, clerkData, frData, ocData };
+};
+
+export const useProfessionalSimulationData = () => {};
+
+export const useProfessionalSimulation = (
+  params: ProfessionalSimulationParams
+) => {
+  // professionalCount,
+  // professionalJob,
+  // professionalLife,
+  // professionalResident,
+  // professionalSales,
+  const { dongName, industryName, year, quarter, value } = params;
+  const response = useQueries({
+    queries: [
+      {
+        queryKey: [
+          'professional',
+          'sales',
+          dongName,
+          industryName,
+          `${year}-${quarter}`,
+          `${value}`,
+        ],
+        queryFn: () => professionalSales(params),
+      },
+      {
+        queryKey: [
+          'professional',
+          'life',
+          dongName,
+          industryName,
+          `${year}-${quarter}`,
+          `${value}`,
+        ],
+        queryFn: () => professionalLife(params),
+      },
+      {
+        queryKey: [
+          'professional',
+          'resident',
+          dongName,
+          industryName,
+          `${year}-${quarter}`,
+          `${value}`,
+        ],
+        queryFn: () => professionalResident(params),
+      },
+      {
+        queryKey: [
+          'professional',
+          'job',
+          dongName,
+          industryName,
+          `${year}-${quarter}`,
+          `${value}`,
+        ],
+        queryFn: () => professionalJob(params),
+      },
+      {
+        queryKey: [
+          'professional',
+          'count',
+          dongName,
+          industryName,
+          `${year}-${quarter}`,
+          `${value}`,
+        ],
+        queryFn: () => professionalCount(params),
+      },
+    ],
+  });
+  const data = useMemo(
+    () => ({
+      sales: response[0].data,
+      life: response[1].data,
+      resident: response[2].data,
+      job: response[3].data,
+      count: response[4].data,
+    }),
+    [response]
+  );
+  const isSuccess = useMemo(
+    () => response.every((e) => e.isSuccess),
+    [response]
+  );
+  const isLoading = useMemo(
+    () => response.some((e) => e.isLoading),
+    [response]
+  );
+  const isError = useMemo(() => response.some((e) => e.isError), [response]);
+
+  return { data, isSuccess, isLoading, isError };
 };

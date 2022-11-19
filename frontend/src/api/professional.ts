@@ -5,15 +5,17 @@ import {
 } from '../models/professional';
 
 export const professionalResult = async (params: ProfessionalResultParams) => {
-  const { data } = await client.post('simul/asset/already', params);
+  const resultParams = { ...params, dongName: params.dongName?.split(' ')[1] };
+  const { data } = await client.post('simul/asset/already', resultParams);
   return data;
 };
 
 export const professionalSales = async (
   params: ProfessionalSimulationParams
 ) => {
-  const { data } = await client.post('simul/sales/already', params);
-
+  const salesParams = { ...params, dongName: params.dongName?.split(' ')[1] };
+  const { data } = await client.post('simul/sales/already', salesParams);
+  console.log('sales', data, 'params', params);
   return data;
 };
 
