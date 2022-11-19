@@ -16,19 +16,20 @@ const status: IndexContent = {
   buttonColor: blueTheme.gradColor,
 };
 
-const professional: IndexContent = {
-  title: '이미 사장',
-  description: '내 가게 상태를 진단하고 싶다면?',
-  imgSrc: 'assets/img/index_professional.png',
-  buttonContent: '경영 환경 진단하기',
-  buttonColor: greenTheme.gradColor,
-};
 const amatuer: IndexContent = {
   title: '아마 사장',
   description: '나는야 예비 창업가!',
   imgSrc: 'assets/img/index_amatuer.png',
   buttonContent: '창업 현황 확인하기',
   buttonColor: purpleTheme.gradColor,
+};
+
+const professional: IndexContent = {
+  title: '이미 사장',
+  description: '내 가게 상태를 진단하고 싶다면?',
+  imgSrc: 'assets/img/index_professional.png',
+  buttonContent: '경영 환경 진단하기',
+  buttonColor: greenTheme.gradColor,
 };
 
 const IndexPage = () => {
@@ -39,11 +40,14 @@ const IndexPage = () => {
         <IndexSearchBar />
         <IndexItem content={status} onClick={() => navigate('/status')} />
         <IndexItem
-          content={professional}
-          onClick={() => navigate('/professional')}
+          content={amatuer}
+          onClick={() => navigate('/amatuer')}
           right
         />
-        <IndexItem content={amatuer} onClick={() => navigate('/amatuer')} />
+        <IndexItem
+          content={professional}
+          onClick={() => navigate('/professional')}
+        />
         <Footer />
       </Wrapper>
     </Transitions>
