@@ -125,7 +125,7 @@ const ProfessionalSideBar = ({
           </div>
         </ProListItem>
         <JobSearchInput
-          label="가게 주소"
+          label="가게 주소 (구, 동)"
           placeholder="행정동을 입력해주세요."
           inputValue={selectedDongSearch}
           onChange={onDongChange}
@@ -148,7 +148,7 @@ const ProfessionalSideBar = ({
         />
         <ProListItem>
           <Label style={{ marginBottom: '0.6rem', fontSize: '1.05rem' }}>
-            직원 수
+            직원 수 (명)
           </Label>
           <Input
             placeholder="직원 수를 입력해주세요. (숫자만)"
@@ -159,7 +159,7 @@ const ProfessionalSideBar = ({
         </ProListItem>
         <ProListItem>
           <Label style={{ marginBottom: '0.6rem', fontSize: '1.05rem' }}>
-            가게 면적
+            가게 면적 (㎡)
           </Label>
           <Input
             placeholder="가게 면적을 입력해주세요. (숫자만)"
@@ -170,7 +170,7 @@ const ProfessionalSideBar = ({
         </ProListItem>
         <ProListItem>
           <Label style={{ marginBottom: '0.6rem', fontSize: '1.05rem' }}>
-            평균 월 매출
+            평균 월 매출 (원)
           </Label>
           <Input
             placeholder="평균 월 매출을 입력해주세요. (숫자만)"

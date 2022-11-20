@@ -53,11 +53,20 @@ const ProfessionalResult = ({
 
   return (
     <Wrapper>
+      <ReportContent
+        style={{ fontFamily: 'GmarketSansMedium', alignItems: 'start' }}
+      >
+        <div>
+          <TitleHighlight>&#60; {dongName} &#62;</TitleHighlight>의 &nbsp;
+          <TitleHighlight>[ {industryName} ]</TitleHighlight> 평균값을 토대로
+          분석한 결과입니다.
+        </div>
+      </ReportContent>
       <ReportAlert>
         ❗ 아래 분석 결과는 통계에 따른 추정 결과입니다. 향후 상황에 따라 다를
         수 있기 때문에, 판단 하에 참고하여 활용하시기 바랍니다.
       </ReportAlert>
-      <Summary>
+      <Summary style={{ marginBottom: '3rem' }}>
         {/* 매출 비교 */}
         <SummaryItem
           title="매출 비교"
@@ -164,10 +173,7 @@ const ProfessionalResult = ({
           </div>
         </SummaryItem>
       </Summary>
-      <ReportContent
-        style={{ marginTop: '2rem' }}
-        title="평균값을 토대로 보여드릴게요!"
-      />
+
       <div className="chart-div">
         <ReportContent
           title="평균 월 매출"
@@ -208,7 +214,7 @@ const ProfessionalResult = ({
               marginTop: '20px',
             }}
           >
-            {professionalResult.sales.order} 건
+            {numberComma(professionalResult.sales.order)} 건
           </div>
         </ReportContent>
         <ReportContent
@@ -276,6 +282,12 @@ const ReportAlert = styled.div`
   flex-direction: column;
   padding: 20px 20px;
   border-radius: 10px;
+`;
+
+const TitleHighlight = styled.span`
+  color: #1ca37c;
+  font-size: 1.3rem;
+  font-weight: 600;
 `;
 
 const Highlight = styled.span`

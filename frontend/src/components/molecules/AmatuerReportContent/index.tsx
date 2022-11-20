@@ -90,6 +90,11 @@ const Wrapper = styled.div<{ isIcon?: boolean }>`
   padding: 20px 20px;
   border-radius: 10px;
   font-size: 1.3rem;
+
+  & .report-title-span {
+    color: 'red';
+  }
+
   & .title {
     width: 100%;
     display: flex;

@@ -29,7 +29,7 @@ const Navbar = ({ navList }: NavbarProps) => {
       {/* NavBar Logo */}
       <NavLogo>
         <Link to="/" className="nav-logo">
-          가게사장
+          <img src="/logo.png" alt="로고" />
         </Link>
       </NavLogo>
       {/* NavBar Menu Items */}
