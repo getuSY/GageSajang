@@ -179,23 +179,7 @@ const ProfessionalResult = ({
           title="평균 월 매출"
           style={{ width: 0, flexGrow: 1 }}
           chartData={salesData}
-        >
-          {/* {salesRate > 100 ? (
-            <DetailCardScript>
-              <div>평균 월 매출보다 많이 벌고 있습니다.</div>
-              <div>순이익을 높이고 싶다면 부대비용에 집중해보세요.</div>
-            </DetailCardScript>
-          ) : salesRate < 100 ? (
-            <DetailCardScript>
-              평균 월 매출보다 적게 벌고 있습니다.<br></br>월 매출이 높은 가게를
-              분석해보면 어떨까요?
-            </DetailCardScript>
-          ) : (
-            <DetailCardScript>
-              평균 월 매출과 비슷하게 벌고 있습니다.<br></br>
-            </DetailCardScript>
-          )} */}
-        </ReportContent>
+        ></ReportContent>
         <ReportContent
           title="평균 매출 건수"
           style={{ width: 0, flexGrow: 1, justifyContent: 'space-between' }}
