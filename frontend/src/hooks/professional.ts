@@ -32,7 +32,10 @@ const gradColor = [
 ];
 
 // 가게 면적
-export const useProfessionalData = (result: any) => {
+export const useProfessionalData = (
+  storeInfo: ProfessionalResultParams,
+  result: any
+) => {
   const areaData = useMemo(
     () => ({
       type: 'bar',
@@ -41,7 +44,7 @@ export const useProfessionalData = (result: any) => {
         datasets: [
           {
             label: ['내 가게 면적'],
-            data: [42, result.store.area],
+            data: [storeInfo.area, result.store.area],
             // backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
           },
@@ -62,7 +65,7 @@ export const useProfessionalData = (result: any) => {
         datasets: [
           {
             label: ['내 가게 월 매출'],
-            data: [6000000, result.sales.sales / 3],
+            data: [storeInfo.sales, result.sales.sales / 3],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
           },
@@ -80,7 +83,7 @@ export const useProfessionalData = (result: any) => {
         datasets: [
           {
             label: ['내 가게 직원 수'],
-            data: [6, result.store.clerk],
+            data: [storeInfo.clerk, result.store.clerk],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
           },
