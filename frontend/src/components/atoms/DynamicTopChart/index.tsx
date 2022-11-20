@@ -75,7 +75,7 @@ const DynamicTopChart = ({
       },
       y: {
         axis: 'y',
-        min: Math.min(...values) - 100, /// 가변값으로 설정하기
+        min: Math.min(...values) - 10, /// 가변값으로 설정하기
         title: {
           display: 'true',
           text: name + '(단위 : 만)',
