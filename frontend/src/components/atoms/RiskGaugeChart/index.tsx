@@ -37,15 +37,20 @@ const chartData = {
         },
       },
     },
-    legend: {
-      display: false,
-    },
-    title: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
-    },
+    // legend: {
+    //   display: false,
+    // },
+    // title: {
+    //   display: false,
+    // },
+    // tooltip: {
+    //   enabled: false,
+    // },
+    events: [],
+    // tooptips: {
+    //   enable: false,
+    // },
+    // hover: false,
   },
 };
 
@@ -89,6 +94,7 @@ const Wrapper = styled.div<{ gauge: 1 | 2 | 3 | 4 }>`
     bottom: 42px;
     left: 50%;
     transform: ${({ gauge }) => `rotate(${20 + (gauge - 1) * 45}deg)`};
+    transition: transform 0.5s;
     &::before {
       content: '';
       /* width: 100px;

@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { lazy, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -7,11 +7,14 @@ import {
   Outlet,
   Navigate,
   useLocation,
+  useNavigate,
 } from 'react-router-dom';
 import { greenTheme, blueTheme, purpleTheme } from './styles/theme';
 import Layout from './layout/Layout';
 import LoadingPage from './components/pages/LoadingPage';
 import { DefaultTheme } from 'styled-components';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 // Home
 const Home = lazy(() => import('./components/pages/IndexPage'));
@@ -109,11 +112,28 @@ const Wrapper = styled.div`
   background-size: 2560px 1836px;
 `;
 
+// const modalOptions = {
+//   title: 'Alert',
+//   message: '로그인 하세요!',
+//   buttons: [
+//     {
+//       label: 'Yes',
+//       onClick: () => alert('Click Yes'),
+//     },
+//     {
+//       label: 'No',
+//       onClick: () => alert('Click No'),
+//     },
+//   ],
+// };
+
 const LoginRequired = () => {
   const user = sessionStorage.getItem('email');
   const location = useLocation();
+  const navigate = useNavigate();
   if (!user) {
-    alert('로그인이 필요합니다!!');
+    // confirmAlert(modalOptions);
+    // alert('로그인이 필요합니다!!');
     return <Navigate to="/user/login" state={{ from: location }} replace />;
   }
 

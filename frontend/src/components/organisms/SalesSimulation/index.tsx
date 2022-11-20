@@ -118,9 +118,7 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
   return (
     <Wrapper isOpen={isOpen}>
       <TitleDiv>
-        <div className="title">
-          📊 {name} 시뮬레이션 결과를 확인할 수 있습니다.
-        </div>
+        <div className="title">📊 {name} 시뮬레이션</div>
         <img
           src={`/assets/icons/greenblue_${isOpen ? 'up' : 'down'}_btn.png`}
           alt="exit"

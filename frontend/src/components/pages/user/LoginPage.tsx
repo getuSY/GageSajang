@@ -5,15 +5,17 @@ import LoginBox from '../../organisms/LoginBox';
 const LoginPage = () => {
   return (
     <Wrapper>
+      <dialog open>
+        asd
+        <button>OK</button>
+      </dialog>
       <img
         src="/assets/img/login_img.png"
         style={loginImg}
         alt="login_gage_open_image"
       />
       <LoginPageBox>
-        <LoginTitle>
-          나만의 가게를 열고 싶나요?<br></br>'가게 사장'이 도와드릴게요!
-        </LoginTitle>
+        <LoginTitle>당신의 비즈니스 파트너, 가게사장</LoginTitle>
         <LoginBox />
       </LoginPageBox>
     </Wrapper>
@@ -41,9 +43,12 @@ const LoginPageBox = styled.div`
 `;
 
 const LoginTitle = styled.p`
-  font-size: 40px;
-  font-weight: bold;
-  text-align: start;
+  font-size: 25px;
+  font-family: 'GmarketSansMedium';
+  background: ${({ theme }) => `${theme.gradColor}`};
+  color: transparent;
+  -webkit-background-clip: text;
+  font-weight: 700;
 `;
 
 export default LoginPage;

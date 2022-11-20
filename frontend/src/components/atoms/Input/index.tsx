@@ -10,6 +10,7 @@ interface InputProps {
   onClick?: any;
   disabled?: boolean;
   inputId?: string;
+  type?: string;
 }
 
 const Input = ({
@@ -21,6 +22,7 @@ const Input = ({
   clearValue,
   disabled,
   inputId,
+  type,
 }: InputProps) => {
   return (
     <>
@@ -36,6 +38,7 @@ const Input = ({
               readOnly={onClick !== undefined}
               disabled={disabled}
               id={inputId}
+              type={type}
             />
             {clearValue && (
               <div className="clear-btn" onClick={clearValue}>
