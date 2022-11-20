@@ -37,6 +37,7 @@ const JobSearchInput = ({
           onChange={onChange}
           inputValue={inputValue}
           clearValue={clearValue}
+          disabled={inputValue ? true : false}
         />
         <InputSearchResult visible={searchResultOpen} ref={searchResultRef}>
           {searchResult?.map((e, i) => (

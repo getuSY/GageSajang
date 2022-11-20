@@ -12,7 +12,7 @@ import SummaryItem from './SummaryItem';
 import {
   useProfessionalData,
   useProfessionalResult,
-  useProfessionalSimulation,
+  useProfessionalSimulationData,
 } from '../../../hooks/professional';
 import SalesSimulation from '../SalesSimulation';
 import { numberComma, getRate, getProRate } from '../../../utils/common';
@@ -29,7 +29,7 @@ const ProfessionalResult = ({
   const { areaData, salesData, clerkData, frData, ocData } =
     useProfessionalData(professionalResult);
   const { sales, clerk, area, dongName, industryName } = storeInfo;
-  const simulData = useProfessionalSimulation({
+  const simulData = useProfessionalSimulationData({
     dongName,
     industryName,
     quarter: 4,
@@ -238,7 +238,10 @@ const ProfessionalResult = ({
       {simulData.isSuccess && (
         <>
           <SalesSimulation values={simulData.data.sales} name="매출" />
-          <SalesSimulation values={simulData.data.resident} name="유동인구" />
+          <SalesSimulation values={simulData.data.count} name="점포 수" />
+          <SalesSimulation values={simulData.data.job} name="직장인구" />
+          <SalesSimulation values={simulData.data.life} name="유동인구" />
+          <SalesSimulation values={simulData.data.resident} name="거주인구" />
         </>
       )}
     </Wrapper>

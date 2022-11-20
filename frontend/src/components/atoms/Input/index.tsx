@@ -86,7 +86,7 @@ const StyledInput = styled.input`
   border-radius: 10px;
   outline: none;
   &:disabled {
-    color: inherit;
+    color: #000000;
   }
 `;
 
