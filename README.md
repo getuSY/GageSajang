@@ -1,6 +1,7 @@
 <!-- # <img src="/uploads/3c6c9e2daadd3c7360744304fd927bc3/그림2.png" width="300" height="150"/> -->
 <br>
-![landingimage](/image/image1.PNG)
+
+![landingimage](/image/index.png)
 
 #### 창업을 하고 계신 이미 사장님을 위한 경영환경 진단 서비스 및 매출 예측 시뮬레이션
 
@@ -93,7 +94,7 @@
 
 <!-- <img src="/image/status1.PNG" width="641" height="380"/> -->
 
-![상권 현황1](/image/status1.png)
+![상권 현황1](/image/status1.PNG)
 ![상권 현황2](/image/status2.png)
 ![상권 현황3](/image/status3.png)
 
@@ -179,13 +180,15 @@
 - frontend
   ![front](/image/front.png)
 
-  - React 18.0.2, Typescript 4.8.4
-  - React-Router-Dom 6.4.2
-  - Styled-Components 5.3.6
-  - axios 1.1.3
+  - React 18.0.2
+  - Typescript 4.8.4
   - React-Query 4.13.0
+  - Styled-Components 5.3.6
+  - Kakao Map API
+  - axios 1.1.3
   - chart.js 3.9.1
   - d3.js 7.6.1
+  - React-Router-Dom 6.4.2
 
 - backend
   <img src="/image/back.png" width="700" height="500"/>
