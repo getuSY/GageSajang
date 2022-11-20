@@ -5,6 +5,10 @@ import LoginBox from '../../organisms/LoginBox';
 const LoginPage = () => {
   return (
     <Wrapper>
+      <dialog open>
+        asd
+        <button>OK</button>
+      </dialog>
       <img
         src="/assets/img/login_img.png"
         style={loginImg}

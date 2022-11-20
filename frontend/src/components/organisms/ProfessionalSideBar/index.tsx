@@ -155,6 +155,7 @@ const ProfessionalSideBar = ({
             inputId="clerk"
             onChange={changeStoreInform}
             inputValue={storeInform.clerk.toString()}
+            type="number"
           />
         </ProListItem>
         <ProListItem>
@@ -166,6 +167,7 @@ const ProfessionalSideBar = ({
             inputId="area"
             onChange={changeStoreInform}
             inputValue={storeInform.area.toString()}
+            type="number"
           />
         </ProListItem>
         <ProListItem>
@@ -177,6 +179,7 @@ const ProfessionalSideBar = ({
             inputId="sales"
             onChange={changeStoreInform}
             inputValue={storeInform.sales.toString()}
+            type="number"
           />
         </ProListItem>
       </ProList>

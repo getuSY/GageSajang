@@ -74,7 +74,8 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 30px;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
+    font-family: 'GmarketSansMedium';
   }
   & .left {
     margin-left: 10vw;
