@@ -280,11 +280,6 @@ $ git config --global core.editor "code --wait"
 
 ## 🌐 배포 방법
 
-#### Front & Back End 서버
+[🌐 배포 방법](/exec/Porting_Manual.pdf)
 
-- 빌드 파일 위치한 폴더 이동 (/home/ubuntu/build)
-- 아래 명령어로 실행
-
-```
-java -jar [Server File Name].jar
 ```
