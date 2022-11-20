@@ -53,6 +53,11 @@ const DynamicChart = ({ posi, options }: DynamicChartProps) => {
       {
         type: 'line',
         dataPoints: realData,
+        fill: false,
+        interaction: {
+          intersect: false,
+        },
+        radius: 0,
       },
     ],
   };
