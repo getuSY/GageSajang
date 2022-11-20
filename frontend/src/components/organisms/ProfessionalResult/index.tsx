@@ -19,7 +19,7 @@ import { numberComma, getRate, getProRate } from '../../../utils/common';
 
 interface ProfessionalResultProps {
   storeInfo: ProfessionalResultParams;
-  professionalResult: any;
+  professionalResult: ProfessionalStoreResult;
 }
 
 const ProfessionalResult = ({
