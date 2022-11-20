@@ -96,7 +96,7 @@ const ReportContentContainer = ({
       </ReportAlert>
       {/* 창업 위험도 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[0] = e)}>
-        <ReportContent title="💸 창업 위험도" />
+        <ReportContent title="창업 위험도" titleIcon="circle-exclamation" />
         <div className="chart-div">
           <RiskGaugeChart gauge={riskData.risk} style={{ width: '500px' }} />
           <ReportContent
@@ -139,7 +139,11 @@ const ReportContentContainer = ({
       </ReportCategory>
       {/* 업종 분석 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[1] = e)}>
-        <ReportContent title="💸 업종 분석" style={{ marginTop: '2rem' }} />
+        <ReportContent
+          title="업종 분석"
+          style={{ marginTop: '2rem' }}
+          titleIcon="shop"
+        />
         <div className="chart-div">
           <ReportContent
             title="연도별 점포 수"
@@ -202,7 +206,11 @@ const ReportContentContainer = ({
 
       {/* 매출 분석 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[2] = e)}>
-        <ReportContent title="💸 매출 분석" style={{ marginTop: '2rem' }} />
+        <ReportContent
+          title="매출 분석"
+          style={{ marginTop: '2rem' }}
+          titleIcon="chart-line"
+        />
         <div className="chart-div">
           <ReportContent
             title="해당 동 총 매출"
@@ -304,7 +312,11 @@ const ReportContentContainer = ({
 
       {/* 유동 인구 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[3] = e)}>
-        <ReportContent title="💸 유동 인구" style={{ marginTop: '2rem' }} />
+        <ReportContent
+          title="유동 인구"
+          style={{ marginTop: '2rem' }}
+          titleIcon="people-group"
+        />
         <div className="chart-div">
           <ReportContent
             title="전체 유동 인구"
@@ -408,7 +420,11 @@ const ReportContentContainer = ({
 
       {/* 점포 수 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[4] = e)}>
-        <ReportContent title="💸 점포 수" style={{ marginTop: '2rem' }} />
+        <ReportContent
+          title="점포 수"
+          style={{ marginTop: '2rem' }}
+          titleIcon="cash-register"
+        />
         <div className="chart-div">
           <ReportContent
             title="개업 현황"
@@ -441,7 +457,11 @@ const ReportContentContainer = ({
 
       {/* 상권 배후지 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
-        <ReportContent title="💸 상권 배후지" style={{ marginTop: '2rem' }} />
+        <ReportContent
+          title="상권 배후지"
+          style={{ marginTop: '2rem' }}
+          titleIcon="house-circle-check"
+        />
         <div className="chart-div">
           <ReportContent
             title="인구 통계"
@@ -464,7 +484,11 @@ const ReportContentContainer = ({
 
       {/* 시뮬레이션 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[6] = e)}>
-        <ReportContent title="💸 시뮬레이션" style={{ marginTop: '2rem' }} />
+        <ReportContent
+          title="시뮬레이션"
+          style={{ marginTop: '2rem' }}
+          titleIcon="square-poll-vertical"
+        />
         <ReportAlert>
           ❗<div className="emphasis">{dongName}</div>의
           <div className="emphasis" style={{ margin: '0 0.3rem' }}>

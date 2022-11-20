@@ -21,13 +21,9 @@ const StatusPage = lazy(() => import('./components/pages/status/StatusPage'));
 const ProfessionalPage = lazy(
   () => import('./components/pages/professional/ProfessionalPage')
 );
-// const ProfessionalStorePage = lazy(
-//   () => import('./components/pages/professional/ProfessionalStorePage')
-// );
 const ProfessionalStorePage = lazy(
   () => import('./components/pages/professional/ProfessionalStorePage')
 );
-
 // Amatuer
 const AmatuerPage = lazy(
   () => import('./components/pages/amatuer/AmatuerPage')
