@@ -143,7 +143,7 @@
 
 ## ⚙️ 기술 스택
 
-<!-- ![기술스택](/uploads/fb67c18d7e441b9647a2e81117b57c6f/기술스택.png) -->
+![기술스택](/image/architecture.png)
 
 - Issue 관리
   <img src="/image/jira.png" width="100" height="50"/>
