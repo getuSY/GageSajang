@@ -108,7 +108,7 @@ const ProfessionalStorePage = () => {
           {content === 0 && (
             <InitialReport>
               <img
-                src="/assets/icons/store.png"
+                src="/mainIcon.png"
                 alt="logo"
                 className="initialReport-content-logo"
               />
@@ -124,7 +124,7 @@ const ProfessionalStorePage = () => {
           {content === 1 && (
             <InitialReport>
               <img
-                src="/assets/icons/store.png"
+                src="/mainIcon.png"
                 alt="logo"
                 className="initialReport-content-logo"
               />
@@ -173,7 +173,7 @@ const InitialReport = styled.div`
   background: #f8f8f8;
 
   & .initialReport-content-logo {
-    width: 10rem;
+    width: 15rem;
   }
 
   & .initialReport-content-div {

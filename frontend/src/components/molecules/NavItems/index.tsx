@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-grow: 1;
   gap: 20px;
-  margin-left: 100px;
+  margin-left: 50px;
   & .nav-item {
     font-family: 'Pretendard-Regular';
     font-size: 1.1rem;
