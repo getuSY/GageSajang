@@ -31,11 +31,12 @@ const gradColor = [
   ],
 ];
 
-// 가게 면적
+// 분석 결과 (화면 상단)
 export const useProfessionalData = (
   storeInfo: ProfessionalResultParams,
   result: any
 ) => {
+  // 가게 면적
   const areaData = useMemo(
     () => ({
       type: 'bar',
@@ -43,9 +44,8 @@ export const useProfessionalData = (
         labels: ['내 가게 면적', '평균 가게 면적'],
         datasets: [
           {
-            label: ['내 가게 면적'],
+            label: ['가게 면적(㎡)'],
             data: [storeInfo.area, result.store.area],
-            // backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
           },
         ],
@@ -64,7 +64,7 @@ export const useProfessionalData = (
         labels: ['내 월 매출', '평균 월 매출'],
         datasets: [
           {
-            label: ['내 가게 월 매출'],
+            label: ['월 매출(원)'],
             data: [storeInfo.sales, result.sales.sales / 3],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
@@ -82,7 +82,7 @@ export const useProfessionalData = (
         labels: ['내 가게 직원 수', '평균 직원 수'],
         datasets: [
           {
-            label: ['내 가게 직원 수'],
+            label: ['직원 수(명)'],
             data: [storeInfo.clerk, result.store.clerk],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
@@ -113,7 +113,7 @@ export const useProfessionalData = (
           },
           title: {
             display: true,
-            text: '총 점포 수 대비 프랜차이즈 점포 수',
+            text: '총 점포 수 및 프랜차이즈 점포 수(개소)',
           },
         },
       },
@@ -155,7 +155,7 @@ export const useProfessionalData = (
           },
           title: {
             display: true,
-            text: '총 점포 수 및 개폐업 점포 수',
+            text: '총 점포 수 및 개폐업 점포 수(개소)',
           },
         },
       },
