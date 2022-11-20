@@ -135,7 +135,6 @@
 
 <br>
 
-
 ## ⚙️ 기술 스택
 
 ![기술스택](/uploads/fb67c18d7e441b9647a2e81117b57c6f/기술스택.png)
@@ -175,6 +174,7 @@
     - Ubuntu 20.04 LTS
 
 - frontend
+
   ![front](/image/front.png)
 
   - React 18.0.2
@@ -188,6 +188,7 @@
   - React-Router-Dom 6.4.2
 
 - backend
+
   <img src="/image/back.png" width="700" height="500"/>
 
   - Java (Zulu 11.0.17-win64)
