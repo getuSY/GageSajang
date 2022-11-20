@@ -38,7 +38,7 @@ const AmatuerSideBar = ({
   onClickAnlzButton,
   isResultLoading,
 }: AmatuerSideBarProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   // 메인 -> 분석 페이지 시 사이드바 오픈
   useEffect(() => {
@@ -77,7 +77,7 @@ const AmatuerSideBar = ({
     <BaseSideBar title="🏪 상권 분석" isOpen={isOpen} setIsOpen={setIsOpen}>
       <Wrapper>
         <LabelSearchInput
-          label="📌 주소 입력"
+          label="🗺️ 주소 입력"
           placeholder="주소를 입력하세요."
           onChange={onChange}
           inputValue={inputValue}
@@ -87,11 +87,11 @@ const AmatuerSideBar = ({
           selectDong={selectDong}
           searchResultRef={searchResultRef}
         />
-        <Label>🍴 업종 선택</Label>
+        <Label>🧳 업종 선택</Label>
         <AmatuerMainButtons menuList={menuList} tab={mainCategory} />
         {mainCategory ? (
           <>
-            <Label>🍴 상세 선택</Label>
+            <Label>📌 상세 선택</Label>
             <AmatuerSubButtons tab={mainCategory} subCategory={subCategory} />
           </>
         ) : null}

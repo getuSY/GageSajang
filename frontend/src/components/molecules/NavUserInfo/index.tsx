@@ -31,11 +31,11 @@ const NavUserInfo = ({ userInfo }: NavUserInfoProps) => {
       />
       <div className="username">
         {userInfo.nickname}
-        <ul>
+        {/* <ul>
           <MyPageList onClick={toMyPage}>회원 정보 수정</MyPageList>
           <MyPageList onClick={toMyStore}>내 가게 정보</MyPageList>
           <MyPageList onClick={toMyArea}>내 관심 상권</MyPageList>
-        </ul>
+        </ul> */}
       </div>
       <Button
         onClick={() => {

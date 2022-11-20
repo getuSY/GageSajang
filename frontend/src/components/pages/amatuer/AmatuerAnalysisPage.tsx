@@ -23,7 +23,6 @@ const AmatuerAnalysisPage = () => {
   const container = useRef<any>();
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const mainCategory = params.get('mainCategory')
     ? parseInt(params.get('mainCategory')!)

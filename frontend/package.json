@@ -34,6 +34,7 @@
     "react": "^18.2.0",
     "react-canvas-js": "^1.0.1",
     "react-chartjs-2": "^4.3.1",
+    "react-confirm-alert": "^3.0.6",
     "react-d3-library": "^1.1.8",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "^18.2.0",
@@ -44,6 +45,7 @@
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.6",
+    "tall": "^8.0.0",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
