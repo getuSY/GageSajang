@@ -94,6 +94,7 @@ const Wrapper = styled.div`
     width: 30px;
     display: flex;
     justify-content: center;
+    align-items: center;
     & svg {
       margin-right: 9px;
     }

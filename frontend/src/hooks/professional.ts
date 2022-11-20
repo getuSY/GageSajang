@@ -163,9 +163,7 @@ export const useProfessionalData = (result: any) => {
   return { areaData, salesData, clerkData, frData, ocData };
 };
 
-export const useProfessionalSimulationData = () => {};
-
-export const useProfessionalSimulation = (
+export const useProfessionalSimulationData = (
   params: ProfessionalSimulationParams
 ) => {
   // professionalCount,

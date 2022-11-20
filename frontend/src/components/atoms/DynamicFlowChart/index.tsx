@@ -33,7 +33,8 @@ const DynamicFlowChart = ({ values, labels, name }: DynamicFlowChartProps) => {
   const options = {
     reponsive: false,
     resizeDelay: 0,
-    elements: { point: { pointStyle: 'circle', radius: 5 } },
+    // elements: { point: { pointStyle: 'circle', radius: 5 } },
+    elements: { point: { radius: 0 } },
     plugins: {
       datalabels: { display: false },
       title: {

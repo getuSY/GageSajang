@@ -12,6 +12,10 @@ interface ReportProps {
 
 const reportMenuList = [
   {
+    name: '창업 위험도',
+    icon: 'circle-exclamation',
+  },
+  {
     name: '업종 분석',
     icon: 'shop',
   },
@@ -32,10 +36,7 @@ const reportMenuList = [
     name: '상권 배후지',
     icon: 'house-circle-check',
   },
-  {
-    name: '창업 위험도',
-    icon: 'circle-exclamation',
-  },
+
   {
     name: '시뮬레이션',
     icon: 'square-poll-vertical',

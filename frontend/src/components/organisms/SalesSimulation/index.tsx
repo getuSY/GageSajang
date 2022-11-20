@@ -40,9 +40,14 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
         const quart = a.quarter;
         return yr + '년 ' + quart + '분기';
       });
-    const sales: Array<number> = values
-      .slice(0, (Number(perPos) + 1) * 4)
-      .map((a) => a.value / 10000);
+    let sales: Array<number>;
+    if (name === '매출' || name === '유동인구') {
+      sales = values
+        .slice(0, (Number(perPos) + 1) * 4)
+        .map((a) => a.value / 10000);
+    } else {
+      sales = values.slice(0, (Number(perPos) + 1) * 4).map((a) => a.value);
+    }
     setYearLabel(quarters);
     setSalesValues(sales);
     // top chart 넘겨줄 데이터
@@ -58,7 +63,12 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
       const quart = a.quarter;
       return yr + '년 ' + quart + '분기';
     });
-    const topVals: Array<number> = newTops.map((a) => a.value / 10000);
+    let topVals: Array<number>;
+    if (name === '매출' || name === '유동인구') {
+      topVals = newTops.map((a) => a.value / 10000);
+    } else {
+      topVals = newTops.map((a) => a.value);
+    }
     setTopValues(topVals);
     setTopLabel(topQuarters);
     // bottom 차트 넘겨줄 데이터
@@ -74,7 +84,12 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
       const quart = a.quarter;
       return yr + '년 ' + quart + '분기';
     });
-    const btmVals: Array<number> = newBtms.map((a) => a.value / 10000);
+    let btmVals: Array<number>;
+    if (name === '매출' || name === '유동인구') {
+      btmVals = newBtms.map((a) => a.value / 10000);
+    } else {
+      btmVals = newBtms.map((a) => a.value);
+    }
     setBtmValues(btmVals);
     setBtmLabel(btmQuarters);
     // rate chart 넘겨줄 데이터
@@ -104,7 +119,7 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
     <Wrapper isOpen={isOpen}>
       <TitleDiv>
         <div className="title">
-          💰 {name} 시뮬레이션 결과를 확인할 수 있습니다.
+          📊 {name} 시뮬레이션 결과를 확인할 수 있습니다.
         </div>
         <img
           src={`/assets/icons/greenblue_${isOpen ? 'up' : 'down'}_btn.png`}

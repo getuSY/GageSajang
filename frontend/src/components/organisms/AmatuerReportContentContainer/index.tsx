@@ -94,9 +94,56 @@ const ReportContentContainer = ({
         ❗ 아래 분석 결과는 통계에 따른 추정 결과입니다. 향후 상황에 따라 다를
         수 있기 때문에, 판단 하에 참고하여 활용하시기 바랍니다.
       </ReportAlert>
-      {/* 업종 분석 */}
+      {/* 창업 위험도 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[0] = e)}>
-        <ReportContent title="💸 업종 분석" />
+        <ReportContent title="창업 위험도" titleIcon="circle-exclamation" />
+        <div className="chart-div">
+          <RiskGaugeChart gauge={riskData.risk} style={{ width: '500px' }} />
+          <ReportContent
+            title="창업 위험도 설명"
+            style={{ flexGrow: 1, alignItems: 'flex-start' }}
+          >
+            <ReportRiskDescription>
+              <div className="risk-desc">
+                <span className="risk-name risk-name1">고위험</span>
+                <span> : </span>
+                <span>해당 업종은 창업을 강력히 비추천 드립니다.</span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name2">위험</span>
+                <span> : </span>
+                <span>
+                  해당 업종은 창업하는데 어려움이 있습니다. 다른 업종 및 지역을
+                  고려하시길 추천드립니다.
+                </span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name3">주의</span>
+                <span> : </span>
+                <span>
+                  이 지역에서 해당 업종을 창업할 시 주의가 필요합니다.
+                </span>
+              </div>
+              <div className="risk-desc">
+                <span className="risk-name risk-name4">정상</span>
+                <span> : </span>
+                <span>이 지역에서 해당 업종은 전망이 좋은 편입니다.</span>
+              </div>
+            </ReportRiskDescription>
+            <div className="data-desc">
+              위험도 데이터 출처 : 서울신용보증재단 100대 생활밀접업종
+              창업위험도
+            </div>
+          </ReportContent>
+        </div>
+      </ReportCategory>
+      {/* 업종 분석 */}
+      <ReportCategory ref={(e: any) => (contentRefs.current[1] = e)}>
+        <ReportContent
+          title="업종 분석"
+          style={{ marginTop: '2rem' }}
+          titleIcon="shop"
+        />
         <div className="chart-div">
           <ReportContent
             title="연도별 점포 수"
@@ -158,8 +205,12 @@ const ReportContentContainer = ({
       </ReportCategory>
 
       {/* 매출 분석 */}
-      <ReportCategory ref={(e: any) => (contentRefs.current[1] = e)}>
-        <ReportContent title="💸 매출 분석" style={{ marginTop: '2rem' }} />
+      <ReportCategory ref={(e: any) => (contentRefs.current[2] = e)}>
+        <ReportContent
+          title="매출 분석"
+          style={{ marginTop: '2rem' }}
+          titleIcon="chart-line"
+        />
         <div className="chart-div">
           <ReportContent
             title="해당 동 총 매출"
@@ -260,8 +311,12 @@ const ReportContentContainer = ({
       </ReportCategory>
 
       {/* 유동 인구 */}
-      <ReportCategory ref={(e: any) => (contentRefs.current[2] = e)}>
-        <ReportContent title="💸 유동 인구" style={{ marginTop: '2rem' }} />
+      <ReportCategory ref={(e: any) => (contentRefs.current[3] = e)}>
+        <ReportContent
+          title="유동 인구"
+          style={{ marginTop: '2rem' }}
+          titleIcon="people-group"
+        />
         <div className="chart-div">
           <ReportContent
             title="전체 유동 인구"
@@ -364,8 +419,12 @@ const ReportContentContainer = ({
       </ReportCategory>
 
       {/* 점포 수 */}
-      <ReportCategory ref={(e: any) => (contentRefs.current[3] = e)}>
-        <ReportContent title="💸 점포 수" style={{ marginTop: '2rem' }} />
+      <ReportCategory ref={(e: any) => (contentRefs.current[4] = e)}>
+        <ReportContent
+          title="점포 수"
+          style={{ marginTop: '2rem' }}
+          titleIcon="cash-register"
+        />
         <div className="chart-div">
           <ReportContent
             title="개업 현황"
@@ -397,8 +456,12 @@ const ReportContentContainer = ({
       </ReportCategory>
 
       {/* 상권 배후지 */}
-      <ReportCategory ref={(e: any) => (contentRefs.current[4] = e)}>
-        <ReportContent title="💸 상권 배후지" style={{ marginTop: '2rem' }} />
+      <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
+        <ReportContent
+          title="상권 배후지"
+          style={{ marginTop: '2rem' }}
+          titleIcon="house-circle-check"
+        />
         <div className="chart-div">
           <ReportContent
             title="인구 통계"
@@ -418,51 +481,14 @@ const ReportContentContainer = ({
           ></ReportContent>
         </div>
       </ReportCategory>
-      <ReportCategory ref={(e: any) => (contentRefs.current[5] = e)}>
-        <ReportContent title="💸 창업 위험도" style={{ marginTop: '2rem' }} />
-        <div className="chart-div">
-          <RiskGaugeChart gauge={riskData.risk} style={{ width: '500px' }} />
-          <ReportContent
-            title="창업 위험도 설명"
-            style={{ flexGrow: 1, alignItems: 'flex-start' }}
-          >
-            <ReportRiskDescription>
-              <div className="risk-desc">
-                <span className="risk-name risk-name1">고위험</span>
-                <span> : </span>
-                <span>해당 업종은 창업을 강력히 비추천 드립니다.</span>
-              </div>
-              <div className="risk-desc">
-                <span className="risk-name risk-name2">위험</span>
-                <span> : </span>
-                <span>
-                  해당 업종은 창업하는데 어려움이 있습니다. 다른 업종 및 지역을
-                  고려하시길 추천드립니다.
-                </span>
-              </div>
-              <div className="risk-desc">
-                <span className="risk-name risk-name3">주의</span>
-                <span> : </span>
-                <span>
-                  이 지역에서 해당 업종을 창업할 시 주의가 필요합니다.
-                </span>
-              </div>
-              <div className="risk-desc">
-                <span className="risk-name risk-name4">정상</span>
-                <span> : </span>
-                <span>이 지역에서 해당 업종은 전망이 좋은 편입니다.</span>
-              </div>
-            </ReportRiskDescription>
-            <div className="data-desc">
-              위험도 데이터 출처 : 서울신용보증재단 100대 생활밀접업종
-              창업위험도
-            </div>
-          </ReportContent>
-        </div>
-      </ReportCategory>
+
       {/* 시뮬레이션 */}
       <ReportCategory ref={(e: any) => (contentRefs.current[6] = e)}>
-        <ReportContent title="💸 시뮬레이션" style={{ marginTop: '2rem' }} />
+        <ReportContent
+          title="시뮬레이션"
+          style={{ marginTop: '2rem' }}
+          titleIcon="square-poll-vertical"
+        />
         <ReportAlert>
           ❗<div className="emphasis">{dongName}</div>의
           <div className="emphasis" style={{ margin: '0 0.3rem' }}>
