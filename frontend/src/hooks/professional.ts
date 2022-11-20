@@ -64,8 +64,11 @@ export const useProfessionalData = (
         labels: ['내 월 매출', '평균 월 매출'],
         datasets: [
           {
-            label: ['월 매출(원)'],
-            data: [storeInfo.sales, result.sales.sales / 3],
+            label: ['월 매출(만 원)'],
+            data: [
+              Math.round(storeInfo.sales / 30000),
+              Math.round(result.sales.sales / 30000),
+            ],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
           },

@@ -24,7 +24,7 @@ const StatusSideBar = ({
 }: StatusSideBarProps) => {
   return (
     <BaseSideBar
-      title="상권 현황"
+      title="🏪 상권 현황"
       isOpen={sideBarStatus}
       statusmark={true}
       setIsOpen={setSideBarStatus}

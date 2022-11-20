@@ -469,13 +469,13 @@ const ReportContentContainer = ({
             chartData={hinterlandPeopleData}
           ></ReportContent>
           <ReportContent
-            title="연령별 매출"
+            title="연령대별 인구"
             style={{ flexGrow: 1 }}
             chartStyle={{ width: '450px' }}
             chartData={hinterlandAgeData}
           ></ReportContent>
           <ReportContent
-            title="성별 매출"
+            title="성별별 인구"
             chartData={hinterlandGenderData}
             style={{ width: '350px' }}
           ></ReportContent>
