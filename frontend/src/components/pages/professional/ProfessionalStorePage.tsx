@@ -52,7 +52,11 @@ const ProfessionalStorePage = () => {
   });
   useEffect(() => {
     if (userStoreInfo.isSuccess) {
-      setStoreInform(userStoreInfo.data);
+      // setStoreInform(userStoreInfo.data);
+      setStoreInform({
+        ...userStoreInfo.data,
+        sales: userStoreInfo.data.sales / 3,
+      });
       setSelectedDongSearch(userStoreInfo.data.dongName);
       setSelectedJobSearch(userStoreInfo.data.industryName);
       setContent(1);
@@ -74,6 +78,7 @@ const ProfessionalStorePage = () => {
   const onSubmitHandler = () => {
     const params: ProfessionalStoreInfo = {
       ...storeInform,
+      sales: storeInform.sales * 3,
       dongName: selectedDongSearch,
       industryName: selectedJobSearch,
     };
