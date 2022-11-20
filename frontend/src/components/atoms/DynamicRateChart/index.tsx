@@ -34,7 +34,8 @@ const DynamicRateChart = ({ values, labels, name }: DynamicRateChartProps) => {
   const options = {
     reponsive: false,
     resizeDelay: 0,
-    elements: { point: { pointStyle: 'rectRot', radius: 5 } },
+    // elements: { point: { pointStyle: 'rectRot', radius: 5 } },
+    elements: { point: { radius: 0 } },
     plugins: {
       datalabels: { display: false },
       title: {
