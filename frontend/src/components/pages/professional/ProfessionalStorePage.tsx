@@ -107,16 +107,33 @@ const ProfessionalStorePage = () => {
         <>
           {content === 0 && (
             <InitialReport>
-              <div>처음 뵙겠습니다, 사장님!</div>
-              <div>가게 정보를 입력하고 내 가게 분석을 시작해봐요.</div>
+              <img
+                src="/mainIcon.png"
+                alt="logo"
+                className="initialReport-content-logo"
+              />
+              <div className="initialReport-content-div">
+                <div>처음 뵙겠습니다, 사장님!</div>
+                <div>
+                  가게 정보를 입력하고 <span>내 가게 분석</span>을 시작해
+                  보세요.
+                </div>
+              </div>
             </InitialReport>
           )}
           {content === 1 && (
             <InitialReport>
-              <div>사장님, 또 뵙네요! </div>
-              <div>이미 저장된 가게 정보가 있네요.</div>
-              <div>
-                수정 없이 분석을 진행하시려면 분석하기 버튼을 눌러주세요.
+              <img
+                src="/mainIcon.png"
+                alt="logo"
+                className="initialReport-content-logo"
+              />
+              <div className="initialReport-content-div">
+                <div>이미 저장된 가게 정보가 있습니다.</div>
+                <div>
+                  수정 없이 분석을 진행하시려면 하단의{' '}
+                  <span>내 가게 분석하기</span> 버튼을 눌러주세요.
+                </div>
               </div>
             </InitialReport>
           )}
@@ -151,11 +168,28 @@ const InitialReport = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
-  font-weight: 700;
   width: 100%;
   height: 100%;
-  background: #f3f3f3;
+  background: #f8f8f8;
+
+  & .initialReport-content-logo {
+    width: 15rem;
+  }
+
+  & .initialReport-content-div {
+    margin-top: 3rem;
+    text-align: center;
+    font-family: 'GmarketSansMedium';
+    font-size: 1.5rem;
+
+    & span {
+      background: ${({ theme }) => `${theme.gradColor}`};
+      color: transparent;
+      -webkit-background-clip: text;
+      font-weight: 700;
+      margin: 0px 6px;
+    }
+  }
 `;
 const SpinnerDiv = styled.div`
   display: flex;
