@@ -31,8 +31,12 @@ const gradColor = [
   ],
 ];
 
-// 가게 면적
-export const useProfessionalData = (result: any) => {
+// 분석 결과 (화면 상단)
+export const useProfessionalData = (
+  storeInfo: ProfessionalResultParams,
+  result: any
+) => {
+  // 가게 면적
   const areaData = useMemo(
     () => ({
       type: 'bar',
@@ -40,9 +44,8 @@ export const useProfessionalData = (result: any) => {
         labels: ['내 가게 면적', '평균 가게 면적'],
         datasets: [
           {
-            label: ['내 가게 면적'],
-            data: [42, result.store.area],
-            // backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+            label: ['가게 면적(㎡)'],
+            data: [storeInfo.area, result.store.area],
             barThickness: 70,
           },
         ],
@@ -61,8 +64,11 @@ export const useProfessionalData = (result: any) => {
         labels: ['내 월 매출', '평균 월 매출'],
         datasets: [
           {
-            label: ['내 가게 월 매출'],
-            data: [6000000, result.sales.sales / 3],
+            label: ['월 매출(만 원)'],
+            data: [
+              Math.round(storeInfo.sales / 30000),
+              Math.round(result.sales.sales / 30000),
+            ],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
           },
@@ -79,8 +85,8 @@ export const useProfessionalData = (result: any) => {
         labels: ['내 가게 직원 수', '평균 직원 수'],
         datasets: [
           {
-            label: ['내 가게 직원 수'],
-            data: [6, result.store.clerk],
+            label: ['직원 수(명)'],
+            data: [storeInfo.clerk, result.store.clerk],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
             barThickness: 70,
           },
@@ -110,7 +116,7 @@ export const useProfessionalData = (result: any) => {
           },
           title: {
             display: true,
-            text: '총 점포 수 대비 프랜차이즈 점포 수',
+            text: '총 점포 수 및 프랜차이즈 점포 수(개소)',
           },
         },
       },
@@ -152,7 +158,7 @@ export const useProfessionalData = (result: any) => {
           },
           title: {
             display: true,
-            text: '총 점포 수 및 개폐업 점포 수',
+            text: '총 점포 수 및 개폐업 점포 수(개소)',
           },
         },
       },

@@ -401,7 +401,7 @@ export const useStatusRpData = (rpDetail: any) => {
     [rpDetail]
   );
 
-  // 상권 아파트/비아파트 비율
+  // 상권 내 아파트/비아파트 비율
   const rpAptData = useMemo(
     () => ({
       type: 'pie',
@@ -412,12 +412,21 @@ export const useStatusRpData = (rpDetail: any) => {
             label: '상권 아파트/비아파트 비율',
             data: [rpDetail.resident.apt, rpDetail.resident.nonApt],
             barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
           },
         ],
+      },
+      options: {
+        plugins: {
+          datalabels: {
+            font: {
+              weight: 'bold',
+            },
+            color: 'white',
+            padding: 6,
+            backgroundColor: '#79797930',
+            borderRadius: 4,
+          },
+        },
       },
       grad: aptGrad,
     }),
@@ -435,12 +444,21 @@ export const useStatusRpData = (rpDetail: any) => {
             label: '상권배후지 아파트/비아파트 비율',
             data: [rpDetail.apt.apt, rpDetail.apt.nonApt],
             barThickness: 30,
-            datalabels: {
-              // 데이터라벨 숨김
-              color: 'transparent',
-            },
           },
         ],
+      },
+      options: {
+        plugins: {
+          datalabels: {
+            font: {
+              weight: 'bold',
+            },
+            color: 'white',
+            padding: 6,
+            backgroundColor: '#79797930',
+            borderRadius: 4,
+          },
+        },
       },
       grad: aptGrad,
     }),

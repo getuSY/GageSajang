@@ -37,7 +37,6 @@ const BaseSideBar = ({
       <ShadowBox>
         {statusmark ? (
           <div className="title-div">
-            <FontAwesomeIcon icon={faChartArea} className="title-icon" />
             <div className="title">{title}</div>
           </div>
         ) : (

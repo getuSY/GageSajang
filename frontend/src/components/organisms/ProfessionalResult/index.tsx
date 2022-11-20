@@ -19,7 +19,7 @@ import { numberComma, getRate, getProRate } from '../../../utils/common';
 
 interface ProfessionalResultProps {
   storeInfo: ProfessionalResultParams;
-  professionalResult: any;
+  professionalResult: ProfessionalStoreResult;
 }
 
 const ProfessionalResult = ({
@@ -27,7 +27,7 @@ const ProfessionalResult = ({
   professionalResult,
 }: ProfessionalResultProps) => {
   const { areaData, salesData, clerkData, frData, ocData } =
-    useProfessionalData(professionalResult);
+    useProfessionalData(storeInfo, professionalResult);
   const { sales, clerk, area, dongName, industryName } = storeInfo;
   const simulData = useProfessionalSimulationData({
     dongName,
