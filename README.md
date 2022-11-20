@@ -135,9 +135,6 @@
 
 <br>
 
-## 📝 스프린트
-
-![jira_sprint](/uploads/0d68d5339dc7ee9387c68eb77f82a138/jira_sprint.png)
 
 ## ⚙️ 기술 스택
 
