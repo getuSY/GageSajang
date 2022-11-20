@@ -95,7 +95,9 @@
 <!-- <img src="/image/status1.PNG" width="641" height="380"/> -->
 
 ![상권 현황1](/image/status1.PNG)
+
 ![상권 현황2](/image/status2.png)
+
 ![상권 현황3](/image/status3.png)
 
 ### 아마 사장 페이지
@@ -110,7 +112,9 @@
 - 창업 위험도
 
 ![아마사장1](/image/amatuer1.png)
+
 ![아마사장2](/image/amatuer2.png)
+
 ![아마사장3](/image/amatuer3.png)
 
 > 매출 예측 시뮬레이션
@@ -126,18 +130,20 @@
 > 경영 환경 진단 서비스
 
 - 등록된 매출 데이터를 통해 경영 환경 진단 서비스를 제공합니다.
-- ![이미사장2](/image/professional2.png)
+
+![이미사장2](/image/professional2.png)
 
 > 매출 예측 시뮬레이션
 
 - 2023년 4분기의 매출을 예측해줍니다.
-  ![이미사장3](/image/professional3.gif)
+
+![이미사장3](/image/professional3.gif)
 
 <br>
 
 ## ⚙️ 기술 스택
 
-![기술스택](/uploads/fb67c18d7e441b9647a2e81117b57c6f/기술스택.png)
+<!-- ![기술스택](/uploads/fb67c18d7e441b9647a2e81117b57c6f/기술스택.png) -->
 
 - Issue 관리
   <img src="/image/jira.png" width="100" height="50"/>
