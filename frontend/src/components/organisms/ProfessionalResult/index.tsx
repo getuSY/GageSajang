@@ -198,7 +198,7 @@ const ProfessionalResult = ({
               marginTop: '20px',
             }}
           >
-            {numberComma(professionalResult.sales.order)} 건
+            {numberComma(Math.round(professionalResult.sales.order / 3))} 건
           </div>
         </ReportContent>
         <ReportContent
