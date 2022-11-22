@@ -6,6 +6,7 @@ import SlideBar from '../../atoms/SlideBar';
 import DynamicRateChart from '../../atoms/DynamicRateChart';
 import DynamicTopChart from '../../atoms/DynamicTopChart';
 import DynamicFlowChart from '../../atoms/DynamicFlowChart';
+import StatusReportTitle from '../../molecules/StatusReportTitle';
 
 interface SalesSimulationProps {
   values: Array<SimulInfo>;
@@ -170,6 +171,7 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
             ></DynamicTopChart>
           </Inside>
         </ChartBox>
+        <ReportSummary>{name}</ReportSummary>
       </>
     </Wrapper>
   );
@@ -237,6 +239,12 @@ const Inside = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+`;
+
+const ReportSummary = styled.div`
+  background-color: #ffffff;
+  padding: 20px 0px 20px 30px;
+  border-left: ${({ theme }) => `3px solid ${theme.mainColor}`};
 `;
 
 export default SalesSimulation;

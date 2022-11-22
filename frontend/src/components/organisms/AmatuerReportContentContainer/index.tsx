@@ -501,6 +501,23 @@ const ReportContentContainer = ({
           의 예측 결과입니다. 향후 상황에 따라 오차가 있을 수 있기 때문에, 판단
           하에 참고하여 활용하시기 바랍니다.
         </ReportAlert>
+        <ReportContent
+          title="시뮬레이션 안내"
+          style={{ flexGrow: 1, alignItems: 'flex-start' }}
+        >
+          <ReportRiskDescription>
+            <div className="risk-desc" style={{ marginLeft: '10px' }}>
+              가게사장의 시뮬레이션은 서울열린데이터광장에서 제공하는 2013년부터
+              2020년까지의 사회적, 경제적, 상업적 요인을 고려하여 머신러닝 시킨
+              결과입니다.
+            </div>
+            <div className="risk-desc" style={{ marginLeft: '20px' }}>
+              - 사회적요인 : 생활인구,직장인구,거주인구 <br></br>- 경제적요인 :
+              경제성장률, 매출금액, 매출건수, 지출 총금액, 월평균 소득금액{' '}
+              <br></br>- 상업적요인 : 개폐, 유사업종, 프랜차이즈, 점포수
+            </div>
+          </ReportRiskDescription>
+        </ReportContent>
         <div className="chart-div">
           <ReportContent
             title="분기별 매출"
@@ -601,6 +618,14 @@ const ReportRiskDescription = styled.div`
   & .data-desc {
     font-size: 1.1rem;
     justify-self: end;
+  }
+  & .data-source {
+    font-size: 1rem;
+    color: gray;
+    margin-top: 10px;
+  }
+  & .emphasis {
+    font-weight: 700;
   }
 `;
 
