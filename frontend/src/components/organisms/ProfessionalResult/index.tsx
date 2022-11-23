@@ -253,7 +253,7 @@ const ProfessionalResult = ({
             </div>
           </ReportContent>
           <SalesSimulation values={simulData.data.sales} name="매출" />
-          <SalesSimulation values={simulData.data.count} name="점포 수" />
+          <SalesSimulation values={simulData.data.count} name="매출 건수" />
           <SalesSimulation values={simulData.data.job} name="직장인구" />
           <SalesSimulation values={simulData.data.life} name="유동인구" />
           <SalesSimulation values={simulData.data.resident} name="거주인구" />

@@ -30,7 +30,7 @@ const DynamicFlowChart = ({ values, labels, name }: DynamicFlowChartProps) => {
     ],
   };
 
-  const options = {
+  let options = {
     reponsive: false,
     resizeDelay: 0,
     // elements: { point: { pointStyle: 'circle', radius: 5 } },
@@ -66,11 +66,15 @@ const DynamicFlowChart = ({ values, labels, name }: DynamicFlowChartProps) => {
         axis: 'y',
         title: {
           display: 'true',
-          text: name + '(단위 : 만)',
+          text: name,
         },
       },
     },
   };
+
+  if (name === '유동인구' || name === '매출') {
+    options.scales.y.title.text = name + '(단위 : 만)';
+  }
 
   return (
     <Wrapper>
