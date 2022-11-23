@@ -234,6 +234,7 @@ const ProfessionalResult = ({
               alignItems: 'flex-start',
               background: '#feffca',
               fontSize: '20px',
+              marginTop: '20px',
             }}
           >
             <div style={{ margin: '1rem' }}>
