@@ -171,7 +171,33 @@ const SalesSimulation = ({ values, name }: SalesSimulationProps) => {
             ></DynamicTopChart>
           </Inside>
         </ChartBox>
-        <ReportSummary>{name}</ReportSummary>
+        <ReportSummary style={{ background: '#feffca8a' }}>
+          <div
+            style={{
+              fontFamily: 'GmarketSansMedium',
+              fontWeight: 500,
+              fontSize: '24px',
+              marginBottom: '1rem',
+            }}
+          >
+            {name}
+          </div>
+          <div style={{ gap: '12px', fontSize: '20px' }}>
+            <div>
+              3개월 후 {name} : {values[40].value}
+            </div>
+            <div>
+              6개월 후 {name} : {values[41].value}
+            </div>
+            <div>
+              9개월 후 {name} : {values[42].value}
+            </div>
+            <div>
+              1년 후 {name} : {values[43].value}
+            </div>
+            <br></br>
+          </div>
+        </ReportSummary>
       </>
     </Wrapper>
   );
@@ -187,7 +213,7 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   display: flex;
   padding: 14px 20px;
   /* height: 48px; */
-  height: ${({ isOpen }) => (isOpen ? '1000px' : '48px')};
+  height: ${({ isOpen }) => (isOpen ? '1200px' : '48px')};
   transition: 1.5s;
   flex-shrink: 0;
   overflow: hidden;
@@ -245,6 +271,7 @@ const ReportSummary = styled.div`
   background-color: #ffffff;
   padding: 20px 0px 20px 30px;
   border-left: ${({ theme }) => `3px solid ${theme.mainColor}`};
+  margin: 2rem;
 `;
 
 export default SalesSimulation;
