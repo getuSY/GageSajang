@@ -33,7 +33,7 @@ const DynamicTopChart = ({
     ],
   };
   let context;
-  const options = {
+  let options = {
     animation: {
       // delay: 500,
       easing: 'easeOutQuad',
@@ -78,11 +78,15 @@ const DynamicTopChart = ({
         min: Math.min(...values) - 10, /// 가변값으로 설정하기
         title: {
           display: 'true',
-          text: name + '(단위 : 만)',
+          text: name,
         },
       },
     },
   };
+
+  if (name === '유동인구' || name === '매출') {
+    options.scales.y.title.text = name + '(단위 : 만)';
+  }
   return (
     <Wrapper>
       <ReportChart
