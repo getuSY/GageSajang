@@ -227,8 +227,33 @@ const ProfessionalResult = ({
       </div>
       {simulData.isSuccess && (
         <>
+          <ReportContent
+            title="시뮬레이션 안내"
+            style={{
+              flexGrow: 1,
+              alignItems: 'flex-start',
+              background: '#feffca',
+              fontSize: '20px',
+            }}
+          >
+            <div style={{ margin: '1rem' }}>
+              <div style={{}}>
+                가게사장의 시뮬레이션은 서울열린데이터광장에서 제공하는{' '}
+                <span style={{ fontWeight: 700 }}>
+                  2013년부터 2020년까지의 사회적, 경제적, 상업적 요인을 고려하여
+                  머신러닝
+                </span>{' '}
+                시킨 결과입니다.
+              </div>
+              <div style={{ marginLeft: '10px', marginTop: '8px' }}>
+                - 사회적요인 : 생활인구,직장인구,거주인구 <br></br>- 경제적요인
+                : 경제성장률, 매출금액, 매출건수, 지출 총금액, 월평균 소득금액{' '}
+                <br></br>- 상업적요인 : 개폐, 유사업종, 프랜차이즈, 점포수
+              </div>
+            </div>
+          </ReportContent>
           <SalesSimulation values={simulData.data.sales} name="매출" />
-          <SalesSimulation values={simulData.data.count} name="점포 수" />
+          <SalesSimulation values={simulData.data.count} name="매출 건수" />
           <SalesSimulation values={simulData.data.job} name="직장인구" />
           <SalesSimulation values={simulData.data.life} name="유동인구" />
           <SalesSimulation values={simulData.data.resident} name="거주인구" />
