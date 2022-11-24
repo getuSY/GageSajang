@@ -86,6 +86,10 @@ const DynamicTopChart = ({
 
   if (name === '유동인구' || name === '매출') {
     options.scales.y.title.text = name + '(단위 : 만)';
+  } else if (name === '매출 건수') {
+    options.scales.y.title.text = name + '(단위 : 건)';
+  } else {
+    options.scales.y.title.text = name + '(단위 : 명)';
   }
   return (
     <Wrapper>

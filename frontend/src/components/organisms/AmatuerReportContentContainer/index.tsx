@@ -500,8 +500,8 @@ const ReportContentContainer = ({
           <ReportRiskDescription>
             <div className="risk-desc" style={{ marginLeft: '10px' }}>
               가게사장의 시뮬레이션은 서울열린데이터광장에서 제공하는 2013년부터
-              2020년까지의 사회적, 경제적, 상업적 요인을 고려하여 머신러닝 시킨
-              결과입니다.
+              2020년까지의 사회적, 경제적, 상업적 요인을 고려하여 머신러닝을
+              통해 도출한 결과입니다.
             </div>
             <div
               className="risk-desc"
