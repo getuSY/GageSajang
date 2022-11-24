@@ -48,7 +48,7 @@ const ProfessionalResult = ({
     professionalResult.status.close,
     professionalResult.store.total,
   ])[0];
-  const clerkRate = clerk / professionalResult.store.clerk;
+  let clerkRate = clerk / professionalResult.store.clerk;
   const areaRate = getProRate(area, professionalResult.store.area);
 
   return (
@@ -153,10 +153,10 @@ const ProfessionalResult = ({
           iconSrc="/assets/icons/clerk.png"
         >
           <div>
-            {clerkRate > 1 && (
+            {clerkRate > 1 && clerkRate !== Infinity && (
               <div className="cardBody">
-                평균보다 <Highlight>{clerkRate} 배</Highlight> 더 고용하고
-                있습니다.
+                평균보다 <Highlight>{clerkRate.toFixed(1)} 배</Highlight> 더
+                고용하고 있습니다.
               </div>
             )}
             {clerkRate === 1 && (
@@ -166,8 +166,13 @@ const ProfessionalResult = ({
             )}
             {clerkRate < 1 && (
               <div className="cardBody">
-                평균보다 <Highlight>{clerkRate} 배</Highlight> 적게 고용하고
-                있습니다.
+                평균보다 <Highlight>약 {clerkRate.toFixed(1)} 배</Highlight>{' '}
+                적게 고용하고 있습니다.
+              </div>
+            )}
+            {clerkRate === Infinity && (
+              <div className="cardBody">
+                평균보다 <Highlight>더 많이</Highlight> 고용하고 있습니다.
               </div>
             )}
           </div>
@@ -244,7 +249,7 @@ const ProfessionalResult = ({
                   2013년부터 2020년까지의 사회적, 경제적, 상업적 요인을 고려하여
                   머신러닝
                 </span>{' '}
-                시킨 결과입니다.
+                을 통해 도출한 결과입니다.
               </div>
               <div style={{ marginLeft: '10px', marginTop: '8px' }}>
                 - 사회적요인 : 생활인구,직장인구,거주인구 <br></br>- 경제적요인

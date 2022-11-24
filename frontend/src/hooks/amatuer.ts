@@ -784,7 +784,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         datasets: [
           {
             label: '매출(만 원)',
-            data: amatuerSimulation.sales
+            data: amatuerSimulation?.sales
               ? amatuerSimulation.sales.map((e: any) =>
                   Math.round(e.value / 10000)
                 )
@@ -808,7 +808,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         datasets: [
           {
             label: '유동인구(만 명)',
-            data: amatuerSimulation.life
+            data: amatuerSimulation?.life
               ? amatuerSimulation.life.map((e: any) =>
                   Math.round(e.value / 10000)
                 )
@@ -832,7 +832,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         datasets: [
           {
             label: '거주인구(명)',
-            data: amatuerSimulation.resident
+            data: amatuerSimulation?.resident
               ? amatuerSimulation.resident.map((e: any) => e.value)
               : [0, 0, 0, 0, 0],
             datalabels: {
@@ -859,7 +859,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         datasets: [
           {
             label: '직업인구(명)',
-            data: amatuerSimulation.job
+            data: amatuerSimulation?.job
               ? amatuerSimulation.job.map((e: any) => e.value)
               : [0, 0, 0, 0, 0],
             datalabels: {
@@ -886,7 +886,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
         datasets: [
           {
             label: '점포 수(개소)',
-            data: amatuerSimulation.count
+            data: amatuerSimulation?.count
               ? amatuerSimulation.count.map((e: any) => e.value)
               : [0, 0, 0, 0, 0],
             datalabels: {
