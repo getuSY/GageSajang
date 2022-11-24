@@ -103,7 +103,10 @@ export const useProfessionalData = (
         labels: ['총 점포 수', '프랜차이즈 수'],
         datasets: [
           {
-            data: [Math.ceil(result.store.total), result.store.franchise],
+            data: [
+              Math.ceil(result.store.total),
+              parseInt(result.store.franchise),
+            ],
             backgroundColor: ['#edf3f1', 'rgb(255, 205, 86)'],
             hoverOffset: 5,
           },
@@ -139,8 +142,8 @@ export const useProfessionalData = (
           {
             data: [
               Math.ceil(result.store.total),
-              result.status.open,
-              result.status.close,
+              parseInt(result.status.open),
+              parseInt(result.status.close),
             ],
             backgroundColor: [
               '#edf3f1',
