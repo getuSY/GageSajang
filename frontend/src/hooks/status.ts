@@ -197,6 +197,12 @@ const aptGrad = [
   ],
 ];
 
+const genderDefault = [0, 0];
+const quarterDefault = [0, 0, 0, 0];
+const timeDefault = [0, 0, 0, 0, 0, 0];
+const ageDefault = [0, 0, 0, 0, 0, 0];
+const weekDefault = [0, 0, 0, 0, 0, 0, 0];
+
 // 유동인구 상세 페이지
 export const useStatusFpData = (fpDetail: any) => {
   // 성별별 유동인구
@@ -208,7 +214,9 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             barThickness: 70,
-            data: fpDetail.gender.map((e: number) => Math.floor(e / 90)),
+            data: fpDetail?.gender
+              ? fpDetail.gender.map((e: number) => Math.floor(e / 90))
+              : genderDefault,
             datalabels: {
               font: {
                 weight: 'bold',
@@ -235,7 +243,9 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             label: '연령대별 유동인구(명)',
-            data: fpDetail.age.map((e: number) => Math.floor(e / 90)),
+            data: fpDetail?.age
+              ? fpDetail.age.map((e: number) => Math.floor(e / 90))
+              : ageDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -264,7 +274,9 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             label: '하루 평균(명)',
-            data: fpDetail.quarter.map((e: number) => Math.floor(e / 90)),
+            data: fpDetail?.quarter
+              ? fpDetail.quarter.map((e: number) => Math.floor(e / 90))
+              : quarterDefault,
             barThickness: 60,
             datalabels: {
               color: 'transparent', // 데이터라벨 숨김
@@ -286,7 +298,9 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             label: '요일별 유동인구(명)',
-            data: fpDetail.week.map((e: number) => Math.floor(e / 90)),
+            data: fpDetail?.week
+              ? fpDetail.week.map((e: number) => Math.floor(e / 90))
+              : weekDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -324,7 +338,9 @@ export const useStatusFpData = (fpDetail: any) => {
         datasets: [
           {
             label: '시간대별 유동인구(명)',
-            data: fpDetail.time.map((e: number) => Math.floor(e / 90)),
+            data: fpDetail?.time
+              ? fpDetail.time.map((e: number) => Math.floor(e / 90))
+              : timeDefault,
             borderColor: '#6585EF',
             backgroundColor: '#6585EF',
             borderWidth: 2,
@@ -356,7 +372,7 @@ export const useStatusRpData = (rpDetail: any) => {
           {
             label: '성별별 거주인구',
             barThickness: 70,
-            data: rpDetail.resident.gender,
+            data: rpDetail?.resident ? rpDetail.resident.gender : genderDefault,
           },
         ],
       },
@@ -387,7 +403,7 @@ export const useStatusRpData = (rpDetail: any) => {
         datasets: [
           {
             label: '연령대별 거주인구(명)',
-            data: rpDetail.resident.age,
+            data: rpDetail?.resident ? rpDetail.resident.age : ageDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -410,7 +426,9 @@ export const useStatusRpData = (rpDetail: any) => {
         datasets: [
           {
             label: '상권 아파트/비아파트 비율',
-            data: [rpDetail.resident.apt, rpDetail.resident.nonApt],
+            data: rpDetail?.resident
+              ? [rpDetail.resident.apt, rpDetail.resident.nonApt]
+              : [0, 0],
             barThickness: 30,
           },
         ],
@@ -442,7 +460,9 @@ export const useStatusRpData = (rpDetail: any) => {
         datasets: [
           {
             label: '상권배후지 아파트/비아파트 비율',
-            data: [rpDetail.apt.apt, rpDetail.apt.nonApt],
+            data: rpDetail?.apt
+              ? [rpDetail.apt.apt, rpDetail.apt.nonApt]
+              : [0, 0],
             barThickness: 30,
           },
         ],
@@ -479,7 +499,7 @@ export const useStatusStoreData = (storeDetail: any) => {
         datasets: [
           {
             label: '업종별 점포 수(개소)',
-            data: storeDetail.cs,
+            data: storeDetail?.cs ? storeDetail.cs : [0, 0, 0],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -502,7 +522,7 @@ export const useStatusStoreData = (storeDetail: any) => {
         datasets: [
           {
             label: '상권 구분별 점포 수(개소)',
-            data: storeDetail.div,
+            data: storeDetail?.div ? storeDetail.div : [0, 0, 0, 0],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -529,7 +549,7 @@ export const useStatusOpenData = (openDetail: any) => {
         datasets: [
           {
             label: '업종별 개업률(%)',
-            data: openDetail.open.cs,
+            data: openDetail?.open ? openDetail.open.cs : [0, 0, 0],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -556,11 +576,13 @@ export const useStatusOpenData = (openDetail: any) => {
         datasets: [
           {
             label: '개업률 높은 상권(%)',
-            data: [
-              openDetail.open.top3[0].per,
-              openDetail.open.top3[1].per,
-              openDetail.open.top3[2].per,
-            ],
+            data: openDetail?.open?.top3
+              ? [
+                  openDetail.open.top3[0].per,
+                  openDetail.open.top3[1].per,
+                  openDetail.open.top3[2].per,
+                ]
+              : [0, 0, 0],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -590,7 +612,7 @@ export const useStatusCloseData = (closeDetail: any) => {
         datasets: [
           {
             label: '업종별 폐업률(%)',
-            data: closeDetail.close.cs,
+            data: closeDetail?.close?.cs ? closeDetail.close.cs : [0, 0, 0],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -617,11 +639,13 @@ export const useStatusCloseData = (closeDetail: any) => {
         datasets: [
           {
             label: '폐업률 높은 상권 Top3',
-            data: [
-              closeDetail.close.top3[0].per,
-              closeDetail.close.top3[1].per,
-              closeDetail.close.top3[2].per,
-            ],
+            data: closeDetail?.close?.top3
+              ? [
+                  closeDetail.close.top3[0].per,
+                  closeDetail.close.top3[1].per,
+                  closeDetail.close.top3[2].per,
+                ]
+              : [0, 0, 0],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -651,7 +675,9 @@ export const useStatusSalesData = (salesDetail: any) => {
         datasets: [
           {
             label: '월 평균 업종별 매출(만 원)',
-            data: salesDetail.cs.map((sales: number) => sales / 10000),
+            data: salesDetail?.cs
+              ? salesDetail.cs.map((sales: number) => sales / 10000)
+              : [0, 0, 0],
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -674,7 +700,7 @@ export const useStatusSalesData = (salesDetail: any) => {
         datasets: [
           {
             label: '요일별 매출 비율(%)',
-            data: salesDetail.week,
+            data: salesDetail?.week ? salesDetail.week : weekDefault,
             min: 0,
             barThickness: 30,
             datalabels: {
@@ -698,7 +724,7 @@ export const useStatusSalesData = (salesDetail: any) => {
         datasets: [
           {
             label: '연령대별 매출 비율(%)',
-            data: salesDetail.age,
+            data: salesDetail?.age ? salesDetail.age : ageDefault,
             barThickness: 30,
             datalabels: {
               // 데이터라벨 숨김
@@ -722,7 +748,7 @@ export const useStatusSalesData = (salesDetail: any) => {
           {
             label: '성별별 매출 비율(%)',
             barThickness: 70,
-            data: salesDetail.gender,
+            data: salesDetail?.gender ? salesDetail.gender : genderDefault,
             datalabels: {
               // 데이터라벨 숨김
               color: 'white',
@@ -757,7 +783,7 @@ export const useStatusSalesData = (salesDetail: any) => {
         datasets: [
           {
             label: '시간대별 매출 비율(%)',
-            data: salesDetail.time,
+            data: salesDetail?.time ? salesDetail.time : timeDefault,
             borderColor: '#6585EF',
             backgroundColor: '#6585EF',
             borderWidth: 2,
