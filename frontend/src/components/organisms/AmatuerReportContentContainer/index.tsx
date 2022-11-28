@@ -532,6 +532,7 @@ const ReportContentContainer = ({
             style={{ flexGrow: 1 }}
             chartData={amaSimulSalesData}
             chartStyle={{ width: '600px' }}
+            isVert={false}
           ></ReportContent>
 
           <ReportContent
@@ -540,6 +541,7 @@ const ReportContentContainer = ({
             // chartStyle={{ width: '450px' }}
             chartData={amaSimulCountData}
             chartStyle={{ width: '600px' }}
+            isVert={false}
           ></ReportContent>
         </div>
         <div className="chart-div">
@@ -548,15 +550,18 @@ const ReportContentContainer = ({
             style={{ flexGrow: 1 }}
             // chartStyle={{ width: '450px' }}
             chartData={amaSimulLifeData}
+            isVert={false}
           ></ReportContent>
           <ReportContent
             title="분기별 거주인구"
             chartData={amaSimulResidentData}
+            isVert={false}
           ></ReportContent>
           <ReportContent
             title="분기별 직업인구"
             style={{ flexGrow: 1 }}
             chartData={amaSimulJobData}
+            isVert={false}
           ></ReportContent>
         </div>
       </ReportCategory>
