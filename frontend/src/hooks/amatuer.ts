@@ -778,7 +778,7 @@ export const useRiskData = (amatuerResult: any) => {
 export const useAmatuerSimulationData = (amatuerSimulation: any) => {
   const amaSimulSalesData = useMemo(
     () => ({
-      type: 'bar',
+      type: 'line',
       data: {
         labels: simulLabels,
         datasets: [
@@ -793,16 +793,27 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            fill: true,
+            borderColor: ['#B29AF8a0'],
+            tension: 0.5,
           },
         ],
       },
-      grad: timeGrad,
+      // grad: timeGrad,
+      grad: [
+        [
+          [0, '#ff000000'],
+          [0.26, '#ff000000'],
+          [0.26, '#B29AF830'],
+          [1, '#B29AF8a0'],
+        ],
+      ],
     }),
     [amatuerSimulation]
   );
   const amaSimulLifeData = useMemo(
     () => ({
-      type: 'bar',
+      type: 'line',
       data: {
         labels: simulLabels,
         datasets: [
@@ -817,16 +828,26 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            fill: true,
+            borderColor: ['#68E1D9a0'],
+            tension: 0.5,
           },
         ],
       },
-      grad: timeGrad,
+      grad: [
+        [
+          [0, '#ff000000'],
+          [0.25, '#ff000000'],
+          [0.25, '#68E1D930'],
+          [1, '#68E1D9a0'],
+        ],
+      ],
     }),
     [amatuerSimulation]
   );
   const amaSimulResidentData = useMemo(
     () => ({
-      type: 'bar',
+      type: 'line',
       data: {
         labels: simulLabels,
         datasets: [
@@ -839,13 +860,18 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            borderColor: '#F8DB6D',
+            tension: 0.5,
+            fill: true,
           },
         ],
       },
       grad: [
         [
-          [0, '#545BF980'],
-          [1, '#545BF9'],
+          [0, '#ff000000'],
+          [0.25, '#ff000000'],
+          [0.25, '#F8DB6D30'],
+          [1, '#F8DB6Da0'],
         ],
       ],
     }),
@@ -853,7 +879,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
   );
   const amaSimulJobData = useMemo(
     () => ({
-      type: 'bar',
+      type: 'line',
       data: {
         labels: simulLabels,
         datasets: [
@@ -866,13 +892,18 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            fill: true,
+            tension: 0.5,
+            borderColor: '#F3A6AFa0',
           },
         ],
       },
       grad: [
         [
-          [0, '#FC6DD180'],
-          [1, '#FC6DD1'],
+          [0, '#ff000000'],
+          [0.25, '#ff000000'],
+          [0.25, '#F3A6AF30'],
+          [1, '#F3A6AFa0'],
         ],
       ],
     }),
@@ -880,7 +911,7 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
   );
   const amaSimulCountData = useMemo(
     () => ({
-      type: 'bar',
+      type: 'line',
       data: {
         labels: simulLabels,
         datasets: [
@@ -893,13 +924,18 @@ export const useAmatuerSimulationData = (amatuerSimulation: any) => {
               // 데이터라벨 숨김
               color: 'transparent',
             },
+            fill: true,
+            borderColor: ['#60AEEE'],
+            tension: 0.5,
           },
         ],
       },
       grad: [
         [
-          [0, '#23CFFA80'],
-          [1, '#23CFFA'],
+          [0, '#ff000000'],
+          [0.25, '#ff000000'],
+          [0.25, '#60AEEE30'],
+          [1, '#60AEEEa0'],
         ],
       ],
     }),
